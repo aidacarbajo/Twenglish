@@ -7,6 +7,8 @@
  */
 
 import React from 'react';
+import Lecciones from './screens/Lecciones';
+
 import {
   Text,
   useColorScheme,
@@ -18,8 +20,6 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import RNBootSplash from "react-native-bootsplash";
-
-import Realm from 'realm';
 
 const Section = ({children, title}) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -61,7 +61,7 @@ const App = () => {
     });
   }, []);
 
-  return <Text>He entrado en Twenglish</Text>;
+  return <Lecciones />;
 };
 
 export default App;
