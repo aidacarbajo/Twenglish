@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, FlatList } from 'react-native';
 // import { getNiveles, insertNivel, deleteNivel, deleteAllNiveles, updateNivel } from '../data/queries/nivel';
 import Realm from 'realm';
-import database from '../data/database/config';
+import database, {getRealm} from '../data/database/config';
 
 export default class Lecciones extends Component {
     constructor(props) {
@@ -13,18 +13,21 @@ export default class Lecciones extends Component {
         // let realm = new Realm({ path: 'twenglish.realm' });
         // var user_details = realm.objects('Nivel');
 
-        Realm.open(database).then(realm => {
-            console.log(database.path);
-            console.log(realm);     // esta vacio
-            try {
-                realm.write(() => {
-                    realm.create('Apartado', {titulo: 'C50', explicacion: 'he conseguido guardarlo'});
-                    console.log("A ver que tal");
-                })
-            }catch (e) {
-                console.log("Error on creation");
-              }
-        })
+        getRealm();
+
+        // Realm.open(database).then(realm => {
+        //     console.log(database.path);
+        //     console.log(realm);     // esta vacio
+        //     try {
+        //         realm.write(() => {
+        //             realm.create('Apartado', {titulo: 'C50', explicacion: 'he conseguido guardarlo'});
+        //             console.log("A ver que tal");
+        //         })
+        //     }catch (e) {
+        //         console.log("Error on creation");
+        //       }
+        // })
+
         // let niveles = getRealm.objects('Nivel');
         // console.log(niveles);
         // var existe = Realm.exists({ path: 'twenglish.realm' });
