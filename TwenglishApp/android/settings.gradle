@@ -1,5 +1,12 @@
 rootProject.name = 'TwenglishApp'
+include ':react-native-fs'
+project(':react-native-fs').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fs/android')
+// realm
 include ':realm'
 project(':realm').projectDir = new File(rootProject.projectDir, '../node_modules/realm/react-native/android')
+// fs ficheros
+include ':react-native-fs'
+project(':react-native-fs').projectDir = new File(settingsDir, '../node_modules/react-native-fs/android')
+
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'

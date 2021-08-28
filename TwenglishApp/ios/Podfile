@@ -14,6 +14,8 @@ target 'TwenglishApp' do
 
   pod 'RealmJS', :path => '../node_modules/realm'
 
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
   target 'TwenglishAppTests' do
     inherit! :complete
     # Pods for testing
