@@ -1,10 +1,10 @@
- @import './index.css';
-/*
+@import './index.css';
+
 ///////////////
 // Variables //
 ///////////////
 
-$primary: #2971FD;
+$primary: #12367e;
 $secundary: #F7002C;
 
 $background-primary-gradient: linear-gradient(-45deg, #2773FC, #4D3EFD, #7A00FF);
@@ -19,11 +19,17 @@ $button-height: 1.5em;
 $button-padding: 1em;
 
 $button-radius: 12px;
-$button-circle: 50%; */
+$button-circle: 50%; 
 
 .texto {
-    color: #2971FD;
+    color: $primary !important;
 }
+
+/* ¿Ya esta en ios y android, como uso la fuente por defecto? */
+
+
+
+
 /* 
 .lg {
     padding: $button-padding;

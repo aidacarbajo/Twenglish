@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import {BlueButton} from '../components/BlueButton';
+import {MyText} from '../components/MyText';
+import { MyTitle } from '../components/MyTitle';
 
 export default class Lecciones extends Component {
   constructor(props) {
@@ -9,9 +12,10 @@ export default class Lecciones extends Component {
   render() {
     return (
       <View>
-            {/* <Text>Hola</Text> */}
-          
-        </View>
+          <BlueButton title="Hola"></BlueButton>
+          <MyText title="Esto es un texto desde el componente" ></MyText>
+          <MyTitle title="Esto es un titulo"></MyTitle>
+      </View>
     );
   }
 }
