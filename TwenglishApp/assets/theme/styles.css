@@ -1,0 +1,43 @@
+ @import './index.css';
+/*
+///////////////
+// Variables //
+///////////////
+
+$primary: #2971FD;
+$secundary: #F7002C;
+
+$background-primary-gradient: linear-gradient(-45deg, #2773FC, #4D3EFD, #7A00FF);
+$background-secundary-gradient: linear-gradient(-45deg, #F6002F, #EF7B03);
+$background-secundary-checked: #FEE3E8;
+
+$button-lg-width: 95%;
+$button-md-width: 43%;
+
+$button-height: 1.5em;
+
+$button-padding: 1em;
+
+$button-radius: 12px;
+$button-circle: 50%; */
+
+.texto {
+    color: #2971FD;
+}
+/* 
+.lg {
+    padding: $button-padding;
+    width: $button-lg-width;
+}
+
+.button-primary {
+    background: $background-primary-gradient;
+}
+
+.button-secundary {
+    background: $background-secundary-gradient;
+}
+
+.button-checked {
+    background-color: $background-secundary-checked;
+} */
