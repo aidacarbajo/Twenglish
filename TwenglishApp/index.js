@@ -31,10 +31,10 @@ const App2 = () => {
 
         // Comprobar que se ha hecho la copia
         const apuntes = realm.objects('Nivel');
-        console.log('---------------------------');
-        console.log('Niveles: ', apuntes.length);
-        console.log(apuntes);
-        console.log('---------------------------');
+        // console.log('---------------------------');
+        // console.log('Niveles: ', apuntes.length);
+        // console.log(apuntes);
+        // console.log('---------------------------');
     });
 
     

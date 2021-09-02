@@ -26,7 +26,7 @@ export default class Lecciones extends Component {
           <RedButton title="Check answer"></RedButton>
           <OptionSelectedButton title="Option XX"></OptionSelectedButton>
           <OptionButton title="Option selected"></OptionButton>
-          {/* <RoundButton icon="home"></RoundButton> */}
+          <RoundButton icon="notes"></RoundButton>
 
       </View>
     );

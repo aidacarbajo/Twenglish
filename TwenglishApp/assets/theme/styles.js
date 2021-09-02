@@ -95,5 +95,16 @@ const button = StyleSheet.create({
     }
 });
 
-export { text, button };
+
+const elementIcons = 'element-icons';
+
+const icons = StyleSheet.create({
+    all: {
+        fontFamily: elementIcons,
+        color: '#fff',
+        fontSize: 20
+    }
+});
+
+export { text, button, icons };
 // @import './index.css';

@@ -1,17 +1,14 @@
 import React from 'react';
 import { button } from '../../assets/theme/styles';
 import LinearGradient from 'react-native-linear-gradient';
-// import '../../assets/icons/element-icons.ttf';
-import { Icon } from 'react-native-elements';
+import { Icon } from '../Icons/Icon';
 
 export const RoundButton = ({icon}) => {
 //   const onPress = async () => {
 //   };
-  console.log(icon);
-
   return (
     <LinearGradient locations={[0, 1]} useAngle={true} angle={-45} angleCenter={{ x: 0.5, y: 0.5 }} colors={button.secundary.backgroundColor} style={[button.round]}>
-      {/* <Icon name={icon}/> */}
+      <Icon icon={icon}></Icon>
     </LinearGradient>
   );
 };

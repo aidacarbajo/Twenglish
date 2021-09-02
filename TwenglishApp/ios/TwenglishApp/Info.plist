@@ -59,6 +59,8 @@
 		<string>sen_extra_bold.ttf</string>
 		<string>sen_regular.otf</string>
 		<string>sen_regular.ttf</string>
+		<string>element-icons.ttf</string>
+		<string>element-icons.woff</string>
 	</array>
 </dict>
 </plist>
