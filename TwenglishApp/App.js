@@ -10,7 +10,6 @@ import React from 'react';
 import Lecciones from './screens/Lecciones';
 
 import RNBootSplash from "react-native-bootsplash";
-import {Text} from 'react-native';
 
 const App = () => {
   React.useEffect(() => {
