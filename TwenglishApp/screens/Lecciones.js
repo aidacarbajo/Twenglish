@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { BlueButton } from '../components/Buttons/BlueButton';
-// import { MyText } from '../components/Texts/MyText';
-// import { MyTextSec } from '../components/Texts/MyTextSec';
 import MyTitle from '../components/Texts/MyTitle';
 import { RedButton } from '../components/Buttons/RedButton ';
-// import { OptionSelectedButton } from '../components/Buttons/OptionSelectedButton';
-// import { OptionButton } from '../components/Buttons/OptionButton';
 // import { RoundButton } from '../components/Buttons/RoundButton';
 import { StyleSheet } from 'react-native';
 import RadioButton from '../components/RadioButton/RadioButton';
@@ -59,7 +55,6 @@ export default class Lecciones extends Component {
           
           {/* <RoundButton icon="notes" style={styles.margin}></RoundButton> */}
         
-
 
       </View>
     );

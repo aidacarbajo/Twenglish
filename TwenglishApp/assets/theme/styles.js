@@ -127,5 +127,13 @@ const radiobutton = StyleSheet.create({
    }
 });
 
-export { text, button, icons, radiobutton };
+const menus = StyleSheet.create({
+    footer: {
+        height: 30,
+        backgroundColor: "black",
+        // flex: 1
+    }
+});
+
+export { text, button, icons, radiobutton, menus };
 // @import './index.css';
