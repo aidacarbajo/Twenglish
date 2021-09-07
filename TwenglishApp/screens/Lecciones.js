@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { BlueButton } from '../components/Buttons/BlueButton';
 // import { MyText } from '../components/Texts/MyText';
 // import { MyTextSec } from '../components/Texts/MyTextSec';
-import { MyTitle } from '../components/Texts/MyTitle';
+import MyTitle from '../components/Texts/MyTitle';
 import { RedButton } from '../components/Buttons/RedButton ';
 // import { OptionSelectedButton } from '../components/Buttons/OptionSelectedButton';
 // import { OptionButton } from '../components/Buttons/OptionButton';

@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { text } from '../../assets/theme/styles';
 
-export const MyTextSec = ({title}) => {
-    return (
-        <Text style={[text.body, text.secundario]}>{title}</Text> 
-    );
-};
+class MyTextSec extends Component {
+    constructor(props) {
+        super(props);
+    }
+      
+    render() {
+        return (
+            <Text style={[text.body, text.secundario]}>{this.props.title}</Text> 
+        );
+    }
+}
+
+export default MyTextSec;

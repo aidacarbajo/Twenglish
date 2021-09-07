@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { button, text } from '../../assets/theme/styles';
-import { MyTextWhite } from '../Texts/MyTextWhite';
+import MyTextWhite from '../Texts/MyTextWhite';
 import LinearGradient from 'react-native-linear-gradient';
 
 export const BlueButton = ({title}) => {

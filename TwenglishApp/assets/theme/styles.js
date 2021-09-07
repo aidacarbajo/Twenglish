@@ -80,7 +80,7 @@ const button = StyleSheet.create({
          elevation: 20,
     },
     option: {
-        width: '80%',
+        width: '90%',
         paddingVertical: 15,
         marginVertical: 10,
         shadowOpacity: 0,
@@ -111,7 +111,12 @@ const icons = StyleSheet.create({
     all: {
         fontFamily: elementIcons,
         color: '#fff',
+    },
+    sm: {
         fontSize: 20
+    },
+    lg: {
+        fontSize: 30
     }
 });
 
@@ -119,9 +124,6 @@ const radiobutton = StyleSheet.create({
     radiobutton: {
        paddingVertical: 20,
     //    backgroundColor: 'black'
-   } ,
-   prueba: {
-       backgroundColor: 'black'
    }
 });
 

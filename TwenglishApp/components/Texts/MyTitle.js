@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { text } from '../../assets/theme/styles';
 
-export const MyTitle = ({title, titleBold}) => {
-    return (
-        <View style={{flexDirection:'row'}}>
-            <Text style={[text.primario, text.primarioTitulo, text.rightt]}>{title}</Text> 
-            <Text style={[text.primario, text.primarioTitulo, text.primarioBold]}>{titleBold}</Text>
-        </View>
-    );
-};
+class MyTitle extends Component {
+    constructor(props) {
+        super(props);
+    }
+      
+    render() {
+        return (
+            <View style={{flexDirection:'row'}}>
+                <Text style={[text.primario, text.primarioTitulo, text.rightt]}>{this.props.title}</Text> 
+                <Text style={[text.primario, text.primarioTitulo, text.primarioBold]}>{this.props.titleBold}</Text>
+            </View>
+        );
+    }
+}
+
+export default MyTitle;

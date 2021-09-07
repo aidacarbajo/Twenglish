@@ -1,7 +1,7 @@
 import React from 'react';
 import { button } from '../../assets/theme/styles';
 import LinearGradient from 'react-native-linear-gradient';
-import { Icon } from '../Icons/Icon';
+import Icon from '../Icons/Icon';
 
 export const RoundButton = ({icon}) => {
 //   const onPress = async () => {

@@ -1,6 +1,6 @@
 import OptionButton  from "../Buttons/OptionButton";
 import { OptionSelectedButton } from "../Buttons/OptionSelectedButton";
-import { TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 import { radiobutton } from "../../assets/theme/styles";
 import React, { Component } from 'react'
 
@@ -11,7 +11,7 @@ class RadioButton extends Component {
 
   callbackFunction = (opcionSeleccionada) => {
     this.setState({value: opcionSeleccionada})
-    console.log(opcionSeleccionada);
+    // console.log(opcionSeleccionada);
   }
 
 
