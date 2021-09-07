@@ -1,7 +1,9 @@
 import React from 'react';
-import { button } from '../../assets/theme/styles';
+import { button, text } from '../../assets/theme/styles';
 import { MyTextWhite } from '../Texts/MyTextWhite';
 import LinearGradient from 'react-native-linear-gradient';
+import { TouchableOpacity } from 'react-native';
+
 
 
 export const RedButton = ({title}) => {
@@ -9,7 +11,9 @@ export const RedButton = ({title}) => {
 //   };
   return (
     <LinearGradient locations={[0, 1]} useAngle={true} angle={-45} angleCenter={{ x: 0.5, y: 0.5 }} colors={button.secundary.backgroundColor} style={[button.button]}>
-        <MyTextWhite title={title}></MyTextWhite>
+        <TouchableOpacity style={text.buttonText}>
+          <MyTextWhite title={title}></MyTextWhite>
+        </TouchableOpacity>
     </LinearGradient>
   );
 };

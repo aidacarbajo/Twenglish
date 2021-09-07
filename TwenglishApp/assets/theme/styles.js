@@ -15,6 +15,7 @@ const text = StyleSheet.create({
     },
     primarioTitulo: {
         fontSize: 20,
+        marginBottom: 30
     },
     primarioBold: {
         fontFamily: extrabold,
@@ -22,7 +23,9 @@ const text = StyleSheet.create({
     body: {
         fontSize: 14,
         color: body,
-        fontFamily: regular
+        fontFamily: regular,
+        textAlign: 'center'
+        // width: '100%'
     },
     secundario: {
         color: secundary,
@@ -36,7 +39,14 @@ const text = StyleSheet.create({
     },
     opcion: {
         fontSize: 12
-    } 
+    },
+    buttonText: {
+        backgroundColor: 'transparent',
+        borderRadius: 12,
+        justifyContent: 'center',
+        width: '100%',
+        height: 50
+    }
 });
 
 const button = StyleSheet.create({
@@ -44,11 +54,11 @@ const button = StyleSheet.create({
         // colores, tamaño y texto
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 16,
+        // paddingVertical: 4,
         borderRadius: 12,
-        width: '87%',
+        width: '100%',
         // en medio de la pantalla
-        marginVertical: 20,
+        marginVertical: 10,
         marginRight: 'auto',
         marginLeft: 'auto',
     },
