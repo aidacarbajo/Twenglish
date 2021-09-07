@@ -9,7 +9,7 @@ import { RedButton } from '../components/Buttons/RedButton ';
 // import { OptionButton } from '../components/Buttons/OptionButton';
 // import { RoundButton } from '../components/Buttons/RoundButton';
 import { StyleSheet } from 'react-native';
-import { Checklist } from '../components/Checklist/Checklist';
+import RadioButton from '../components/RadioButton/RadioButton';
 
 export default class Lecciones extends Component {
   constructor(props) {
@@ -55,7 +55,7 @@ export default class Lecciones extends Component {
 
           <BlueButton title="Check answer"></BlueButton>
           <RedButton title="Check answer"></RedButton>
-          {/* <Checklist opciones={array}></Checklist> */}
+          <RadioButton opciones={array}></RadioButton>
           
           {/* <RoundButton icon="notes" style={styles.margin}></RoundButton> */}
         

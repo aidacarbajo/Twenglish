@@ -1,7 +1,6 @@
 import React from 'react';
 import { Pressable, Text } from 'react-native';
 import { button, text } from '../../assets/theme/styles';
-import { MyTextWhite } from '../Texts/MyTextWhite';
 
 export const OptionSelectedButton = ({title}) => {
 //   const onPress = async () => {

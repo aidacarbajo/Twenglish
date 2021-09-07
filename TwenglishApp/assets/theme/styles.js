@@ -54,7 +54,6 @@ const button = StyleSheet.create({
         // colores, tamaño y texto
         alignItems: 'center',
         justifyContent: 'center',
-        // paddingVertical: 4,
         borderRadius: 12,
         width: '100%',
         // en medio de la pantalla
@@ -116,5 +115,15 @@ const icons = StyleSheet.create({
     }
 });
 
-export { text, button, icons };
+const radiobutton = StyleSheet.create({
+    radiobutton: {
+       paddingVertical: 20,
+    //    backgroundColor: 'black'
+   } ,
+   prueba: {
+       backgroundColor: 'black'
+   }
+});
+
+export { text, button, icons, radiobutton };
 // @import './index.css';
