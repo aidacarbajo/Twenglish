@@ -168,5 +168,26 @@ const posiciones = StyleSheet.create({
     }
 });
 
-export { text, button, icons, radiobutton, menus, view, posiciones, secundary };
+const cards = StyleSheet.create({
+    card: {
+        borderRadius: 12,
+        backgroundColor: 'white',
+        elevation: 10,
+        marginVertical: 10,
+    },
+    padding: {
+        paddingHorizontal: 17,
+        paddingVertical: 20
+    },
+    dimensions: {
+        width: 117,
+        height: 142
+    },
+    image: {
+        flex: 1,
+        justifyContent: "center",
+    }
+})
+
+export { text, button, icons, radiobutton, menus, view, posiciones, secundary, cards };
 // @import './index.css';

@@ -18,18 +18,8 @@ const tabs = [
     {
         activeColor: secundary,
         activeBackgroundColor: '#FEE3E8',
-        activeIcon: "settings",
+        activeIcon: "calendar",
     },
-    // {
-    //     activeColor: secundary,
-    //     activeBackgroundColor: '#FEE3E8',
-    //     activeIcon: "tick",
-    // },
-    // {
-    //     activeColor: secundary,
-    //     activeBackgroundColor: '#FEE3E8',
-    //     activeIcon: "info",
-    // }
 ];
 
 const iconRender = ({ icon }) =>
