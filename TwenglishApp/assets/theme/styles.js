@@ -10,7 +10,7 @@ const body = '#4D4D4D';
 
 const view = StyleSheet.create({
     container: {
-        backgroundColor: "#fff",
+        // backgroundColor: "#fff",
         paddingHorizontal: 50,
         paddingVertical: 60,
         height: '100%'
@@ -132,6 +132,9 @@ const icons = StyleSheet.create({
     },
     dark: {
         color: '#9F9F9F'
+    },
+    menu: {
+        color: secundary,
     }
 });
 
@@ -144,8 +147,10 @@ const radiobutton = StyleSheet.create({
 
 const menus = StyleSheet.create({
     footer: {
-        height: 30,
-        backgroundColor: "black",
+        height: 70,
+        // backgroundColor: "green",
+        width: '100%',
+        elevation: 20,
     }
 });
 
@@ -163,5 +168,5 @@ const posiciones = StyleSheet.create({
     }
 });
 
-export { text, button, icons, radiobutton, menus, view, posiciones };
+export { text, button, icons, radiobutton, menus, view, posiciones, secundary };
 // @import './index.css';
