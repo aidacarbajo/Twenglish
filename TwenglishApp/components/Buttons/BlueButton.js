@@ -4,7 +4,7 @@ import { button, text } from '../../assets/theme/styles';
 import MyTextWhite from '../Texts/MyTextWhite';
 import LinearGradient from 'react-native-linear-gradient';
 
-export const BlueButton = ({title}) => {
+export const BlueButton = ({title, navigation}) => {
   const onPress = async () => {
 
   };

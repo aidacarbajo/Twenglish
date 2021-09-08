@@ -8,6 +8,14 @@ const primary = '#2971FD';
 const secundary = '#F7002B';
 const body = '#4D4D4D';
 
+const view = StyleSheet.create({
+    container: {
+        backgroundColor: "#fff",
+        paddingHorizontal: 50,
+        paddingVertical: 60,
+        height: '100%'
+    }
+})
 const text = StyleSheet.create({
     primario: {
         color: primary,
@@ -60,6 +68,7 @@ const button = StyleSheet.create({
         marginVertical: 10,
         marginRight: 'auto',
         marginLeft: 'auto',
+        // paddingVertical: 20
     },
     primary: {
         backgroundColor: ['#2773FC', '#4D3EFD', '#7A00FF'],
@@ -110,13 +119,19 @@ const elementIcons = 'element-icons';
 const icons = StyleSheet.create({
     all: {
         fontFamily: elementIcons,
-        color: '#fff',
+        // color: '#fff',
     },
     sm: {
         fontSize: 20
     },
     lg: {
-        fontSize: 30
+        fontSize: 25
+    },
+    light: {
+        color: 'white'
+    },
+    dark: {
+        color: '#9F9F9F'
     }
 });
 
@@ -131,9 +146,22 @@ const menus = StyleSheet.create({
     footer: {
         height: 30,
         backgroundColor: "black",
-        // flex: 1
     }
 });
 
-export { text, button, icons, radiobutton, menus };
+const posiciones = StyleSheet.create({
+    abolute: {
+        position: 'absolute',
+        marginHorizontal: 20,
+        marginVertical: 20,
+    },
+    topright: {
+        right: 0
+    },
+    topleft: {
+        left: 0
+    }
+});
+
+export { text, button, icons, radiobutton, menus, view, posiciones };
 // @import './index.css';
