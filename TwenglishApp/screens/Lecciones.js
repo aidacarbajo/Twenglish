@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
+import { TouchableOpacity, View, Text, StatusBar } from 'react-native';
 import MyTitle from '../components/Texts/MyTitle';
 import { cards, view, posiciones, icons } from '../assets/theme/styles';
 import Icon from '../components/Icons/Icon';
@@ -13,26 +13,32 @@ export default ( {navigation} ) => {
     {
       id: '1',
       title: 'Example option 1',
+      image: '../../assets/img/logo.png'
     },
     {
       id: '2',
       title: 'Example option 2',
+      image: '../../assets/img/logo.png'
     },
     {
       id: '3',
       title: 'Example option 3',
+      image: '../../assets/img/logo.png'
     },
     {
       id: '4',
       title: 'Example option 4',
+      image: '../../assets/img/logo.png'
     },
     {
       id: '5',
       title: 'Example option 5',
+      image: '../../assets/img/logo.png'
     },
     {
       id: '6',
       title: 'Example option 6',
+      image: '../../assets/img/logo.png'
     },
     // {
     //   id: '7',
@@ -50,13 +56,15 @@ export default ( {navigation} ) => {
       
     return (
       <View style={view.container}>
+        <StatusBar hidden />
+
         <View style={[posiciones.abolute, posiciones.topright]}>
           <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
               <Icon icon="settings" color={icons.dark} size={icons.lg}></Icon>
           </TouchableOpacity>
         </View>
 
-          <MyTitle title="My" titleBold="progress"></MyTitle>
+          <MyTitle title="My" titleBold="Progress"></MyTitle>
 
           {/* Scroll Horizontal */}
           {/* For de niveles */}

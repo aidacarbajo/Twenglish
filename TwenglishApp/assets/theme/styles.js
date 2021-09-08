@@ -190,4 +190,3 @@ const cards = StyleSheet.create({
 })
 
 export { text, button, icons, radiobutton, menus, view, posiciones, secundary, cards };
-// @import './index.css';

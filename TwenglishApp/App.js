@@ -11,6 +11,7 @@ import React from 'react';
 import NavigationFooter from './config/NavigationFooter';
 
 import RNBootSplash from "react-native-bootsplash";
+import { StatusBar, View } from 'react-native';
 
 const App = () => {
   React.useEffect(() => {
@@ -20,7 +21,9 @@ const App = () => {
     });
   }, []);
 
-  return <NavigationFooter />;
+  return (
+      <NavigationFooter />
+  );
 };
 
 export default App;
