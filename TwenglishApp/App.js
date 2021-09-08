@@ -8,7 +8,7 @@
 
 import React from 'react';
 // import Lecciones from './screens/Lecciones';
-import Navigation from './config/Navigation';
+import NavigationFooter from './config/NavigationFooter';
 
 import RNBootSplash from "react-native-bootsplash";
 
@@ -20,7 +20,7 @@ const App = () => {
     });
   }, []);
 
-  return <Navigation />;
+  return <NavigationFooter />;
 };
 
 export default App;

@@ -9,7 +9,7 @@ import {
 import TabMenu from '../components/Menus/TabMenu';
 import Lecciones from '../screens/Lecciones';
 import Settings from '../screens/Settings';
-import SettingsCopy from '../screens/Settings copy';
+import Rutine from '../screens/Rutine';
 import Ejemplos from '../screens/Ejemplos';
 import { icons } from '../assets/theme/styles';
 
@@ -30,7 +30,7 @@ const Navigation = () => {
         }
       >
         <Tab.Screen name="Lessons" component={Lecciones} />
-        <Tab.Screen name="Settings" component={Settings} />
+        <Tab.Screen name="Rutine" component={Rutine} />
         {/* <Tab.Screen name="Three" component={SettingsCopy} />
         <Tab.Screen name="Four" component={Ejemplos} /> */}
 

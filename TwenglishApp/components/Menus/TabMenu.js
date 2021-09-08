@@ -11,7 +11,7 @@ import Icon from '../Icons/Icon';
 
 const tabs = [
     {
-        activeColor: "#F7002B",
+        activeColor: secundary,
         activeBackgroundColor: '#FEE3E8',
         activeIcon: "notes",
     },
