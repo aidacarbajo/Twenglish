@@ -8,7 +8,7 @@ import MyTitle from '../components/Texts/MyTitle';
 export default ({navigation}) => {
     return (
         <View style={view.container}>
-            <MyTitle title="My" titleBold="Rutine"></MyTitle>
+            <MyTitle title="My" titleBold="Routine"></MyTitle>
 
         </View>
     );

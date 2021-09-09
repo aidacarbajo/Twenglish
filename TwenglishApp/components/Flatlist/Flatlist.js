@@ -1,28 +1,28 @@
 import React from 'react';
-import { ImageBackground, View, Text } from 'react-native';
+import { View } from 'react-native';
 import { cards } from '../../assets/theme/styles';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-import { getImage } from '../../util/ImageManager';
+import { FlatList } from 'react-native-gesture-handler';
+import CardImage from '../Card/CardImage';
 
 export default ( {data} ) => {
+    // console.log('');
+    // console.log(data.items);
     return (
-        <FlatList style={cards.padding}
-            showsVerticalScrollIndicator={false}
-            data={data.items}
-            numColumns={2}
-            columnWrapperStyle={{justifyContent: 'space-between'}}
-            keyExtractor={item => item.id }
-            renderItem={(item) => 
-            // <Card />
-            // <TouchableOpacity>          
-                <View style={[cards.card, cards.dimensions]}>
-                    <ImageBackground source={getImage('Logo')} resizeMode="cover" style={cards.image} imageStyle={{ borderRadius: 12}}>
-                    </ImageBackground> 
-                </View>
-            // </TouchableOpacity>
-
-        }>
-        </FlatList>
+        <View style={cards.height}>
+            <FlatList style={cards.padding}
+                numColumns={2}
+                columnWrapperStyle={{justifyContent: 'space-between'}}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{ flexGrow: 1 }}
+                // inverted
+                data={data.items}
+                keyExtractor={(item) => item.id }
+                renderItem={(item) => 
+                    <CardImage dataImagen={item.item.image} dataTitle={item.item.title} data100={item.item.porcentaje}></CardImage>
+                }>
+                
+            </FlatList>
+        </View>
 
     );
 }

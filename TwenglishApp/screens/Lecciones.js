@@ -1,53 +1,74 @@
 import React from 'react';
-import { TouchableOpacity, View, Text, StatusBar } from 'react-native';
+import { TouchableOpacity, View, StatusBar } from 'react-native';
 import MyTitle from '../components/Texts/MyTitle';
-import { cards, view, posiciones, icons } from '../assets/theme/styles';
+import { view, posiciones, icons } from '../assets/theme/styles';
 import Icon from '../components/Icons/Icon';
 import MyText from '../components/Texts/MyText';
-import { FlatList } from 'react-native-gesture-handler';
 import Flatlist from '../components/Flatlist/Flatlist';
 
 export default ( {navigation} ) => {
  
     const array = [
     {
+      id: '0',
+      title: 'Greetings',
+      image: 'greetingsA1',
+      porcentaje: '80'
+    },
+    {
       id: '1',
-      title: 'Example option 1',
-      image: '../../assets/img/logo.png'
+      title: 'Routine',
+      image: 'routineA1',
+      porcentaje: '10'
     },
     {
       id: '2',
-      title: 'Example option 2',
-      image: '../../assets/img/logo.png'
+      title: 'Food',
+      image: 'foodA1',
+      porcentaje: '0'
     },
     {
       id: '3',
-      title: 'Example option 3',
-      image: '../../assets/img/logo.png'
+      title: 'Studies',
+      image: 'schoolA1',
+      porcentaje: '0'
     },
     {
       id: '4',
-      title: 'Example option 4',
-      image: '../../assets/img/logo.png'
+      title: 'Home',
+      image: 'homeA1',
+      porcentaje: '0'
     },
     {
       id: '5',
-      title: 'Example option 5',
-      image: '../../assets/img/logo.png'
+      title: 'Family',
+      image: 'familyA1',
+      porcentaje: '0'
     },
     {
       id: '6',
-      title: 'Example option 6',
-      image: '../../assets/img/logo.png'
+      title: 'Hobbies',
+      image: 'hobbiesA1',
+      porcentaje: '10'
     },
-    // {
-    //   id: '7',
-    //   title: 'Example option 7',
-    // },
-    // {
-    //   id: '8',
-    //   title: 'Example option 8',
-    // }
+    {
+      id: '7',
+      title: 'Weather',
+      image: 'weatherA1',
+      porcentaje: '10'
+    },
+    {
+      id: '8',
+      title: 'City',
+      image: 'cityA1',
+      porcentaje: '10'
+    },
+    {
+      id: '9',
+      title: 'Animals',
+      image: 'animalsA1',
+      porcentaje: '10'
+    }
     ];
 
     state = {
@@ -70,13 +91,7 @@ export default ( {navigation} ) => {
           {/* For de niveles */}
 
           <MyText title="What would you like to learn today?"></MyText>
-
-          {/* Cards con imagenes y etiquetas de las lecciones en columnas de dos */}
-          {/* Al hacer press que haga un TouchableOpacity */}
-          <Flatlist data={state}
-            ></Flatlist>
-
-          {/* Menu fijo abajo del todo con navegacion funcional */}
+          <Flatlist data={state}></Flatlist>
       </View>
     );
 }

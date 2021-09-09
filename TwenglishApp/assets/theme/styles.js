@@ -10,7 +10,7 @@ const body = '#4D4D4D';
 
 const view = StyleSheet.create({
     container: {
-        // backgroundColor: "#fff",
+        backgroundColor: "#F6F5F8",
         paddingHorizontal: 50,
         paddingVertical: 60,
         height: '100%'
@@ -172,20 +172,46 @@ const cards = StyleSheet.create({
     card: {
         borderRadius: 12,
         backgroundColor: 'white',
-        elevation: 10,
+        elevation: 5,
         marginVertical: 10,
     },
     padding: {
-        paddingHorizontal: 17,
-        paddingVertical: 20
+        paddingHorizontal: 15,
+        flex: 1,
+        // backgroundColor: 'black',
+        marginTop: 20
+    },
+    back: {
+        backgroundColor: 'transparent',
+        height: '100%',
+        width: '100%',
     },
     dimensions: {
-        width: 117,
+        width: 122,
         height: 142
     },
     image: {
         flex: 1,
         justifyContent: "center",
+    },
+    height: {
+        height: '100%'
+    },
+    tag: {
+        color: primary,
+        fontFamily: 'sen_extra_bold',
+        fontSize: 10,
+        lineHeight: 25,
+        paddingHorizontal: 15,
+        textAlign: "center",
+        backgroundColor: "#fff",
+        borderRadius: 6,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: -60
+    },
+    tag100: {
+        fontFamily: 'sen_regular',
     }
 })
 

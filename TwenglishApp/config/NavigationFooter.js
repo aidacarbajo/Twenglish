@@ -30,7 +30,7 @@ const Navigation = () => {
         }
       >
         <Tab.Screen name="Lessons" component={Lecciones} />
-        <Tab.Screen name="Rutine" component={Rutine} />
+        <Tab.Screen name="Routine" component={Rutine} />
         {/* <Tab.Screen name="Three" component={SettingsCopy} />
         <Tab.Screen name="Four" component={Ejemplos} /> */}
 
