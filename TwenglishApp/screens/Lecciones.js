@@ -5,8 +5,13 @@ import { view, posiciones, icons } from '../assets/theme/styles';
 import Icon from '../components/Icons/Icon';
 import MyText from '../components/Texts/MyText';
 import Flatlist from '../components/Flatlist/Flatlist';
+import { getNivel, getNiveles } from '../data/queries/nivel';
 
 export default ( {navigation} ) => {
+
+    // getNiveles().then(res => {
+    //   console.log(res);
+    // })
  
     const array = [
     {

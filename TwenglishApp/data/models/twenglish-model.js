@@ -47,7 +47,8 @@ exports.Leccion = {
     explicacion: 'Apuntes',
     total_aciertos: 'int',
     progreso: 'int',
-    ejercicios: 'Ejercicio[]'
+    ejercicios: 'Ejercicio[]',
+    portada: 'string'
   }
 }
 

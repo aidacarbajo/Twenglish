@@ -7,11 +7,9 @@
  */
 
 import React from 'react';
-// import Lecciones from './screens/Lecciones';
 import NavigationFooter from './config/NavigationFooter';
 
 import RNBootSplash from "react-native-bootsplash";
-import { StatusBar, View } from 'react-native';
 
 const App = () => {
   React.useEffect(() => {
