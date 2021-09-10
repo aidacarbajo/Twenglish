@@ -29,7 +29,7 @@ export const getImage = (name) => {
             img = HomeA1; break;
         case 'routineA1':
             img = RoutineA1; break;
-        case 'schoolA1':
+        case 'studiesA1':
             img = SchoolA1; break;
         case 'hobbiesA1':
             img = HobbiesA1; break;

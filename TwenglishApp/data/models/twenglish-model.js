@@ -1,8 +1,8 @@
 exports.Apartado = {
   name: 'Apartado',
   properties: {
-    titulo: 'string',
-    explicacion: 'string'
+    titulo: 'string?',
+    explicacion: 'string?'
   }
 }
 
@@ -48,7 +48,8 @@ exports.Leccion = {
     total_aciertos: 'int',
     progreso: 'int',
     ejercicios: 'Ejercicio[]',
-    portada: 'string'
+    portada: 'string',
+    // test: 'Ejercicio[]'
   }
 }
 

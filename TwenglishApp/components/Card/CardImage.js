@@ -6,7 +6,6 @@ import { getImage } from '../../util/ImageManager';
 import Tag from './Tag';
 
 export default ( { dataImagen, dataTitle, data100 } ) => {
-    // console.log(dataImagen);
     return (
         <View style={[cards.card, cards.dimensions]}>
             <TouchableOpacity style={cards.back}>         

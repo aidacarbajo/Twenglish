@@ -1,13 +1,13 @@
 import Realm from 'realm';
-import { database } from '../database/config';
+import database from '../database/config';
 import { Nivel } from '../models/twenglish-model';
 
 const getNiveles = () => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
-        console.log(realm);
         let niveles = realm.objects('Nivel');
-        console.log(niveles);
-        console.log(niveles.length);
+        // console.log(niveles);
+
+        // realm.close();
         resolve(niveles);
     }).catch((error) => reject(error));
 });
@@ -15,10 +15,8 @@ const getNiveles = () => new Promise((resolve, reject) => {
 const getNivel = nivelNombre => new Promise((resolve, reject) => {
     console.log(nivelNombre);
     Realm.open(database).then(realm => {
-        console.log(realm);
-        let niveles = realm.objects('Nivel');
+        let niveles = realm.objects('Nivel').filter(`nombre = ${nivelNombre}`);
         console.log(niveles);
-        console.log(niveles.length);
         resolve(niveles);
     }).catch((error) => reject(error.message));
 });
@@ -27,7 +25,7 @@ const insertNivel = newNivel =>
     new Promise((resolve, reject) => {
         Realm.open(database).then(realm => {
             realm.write(() => {
-                realm.create(Nivel, newNivel);
+                realm.create('Nivel', newNivel);
                 resolve(newNivel);
             })
         }).catch((error) => reject(error));
