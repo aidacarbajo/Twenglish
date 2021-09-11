@@ -5,13 +5,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { GradientCircularProgress } from 'react-native-circular-gradient-progress';
 
 export default ( { nivel } ) => {   
-    let activoStart =  '#EE6400';
-    let activoMiddle =  '#F34117';
-    let activoEnd =  '#F7002D';
-
-    activoStart = '#2872FC';
-    activoMiddle = '#4F3CFD';
-    activoEnd = '#7804FF';
     
     const seleccionado = 'A1';
 
@@ -21,7 +14,7 @@ export default ( { nivel } ) => {
             padding: 10,
             marginEnd: 10,
             borderRadius: 12,
-            elevation: 2
+            elevation: 1
         },
         fondoT: {
             backgroundColor: 'transparent',
@@ -31,7 +24,7 @@ export default ( { nivel } ) => {
         }
     });
 
-    const getCircle = () => {
+    const getCircle = (start, middle, end) => {
         return (
             <GradientCircularProgress
                 size={57}
@@ -39,9 +32,9 @@ export default ( { nivel } ) => {
                 progress={nivel.item.progreso}
                 emptyColor="#E3E3E3"
                 // nivel.item.progress
-                startColor={activoStart}
-                middleColor={activoMiddle}
-                endColor={activoEnd}
+                startColor={start}
+                middleColor={middle}
+                endColor={end}
                 withSnail= {true}
             ></GradientCircularProgress>  
         )
@@ -51,10 +44,10 @@ export default ( { nivel } ) => {
         // <View style={cards.paddingLevel}>
         nivel.item.nombre === seleccionado
             ?   <View style={styles.fondo}>
-                    {getCircle()}
+                    {getCircle('#EE6400', '#F34117', '#F7002D')}
                 </View>
             :   <View style={styles.fondoT}>
-                    {getCircle()}
+                    {getCircle('#2872FC', '#4F3CFD', '#7804FF')}
                 </View>
          
         // </View>
