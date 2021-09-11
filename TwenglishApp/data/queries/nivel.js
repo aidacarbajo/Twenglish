@@ -4,22 +4,36 @@ import { Nivel } from '../models/twenglish-model';
 
 const getNiveles = () => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
-        let niveles = realm.objects('Nivel');
-        // console.log(niveles);
+        const niveles = realm.objects('Nivel');
 
-        // realm.close();
-        resolve(niveles);
-    }).catch((error) => reject(error));
+        let res = {
+            // nombre: [],
+            // progreso: []
+            nivel: []
+        };
+
+        for (let i = 0; i < niveles.length; i++) {
+            // res.nombre.push(niveles[i].nombre);
+            // res.progreso.push(niveles[i].progreso);
+            let niv = {
+                nombre: niveles[i].nombre,
+                progreso: niveles[i].progreso
+            }
+            res.nivel.push(niv);
+        }
+
+        resolve(res);
+    }).catch((error) => reject(error,message));
 });
 
-const getNivel = nivelNombre => new Promise((resolve, reject) => {
-    console.log(nivelNombre);
+const getNivelSeleccionado = () => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
-        let niveles = realm.objects('Nivel').filter(`nombre = ${nivelNombre}`);
-        console.log(niveles);
+        const niveles = realm.objects('Niveles');
         resolve(niveles);
     }).catch((error) => reject(error.message));
 });
+
+
 
 const insertNivel = newNivel => 
     new Promise((resolve, reject) => {
@@ -64,4 +78,4 @@ const deleteAllNiveles = nivel =>
         }).catch((error) => reject(error));
     });
 
-export { getNiveles, getNivel, insertNivel, updateNivel, deleteNivel, deleteAllNiveles }
+export { getNiveles, getNivelSeleccionado, insertNivel, updateNivel, deleteNivel, deleteAllNiveles }

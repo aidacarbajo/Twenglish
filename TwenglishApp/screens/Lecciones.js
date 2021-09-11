@@ -5,8 +5,8 @@ import { view, posiciones, icons } from '../assets/theme/styles';
 import Icon from '../components/Icons/Icon';
 import MyText from '../components/Texts/MyText';
 import Flatlist from '../components/Flatlist/Flatlist';
-import { getNivel, getNiveles } from '../data/queries/nivel';
-import { getLecciones } from '../data/queries/lecciones';
+import { getNivelSeleccionado, getNiveles } from '../data/queries/nivel';
+import NivelesList from '../components/Flatlist/NivelesList';
 
 class Lecciones extends Component {
 
@@ -25,17 +25,18 @@ class Lecciones extends Component {
   componentDidMount() {
     this._isMounted = true;
 
-    return getNiveles().then(res => {
-      // console.log(res[0].lecciones);
+    return getNivelSeleccionado().then(res => {
+      const nivel = res[0].nivel_seleccionado;    // el primero no sera siempre el seleccionado
+
       if (this._isMounted) {
         this.setState({
           isLoading:false,
-          lecciones: res[0].lecciones,
+          lecciones: nivel.lecciones,
         }).catch( (error) => {
           console.log(error.message);
         });
       }
-    }).catch( (error) => {
+    }).catch((error) => {
       // console.log(error.message);
     });
   }
@@ -65,6 +66,7 @@ class Lecciones extends Component {
             <MyTitle title="My" titleBold="Progress"></MyTitle>
 
             {/* Scroll Horizontal */}
+            <NivelesList></NivelesList>
             {/* For de niveles */}
 
             <MyText title="What would you like to learn today?"></MyText>

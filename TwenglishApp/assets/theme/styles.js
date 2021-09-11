@@ -23,7 +23,7 @@ const text = StyleSheet.create({
     },
     primarioTitulo: {
         fontSize: 20,
-        marginBottom: 30
+        marginBottom: 20
     },
     primarioBold: {
         fontFamily: extrabold,
@@ -178,8 +178,10 @@ const cards = StyleSheet.create({
     padding: {
         paddingHorizontal: 15,
         flex: 1,
-        // backgroundColor: 'black',
         marginTop: 20
+    },
+    paddingLevel: {
+        paddingEnd: 15,
     },
     back: {
         backgroundColor: 'transparent',
