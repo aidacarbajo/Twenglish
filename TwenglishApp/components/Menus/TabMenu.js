@@ -13,7 +13,7 @@ const tabs = [
     {
         activeColor: secundary,
         activeBackgroundColor: '#FEE3E8',
-        activeIcon: "notes",
+        activeIcon: "lessons",
     },
     {
         activeColor: secundary,

@@ -197,7 +197,7 @@ const cards = StyleSheet.create({
         justifyContent: "center",
     },
     height: {
-        height: '100%'
+        height: '80%'
     },
     tag: {
         color: primary,

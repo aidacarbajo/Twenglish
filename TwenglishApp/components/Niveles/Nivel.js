@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { button, cards } from '../../assets/theme/styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { GradientCircularProgress } from 'react-native-circular-gradient-progress';
+import { GradientCircularProgress,  } from 'react-native-circular-gradient-progress';
 
 export default ( { nivel } ) => {   
     
@@ -36,24 +36,27 @@ export default ( { nivel } ) => {
                 middleColor={middle}
                 endColor={end}
                 withSnail= {true}
-            ></GradientCircularProgress>  
+                // classes={
+                //     (textContainer) => (
+                //       <Text>
+                //         Hola
+                //       </Text>
+                //     )
+                //   }
+            >
+                {/* <Text>Hola</Text> */}
+            </GradientCircularProgress>  
         )
     }
 
     return (
-        // <View style={cards.paddingLevel}>
         nivel.item.nombre === seleccionado
-            ?   <View style={styles.fondo}>
-                    {getCircle('#EE6400', '#F34117', '#F7002D')}
-                </View>
-            :   <View style={styles.fondoT}>
-                    {getCircle('#2872FC', '#4F3CFD', '#7804FF')}
-                </View>
-         
-        // </View>
-        
+        ?   <View style={styles.fondo}>
+                {getCircle('#EE6400', '#F34117', '#F7002D')}
+            </View>
+        :   <View style={styles.fondoT}>
+                {getCircle('#2872FC', '#4F3CFD', '#7804FF')}
+            </View>
+                
     );
-
-
-    
 }
