@@ -1,50 +1,61 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { ActivityIndicator, Dimensions, StyleSheet, Text, View } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import Nivel from '../Niveles/Nivel';
 import { getNiveles } from '../../data/queries/nivel';
 
 class NivelesList extends Component {
 
     constructor(props) {
-        super(props);_isMounted = false;
+        super(props);
+        _isMounted = false;
 
         this.state = {
           isLoading: true,
           levels: [],
+          nivelSeleccionado: 'A1'
         };
-    
-      }
-    
-      componentDidMount() {
-        this._isMounted = true;
-    
-        return getNiveles().then(res => {
-            // console.log(res);
-    
-            if (this._isMounted) {
-                this.setState({
-                    isLoading:false,
-                    levels: res
-                }).catch( (error) => {
-                    console.log(error.message);
-                });
-            }
+
+        this.callbackFunction = (nivelSeleccionado) => {
+            this.setState({nivelSeleccionado: nivelSeleccionado});
+            // Cambiar nivel aqui
+            this.getLevels();
+        }
+
+        this.getLevels = () => {
+            return getNiveles().then(res => {
+                if (this._isMounted) {
+                    this.setState({
+                        isLoading:false,
+                        levels: res
+                    }).catch( (error) => {
+                        console.log(error.message);
+                    });
+                }
             }).catch((error) => {
             // console.log(error.message);
             });
-      }
+        }
     
-      componentWillUnmount() {
+      }
+
+    componentDidMount() {
+        this._isMounted = true;
+
+        this.getLevels();
+    }
+    
+    componentWillUnmount() {
         this._isMounted = false;
-      }
-    
+    }
 
     render() {
         const styles = StyleSheet.create({
             container: {
-                height: 80,
-                marginBottom: 25
+                height: 90,
+                justifyContent: 'center',
+                marginBottom: 25,
+                width: Dimensions.get('window').width - 50
             }
         });
 
@@ -56,7 +67,7 @@ class NivelesList extends Component {
             )
           } else {
             return (
-                <View style={[styles.container, {padding: 3}]}>
+                <View style={[styles.container]}>
                     <FlatList
                         horizontal
                         showsHorizontalScrollIndicator={false}
@@ -65,7 +76,7 @@ class NivelesList extends Component {
                         data={this.state.levels.nivel}
                         keyExtractor={(item) => item.nombre}
                         renderItem={(item) => 
-                            <Nivel nivel={item}></Nivel>
+                            <Nivel nivel={item} nseleccionado={this.state.nivelSeleccionado} parentCallback = {this.callbackFunction}></Nivel>
                         }
                         >
                     </FlatList> 

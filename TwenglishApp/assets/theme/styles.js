@@ -217,4 +217,4 @@ const cards = StyleSheet.create({
     }
 })
 
-export { text, button, icons, radiobutton, menus, view, posiciones, secundary, cards };
+export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, cards };

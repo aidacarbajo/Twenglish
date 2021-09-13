@@ -4,22 +4,35 @@ import { Nivel } from '../models/twenglish-model';
 
 const getNiveles = () => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
-        const niveles = realm.objects('Nivel');
+        // const niveles = realm.objects('Nivel');
+
+        const niveless = realm.objects('Niveles');
 
         let res = {
-            // nombre: [],
-            // progreso: []
             nivel: []
         };
 
-        for (let i = 0; i < niveles.length; i++) {
-            // res.nombre.push(niveles[i].nombre);
-            // res.progreso.push(niveles[i].progreso);
-            let niv = {
-                nombre: niveles[i].nombre,
-                progreso: niveles[i].progreso
+        let niv = {
+            nombre: niveless[0].nivel_seleccionado.nombre,
+            progreso: niveless[0].nivel_seleccionado.progreso
+        }
+
+        console.log(niv);
+        res.nivel.push(niv);
+
+        for (let i = 0; i < niveless[0].niveles.length; i++) {
+            if(niveless[0].niveles[i].nombre != res.nivel[0].nombre) {
+                console.log(niveless[0].niveles);
+                niv = {
+                    nombre: niveless[0].niveles[i].nombre,
+                    progreso: niveless[0].niveles[i].progreso
+                }
+                res.nivel.push(niv);
             }
-            res.nivel.push(niv);
+            ////////////////////////////////////////////////
+            // COMENTAR CUANDO TENGA LOS NIVELES AÑADIDOS //
+            ////////////////////////////////////////////////
+            res.nivel.push({nombre: 'A2', proreso: 0}, {nombre: 'B1', proreso: 0}, {nombre: 'B2', proreso: 0}, {nombre: 'C1', proreso: 0}, {nombre: 'C2', proreso: 0});
         }
 
         resolve(res);
@@ -29,6 +42,7 @@ const getNiveles = () => new Promise((resolve, reject) => {
 const getNivelSeleccionado = () => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
         const niveles = realm.objects('Niveles');
+        console.log(niveles[0].nivel_seleccionado);
         resolve(niveles);
     }).catch((error) => reject(error.message));
 });
