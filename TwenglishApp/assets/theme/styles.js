@@ -215,6 +215,18 @@ const cards = StyleSheet.create({
     tag100: {
         fontFamily: 'sen_regular',
     }
-})
+});
 
-export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, cards };
+const modal = StyleSheet.create({
+    all: {
+        width: '90%'
+    },
+    content: {
+        backgroundColor: 'white', 
+        borderRadius: 26, 
+        padding: 20, 
+        elevation: 20
+    }
+});
+
+export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, cards, modal };

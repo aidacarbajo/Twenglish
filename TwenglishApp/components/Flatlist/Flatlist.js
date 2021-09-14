@@ -8,6 +8,15 @@ class Flatlist extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            tema: null
+        }
+    }
+
+    modalFunction = (temaA) => {
+        this.setState.bind({tema: temaA});
+        this.props.lessonsModal(true, temaA);
     }
 
     render() {
@@ -18,14 +27,16 @@ class Flatlist extends Component {
                     columnWrapperStyle={{justifyContent: 'space-between'}}
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{ flexGrow: 1 }}
-                    // inverted
                     data={this.props.dataRealm}
                     keyExtractor={(item) => item.tema }
                     renderItem={(item) => 
-                        <CardImage dataImagen={item.item.portada} dataTitle={item.item.tema} data100={item.item.progreso}></CardImage>
+                        <CardImage lessonsModal={this.modalFunction} visible={this.state.isLessonsVisible} dataImagen={item.item.portada} dataTitle={item.item.tema} data100={item.item.progreso} navigation={this.props.navigation}></CardImage>
                     }>
+    
+                    
                     
                 </FlatList>
+                
             </View>
 
         );

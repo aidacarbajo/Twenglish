@@ -4,7 +4,6 @@ import { Nivel } from '../models/twenglish-model';
 
 const getNiveles = () => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
-        // const niveles = realm.objects('Nivel');
 
         const niveless = realm.objects('Niveles');
 
@@ -17,12 +16,11 @@ const getNiveles = () => new Promise((resolve, reject) => {
             progreso: niveless[0].nivel_seleccionado.progreso
         }
 
-        console.log(niv);
         res.nivel.push(niv);
 
         for (let i = 0; i < niveless[0].niveles.length; i++) {
             if(niveless[0].niveles[i].nombre != res.nivel[0].nombre) {
-                console.log(niveless[0].niveles);
+                // console.log(niveless[0].niveles);
                 niv = {
                     nombre: niveless[0].niveles[i].nombre,
                     progreso: niveless[0].niveles[i].progreso
@@ -42,7 +40,7 @@ const getNiveles = () => new Promise((resolve, reject) => {
 const getNivelSeleccionado = () => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
         const niveles = realm.objects('Niveles');
-        console.log(niveles[0].nivel_seleccionado);
+        // console.log(niveles[0].nivel_seleccionado);
         resolve(niveles);
     }).catch((error) => reject(error.message));
 });

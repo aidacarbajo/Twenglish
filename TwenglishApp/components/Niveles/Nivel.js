@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { primary, secundary } from '../../assets/theme/styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { GradientCircularProgress,  } from 'react-native-circular-gradient-progress';
 
 export default ( { nivel, nseleccionado, parentCallback } ) => {   

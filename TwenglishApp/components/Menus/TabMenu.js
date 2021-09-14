@@ -1,13 +1,9 @@
-// import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import BubbleTabBar, {
-//   IBubbleTabConfig,
-//   IIconRenderer,
 } from 'react-native-bubble-tabbar';
 import { icons, menus, secundary } from '../../assets/theme/styles';
   
 import Icon from '../Icons/Icon';
-
 
 const tabs = [
     {

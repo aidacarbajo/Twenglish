@@ -5,13 +5,14 @@ import { text } from '../../assets/theme/styles';
 class MyTitle extends Component {
     constructor(props) {
         super(props);
+        // console.log(this.props.style);
     }
       
     render() {
         return (
             <View style={{flexDirection:'row'}}>
-                <Text style={[text.primario, text.primarioTitulo, text.rightt]}>{this.props.title}</Text> 
-                <Text style={[text.primario, text.primarioTitulo, text.primarioBold]}>{this.props.titleBold}</Text>
+                <Text style={[text.primario, text.primarioTitulo, text.rightt, this.props.style]}>{this.props.title}</Text> 
+                <Text style={[text.primario, text.primarioTitulo, text.primarioBold, this.props.style]}>{this.props.titleBold}</Text>
             </View>
         );
     }

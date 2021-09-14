@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
-import { TouchableOpacity, View, StatusBar, ActivityIndicator } from 'react-native';
+import { TouchableOpacity, View, StatusBar, ActivityIndicator, Pressable, Text } from 'react-native';
 import MyTitle from '../components/Texts/MyTitle';
-import { view, posiciones, icons } from '../assets/theme/styles';
+import { view, posiciones, icons, text, button } from '../assets/theme/styles';
 import Icon from '../components/Icons/Icon';
 import MyText from '../components/Texts/MyText';
 import Flatlist from '../components/Flatlist/Flatlist';
-import { getNivelSeleccionado, getNiveles } from '../data/queries/nivel';
+import { getNivelSeleccionado } from '../data/queries/nivel';
 import NivelesList from '../components/Flatlist/NivelesList';
+import Modal from '../components/Modal/ModalC';
+import ModalLessons from '../components/Modal/ModalLessons';
+
 
 class Lecciones extends Component {
 
@@ -17,9 +20,11 @@ class Lecciones extends Component {
 
     this.state = {
       isLoading: true,
-      lecciones: []
+      lecciones: [],
+      isSettingsVisible: false,
+      isLessonsVisible: false,
+      temaLesson: null
     };
-
   }
 
   componentDidMount() {
@@ -45,7 +50,21 @@ class Lecciones extends Component {
     this._isMounted = false;
   }
 
-  render() {
+  callbackFunction = (visible) => {
+    this.setState({isSettingsVisible: visible, isLessonsVisible: false});
+  }
+
+  callbackLessons = (visible, tema) => {
+    // console.log('Estoy en el Lecciones y lo veo: ', visible, tema);
+    if(visible) {
+      this.setState({isSettingsVisible: false, isLessonsVisible: visible, temaLesson: tema});
+    } else {
+      this.setState({isLessonsVisible: visible, temaLesson: null});
+    }
+  }
+
+ 
+    render() {
     if(this.state.isLoading){
       return (
           <View>
@@ -56,21 +75,31 @@ class Lecciones extends Component {
       return (
         <View style={view.container}>
           <StatusBar hidden />
+          {/* Modal de ajustes */}
+          <Modal visible={this.state.isSettingsVisible} tipo={'top'} navigation={this.props.navigation}>
+              <Pressable style={[button.button, button.option]} onPress={() => this.props.navigation.navigate('Settings')}>
+                  <Text style={text.primario}>Más Información</Text>
+              </Pressable>  
+          </Modal>
 
           <View style={[posiciones.abolute, posiciones.topright]}>
-            <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
+            <TouchableOpacity onPress={() => this.callbackFunction(!this.state.isSettingsVisible) }>
                 <Icon icon="settings" color={icons.dark} size={icons.lg}></Icon>
             </TouchableOpacity>
           </View>
 
-            <MyTitle title="My" titleBold="Progress"></MyTitle>
+          <MyTitle title="My" titleBold="Progress"></MyTitle>
+          <NivelesList></NivelesList>
 
-            {/* Scroll Horizontal */}
-            <NivelesList></NivelesList>
-            {/* For de niveles */}
+          <MyText title="What would you like to learn today?"></MyText>
+          <Flatlist lessonsModal={this.callbackLessons} dataRealm={this.state.lecciones} navigation={this.props.navigation}></Flatlist>
 
-            <MyText title="What would you like to learn today?"></MyText>
-            <Flatlist dataRealm={this.state.lecciones} keyy={'tema'}></Flatlist>
+          {/* Modal de lecciones*/
+          <Modal lessonmodal={this.callbackLessons} visible={this.state.isLessonsVisible} tipo={'centro'} navigation={this.props.navigation}>
+            <ModalLessons dataTitle={this.state.temaLesson}></ModalLessons>
+          </Modal>
+          }
+
         </View>
       );
     }

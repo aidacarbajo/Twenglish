@@ -1,25 +1,37 @@
-import React from 'react';
-import { ImageBackground, View, Text, StyleSheet } from 'react-native';
+import React, {Component} from 'react';
+import { ImageBackground, Pressable, View } from 'react-native';
 import { cards } from '../../assets/theme/styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { getImage } from '../../util/ImageManager';
 import Tag from './Tag';
 
-export default ( { dataImagen, dataTitle, data100 } ) => {
-    return (
-        <View style={[cards.card, cards.dimensions]}>
-            <TouchableOpacity style={cards.back}>         
-                <View style={[cards.dimensions]}>
-                    <ImageBackground 
-                        source={getImage(dataImagen)} 
-                        resizeMode="cover" 
-                        style={[cards.image]} 
-                        imageStyle={{ borderRadius: 12}} /*{opacity: 0.8}*/
-                    >
-                       <Tag data100={data100} dataTitle={dataTitle}></Tag>
-                    </ImageBackground> 
-                </View>
-            </TouchableOpacity>
-        </View>
-    );
+class CardImage extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    sendData = () => {
+        this.props.lessonsModal(this.props.dataTitle);
+    }
+
+    render() {
+        return (
+            <View style={[cards.card, cards.dimensions]}>
+                <Pressable style={cards.back} onPress={this.sendData}>         
+                    <View style={[cards.dimensions]}>
+                        <ImageBackground 
+                            source={getImage(this.props.dataImagen)} 
+                            resizeMode="cover" 
+                            style={[cards.image]} 
+                            imageStyle={{ borderRadius: 12}}
+                        >
+                            <Tag data100={this.props.data100} dataTitle={this.props.dataTitle}></Tag>
+                        </ImageBackground> 
+                    </View>
+                </Pressable>
+            </View>
+        );
+    }
 }
+
+export default CardImage;

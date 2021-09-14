@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Dimensions, StyleSheet, Text, View } from 'react-native';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { ActivityIndicator, Dimensions, StyleSheet, View } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 import Nivel from '../Niveles/Nivel';
 import { getNiveles } from '../../data/queries/nivel';
 
@@ -18,7 +18,9 @@ class NivelesList extends Component {
 
         this.callbackFunction = (nivelSeleccionado) => {
             this.setState({nivelSeleccionado: nivelSeleccionado});
-            // Cambiar nivel aqui
+            ////////////////////////
+            // Cambiar nivel aqui //
+            ////////////////////////
             this.getLevels();
         }
 
@@ -41,7 +43,6 @@ class NivelesList extends Component {
 
     componentDidMount() {
         this._isMounted = true;
-
         this.getLevels();
     }
     
