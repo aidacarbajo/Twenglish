@@ -11,6 +11,7 @@ import Rutine from '../screens/Rutine';
 import Settings from '../screens/Settings';
 
 import { icons } from '../assets/theme/styles';
+import Apuntes from '../screens/Apuntes';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -36,6 +37,7 @@ const Footer = () => {
       <Tab.Screen name="Routine" component={Rutine} />
 
       <Tab.Screen name="Settings" component={Settings} options={options}/> 
+      <Tab.Screen name="Apuntes" component={Apuntes} options={options}/> 
 
 
     </Tab.Navigator>

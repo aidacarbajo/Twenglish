@@ -4,10 +4,19 @@ import { Leccion } from '../models/twenglish-model';
 
 const getLecciones = () => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
-        let lecciones = realm.objects('Leccion');
-        // realm.close();
+        const lecciones = realm.objects('Leccion');
         resolve(lecciones);
     }).catch((error) => reject(error));
 });
 
-export { getLecciones }
+const getApuntesLeccion = (nombre) => new Promise((resolve, reject) => {
+    Realm.open(database).then(realm => {
+        const apuntes = realm.objects('Leccion').filtered(`portada == '${nombre}'`);
+        if(apuntes[0].explicacion != null) {
+            resolve(apuntes[0].explicacion.apartados);
+        }
+        resolve(null);
+    }).catch((error) => reject(error));
+});
+
+export { getLecciones, getApuntesLeccion }

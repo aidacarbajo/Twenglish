@@ -10,18 +10,19 @@ class Flatlist extends Component {
         super(props);
 
         this.state = {
-            tema: null
+            tema: null,
+            portada: null
         }
     }
 
-    modalFunction = (temaA) => {
-        this.setState.bind({tema: temaA});
-        this.props.lessonsModal(true, temaA);
+    modalFunction = (temaA, portadaA) => {
+        this.setState.bind({tema: temaA, portada: portadaA});
+        this.props.lessonsModal(true, temaA, portadaA);
     }
 
     render() {
         return (
-            <View style={cards.height}>
+            <View style={[cards.height]}>
                 <FlatList style={cards.padding}
                     numColumns={2}
                     columnWrapperStyle={{justifyContent: 'space-between'}}
@@ -32,13 +33,8 @@ class Flatlist extends Component {
                     renderItem={(item) => 
                         <CardImage lessonsModal={this.modalFunction} visible={this.state.isLessonsVisible} dataImagen={item.item.portada} dataTitle={item.item.tema} data100={item.item.progreso} navigation={this.props.navigation}></CardImage>
                     }>
-    
-                    
-                    
                 </FlatList>
-                
             </View>
-
         );
     }
 }

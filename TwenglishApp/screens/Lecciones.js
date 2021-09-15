@@ -23,9 +23,25 @@ class Lecciones extends Component {
       lecciones: [],
       isSettingsVisible: false,
       isLessonsVisible: false,
-      temaLesson: null
+      temaLesson: null,
+      portadaName: null
     };
+
   }
+
+  // se ejecuta cada vez que hay un cambio en los props
+  // static getDerivedStateFromProps(props, state) { 
+  //   // console.log(props);
+  //   if(props.route.params != undefined && props.route.params != null && props.route.params.deleteModal) {
+  //     props.params = null;
+  //       return {
+  //           isSettingsVisible: false,
+  //           isLessonsVisible: false
+  //       }
+  //   }
+  //   return null;
+  // }
+
 
   componentDidMount() {
     this._isMounted = true;
@@ -46,6 +62,7 @@ class Lecciones extends Component {
     });
   }
 
+  // cuando se destruye el componente
   componentWillUnmount() {
     this._isMounted = false;
   }
@@ -54,12 +71,12 @@ class Lecciones extends Component {
     this.setState({isSettingsVisible: visible, isLessonsVisible: false});
   }
 
-  callbackLessons = (visible, tema) => {
+  callbackLessons = (visible, tema, portada) => {
     // console.log('Estoy en el Lecciones y lo veo: ', visible, tema);
     if(visible) {
-      this.setState({isSettingsVisible: false, isLessonsVisible: visible, temaLesson: tema});
+      this.setState({isSettingsVisible: false, isLessonsVisible: visible, temaLesson: tema, portadaName: portada});
     } else {
-      this.setState({isLessonsVisible: visible, temaLesson: null});
+      this.setState({isLessonsVisible: visible, temaLesson: null, portadaName: null});
     }
   }
 
@@ -73,6 +90,7 @@ class Lecciones extends Component {
       )
     } else {
       return (
+
         <View style={view.container}>
             <StatusBar hidden />
             {/* Modal de ajustes */}
@@ -84,7 +102,7 @@ class Lecciones extends Component {
 
             {/* Modal de lecciones*/
             <Modal lessonmodal={this.callbackLessons} visible={this.state.isLessonsVisible} tipo={'centro'} navigation={this.props.navigation}>
-              <ModalLessons dataTitle={this.state.temaLesson}></ModalLessons>
+              <ModalLessons dataTitle={this.state.temaLesson} dataPortada={this.state.portadaName} navigation={this.props.navigation}></ModalLessons>
             </Modal>
             }
             <View style={[posiciones.abolute, posiciones.topright]}>

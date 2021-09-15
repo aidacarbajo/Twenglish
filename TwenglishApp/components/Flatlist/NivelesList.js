@@ -24,12 +24,16 @@ class NivelesList extends Component {
             this.getLevels();
         }
 
-        this.getLevels = () => {
+      }
+
+      getLevels = () => {
+        // this.getLevels = () => {
             return getNiveles().then(res => {
                 if (this._isMounted) {
                     this.setState({
                         isLoading:false,
-                        levels: res
+                        levels: res.nivel,
+                        // nivelSeleccionado: res.nivel[0].nombre       // Descomentar cuando este hecho el update
                     }).catch( (error) => {
                         console.log(error.message);
                     });
@@ -37,8 +41,7 @@ class NivelesList extends Component {
             }).catch((error) => {
             // console.log(error.message);
             });
-        }
-    
+        // }
       }
 
     componentDidMount() {
@@ -74,13 +77,12 @@ class NivelesList extends Component {
                         showsHorizontalScrollIndicator={false}
                         showsVerticalScrollIndicator={false}
                         contentContainerStyle={{ flexGrow: 1 }}
-                        data={this.state.levels.nivel}
+                        data={this.state.levels}
                         keyExtractor={(item) => item.nombre} 
-                        renderItem={(item) => 
+                        renderItem={(item) =>  
                             <View>
                                 <Nivel nivel={item} nseleccionado={this.state.nivelSeleccionado} parentCallback = {this.callbackFunction}></Nivel>
                             </View>
-                        
                         }
                         >
                     </FlatList>

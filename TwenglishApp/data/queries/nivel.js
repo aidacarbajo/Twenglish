@@ -16,6 +16,7 @@ const getNiveles = () => new Promise((resolve, reject) => {
             progreso: niveless[0].nivel_seleccionado.progreso
         }
 
+
         res.nivel.push(niv);
 
         for (let i = 0; i < niveless[0].niveles.length; i++) {
@@ -27,10 +28,6 @@ const getNiveles = () => new Promise((resolve, reject) => {
                 }
                 res.nivel.push(niv);
             }
-            ////////////////////////////////////////////////
-            // COMENTAR CUANDO TENGA LOS NIVELES AÑADIDOS //
-            ////////////////////////////////////////////////
-            res.nivel.push({nombre: 'A2', proreso: 0}, {nombre: 'B1', proreso: 0}, {nombre: 'B2', proreso: 0}, {nombre: 'C1', proreso: 0}, {nombre: 'C2', proreso: 0});
         }
 
         resolve(res);

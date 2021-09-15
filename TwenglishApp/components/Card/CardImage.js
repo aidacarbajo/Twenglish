@@ -11,7 +11,7 @@ class CardImage extends Component {
     }
 
     sendData = () => {
-        this.props.lessonsModal(this.props.dataTitle);
+        this.props.lessonsModal(this.props.dataTitle, this.props.dataImagen);
     }
 
     render() {
