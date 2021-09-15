@@ -4,7 +4,6 @@ import { primary, secundary } from '../../assets/theme/styles';
 import { GradientCircularProgress,  } from 'react-native-circular-gradient-progress';
 
 export default ( { nivel, nseleccionado, parentCallback } ) => {   
-
     
     const seleccionado = nseleccionado;
 
@@ -62,9 +61,13 @@ export default ( { nivel, nseleccionado, parentCallback } ) => {
     return (
         <View style={styles.padding}>
             {nivel.item.nombre === seleccionado
-            ?   <View style={styles.fondo}>
+            ?   <View style={{flexDirection: 'row'}}>
+                    <Text style={{width:30}}></Text>
+                    <View style={styles.fondo}>
                     {getCircle('#EE6400', '#F34117', '#F7002D')}
                 </View>
+                </View>
+                
             :   <View style={styles.fondoT}>
                     {getCircle('#2872FC', '#4F3CFD', '#7804FF')}
                 </View>}

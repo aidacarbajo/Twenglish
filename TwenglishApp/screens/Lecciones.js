@@ -74,33 +74,41 @@ class Lecciones extends Component {
     } else {
       return (
         <View style={view.container}>
-          <StatusBar hidden />
-          {/* Modal de ajustes */}
-          <Modal visible={this.state.isSettingsVisible} tipo={'top'} navigation={this.props.navigation}>
-              <Pressable style={[button.button, button.option]} onPress={() => this.props.navigation.navigate('Settings')}>
-                  <Text style={text.primario}>Más Información</Text>
-              </Pressable>  
-          </Modal>
+            <StatusBar hidden />
+            {/* Modal de ajustes */}
+            <Modal visible={this.state.isSettingsVisible} tipo={'top'} navigation={this.props.navigation}>
+                <Pressable style={[button.button, button.option]} onPress={() => this.props.navigation.navigate('Settings')}>
+                    <Text style={text.primario}>Más Información</Text>
+                </Pressable>  
+            </Modal>
 
-          <View style={[posiciones.abolute, posiciones.topright]}>
-            <TouchableOpacity onPress={() => this.callbackFunction(!this.state.isSettingsVisible) }>
-                <Icon icon="settings" color={icons.dark} size={icons.lg}></Icon>
-            </TouchableOpacity>
+            {/* Modal de lecciones*/
+            <Modal lessonmodal={this.callbackLessons} visible={this.state.isLessonsVisible} tipo={'centro'} navigation={this.props.navigation}>
+              <ModalLessons dataTitle={this.state.temaLesson}></ModalLessons>
+            </Modal>
+            }
+            <View style={[posiciones.abolute, posiciones.topright]}>
+              <TouchableOpacity onPress={() => this.callbackFunction(!this.state.isSettingsVisible) }>
+                  <Icon icon="settings" color={icons.dark} size={icons.lg}></Icon>
+              </TouchableOpacity>
+            </View>
+
+            <View style={view.safeArea}>
+              <MyTitle title="My" titleBold="Progress"></MyTitle>
+            </View>
+
+            <NivelesList></NivelesList>
+
+            <View style={view.safeArea}>
+              <MyText title="What would you like to learn today?"></MyText>
+              <Flatlist lessonsModal={this.callbackLessons} dataRealm={this.state.lecciones} navigation={this.props.navigation}></Flatlist>
+            </View>
+
+
+            
+
           </View>
 
-          <MyTitle title="My" titleBold="Progress"></MyTitle>
-          <NivelesList></NivelesList>
-
-          <MyText title="What would you like to learn today?"></MyText>
-          <Flatlist lessonsModal={this.callbackLessons} dataRealm={this.state.lecciones} navigation={this.props.navigation}></Flatlist>
-
-          {/* Modal de lecciones*/
-          <Modal lessonmodal={this.callbackLessons} visible={this.state.isLessonsVisible} tipo={'centro'} navigation={this.props.navigation}>
-            <ModalLessons dataTitle={this.state.temaLesson}></ModalLessons>
-          </Modal>
-          }
-
-        </View>
       );
     }
   }

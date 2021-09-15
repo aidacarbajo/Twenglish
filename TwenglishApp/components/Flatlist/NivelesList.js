@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Dimensions, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Nivel from '../Niveles/Nivel';
 import { getNiveles } from '../../data/queries/nivel';
@@ -56,7 +56,7 @@ class NivelesList extends Component {
                 height: 90,
                 justifyContent: 'center',
                 marginBottom: 25,
-                width: Dimensions.get('window').width - 50
+                // marginLeft: 10,
             }
         });
 
@@ -75,12 +75,15 @@ class NivelesList extends Component {
                         showsVerticalScrollIndicator={false}
                         contentContainerStyle={{ flexGrow: 1 }}
                         data={this.state.levels.nivel}
-                        keyExtractor={(item) => item.nombre}
+                        keyExtractor={(item) => item.nombre} 
                         renderItem={(item) => 
-                            <Nivel nivel={item} nseleccionado={this.state.nivelSeleccionado} parentCallback = {this.callbackFunction}></Nivel>
+                            <View>
+                                <Nivel nivel={item} nseleccionado={this.state.nivelSeleccionado} parentCallback = {this.callbackFunction}></Nivel>
+                            </View>
+                        
                         }
                         >
-                    </FlatList> 
+                    </FlatList>
                 </View>
             );
         }

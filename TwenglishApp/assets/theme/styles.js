@@ -11,11 +11,19 @@ const body = '#4D4D4D';
 const view = StyleSheet.create({
     container: {
         backgroundColor: "#F6F5F8",
-        paddingHorizontal: 50,
         paddingVertical: 60,
         height: '100%'
+    },
+    safeArea:  {
+        paddingHorizontal: 50,
+    },
+    allContainers: {
+        backgroundColor: "#F6F5F8",
+        paddingVertical: 60,
+        height: '100%',
+        paddingHorizontal: 50,
     }
-})
+});
 const text = StyleSheet.create({
     primario: {
         color: primary,
@@ -197,7 +205,7 @@ const cards = StyleSheet.create({
         justifyContent: "center",
     },
     height: {
-        height: '80%'
+        height: '100%'
     },
     tag: {
         color: primary,
