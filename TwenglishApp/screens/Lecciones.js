@@ -80,6 +80,13 @@ class Lecciones extends Component {
     }
   }
 
+  irApuntes = () => {
+    return this.props.navigation.navigate('Apuntes', {tema: this.state.temaLesson, portada: this.state.portadaName});
+  }
+  irLeccion = () => {
+    return this.props.navigation.navigate('Voc_Ex1');
+  }
+
  
     render() {
     if(this.state.isLoading){
@@ -101,8 +108,8 @@ class Lecciones extends Component {
             </Modal>
 
             {/* Modal de lecciones*/
-            <Modal lessonmodal={this.callbackLessons} visible={this.state.isLessonsVisible} tipo={'centro'} navigation={this.props.navigation}>
-              <ModalLessons dataTitle={this.state.temaLesson} dataPortada={this.state.portadaName} navigation={this.props.navigation}></ModalLessons>
+            <Modal lessonmodal={this.callbackLessons} visible={this.state.isLessonsVisible} tipo={'centro'}>
+              <ModalLessons dataTitle={this.state.temaLesson} verApuntes={this.irApuntes} empezarLeccion={this.irLeccion}></ModalLessons>
             </Modal>
             }
             <View style={[posiciones.abolute, posiciones.topright]}>

@@ -13,7 +13,7 @@ const getApuntesLeccion = (nombre) => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
         const apuntes = realm.objects('Leccion').filtered(`portada == '${nombre}'`);
         if(apuntes[0].explicacion != null) {
-            resolve(apuntes[0].explicacion.apartados);
+            resolve(apuntes[0].explicacion.apartados[0]);
         }
         resolve(null);
     }).catch((error) => reject(error));

@@ -12,7 +12,7 @@ class Icon extends Component {
     
   render() {
     return (
-        <Text style={[icons.all, this.props.color, this.props.size]}>{decode(myIcons.getIcon(this.props.icon))}</Text>
+        <Text style={[icons.all, icons.sm, {color: this.props.color}]}>{decode(myIcons.getIcon(this.props.icon))}</Text>
     );
   }
 }

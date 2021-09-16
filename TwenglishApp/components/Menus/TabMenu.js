@@ -19,7 +19,7 @@ const tabs = [
 ];
 
 const iconRender = ({ icon }) =>
-    <Icon icon={icon} color={icons.menu} size={icons.sm}/>;
+    <Icon icon={icon} color={icons.menu.color} size={icons.sm}/>;
 
     const TabMenu = ({state, descriptors, navigation}) => {
         return (

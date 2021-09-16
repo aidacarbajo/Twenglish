@@ -7,7 +7,7 @@ import BlueButton from "../Buttons/BlueButton";
 class ModalLessons extends Component {
     constructor(props) {
         super(props);  
-        // console.log(props);
+        console.log(props);
     }
  
     render() {
@@ -15,11 +15,11 @@ class ModalLessons extends Component {
             <View>
                 <MyTitle titleBold={this.props.dataTitle} style={{fontSize: 16, padding: 4, marginBottom: 5}}></MyTitle>
                 
-                <Pressable style={[button.button, button.option, {width: '90%'}]} onPress={() => this.props.navigation.navigate('Apuntes', {tema: this.props.dataTitle, portada: this.props.dataPortada})}>
+                <Pressable style={[button.button, button.option, {width: '90%'}]} onPress={this.props.verApuntes}>
                   <Text style={text.primario}>Notes</Text>
                 </Pressable>  
 
-                <BlueButton title="Start lesson" navigation={this.props.navigation} style={{width: '90%'}}></BlueButton>
+                <BlueButton title="Start lesson" screen={this.props.empezarLeccion} style={{width: '90%'}}></BlueButton>
 
             </View>
         );

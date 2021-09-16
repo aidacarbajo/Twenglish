@@ -1,28 +1,51 @@
 import React from 'react';
+import { icons } from '../assets/theme/styles';
 import { NavigationContainer } from '@react-navigation/native';
 import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 
 import TabMenu from '../components/Menus/TabMenu';
-import { createStackNavigator } from '@react-navigation/stack';
 import Lecciones from '../screens/Lecciones';
 import Rutine from '../screens/Rutine';
 import Settings from '../screens/Settings';
-
-import { icons } from '../assets/theme/styles';
 import Apuntes from '../screens/Apuntes';
+import Voc_Ex1 from '../screens/Voc_Ex1';
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
 
-const options = {
-  tabBarVisible: false
-}
+const pantallas = [
+  {
+    nombre: "Lessons",
+    componente: Lecciones,
+    tabBarVisible: true
+  },
+  {
+    nombre: "Routine",
+    componente: Rutine,
+    tabBarVisible: true
+  },
+  {
+    nombre: "Settings",
+    componente: Settings,
+    tabBarVisible: true
+  },
+  {
+    nombre: "Apuntes",
+    componente: Apuntes,
+    tabBarVisible: false
+  },
+  {
+    nombre: "Voc_Ex1",
+    componente: Voc_Ex1,
+    tabBarVisible: false
+  }
+];
 
-const Footer = () => {
-  return(
-    <Tab.Navigator
+const Navigation = () => {
+  return (
+    <NavigationContainer screenOptions={{headerShown: false}} >
+      <Tab.Navigator
       initialRouteName="Lessons"
       tabBar={({ state, descriptors, navigation }) =>
         <TabMenu
@@ -33,23 +56,14 @@ const Footer = () => {
         />
       }
     >
-      <Tab.Screen name="Lessons" component={Lecciones} />
-      <Tab.Screen name="Routine" component={Rutine} />
-
-      <Tab.Screen name="Settings" component={Settings} options={options}/> 
-      <Tab.Screen name="Apuntes" component={Apuntes} options={options}/> 
-
-
-    </Tab.Navigator>
-  );
-}
-
-
-const Navigation = () => {
-  return (
-    <NavigationContainer screenOptions={{headerShown: false}}>
-      {Footer()}
-      {/* {General()} */}
+      {
+        pantallas.map(pantalla => {
+          return(
+            <Tab.Screen name={pantalla.nombre} component={pantalla.componente} options={{tabBarVisible: pantalla.tabBarVisible}} key={pantalla.nombre}/> 
+          );
+        })
+      }    
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };

@@ -7,6 +7,7 @@ const extrabold = 'sen_extra_bold';
 const primary = '#2971FD';
 const secundary = '#F7002B';
 const body = '#4D4D4D';
+const example = '#949494';
 
 const view = StyleSheet.create({
     container: {
@@ -223,6 +224,13 @@ const cards = StyleSheet.create({
     },
     tag100: {
         fontFamily: 'sen_regular',
+    },
+    cardApuntes: {
+        width: '100%',
+        padding: 20,
+        borderRadius: 20,
+        backgroundColor: 'white',
+        elevation: 4
     }
 });
 
@@ -238,4 +246,4 @@ const modal = StyleSheet.create({
     }
 });
 
-export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, cards, modal };
+export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, example, cards, modal };

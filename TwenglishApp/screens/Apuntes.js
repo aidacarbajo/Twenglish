@@ -1,14 +1,15 @@
 import React, {Component, useEffect} from 'react';
 // import { TouchableOpacity, View, StatusBar, ActivityIndicator, Pressable, Text } from 'react-native';
 import MyTitle from '../components/Texts/MyTitle';
-import { view, posiciones, icons, text, button } from '../assets/theme/styles';
+import { view, posiciones, icons, text, button, cards, secundary, body, example } from '../assets/theme/styles';
 import MyText from '../components/Texts/MyText';
 // import Flatlist from '../components/Flatlist/Flatlist';
 import { getApuntesLeccion } from '../data/queries/lecciones';
 import Modal from '../components/Modal/ModalC';
 import { ActivityIndicator, Pressable, StatusBar, Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from '../components/Icons/Icon';
+import CardVocabulary from '../components/Card/CardVocabulary';
 
 class Apuntes extends Component {
 
@@ -19,56 +20,68 @@ class Apuntes extends Component {
     let params = this.props.route.params;
 
     this.state = {
-      isLoading: true,
-        // isLoading: false,
-        apartados: [],
+        isLoading: true,
         tema: params.tema,
-        portada: params.portada
-    //   isSettingsVisible: false,
-    //   isLessonsVisible: false,
-    //   temaLesson: null
+        portada: params.portada,
+        vocabulario: [],
+        gramatica: [],
     };
 
     _isMounted = false;
   }
 
-  
-  // se ejecuta cada vez que hay un cambio en los props
-  static getDerivedStateFromProps(props, state) { 
-    if(props.route.params.tema != state.tema) {
-        return {
-            tema: props.route.params.tema,
-            portada: props.route.params.portada
-            // actualizar contenido de los apuntes
+  getApuntess = (portadaID, temaID) => {
+    this._isMounted = true;
+
+    return getApuntesLeccion(portadaID).then(res => {
+        const apuntes = res; 
+        
+        if(this._isMounted) {
+            this.setState({
+                isLoading:false,
+                vocabulario: apuntes.listaVocabulario,
+                gramatica: apuntes.listaGramatica,
+                tema: temaID,
+                portada: portadaID,
+            });
         }
-    }
-    return null;
+    }).catch((error) => {
+        // console.log('Esta lección no tiene apuntes');   // en realidad todas las lecciones tienen apuntes
+        this.setState({
+            isLoading:false,
+            vocabulario: [],
+            gramatica: [],
+            tema: temaID,
+            portada: portadaID,
+        });
+    });
   }
 
-
     componentDidMount() {
-        this._isMounted = true;
-
-        return getApuntesLeccion('greetingsA1').then(res => {
-            const apuntes = res;  
-            console.log(apuntes[0].explicacion);
-
-            if(this._isMounted && apuntes != null) {
-                this.setState({
-                    isLoading:false,
-                    apartados: apuntes,
-                }).catch( (error) => {
-                    console.log(error.message);
-                });
-            }
-        }).catch((error) => {
-            // console.log(error.message);
-        });
+        return this.getApuntess(this.props.route.params.portada, this.props.route.params.tema);
     }
+
+  
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        if (nextProps.route.params.tema !== this.state.tema) {
+            return this.getApuntess(nextProps.route.params.portada, nextProps.route.params.tema);
+        }
+    }
+
 
     componentWillUnmount() {
         this._isMounted = false;
     }
+
+    getGramatica = () => {
+        return (
+            <View style={cards.cardApuntes}>
+                <MyTitle title="Must have + past participle verb" style={{fontSize: 14, marginBottom: 10}}></MyTitle>
+                <MyText title="Se usa cuando intentas adivinar algo sobre el pasado, y estás casi seguro de lo que piensas es correcto." style={{fontSize: 12, textAlign: 'left', marginBottom: 10, padding: 4}}></MyText>
+                <MyText title="'They must have gone to their aunt's restaurant.'" style={{fontSize: 12, textAlign: 'left', color: example, paddingHorizontal: 4}}></MyText>
+            </View>
+        );        
+    };
 
  
     render() {
@@ -80,21 +93,35 @@ class Apuntes extends Component {
       )
     } else {
       return (
-        <View style={view.container}>
+        <View style={view.allContainers}>
             <View style={[posiciones.abolute, posiciones.topleft]}>
                 <Pressable onPress={() => this.props.navigation.navigate('Lessons', {deleteModal: true})}>
                     <Icon icon="back" color={icons.dark} size={icons.lg}></Icon>
                 </Pressable>
             </View>
 
-            <View style={view.safeArea}>
-              <MyTitle title={this.state.tema} titleBold="notes"></MyTitle>
-            </View>
+            <MyTitle title={this.state.tema} titleBold="notes"></MyTitle>
+
+            <View style={{marginBottom: 1}}>
+                <MyTitle title={'Grammar'} style={{fontSize: 18, color: body, marginVertical: 15}}></MyTitle>
+                    {this.state.gramatica.map((element) => {
+                        return (
+                            <ScrollView style={[cards.cardApuntes, {marginBottom: 15}]}>
+                                {/* <MyTitle title="Must have + past participle verb" style={{fontSize: 14, marginBottom: 5}}></MyTitle>
+                                <MyText title="Se usa cuando intentas adivinar algo sobre el pasado, y estás casi seguro de lo que piensas es correcto." style={{fontSize: 12, textAlign: 'left', marginBottom: 10, padding: 4}}></MyText>
+                                <MyText title="'They must have gone to their aunt's restaurant.'" style={{fontSize: 12, textAlign: 'left', color: example, paddingHorizontal: 4}}></MyText> */}
+                                <MyTitle title={element.titulo} style={{fontSize: 14, marginBottom: 10}}></MyTitle>
+                                <MyText title={element.explicacion} style={{fontSize: 12, textAlign: 'left', marginBottom: 10, padding: 4}}></MyText>
+                                <MyText title={element.ejemplo} style={{fontSize: 12, textAlign: 'left', color: example, paddingHorizontal: 4}}></MyText>
+                            </ScrollView>
+                        );     
+                    })}
+            </View>                
 
             <View>
-                <Text>{this.state.apartados[0].explicacion}</Text>
+                <MyTitle title={'Vocabulary'} style={{fontSize: 18, color: body, marginVertical: 15}}></MyTitle>
+                <CardVocabulary vocabulary={this.state.vocabulario}></CardVocabulary>
             </View>
-
           </View>
 
       );
