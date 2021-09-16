@@ -81,7 +81,7 @@ class Lecciones extends Component {
   }
 
   irApuntes = () => {
-    return this.props.navigation.navigate('Apuntes', {tema: this.state.temaLesson, portada: this.state.portadaName});
+    return this.props.navigation.navigate('Apuntes', {tema: this.state.temaLesson, portada: this.state.portadaName, from: 'Lessons'});
   }
   irLeccion = () => {
     return this.props.navigation.navigate('Voc_Ex1');

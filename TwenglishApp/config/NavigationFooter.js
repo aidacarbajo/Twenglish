@@ -31,15 +31,15 @@ const pantallas = [
     tabBarVisible: true
   },
   {
+    nombre: "Voc_Ex1",
+    componente: Voc_Ex1,
+    tabBarVisible: false
+  },
+  {
     nombre: "Apuntes",
     componente: Apuntes,
     tabBarVisible: false
   },
-  {
-    nombre: "Voc_Ex1",
-    componente: Voc_Ex1,
-    tabBarVisible: false
-  }
 ];
 
 const Navigation = () => {

@@ -1,4 +1,4 @@
-import React, {Component, useEffect} from 'react';
+import React, {Component, useEffect, NavigationActions} from 'react';
 // import { TouchableOpacity, View, StatusBar, ActivityIndicator, Pressable, Text } from 'react-native';
 import MyTitle from '../components/Texts/MyTitle';
 import { view, posiciones, icons, text, button, cards, secundary, body, example } from '../assets/theme/styles';
@@ -95,8 +95,8 @@ class Apuntes extends Component {
       return (
         <View style={view.allContainers}>
             <View style={[posiciones.abolute, posiciones.topleft]}>
-                <Pressable onPress={() => this.props.navigation.navigate('Lessons', {deleteModal: true})}>
-                    <Icon icon="back" color={icons.dark} size={icons.lg}></Icon>
+                <Pressable onPress={() => this.props.navigation.navigate(this.props.route.params.from)}>
+                    <Icon icon="back" color={secundary} size={icons.lg}></Icon>
                 </Pressable>
             </View>
 

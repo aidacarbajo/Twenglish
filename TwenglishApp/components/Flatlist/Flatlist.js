@@ -29,7 +29,7 @@ class Flatlist extends Component {
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{ flexGrow: 1 }}
                     data={this.props.dataRealm}
-                    keyExtractor={(item) => item.tema }
+                    keyExtractor={(item) => item.portada }
                     renderItem={(item) => 
                         <CardImage lessonsModal={this.modalFunction} visible={this.state.isLessonsVisible} dataImagen={item.item.portada} dataTitle={item.item.tema} data100={item.item.progreso} navigation={this.props.navigation}></CardImage>
                     }>

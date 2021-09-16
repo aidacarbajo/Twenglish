@@ -21,7 +21,7 @@ const view = StyleSheet.create({
     allContainers: {
         backgroundColor: "#F6F5F8",
         paddingVertical: 60,
-        height: '100%',
+        // height: '100%',
         paddingHorizontal: 50,
     }
 });
