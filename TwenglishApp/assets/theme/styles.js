@@ -16,6 +16,7 @@ const view = StyleSheet.create({
         height: '100%'
     },
     safeArea:  {
+        backgroundColor: '#F6F5F8',
         paddingHorizontal: 50,
     },
     allContainers: {
@@ -38,7 +39,7 @@ const text = StyleSheet.create({
         fontFamily: extrabold,
     },
     body: {
-        fontSize: 14,
+        fontSize: 13,
         color: body,
         fontFamily: regular,
         textAlign: 'center'
@@ -246,4 +247,4 @@ const modal = StyleSheet.create({
     }
 });
 
-export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, example, cards, modal };
+export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, example, cards, modal, regular, extrabold, bold };
