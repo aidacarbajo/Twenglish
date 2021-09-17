@@ -84,7 +84,7 @@ class Lecciones extends Component {
     return this.props.navigation.navigate('Apuntes', {tema: this.state.temaLesson, portada: this.state.portadaName, from: 'Lessons'});
   }
   irLeccion = () => {
-    return this.props.navigation.navigate('Voc_Ex1');
+    return this.props.navigation.navigate('Ejercicios');
   }
 
  
@@ -125,7 +125,7 @@ class Lecciones extends Component {
             <NivelesList></NivelesList>
 
             <View style={view.safeArea}>
-              <MyText title="What would you like to learn today?"></MyText>
+              <MyText title="What would you like to learn today?" style={{marginBottom: 15}}></MyText>
               <Flatlist lessonsModal={this.callbackLessons} dataRealm={this.state.lecciones} navigation={this.props.navigation}></Flatlist>
             </View>
 

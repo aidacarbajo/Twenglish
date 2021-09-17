@@ -8,8 +8,9 @@ import Tag from '../components/Card/Tag';
 import MyText from '../components/Texts/MyText';
 import BlueButton from '../components/Buttons/BlueButton';
 import MyTitle from '../components/Texts/MyTitle';
+import Voc_Ex1 from './Voc_Ex1';
 
-class Voc_Ex1 extends Component {
+class Ejercicios extends Component {
 
     constructor(props) {
         super(props);
@@ -79,8 +80,8 @@ class Voc_Ex1 extends Component {
         // console.log(enunciado);
         return (
             enunciado !== undefined
-            ? <MyTitle title={enunciado.frase} style={{fontSize: 12, fontFamily: bold, marginVertical: 15}} destacar={enunciado.palabraClave}></MyTitle>
-            : <MyTitle title={this.state.dataRealm[this.state.dataRealm.length - 1].frase} style={{fontSize: 12, fontFamily: bold, marginVertical: 15}} destacar={this.state.dataRealm[this.state.dataRealm.length - 1].palabraClave}></MyTitle>
+            ? <MyTitle title={enunciado.frase} style={{fontSize: 12, fontFamily: bold}} destacar={enunciado.palabraClave}></MyTitle>
+            : <MyTitle title={this.state.dataRealm[this.state.dataRealm.length - 1].frase} style={{fontSize: 12, fontFamily: bold}} destacar={this.state.dataRealm[this.state.dataRealm.length - 1].palabraClave}></MyTitle>
         )  
     };
 
@@ -94,40 +95,29 @@ class Voc_Ex1 extends Component {
             );
         } else {
             return (
-                <View>
-                    <View>{this.list()}</View>
+                <View style={[{paddingTop: 0, height: '100%'}]}>
+                    <Header navigation={this.props.navigation}></Header>
+                    
+                    <View style={[view.safeArea, {width: '100%', height: '85%'}]}>
+                        {/* Enunciado del ejercicio */}
+                        <MyText title="Choose the correct image."></MyText>
 
-                    <FlatList
-                        style={{paddingHorizontal: cards.padding.paddingHorizontal, paddingVertical: 20}}
-                        numColumns={2}
-                        columnWrapperStyle={{justifyContent: 'space-between'}}
-                        showsVerticalScrollIndicator={false}
-                        data={this.state.dataRealm}
-                        keyExtractor={(item, index) => index }
-                        renderItem={(item, index) => 
-                            <View style={[cards.card, cards.dimensions]}>
-                                <Pressable style={cards.back} onPress={() => this.isPressed(item.index)}>         
-                                    <View style={[cards.dimensions]}>
-                                        <ImageBackground 
-                                            source={getImage(item.item.portada)} 
-                                            resizeMode="cover" 
-                                            style={[cards.image]} 
-                                            imageStyle={{ borderRadius: 12}}
-                                        >
-                                            {/* Solo se añade si se ha acertado */}
-                                            {this.state.pressed[item.index] === true && (
-                                                <Tag dataTitle={item.item.palabraClave}></Tag>
-                                            )}
+                        {/* Tipo de pregunta del ejercicio*/}
+                        {/* getEjercicio(), que tenga un switch que llame a las preguntas y a las respuestas dependiendo el tipo de ejercicio? */}
+                        <Voc_Ex1></Voc_Ex1>
 
-                                        </ImageBackground> 
-                                    </View>
-                                </Pressable>
-                            </View>                        }>
-                    </FlatList>                    
+                        
+                    </View>
+
+                    <View style={[{position: 'absolute', bottom: 0, paddingHorizontal: 30, paddingVertical: 10, width:'100%'}]}>
+                        <BlueButton title="Check answer"></BlueButton>
+                    </View>
+
+                    
                 </View>
             );
         }
     }
 }
 
-export default Voc_Ex1;
+export default Ejercicios;

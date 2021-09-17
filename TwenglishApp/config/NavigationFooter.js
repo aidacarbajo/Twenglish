@@ -10,7 +10,8 @@ import Lecciones from '../screens/Lecciones';
 import Rutine from '../screens/Rutine';
 import Settings from '../screens/Settings';
 import Apuntes from '../screens/Apuntes';
-import Voc_Ex1 from '../screens/Voc_Ex1';
+import Ejercicios from '../screens/Ejercicios';
+// import Voc_Ex1 from '../screens/Voc_Ex1';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,8 +32,8 @@ const pantallas = [
     tabBarVisible: true
   },
   {
-    nombre: "Voc_Ex1",
-    componente: Voc_Ex1,
+    nombre: "Ejercicios",
+    componente: Ejercicios,
     tabBarVisible: false
   },
   {

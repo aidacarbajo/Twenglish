@@ -26,7 +26,7 @@ class Header extends Component {
                 </View>
 
                 <View style={[posiciones.abolute, {right: 30, top: 30}]}>
-                    <Pressable onPress={() => this.props.navigation.navigate('Apuntes', {tema: 'Greetings', portada: 'greetingsA1', from: 'Voc_Ex1'}) }>
+                    <Pressable onPress={() => this.props.navigation.navigate('Apuntes', {tema: 'Greetings', portada: 'greetingsA1', from: 'Ejercicios'}) }>
                         <RoundButton icon="notes" color={'white'}></RoundButton>
                     </Pressable>
                 </View>
