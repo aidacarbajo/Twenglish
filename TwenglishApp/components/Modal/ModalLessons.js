@@ -14,12 +14,11 @@ class ModalLessons extends Component {
             <View>
                 <MyTitle titleBold={this.props.dataTitle} style={{fontSize: 16, padding: 4, marginBottom: 5}}></MyTitle>
                 
+                <BlueButton title="Start lesson" screen={this.props.empezarLeccion} style={{width: '90%'}}></BlueButton>
+
                 <Pressable style={[button.button, button.option, {width: '90%'}]} onPress={this.props.verApuntes}>
                   <Text style={text.primario}>Notes</Text>
                 </Pressable>  
-
-                <BlueButton title="Start lesson" screen={this.props.empezarLeccion} style={{width: '90%'}}></BlueButton>
-
             </View>
         );
     }

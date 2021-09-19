@@ -75,7 +75,8 @@ const button = StyleSheet.create({
         borderRadius: 12,
         width: '100%',
         // en medio de la pantalla
-        marginVertical: 10,
+        marginTop: 10,
+        marginBottom: 5,
         marginRight: 'auto',
         marginLeft: 'auto',
         // paddingVertical: 20

@@ -29,20 +29,6 @@ class Lecciones extends Component {
 
   }
 
-  // se ejecuta cada vez que hay un cambio en los props
-  // static getDerivedStateFromProps(props, state) { 
-  //   // console.log(props);
-  //   if(props.route.params != undefined && props.route.params != null && props.route.params.deleteModal) {
-  //     props.params = null;
-  //       return {
-  //           isSettingsVisible: false,
-  //           isLessonsVisible: false
-  //       }
-  //   }
-  //   return null;
-  // }
-
-
   componentDidMount() {
     this._isMounted = true;
 
@@ -81,9 +67,11 @@ class Lecciones extends Component {
   }
 
   irApuntes = () => {
+    this.callbackFunction(false);
     return this.props.navigation.navigate('Apuntes', {tema: this.state.temaLesson, portada: this.state.portadaName, from: 'Lessons'});
   }
   irLeccion = () => {
+    this.callbackFunction(false);
     return this.props.navigation.navigate('Ejercicios');
   }
  
@@ -107,7 +95,7 @@ class Lecciones extends Component {
             </Modal>
 
             {/* Modal de lecciones*/
-            <Modal lessonmodal={this.callbackLessons} visible={this.state.isLessonsVisible} tipo={'centro'}>
+            <Modal lessonmodal={this.callbackLessons} visible={this.state.isLessonsVisible} tipo={'close'}>
               <ModalLessons dataTitle={this.state.temaLesson} verApuntes={this.irApuntes} empezarLeccion={this.irLeccion}></ModalLessons>
             </Modal>
             }

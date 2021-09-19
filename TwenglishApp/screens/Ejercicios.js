@@ -9,6 +9,8 @@ import MyText from '../components/Texts/MyText';
 import BlueButton from '../components/Buttons/BlueButton';
 import MyTitle from '../components/Texts/MyTitle';
 import Voc_Ex1 from './Voc_Ex1';
+import ModalExit from '../components/Modal/ModalExit';
+import ModalC from '../components/Modal/ModalC';
 
 class Ejercicios extends Component {
 
@@ -51,28 +53,32 @@ class Ejercicios extends Component {
 
         this.state = {
             isLoading: false,
+            isExitVisible: false,
             dataRealm: enunciado,
-            pressed: [false, false, false, false],
+            // pressed: [false, false, false, false],
         };
 
-        this.isPressed = this.isPressed.bind(this);
     
     }
+
+    // shouldComponentUpdate(nextProps, nextState) {                                     
+    //     return true;                      
+    // }
+
 
     getEjercicio = () => {
     
     }
 
-    isPressed = (index, refreshh) => {
-        let arrayPressed = [...this.state.pressed];
-        arrayPressed[index] = true;
-        this.setState({pressed: arrayPressed});
+    modalExit = (visible) => {
+        this.setState({isExitVisible: visible});
     }
 
-   
-    shouldComponentUpdate(nextProps, nextState) {                                     
-        return true;                      
+    salir = () => {
+        this.setState({isExitVisible: false});
+        this.props.navigation.navigate('Lessons');
     }
+ 
 
 
     list = () => {    
@@ -96,8 +102,20 @@ class Ejercicios extends Component {
         } else {
             return (
                 <View style={[{paddingTop: 0, height: '100%'}]}>
-                    <Header navigation={this.props.navigation}></Header>
+                    {/////////////////////////////////////////////////////////
+                    /* Cabecera con titulo, acceso a los apuntes y a salir ///
+                    ////////////////////////////////////////////////////////*/}
+                    <Header salir={this.modalExit} navigation={this.props.navigation}></Header>
                     
+                    {/* Modal de salir del ejercicio*/
+                    <ModalC lessonmodal={this.modalExit} visible={this.state.isExitVisible} tipo={'centro'}>
+                        <ModalExit mevoy={this.salir} mequedo={this.modalExit}></ModalExit>
+                    </ModalC>
+                    }
+                    
+                     {/////////////////////////
+                    /* Contenido importante ///
+                    /////////////////////////*/}
                     <View style={[view.safeArea, {width: '100%', height: '85%'}]}>
                         {/* Enunciado del ejercicio */}
                         <MyText title="Choose the correct image." style={{marginTop: 20}}></MyText>
@@ -109,6 +127,7 @@ class Ejercicios extends Component {
                         
                     </View>
 
+                    {/* Boton para comprobar el resultado */}
                     <View style={[{position: 'absolute', bottom: 0, paddingHorizontal: 30, paddingVertical: 10, width:'100%'}]}>
                         <BlueButton title="Check answer"></BlueButton>
                     </View>

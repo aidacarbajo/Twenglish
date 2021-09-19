@@ -41,7 +41,7 @@ class ModalC extends Component {
                 <View style={[modal.content]}>
                     {this.props.children}
 
-                    {this.props.tipo != 'top' &&
+                    {this.props.tipo === 'close' &&
                         (<Text onPress={this.sendData} style={{marginTop: 10, marginLeft: 'auto', marginRight: 'auto', textDecorationLine: 'underline'}}>Close</Text>)
                     }
                 </View>
