@@ -86,7 +86,6 @@ class Lecciones extends Component {
   irLeccion = () => {
     return this.props.navigation.navigate('Ejercicios');
   }
-
  
     render() {
     if(this.state.isLoading){

@@ -6,10 +6,10 @@ class MyTitle extends Component {
     constructor(props) {
         super(props);
 
-        if(this.props.destacar == undefined) {
-            this.texto = this.props.title;
-            this.textoBold = this.props.titleBold;
-        } 
+        // if(this.props.destacar == undefined) {
+        //     this.texto = this.props.title;
+        //     this.textoBold = this.props.titleBold;
+        // } 
     }
 
     applyBoldStyle = () => {
@@ -26,8 +26,8 @@ class MyTitle extends Component {
                 {
                     this.props.destacar == undefined 
                     ?   <View style={{flexDirection:'row'}}>
-                        <Text style={[text.primario, text.primarioTitulo, text.rightt, this.props.style]}>{this.texto}</Text> 
-                        <Text style={[text.primario, text.primarioTitulo, text.primarioBold, this.props.style]}>{this.textoBold}</Text>        
+                            <Text style={[text.primario, text.primarioTitulo, text.rightt, this.props.style]}>{this.props.title}</Text> 
+                            <Text style={[text.primario, text.primarioTitulo, text.primarioBold, this.props.style]}>{this.props.titleBold}</Text>        
                         </View>
                     : (
                         <View style={{flexDirection:'row'}}>
