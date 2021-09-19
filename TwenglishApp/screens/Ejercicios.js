@@ -100,7 +100,7 @@ class Ejercicios extends Component {
                     
                     <View style={[view.safeArea, {width: '100%', height: '85%'}]}>
                         {/* Enunciado del ejercicio */}
-                        <MyText title="Choose the correct image."></MyText>
+                        <MyText title="Choose the correct image." style={{marginTop: 20}}></MyText>
 
                         {/* Tipo de pregunta del ejercicio*/}
                         {/* getEjercicio(), que tenga un switch que llame a las preguntas y a las respuestas dependiendo el tipo de ejercicio? */}
