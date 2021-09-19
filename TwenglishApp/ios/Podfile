@@ -12,6 +12,12 @@ target 'TwenglishApp' do
     :hermes_enabled => false
   )
 
+  pod 'RealmJS', :path => '../node_modules/realm'
+
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'TwenglishAppTests' do
     inherit! :complete
     # Pods for testing
