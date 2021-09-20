@@ -7,7 +7,8 @@
  */
 
 import React from 'react';
-import NavigationFooter from './config/NavigationFooter';
+import { NavigationContainer } from "@react-navigation/native";
+import MainNavigator from "./config/MainNavigator";
 
 import RNBootSplash from "react-native-bootsplash";
 
@@ -20,7 +21,9 @@ const App = () => {
   }, []);
 
   return (
-      <NavigationFooter />
+      <NavigationContainer screenOptions={{headerShown: false}}>
+        <MainNavigator />
+      </NavigationContainer>
   );
 };
 
