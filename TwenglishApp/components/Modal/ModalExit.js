@@ -21,7 +21,7 @@ class ModalExit extends Component {
     render() {
         return (
             <View style={{padding: 10}}>
-                <MyTitle title="Are you sure you want to leave the lesson?" style={{fontSize: 16, padding: 4, marginBottom: 5}}></MyTitle>
+                <MyTitle title="Are you sure you want to leave?" style={{fontSize: 16, padding: 4, marginBottom: 5}}></MyTitle>
                 <MyText title="¿Seguro que quieres abandonar la lección?"></MyText>
                 {/* onPress={this.props.verApuntes} */}
 

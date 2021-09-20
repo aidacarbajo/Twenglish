@@ -8,6 +8,8 @@ const primary = '#2971FD';
 const secundary = '#F7002B';
 const body = '#4D4D4D';
 const example = '#949494';
+const correcto = '#00C136';
+const extra = '#00ADF7';
 
 const view = StyleSheet.create({
     container: {
@@ -243,9 +245,9 @@ const modal = StyleSheet.create({
     content: {
         backgroundColor: 'white', 
         borderRadius: 26, 
-        padding: 20, 
-        elevation: 20
+        padding: 15, 
+        elevation: 20,
     }
 });
 
-export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, example, cards, modal, regular, extrabold, bold };
+export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, correcto, extra, example, cards, modal, regular, extrabold, bold };

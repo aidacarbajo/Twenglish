@@ -2,15 +2,13 @@ import React, {Component, GetDerivedStateFromProps} from 'react';
 import { ActivityIndicator, ImageBackground, Pressable, Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Header from '../components/Header/Header';
-import { bold, cards, view } from '../assets/theme/styles';
-import { getImage } from '../util/ImageManager';
-import Tag from '../components/Card/Tag';
+import { view } from '../assets/theme/styles';
 import MyText from '../components/Texts/MyText';
 import BlueButton from '../components/Buttons/BlueButton';
-import MyTitle from '../components/Texts/MyTitle';
 import Voc_Ex1 from './Voc_Ex1';
 import ModalExit from '../components/Modal/ModalExit';
 import ModalC from '../components/Modal/ModalC';
+import ModalNotificacion from '../components/Modal/ModalNotificacion';
 
 class Ejercicios extends Component {
 
@@ -54,6 +52,7 @@ class Ejercicios extends Component {
         this.state = {
             isLoading: false,
             isExitVisible: false,
+            isCorreccionVisible: true,
             dataRealm: enunciado,
             // pressed: [false, false, false, false],
         };
@@ -61,15 +60,11 @@ class Ejercicios extends Component {
     
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {                                     
-    //     return true;                      
-    // }
-
-
     getEjercicio = () => {
     
     }
 
+    // Modal ¿Estas seguro de que quieres salir?
     modalExit = (visible) => {
         this.setState({isExitVisible: visible});
     }
@@ -78,19 +73,11 @@ class Ejercicios extends Component {
         this.setState({isExitVisible: false});
         this.props.navigation.navigate('Lessons');
     }
+
+    deleteCorreccion = () => {
+        this.setState({isCorreccionVisible: false});
+    }
  
-
-
-    list = () => {    
-        const enunciado = this.state.dataRealm.find(element => !this.state.pressed[element.key]);
-        // console.log(enunciado);
-        return (
-            enunciado !== undefined
-            ? <MyTitle title={enunciado.frase} style={{fontSize: 12, fontFamily: bold}} destacar={enunciado.palabraClave}></MyTitle>
-            : <MyTitle title={this.state.dataRealm[this.state.dataRealm.length - 1].frase} style={{fontSize: 12, fontFamily: bold}} destacar={this.state.dataRealm[this.state.dataRealm.length - 1].palabraClave}></MyTitle>
-        )  
-    };
-
  
     render() {
         if(this.state.isLoading){
@@ -112,8 +99,14 @@ class Ejercicios extends Component {
                         <ModalExit mevoy={this.salir} mequedo={this.modalExit}></ModalExit>
                     </ModalC>
                     }
+
+                    {/* Modal de acierto/fallo/infoextra*/
+                    <ModalC  hide={this.deleteCorreccion} visible={this.state.isCorreccionVisible} tipo={'abajo'} tiempoCount={true}>
+                        <ModalNotificacion tipo={"fallo"}></ModalNotificacion>
+                    </ModalC>
+                    }
                     
-                     {/////////////////////////
+                    {//////////////////////////
                     /* Contenido importante ///
                     /////////////////////////*/}
                     <View style={[view.safeArea, {width: '100%', height: '85%'}]}>
