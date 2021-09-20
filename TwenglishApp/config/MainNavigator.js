@@ -1,10 +1,6 @@
 import React from 'react';
-import { icons } from '../assets/theme/styles';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Lecciones from '../screens/Lecciones';
-import Rutine from '../screens/Rutine';
 import Settings from '../screens/Settings';
 import Apuntes from '../screens/Apuntes';
 import Ejercicios from '../screens/Ejercicios';
