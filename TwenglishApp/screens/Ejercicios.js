@@ -9,46 +9,31 @@ import ModalExit from '../components/Modal/ModalExit';
 import ModalC from '../components/Modal/ModalC';
 import ModalNotificacion from '../components/Modal/ModalNotificacion';
 import { updateCurrentLesson } from '../data/queries/lecciones';
-import { getEjerciciosLeccion } from '../data/queries/ejercicios';
 
 class Ejercicios extends Component {
 
     constructor(props) {
         super(props);
         
-        // Cuando apriete a una imagen que se guarde esa palabra en la posicion del indice apretado
-        // Cuando le de a check comprueba estos resultados con los suyos
-        const respuestasUsuario = ['', '', '', ''];
-
         this.state = {
-            isLoading: false,
+            isLoading: true,
             isExitVisible: false,
             isCorreccionVisible: true,
             ejercicioActual: 0,
-            ejerciciosLeccionActual: null
-            // pressed: [false, false, false, false],
+            ejerciciosLeccionActual: null,
+            enunciado: null
         };
-
-    
     }
 
     componentDidMount () {
         const lessonId = this.props.route.params.portada;
         updateCurrentLesson(lessonId).then(res => {
-            console.log(res);
+            this.setState({ejerciciosLeccionActual: res.ejercicios, enunciado: res.ejercicios[this.state.ejercicioActual].enunciado, isLoading: false})
         });
-
-        // getEjerciciosLeccion();
-    }
-
-    getEjercicio = () => {
-    
     }
 
     // Modal ¿Estas seguro de que quieres salir?
     modalExit = (visible) => {
-        console.log(this.state.ejercicioActual);
-
         this.setState({isExitVisible: visible});
     }
 
@@ -62,6 +47,39 @@ class Ejercicios extends Component {
         this.setState({isCorreccionVisible: false});
     }
  
+
+        
+    // Completar la pantalla dependiendo del tipo de ejercicio que sea
+    getEjercicio = () => {
+        const ejercicio = this.state.ejerciciosLeccionActual[this.state.ejercicioActual];
+        let res = null;
+
+        switch(ejercicio.tipo) {
+            case 1:
+                // check={this.checkAnswer}
+                res = <Voc_Ex1 ejercicio={ejercicio.bloqueString}/>
+                break;
+            case 2:
+                console.log('Soy tipo 2');
+                break;
+            case 3:
+                console.log('Soy tipo 3');
+                break;
+            case 4:
+                console.log('Soy tipo 4');
+                break;
+            case 5:
+                console.log('Soy tipo 5');
+                break;
+            case 6:
+                console.log('Soy tipo 6');
+                break;
+                
+            }    
+
+        return res;
+    }
+
  
     render() {
         if(this.state.isLoading){
@@ -76,7 +94,7 @@ class Ejercicios extends Component {
                     {/////////////////////////////////////////////////////////
                     /* Cabecera con titulo, acceso a los apuntes y a salir ///
                     ////////////////////////////////////////////////////////*/}
-                    <Header salir={this.modalExit} navigation={this.props.navigation}></Header>
+                    <Header salir={this.modalExit} navigation={this.props.navigation} tema={this.props.route.params.tema}></Header>
                     
                     {/* Modal de salir del ejercicio*/
                     <ModalC lessonmodal={this.modalExit} visible={this.state.isExitVisible} tipo={'centro'}>
@@ -95,13 +113,8 @@ class Ejercicios extends Component {
                     /////////////////////////*/}
                     <View style={[view.safeArea, {width: '100%', height: '85%'}]}>
                         {/* Enunciado del ejercicio */}
-                        <MyText title="Choose the correct image." style={{marginTop: 20}}></MyText>
-
-                        {/* Tipo de pregunta del ejercicio*/}
-                        {/* getEjercicio(), que tenga un switch que llame a las preguntas y a las respuestas dependiendo el tipo de ejercicio? */}
-                        <Voc_Ex1></Voc_Ex1>
-
-                        
+                        <MyText title={this.state.enunciado + '.'} style={{marginTop: 20}}></MyText>
+                        <View>{this.getEjercicio()}</View>
                     </View>
 
                     {/* Boton para comprobar el resultado */}
@@ -115,5 +128,7 @@ class Ejercicios extends Component {
         }
     }
 }
+
+
 
 export default Ejercicios;

@@ -84,7 +84,7 @@ class Apuntes extends Component {
       return (
         <View style={view.allContainers}>
             <View style={[posiciones.abolute, posiciones.topleft]}>
-                <Pressable onPress={() => this.props.navigation.navigate(this.props.route.params.from)}>
+                <Pressable onPress={() => this.props.navigation.navigate(this.props.route.params.from, {tema: this.state.tema})}>
                     <Icon icon="back" color={secundary} size={icons.lg}></Icon>
                 </Pressable>
             </View>

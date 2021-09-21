@@ -14,19 +14,18 @@ import database from './data/database/config';
 
 const App2 = () => {
 
-//   RNFS.unlink(RNFS.DocumentDirectoryPath + '/twenglish.realm')
-//   .then(() => {
-//     console.log('deleted');
-//     console.log(Realm.exists(database));
-//   })
-//   .catch((err) => {         
-//       console.log(err);
-//   })
+  // await RNFS.unlink(RNFS.DocumentDirectoryPath + '/twenglish.realm')
+  // .then(() => {
+  //   console.log('deleted');
+  //   console.log(Realm.exists(database));
+  // })
+  // .catch((err) => {         
+  //     console.log(err);
+  // })
 
   RNFS.copyFileAssets('twenglish.realm', RNFS.DocumentDirectoryPath + '/twenglish.realm')
   .then(() => {
-    //   console.log('copiado');
-    //   Realm.copyBundledRealmFiles();
+      Realm.copyBundledRealmFiles();
       const realm = new Realm(database);
 
     //   const le = realm.objects('Nivel');

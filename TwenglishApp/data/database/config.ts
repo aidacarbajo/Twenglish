@@ -16,10 +16,14 @@ export default {
 
   /*
     PASOS PARA ACTUALIZAR BBDD DESDE REALM STUDIO
-    1. Descomento en index.js el de eliminar twenglish.realm y comento el de copiar
-    2. Poner async y await una vez y borrarlo porque sale error pero sí funciona
-    3. Elimino manualmente el twenglish.realm
-    4. Compilo y ejecuto pa que de error de que no hay realm (así me aseguro)
-    5. Pego el nuevo archivo, hago un link y vuelvo a compilar con el de eliminar comentado y el de copiar sin comentar 
-    6. Debería estar actualizado
+    1.  Descomento en index.js el de eliminar twenglish.realm y comento el de copiar
+        Poner async y await una vez y borrarlo porque sale error pero sí funciona
+        Elimino manualmente el twenglish.realm
+
+    2.  Compilo y ejecuto pa que de error de que no hay realm (así me aseguro)
+
+    3.  Pego el nuevo archivo
+        Hago un link y vuelvo a compilar con el de eliminar comentado y el de copiar sin comentar 
+
+    4. Ya debería estar actualizado
   */
