@@ -1,6 +1,5 @@
-import React, {Component, GetDerivedStateFromProps} from 'react';
-import { ActivityIndicator, ImageBackground, Pressable, Text, View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import React, {Component} from 'react';
+import { ActivityIndicator, View } from 'react-native';
 import Header from '../components/Header/Header';
 import { view } from '../assets/theme/styles';
 import MyText from '../components/Texts/MyText';
@@ -9,7 +8,8 @@ import Voc_Ex1 from './Voc_Ex1';
 import ModalExit from '../components/Modal/ModalExit';
 import ModalC from '../components/Modal/ModalC';
 import ModalNotificacion from '../components/Modal/ModalNotificacion';
-import { getCurrentLesson, updateCurrentLesson } from '../data/queries/lecciones';
+import { updateCurrentLesson } from '../data/queries/lecciones';
+import { getEjerciciosLeccion } from '../data/queries/ejercicios';
 
 class Ejercicios extends Component {
 
@@ -20,41 +20,12 @@ class Ejercicios extends Component {
         // Cuando le de a check comprueba estos resultados con los suyos
         const respuestasUsuario = ['', '', '', ''];
 
-
-        const enunciado = [
-            {
-                key: 0,
-                portada: 'greetingsA1',
-                palabraClave: ['Niagara Falls'],
-                frase: 'I visited the {0} yesterday.'
-            },
-            {
-                key: 1,
-                portada: 'greetingsA1',
-                palabraClave: ['piramides'],
-                frase: 'I visited the {0} yesterday'
-            },
-            {
-                key: 2,
-                portada: 'greetingsA1',
-                palabraClave: ['Niagara Falls'],
-                frase: 'I visited the {0} yesterday'
-            },
-            {
-                key: 3,
-                portada: 'greetingsA1',
-                palabraClave: ['Niagara Falls'],
-                frase: 'I visited the {0} yesterday'
-            },
-
-        ]
-
-
         this.state = {
             isLoading: false,
             isExitVisible: false,
             isCorreccionVisible: true,
-            dataRealm: enunciado,
+            ejercicioActual: 0,
+            ejerciciosLeccionActual: null
             // pressed: [false, false, false, false],
         };
 
@@ -64,10 +35,10 @@ class Ejercicios extends Component {
     componentDidMount () {
         const lessonId = this.props.route.params.portada;
         updateCurrentLesson(lessonId).then(res => {
-            // console.log('Leccion seleccionada: ', res)
+            console.log(res);
         });
 
-        // getCurrentLesson();
+        // getEjerciciosLeccion();
     }
 
     getEjercicio = () => {
@@ -76,6 +47,8 @@ class Ejercicios extends Component {
 
     // Modal ¿Estas seguro de que quieres salir?
     modalExit = (visible) => {
+        console.log(this.state.ejercicioActual);
+
         this.setState({isExitVisible: visible});
     }
 
@@ -84,6 +57,7 @@ class Ejercicios extends Component {
         this.props.navigation.navigate('Lessons');
     }
 
+    // Modal de notificacion
     deleteCorreccion = () => {
         this.setState({isCorreccionVisible: false});
     }
@@ -131,7 +105,7 @@ class Ejercicios extends Component {
                     </View>
 
                     {/* Boton para comprobar el resultado */}
-                    <View style={[{position: 'absolute', bottom: 0, paddingHorizontal: 30, paddingVertical: 10, width:'100%'}]}>
+                    <View style={[{position: 'absolute', bottom: 0, padding: 30, width:'100%'}]}>
                         <BlueButton title="Check answer"></BlueButton>
                     </View>
 
