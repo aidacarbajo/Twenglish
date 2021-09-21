@@ -30,22 +30,7 @@ class Lecciones extends Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
-
-    return getNivelSeleccionado().then(res => {
-      const nivel = res[0].nivel_seleccionado;    // el primero no sera siempre el seleccionado
-
-      if (this._isMounted) {
-        this.setState({
-          isLoading:false,
-          lecciones: nivel.lecciones,
-        }).catch( (error) => {
-          console.log(error.message);
-        });
-      }
-    }).catch((error) => {
-      // console.log(error.message);
-    });
+    this.changeLessons();
   }
 
   // cuando se destruye el componente
@@ -53,12 +38,31 @@ class Lecciones extends Component {
     this._isMounted = false;
   }
 
+  // actualizar lecciones porque se ha cambiado de nivel seleccionado
+  changeLessons = () => {
+
+    return getNivelSeleccionado().then(res => {
+      const nivel = res[0].nivel_seleccionado;   
+      // console.log(nivel.lecciones, 'Nivel seleccionado');
+
+        this.setState({
+          isLoading:false,
+          lecciones: nivel.lecciones,
+        }).catch( (error) => {
+          console.log(error.message);
+        });
+    }).catch((error) => {
+      // console.log(error.message);
+    });
+  }
+
+  // ver modal info
   callbackFunction = (visible) => {
     this.setState({isSettingsVisible: visible, isLessonsVisible: false});
   }
 
+  // ver modal al apretar sobre una leccion
   callbackLessons = (visible, tema, portada) => {
-    // console.log('Estoy en el Lecciones y lo veo: ', visible, tema);
     if(visible) {
       this.setState({isSettingsVisible: false, isLessonsVisible: visible, temaLesson: tema, portadaName: portada});
     } else {
@@ -109,7 +113,7 @@ class Lecciones extends Component {
               <MyTitle title="My" titleBold="Progress"></MyTitle>
             </View>
 
-            <NivelesList></NivelesList>
+            <NivelesList nivelSel={this.changeLessons}></NivelesList>
 
             <View style={view.safeArea}>
               <MyText title="What would you like to learn today?" style={{marginBottom: 15}}></MyText>

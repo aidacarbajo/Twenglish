@@ -11,7 +11,6 @@ class RadioButton extends Component {
 
   callbackFunction = (opcionSeleccionada) => {
     this.setState({value: opcionSeleccionada})
-    // console.log(opcionSeleccionada);
   }
 
 

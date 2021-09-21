@@ -37,10 +37,23 @@ const getNiveles = () => new Promise((resolve, reject) => {
 const getNivelSeleccionado = () => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
         const niveles = realm.objects('Niveles');
-        // console.log(niveles[0].nivel_seleccionado);
         resolve(niveles);
     }).catch((error) => reject(error.message));
 });
+
+const updateCurrentLevel = nivel => 
+    new Promise((resolve, reject) => {
+        Realm.open(database).then(realm => {
+            const nivelS = realm.objects('Nivel').filtered(`nombre == '${nivel}'`);
+            const niveles = realm.objects('Niveles');
+            
+            realm.write(() => {
+                niveles[0].nivel_seleccionado = nivelS[0];
+                resolve(niveles);
+            })
+        }).catch((error) => reject(error));
+    });
+
 
 
 
@@ -87,4 +100,4 @@ const deleteAllNiveles = nivel =>
         }).catch((error) => reject(error));
     });
 
-export { getNiveles, getNivelSeleccionado, insertNivel, updateNivel, deleteNivel, deleteAllNiveles }
+export { getNiveles, getNivelSeleccionado, updateCurrentLevel }

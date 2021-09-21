@@ -76,7 +76,7 @@ class Voc_Ex1 extends Component {
 
     list = () => {    
         const enunciado = this.state.dataRealm.find(element => !this.state.pressed[element.key]);
-        // console.log(enunciado);
+
         return (
             enunciado !== undefined
             ? <MyTitle title={enunciado.frase} style={{fontSize: 12, fontFamily: bold, marginVertical: 15}} destacar={enunciado.palabraClave}></MyTitle>
