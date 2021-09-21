@@ -42,8 +42,8 @@ class Lecciones extends Component {
   changeLessons = () => {
 
     return getNivelSeleccionado().then(res => {
-      const nivel = res[0].nivel_seleccionado; 
-        
+      const nivel = res; 
+
       this.setState({
         isLoading:false,
         lecciones: nivel.lecciones,
@@ -75,7 +75,7 @@ class Lecciones extends Component {
   }
   irLeccion = () => {
     this.callbackFunction(false);
-    return this.props.navigation.navigate('Ejercicios');
+    return this.props.navigation.navigate('Ejercicios', {tema: this.state.temaLesson, portada: this.state.portadaName});
   }
  
     render() {

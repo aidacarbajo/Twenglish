@@ -1,6 +1,9 @@
 import Realm from 'realm';
 import database from '../database/config';
-import { Nivel } from '../models/twenglish-model';
+
+/////////////////////////////////////////////////////////////
+// Devuelve los niveles ordenados para la lista de niveles //
+/////////////////////////////////////////////////////////////
 
 const getNiveles = () => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
@@ -15,7 +18,6 @@ const getNiveles = () => new Promise((resolve, reject) => {
             nombre: niveless[0].nivel_seleccionado.nombre,
             progreso: niveless[0].nivel_seleccionado.progreso
         }
-
 
         res.nivel.push(niv);
 
@@ -33,12 +35,20 @@ const getNiveles = () => new Promise((resolve, reject) => {
     }).catch((error) => reject(error,message));
 });
 
+////////////////////////////////////
+// Devuelve el nivel seleccionado //
+////////////////////////////////////
+
 const getNivelSeleccionado = () => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
         const niveles = realm.objects('Niveles');
-        resolve(niveles);
+        resolve(niveles[0].nivel_seleccionado);
     }).catch((error) => reject(error.message));
 });
+
+////////////////////////////////////////////////////////////////////
+// Actualiza el nivel con el del nombre que se pasa por parametro //
+////////////////////////////////////////////////////////////////////
 
 const updateCurrentLevel = nivel => 
     new Promise((resolve, reject) => {
@@ -48,55 +58,54 @@ const updateCurrentLevel = nivel =>
             
             realm.write(() => {
                 niveles[0].nivel_seleccionado = nivelS[0];
-                resolve(niveles);
+                resolve(nivelS);
             })
         }).catch((error) => reject(error));
     });
 
 
+// const insertNivel = newNivel => 
+//     new Promise((resolve, reject) => {
+//         Realm.open(database).then(realm => {
+//             realm.write(() => {
+//                 realm.create('Nivel', newNivel);
+//                 resolve(newNivel);
+//             })
+//         }).catch((error) => reject(error));
+//     });
 
+// const updateNivel = nivel => 
+//     new Promise((resolve, reject) => {
+//         Realm.open(database).then(realm => {
+//             realm.write(() => {
+//                 let nivelObtenido = realm.objectForPrimaryKey(Nivel, nivel.id);
+//                 // nivelObtenido.nombre = nivel.nombre;
+//                 resolve();
+//             })
+//         }).catch((error) => reject(error));
+//     });
 
-const insertNivel = newNivel => 
-    new Promise((resolve, reject) => {
-        Realm.open(database).then(realm => {
-            realm.write(() => {
-                realm.create('Nivel', newNivel);
-                resolve(newNivel);
-            })
-        }).catch((error) => reject(error));
-    });
+// const deleteNivel = nivel => 
+//     new Promise((resolve, reject) => {
+//         Realm.open(database).then(realm => {
+//             realm.write(() => {
+//                 let nivelObtenido = realm.objectForPrimaryKey(Nivel, nivel.id);
+//                 realm.delete(nivelObtenido);
+//                 resolve();
+//             })
+//         }).catch((error) => reject(error));
+//     });
 
-const updateNivel = nivel => 
-    new Promise((resolve, reject) => {
-        Realm.open(database).then(realm => {
-            realm.write(() => {
-                let nivelObtenido = realm.objectForPrimaryKey(Nivel, nivel.id);
-                // nivelObtenido.nombre = nivel.nombre;
-                resolve();
-            })
-        }).catch((error) => reject(error));
-    });
+// const deleteAllNiveles = nivel => 
+//     new Promise((resolve, reject) => {
+//         Realm.open(database).then(realm => {
+//             realm.write(() => {
+//                 let nivelObtenido = realm.objects(Nivel);
+//                 realm.delete(nivelObtenido);
+//                 resolve();
+//             })
+//         }).catch((error) => reject(error));
+//     });
 
-const deleteNivel = nivel => 
-    new Promise((resolve, reject) => {
-        Realm.open(database).then(realm => {
-            realm.write(() => {
-                let nivelObtenido = realm.objectForPrimaryKey(Nivel, nivel.id);
-                realm.delete(nivelObtenido);
-                resolve();
-            })
-        }).catch((error) => reject(error));
-    });
-
-const deleteAllNiveles = nivel => 
-    new Promise((resolve, reject) => {
-        Realm.open(database).then(realm => {
-            realm.write(() => {
-                let nivelObtenido = realm.objects(Nivel);
-                realm.delete(nivelObtenido);
-                resolve();
-            })
-        }).catch((error) => reject(error));
-    });
 
 export { getNiveles, getNivelSeleccionado, updateCurrentLevel }

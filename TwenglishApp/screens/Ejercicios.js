@@ -9,6 +9,7 @@ import Voc_Ex1 from './Voc_Ex1';
 import ModalExit from '../components/Modal/ModalExit';
 import ModalC from '../components/Modal/ModalC';
 import ModalNotificacion from '../components/Modal/ModalNotificacion';
+import { getCurrentLesson, updateCurrentLesson } from '../data/queries/lecciones';
 
 class Ejercicios extends Component {
 
@@ -58,6 +59,15 @@ class Ejercicios extends Component {
         };
 
     
+    }
+
+    componentDidMount () {
+        const lessonId = this.props.route.params.portada;
+        updateCurrentLesson(lessonId).then(res => {
+            // console.log('Leccion seleccionada: ', res)
+        });
+
+        // getCurrentLesson();
     }
 
     getEjercicio = () => {
