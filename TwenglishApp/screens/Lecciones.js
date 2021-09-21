@@ -42,15 +42,14 @@ class Lecciones extends Component {
   changeLessons = () => {
 
     return getNivelSeleccionado().then(res => {
-      const nivel = res[0].nivel_seleccionado;   
-      console.log(nivel.lecciones, 'Nivel seleccionado');
-
-        this.setState({
-          isLoading:false,
-          lecciones: nivel.lecciones,
-        }).catch( (error) => {
-          console.log(error.message);
-        });
+      const nivel = res[0].nivel_seleccionado; 
+        
+      this.setState({
+        isLoading:false,
+        lecciones: nivel.lecciones,
+      }).catch( (error) => {
+        console.log(error.message);
+      });
     }).catch((error) => {
       // console.log(error.message);
     });

@@ -21,7 +21,6 @@ const getNiveles = () => new Promise((resolve, reject) => {
 
         for (let i = 0; i < niveless[0].niveles.length; i++) {
             if(niveless[0].niveles[i].nombre != res.nivel[0].nombre) {
-                // console.log(niveless[0].niveles);
                 niv = {
                     nombre: niveless[0].niveles[i].nombre,
                     progreso: niveless[0].niveles[i].progreso
