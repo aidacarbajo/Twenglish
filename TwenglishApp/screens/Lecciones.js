@@ -43,7 +43,7 @@ class Lecciones extends Component {
 
     return getNivelSeleccionado().then(res => {
       const nivel = res[0].nivel_seleccionado;   
-      // console.log(nivel.lecciones, 'Nivel seleccionado');
+      console.log(nivel.lecciones, 'Nivel seleccionado');
 
         this.setState({
           isLoading:false,

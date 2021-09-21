@@ -13,7 +13,7 @@ class NivelesList extends Component {
         this.state = {
           isLoading: true,
           levels: [],
-          nivelSeleccionado: 'A1'
+          nivelSeleccionado: null
         };
 
         this.callbackFunction = (nivelSeleccionado) => {
@@ -25,7 +25,7 @@ class NivelesList extends Component {
             this.props.nivelSel();
         }
 
-      }
+    }
 
     getLevels = () => {
         return getNiveles().then(res => {
@@ -33,6 +33,7 @@ class NivelesList extends Component {
                 this.setState({
                     isLoading:false,
                     levels: res.nivel,
+                    nivelSeleccionado: res.nivel[0].nombre
                 }).catch( (error) => {
                     console.log(error.message);
                 });
