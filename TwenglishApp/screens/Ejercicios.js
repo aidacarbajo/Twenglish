@@ -22,6 +22,7 @@ class Ejercicios extends Component {
             isExitVisible: false,
             isCheckVisible: false,
             isCorreccionVisible: false,
+            isNextVisible: false,
             ejercicioActual: 0,
             ejerciciosLeccionActual: null,
             enunciado: null
@@ -55,18 +56,18 @@ class Ejercicios extends Component {
             }
         }
         
-        this.setState({isCorreccionVisible: visible});
+        this.setState({isCorreccionVisible: visible, isCheckVisible: false, isNextVisible: correcta});
     }
  
 
     // corregir el ejercicio 
-    showButton = () => {
-        this.setState({isCheckVisible: true});
+    showButton = (visible) => {
+        this.setState({isCheckVisible: visible});
     }
 
     correctExercise = () => {
         const res = this.child.checkAnswer();
-        res && this.deleteCorreccion(true, false);
+        this.deleteCorreccion(true, res);
     }
 
     // Completar la pantalla dependiendo del tipo de ejercicio que sea
@@ -136,11 +137,12 @@ class Ejercicios extends Component {
                         <View>{this.getEjercicio()}</View>
                     </View>
 
-                    {/* Boton para comprobar el resultado */}
                     <View style={[{position: 'absolute', bottom: 0, padding: 30, width:'100%'}]} >
+                        {/* Boton para comprobar el resultado */}
                         <BlueButton title="Check answer" screen={this.correctExercise} style={[!this.state.isCheckVisible && {display: 'none'}]}></BlueButton>
+                        {/* Boton para pasar al siguiente ejercicio, una vez hemos acertado */}
+                        <BlueButton title="Next" screen={this.correctExercise} style={[!this.state.isNextVisible && {display: 'none'}]}></BlueButton>
                     </View>
-
                     
                 </View>
             );
