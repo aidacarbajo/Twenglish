@@ -15,10 +15,13 @@ class Ejercicios extends Component {
     constructor(props) {
         super(props);
         
+        this.acierto = '';
+
         this.state = {
             isLoading: true,
             isExitVisible: false,
-            isCorreccionVisible: true,
+            isCheckVisible: false,
+            isCorreccionVisible: false,
             ejercicioActual: 0,
             ejerciciosLeccionActual: null,
             enunciado: null
@@ -43,12 +46,29 @@ class Ejercicios extends Component {
     }
 
     // Modal de notificacion
-    deleteCorreccion = () => {
-        this.setState({isCorreccionVisible: false});
+    deleteCorreccion = (visible, correcta) => {
+        if(correcta != undefined) {
+            if(correcta) {
+                this.acierto = 'acierto';
+            } else {
+                this.acierto = 'fallo';
+            }
+        }
+        
+        this.setState({isCorreccionVisible: visible});
     }
  
 
-        
+    // corregir el ejercicio 
+    showButton = () => {
+        this.setState({isCheckVisible: true});
+    }
+
+    correctExercise = () => {
+        const res = this.child.checkAnswer();
+        res && this.deleteCorreccion(true, false);
+    }
+
     // Completar la pantalla dependiendo del tipo de ejercicio que sea
     getEjercicio = () => {
         const ejercicio = this.state.ejerciciosLeccionActual[this.state.ejercicioActual];
@@ -56,8 +76,7 @@ class Ejercicios extends Component {
 
         switch(ejercicio.tipo) {
             case 1:
-                // check={this.checkAnswer}
-                res = <Voc_Ex1 ejercicio={ejercicio.bloqueString}/>
+                res = <Voc_Ex1 ejercicio={ejercicio.bloqueString} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 2:
                 console.log('Soy tipo 2');
@@ -103,8 +122,8 @@ class Ejercicios extends Component {
                     }
 
                     {/* Modal de acierto/fallo/infoextra*/
-                    <ModalC  hide={this.deleteCorreccion} visible={this.state.isCorreccionVisible} tipo={'abajo'} tiempoCount={true}>
-                        <ModalNotificacion tipo={"fallo"}></ModalNotificacion>
+                    <ModalC hide={this.deleteCorreccion} visible={this.state.isCorreccionVisible} tipo={'abajo'} tiempoCount={true}>
+                        <ModalNotificacion tipo={this.acierto}></ModalNotificacion>
                     </ModalC>
                     }
                     
@@ -118,8 +137,8 @@ class Ejercicios extends Component {
                     </View>
 
                     {/* Boton para comprobar el resultado */}
-                    <View style={[{position: 'absolute', bottom: 0, padding: 30, width:'100%'}]}>
-                        <BlueButton title="Check answer"></BlueButton>
+                    <View style={[{position: 'absolute', bottom: 0, padding: 30, width:'100%'}]} >
+                        <BlueButton title="Check answer" screen={this.correctExercise} style={[!this.state.isCheckVisible && {display: 'none'}]}></BlueButton>
                     </View>
 
                     

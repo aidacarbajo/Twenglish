@@ -45,7 +45,7 @@ class ModalC extends Component {
             return null;
         } else {
             setTimeout(() => {
-                this.props.hide();
+                this.props.hide(false);
             }, this.tiempoDesaparecer);
         }
     }

@@ -19,12 +19,14 @@ class Voc_Ex1 extends Component {
         // Para ver si está bien tendré q coger el indice de p.e. "a" (3) en el de antes (0), y comprobar que respuestasUsuario(3) == opcionesClave(0)
 
         const frases = props.ejercicio.frase;
-        const imagenes = props.ejercicio.imagenes;
-        const opcionesClave = props.ejercicio.opcionesClave;
+        const opcionesClave = props.ejercicio.opcionesClave;        
+        const imagenes = JSON.parse(JSON.stringify(props.ejercicio.imagenes));
+        const desordenado = imagenes.sort(() => {return Math.random() - 0.5});
 
         const data = {
                         frases: frases.split('"'), 
                         portada: imagenes,
+                        portadaDesordenada: desordenado,
                         palabraClave: opcionesClave,
                     }
 
@@ -37,6 +39,14 @@ class Voc_Ex1 extends Component {
 
         this.isPressed = this.isPressed.bind(this);
         this.list = this.list.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.onRef(this)
+    }
+
+    componentWillUnmount() {
+        this.props.onRef(undefined)
     }
 
     shouldComponentUpdate(nextProps, nextState) {                                     
@@ -54,7 +64,11 @@ class Voc_Ex1 extends Component {
             let arrayPressed = [...this.state.pressed];
             arrayPressed[index] = true;
 
-            this.setState({pressed: arrayPressed, actual: this.state.actual + 1});    
+            this.setState({pressed: arrayPressed, actual: this.state.actual + 1}); 
+            
+            if(this.state.actual === this.state.pressed.length - 1) {
+                this.props.buttonCheck();
+            }
         }
     }
 
@@ -67,6 +81,10 @@ class Voc_Ex1 extends Component {
             : <MyTitle title={data.frases[data.frases.length - 1]} style={{fontSize: 12, fontFamily: bold, marginVertical: 15}} destacar={[data.palabraClave[data.palabraClave.length - 1]]}></MyTitle>
         )  
     };
+
+    checkAnswer = () => {
+        return true;        
+    }
 
  
     render() {
