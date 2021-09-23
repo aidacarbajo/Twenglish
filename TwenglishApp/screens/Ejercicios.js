@@ -27,6 +27,8 @@ class Ejercicios extends Component {
             ejerciciosLeccionActual: null,
             enunciado: null
         };
+
+        this.correctExercise = this.correctExercise.bind(this);
     }
 
     componentDidMount () {
@@ -48,15 +50,23 @@ class Ejercicios extends Component {
 
     // Modal de notificacion
     deleteCorreccion = (visible, correcta) => {
+        let vis = false;
+
         if(correcta != undefined) {
             if(correcta) {
                 this.acierto = 'acierto';
+                vis = true;
             } else {
                 this.acierto = 'fallo';
+                
+            }
+        } else {
+            if(this.acierto == 'acierto') {
+                vis = true;
             }
         }
         
-        this.setState({isCorreccionVisible: visible, isCheckVisible: false, isNextVisible: correcta});
+        this.setState({isCorreccionVisible: visible, isCheckVisible: false, isNextVisible: vis});
     }
  
 
@@ -70,6 +80,19 @@ class Ejercicios extends Component {
         this.deleteCorreccion(true, res);
     }
 
+    // pasar al siguiente ejercicio
+    nextExercise = () => {
+        if(this.state.ejercicioActual < this.state.ejerciciosLeccionActual.length - 1) {
+            console.log('cambiar ejercicio', this.state.ejercicioActual + 1);
+            this.setState({ejercicioActual: this.state.ejercicioActual + 1, isNextVisible: false});
+        } else {
+            console.log('No quedan ejercicios');
+            // nos llevaria la página de resumen
+        }
+        // this.getEjercicio();
+    }
+
+
     // Completar la pantalla dependiendo del tipo de ejercicio que sea
     getEjercicio = () => {
         const ejercicio = this.state.ejerciciosLeccionActual[this.state.ejercicioActual];
@@ -81,6 +104,7 @@ class Ejercicios extends Component {
                 break;
             case 2:
                 console.log('Soy tipo 2');
+                res = <Voc_Ex2 ejercicio={ejercicio} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 3:
                 console.log('Soy tipo 3');
@@ -139,9 +163,9 @@ class Ejercicios extends Component {
 
                     <View style={[{position: 'absolute', bottom: 0, padding: 30, width:'100%'}]} >
                         {/* Boton para comprobar el resultado */}
-                        <BlueButton title="Check answer" screen={this.correctExercise} style={[!this.state.isCheckVisible && {display: 'none'}]}></BlueButton>
+                        <BlueButton title="Check answer" screen={this.correctExercise.bind()} style={[!this.state.isCheckVisible && {display: 'none'}]}></BlueButton>
                         {/* Boton para pasar al siguiente ejercicio, una vez hemos acertado */}
-                        <BlueButton title="Next" screen={this.correctExercise} style={[!this.state.isNextVisible && {display: 'none'}]}></BlueButton>
+                        <BlueButton title="Next" screen={this.nextExercise} style={[!this.state.isNextVisible && {display: 'none'}]}></BlueButton>
                     </View>
                     
                 </View>
