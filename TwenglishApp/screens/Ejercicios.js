@@ -9,6 +9,7 @@ import ModalExit from '../components/Modal/ModalExit';
 import ModalC from '../components/Modal/ModalC';
 import ModalNotificacion from '../components/Modal/ModalNotificacion';
 import { updateCurrentLesson } from '../data/queries/lecciones';
+import Voc_Ex2 from './Voc_Ex2';
 
 class Ejercicios extends Component {
 
@@ -84,12 +85,11 @@ class Ejercicios extends Component {
     nextExercise = () => {
         if(this.state.ejercicioActual < this.state.ejerciciosLeccionActual.length - 1) {
             console.log('cambiar ejercicio', this.state.ejercicioActual + 1);
-            this.setState({ejercicioActual: this.state.ejercicioActual + 1, isNextVisible: false});
+            this.setState({ejercicioActual: this.state.ejercicioActual + 1, isNextVisible: false, enunciado: this.state.ejerciciosLeccionActual[this.state.ejercicioActual + 1].enunciado});
         } else {
             console.log('No quedan ejercicios');
             // nos llevaria la página de resumen
         }
-        // this.getEjercicio();
     }
 
 
@@ -157,7 +157,7 @@ class Ejercicios extends Component {
                     /////////////////////////*/}
                     <View style={[view.safeArea, {width: '100%', height: '85%'}]}>
                         {/* Enunciado del ejercicio */}
-                        <MyText title={this.state.enunciado + '.'} style={{marginTop: 20}}></MyText>
+                        <MyText title={this.state.enunciado} style={{marginTop: 20}}></MyText>
                         <View>{this.getEjercicio()}</View>
                     </View>
 

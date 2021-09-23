@@ -28,8 +28,8 @@ const App2 = () => {
       Realm.copyBundledRealmFiles();
       const realm = new Realm(database);
 
-    //   const le = realm.objects('Nivel');
-    //   console.log(le);
+      // const le = realm.objects('Nivel');
+      // console.log(le);
   });
 
     return (

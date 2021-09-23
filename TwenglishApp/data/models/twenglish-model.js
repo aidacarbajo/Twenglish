@@ -48,7 +48,8 @@ exports.Ejercicio = {
     enunciado: 'string?',
     intentos: 'int',
     tipo: 'int',
-    bloqueString: 'Bloques'
+    bloqueString: 'Bloques',
+    bloqueRadioButton: 'RadioButton'
   }
 }
 
@@ -80,3 +81,19 @@ exports.Niveles = {
     nivel_seleccionado: 'Nivel'
   }
 }
+
+exports.Opcion = {
+  name: 'Opcion',
+  properties: {
+    frase: 'string?',
+    esCorrecta: 'bool'
+  }
+}
+
+exports.RadioButton = {
+  name: 'RadioButton',
+  properties: {
+    opciones: 'Opcion[]'
+  }
+}
+

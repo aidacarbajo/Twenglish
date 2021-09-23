@@ -57,7 +57,7 @@ class Voc_Ex2 extends Component {
         } else {
             return (
                 <View>
-                    <View>{this.list()}</View>
+                    {/* <View>{this.list()}</View> */}
                                        
                 </View>
             );
