@@ -7,7 +7,7 @@ class ModalC extends Component {
     constructor(props) {
         super(props);
 
-        this.tiempoDesaparecer = 3000;
+        this.tiempoDesaparecer = 1000;
         
         if(this.props.tipo === 'top' || this.props.tipo === 'abajo') {
             this.animacionS = 'bounceInRight';

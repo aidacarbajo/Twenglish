@@ -73,7 +73,9 @@ class Ejercicios extends Component {
     
     // corregir el ejercicio 
     showButton = (visible) => {
-        this.setState({isCheckVisible: visible});
+        if(!this.state.isCorreccionVisible) {
+            this.setState({isCheckVisible: visible});
+        }
     }
 
     correctExercise = () => {

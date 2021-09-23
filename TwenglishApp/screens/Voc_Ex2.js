@@ -51,9 +51,9 @@ class Voc_Ex2 extends Component {
     checkAnswer = () => {
         if(!this.correcta) {
             this.props.buttonCheck(false);
-            setTimeout(() => {
+            // setTimeout(() => {
                 this.correcta = false;
-            }, 3000);
+            // }, 3000);
         }
         return this.correcta;      
     }
