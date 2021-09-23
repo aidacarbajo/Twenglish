@@ -16,7 +16,7 @@ class ModalLessons extends Component {
                 
                 <BlueButton title="Start lesson" screen={this.props.empezarLeccion} style={{width: '90%'}}></BlueButton>
 
-                <Pressable style={[button.button, button.option, {width: '90%'}]} onPress={this.props.verApuntes}>
+                <Pressable style={[button.button, button.option, {width: '90%', alignItems: 'center'}]} onPress={this.props.verApuntes}>
                   <Text style={text.primario}>Notes</Text>
                 </Pressable>  
             </View>

@@ -92,7 +92,7 @@ class Lecciones extends Component {
             <StatusBar hidden />
             {/* Modal de ajustes */}
             <Modal visible={this.state.isSettingsVisible} tipo={'top'} navigation={this.props.navigation}>
-                <Pressable style={[button.button, button.option]} onPress={() => this.props.navigation.navigate('Settings')}>
+                <Pressable style={[button.button, button.option, {alignItems: 'center'}]} onPress={() => this.props.navigation.navigate('Settings')}>
                     <Text style={text.primario}>Más Información</Text>
                 </Pressable>  
             </Modal>

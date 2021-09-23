@@ -27,7 +27,7 @@ class ModalExit extends Component {
 
                 <BlueButton title="Exit" screen={this.mevoy} style={{marginTop: 30, marginBottom: 5}}></BlueButton>
                 
-                <Pressable style={[button.button, button.option, {width: '100%'}]}>
+                <Pressable style={[button.button, button.option, {width: '100%', alignItems: 'center'}]}>
                   <Text style={text.primario} onPress={this.mequedo}>Cancel</Text>
                 </Pressable>  
             </View>

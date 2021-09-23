@@ -65,15 +65,15 @@ const text = StyleSheet.create({
         borderRadius: 12,
         justifyContent: 'center',
         width: '100%',
-        height: 50
+        height: 50,
     }
 });
 
 const button = StyleSheet.create({
     button: {
         // colores, tamaño y texto
-        alignItems: 'center',
-        justifyContent: 'center',
+        // alignItems: 'center',
+        // justifyContent: 'center',
         borderRadius: 12,
         width: '100%',
         // en medio de la pantalla
@@ -102,7 +102,7 @@ const button = StyleSheet.create({
          elevation: 20,
     },
     option: {
-        width: '90%',
+        width: '95%',
         paddingVertical: 15,
         marginVertical: 10,
         shadowOpacity: 0,
@@ -110,12 +110,13 @@ const button = StyleSheet.create({
         borderLeftWidth: 1.5,
         borderRightWidth: 1.5,
         borderTopWidth: 1.5,
-        borderBottomWidth: 1.5
+        borderBottomWidth: 1.5,
     },
     optionSelected: {
         borderColor: secundary,
         backgroundColor: '#FEE3E8',
-        color: secundary
+        color: secundary,
+        paddingLeft: 15,
     },
     round: {
         width: 44,

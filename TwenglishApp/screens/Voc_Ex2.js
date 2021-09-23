@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { ActivityIndicator, ImageBackground, View } from 'react-native';
+import { cards } from '../assets/theme/styles';
+import RadioButton from '../components/RadioButton/RadioButton';
 import { getImage } from '../util/ImageManager';
 
 class Voc_Ex2 extends Component {
@@ -9,17 +11,13 @@ class Voc_Ex2 extends Component {
         
         // this.respuestasUsuario = ['', '', '', ''];
 
-        // const frases = props.ejercicio.frase;
-        // const opcionesClave = props.ejercicio.opcionesClave;        
+        this.imagen = props.imagen[0];
+        this.opcioness = props.radioB.opciones;
+        this.opciones = JSON.parse(JSON.stringify(this.opcioness));
+
+        this.correcta = false;
         // const imagenes = JSON.parse(JSON.stringify(props.ejercicio.imagenes));
         // const desordenado = [...imagenes].sort(() => {return Math.random() - 0.5});
-
-        // const data = {
-        //                 frases: frases.split('"'), 
-        //                 portada: imagenes,
-        //                 portadaDesordenada: desordenado,
-        //                 palabraClave: opcionesClave,
-        //             }
 
         this.state = {
             isLoading: false,
@@ -28,6 +26,8 @@ class Voc_Ex2 extends Component {
             // actual: 0
         };
 
+        this.showCheck = this.showCheck.bind();
+        this.checkAnswer = this.checkAnswer.bind();
         // this.isPressed = this.isPressed.bind(this);
     }
 
@@ -43,8 +43,19 @@ class Voc_Ex2 extends Component {
         return true;                      
     }
 
+    showCheck = (correcta) => {
+        this.props.buttonCheck(true, true);
+        this.correcta = correcta;
+    }
+
     checkAnswer = () => {
-           
+        if(!this.correcta) {
+            this.props.buttonCheck(false);
+            setTimeout(() => {
+                this.correcta = false;
+            }, 3000);
+        }
+        return this.correcta;      
     }
 
     render() {
@@ -57,8 +68,15 @@ class Voc_Ex2 extends Component {
         } else {
             return (
                 <View>
-                    {/* <View>{this.list()}</View> */}
-                                       
+                    <View style={{width: '100%', height: 180, marginTop: 20}}>
+                        <ImageBackground 
+                            source={getImage(this.imagen)} 
+                            resizeMode="cover" 
+                            style={[cards.image]} 
+                            imageStyle={{ borderRadius: 12, width: '100%', height: 180, shadowColor: 'black'}} >
+                        </ImageBackground>  
+                    </View>
+                    <RadioButton opciones={this.opciones} check={this.showCheck}></RadioButton>
                 </View>
             );
         }

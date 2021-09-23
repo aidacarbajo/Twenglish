@@ -30,6 +30,7 @@ class Ejercicios extends Component {
         };
 
         this.correctExercise = this.correctExercise.bind(this);
+        this.deleteCorreccion = this.deleteCorreccion.bind(this);
     }
 
     componentDidMount () {
@@ -51,26 +52,25 @@ class Ejercicios extends Component {
 
     // Modal de notificacion
     deleteCorreccion = (visible, correcta) => {
-        let vis = false;
+        console.log('Visible: ', visible, '---- Correcta: ', correcta);
 
         if(correcta != undefined) {
             if(correcta) {
                 this.acierto = 'acierto';
-                vis = true;
+                this.setState({isCorreccionVisible: visible, isCheckVisible: false, isNextVisible: true});
             } else {
                 this.acierto = 'fallo';
-                
+                this.setState({isCorreccionVisible: visible, isCheckVisible: false, isNextVisible: false});
             }
         } else {
-            if(this.acierto == 'acierto') {
-                vis = true;
-            }
+            this.setState({isCorreccionVisible: visible, isCheckVisible: false});
         }
-        
-        this.setState({isCorreccionVisible: visible, isCheckVisible: false, isNextVisible: vis});
     }
  
-
+    ////////////////////////////////////////////////////////////////////////
+    // cuando corrijo el ejercicio llama a la funcion dos putas veces, socorro
+    ///////////////////////////////////////////////////////////////
+    
     // corregir el ejercicio 
     showButton = (visible) => {
         this.setState({isCheckVisible: visible});
@@ -84,8 +84,7 @@ class Ejercicios extends Component {
     // pasar al siguiente ejercicio
     nextExercise = () => {
         if(this.state.ejercicioActual < this.state.ejerciciosLeccionActual.length - 1) {
-            console.log('cambiar ejercicio', this.state.ejercicioActual + 1);
-            this.setState({ejercicioActual: this.state.ejercicioActual + 1, isNextVisible: false, enunciado: this.state.ejerciciosLeccionActual[this.state.ejercicioActual + 1].enunciado});
+            this.setState({isNextVisible: false, ejercicioActual: this.state.ejercicioActual + 1, isCorreccionVisible: false, enunciado: this.state.ejerciciosLeccionActual[this.state.ejercicioActual + 1].enunciado});
         } else {
             console.log('No quedan ejercicios');
             // nos llevaria la página de resumen
@@ -103,8 +102,7 @@ class Ejercicios extends Component {
                 res = <Voc_Ex1 ejercicio={ejercicio.bloqueString} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 2:
-                console.log('Soy tipo 2');
-                res = <Voc_Ex2 ejercicio={ejercicio} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
+                res = <Voc_Ex2 imagen={ejercicio.bloqueString.imagenes} radioB={ejercicio.bloqueRadioButton} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 3:
                 console.log('Soy tipo 3');
@@ -163,7 +161,7 @@ class Ejercicios extends Component {
 
                     <View style={[{position: 'absolute', bottom: 0, padding: 30, width:'100%'}]} >
                         {/* Boton para comprobar el resultado */}
-                        <BlueButton title="Check answer" screen={this.correctExercise.bind()} style={[!this.state.isCheckVisible && {display: 'none'}]}></BlueButton>
+                        <BlueButton title="Check answer" screen={this.correctExercise} style={[!this.state.isCheckVisible && {display: 'none'}]}></BlueButton>
                         {/* Boton para pasar al siguiente ejercicio, una vez hemos acertado */}
                         <BlueButton title="Next" screen={this.nextExercise} style={[!this.state.isNextVisible && {display: 'none'}]}></BlueButton>
                     </View>

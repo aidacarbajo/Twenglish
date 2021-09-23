@@ -41,7 +41,6 @@ const updateCurrentLesson = portada =>
                     res.leccion_seleccionada = lessonS[0]
                 })
             })
-            console.log(lessonS[0].ejercicios)
             resolve(lessonS[0]);
 
         }).catch((error) => reject(error));
