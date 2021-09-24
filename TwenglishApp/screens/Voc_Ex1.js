@@ -109,7 +109,7 @@ class Voc_Ex1 extends Component {
             this.props.buttonCheck(false);
             setTimeout(() => {
                 this.setState({pressed: [false, false, false, false], actual: 0})
-            }, 500);
+            }, 800);
         }
 
         return iguales;        

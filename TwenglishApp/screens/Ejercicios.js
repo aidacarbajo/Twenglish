@@ -54,7 +54,7 @@ class Ejercicios extends Component {
     // Modal de notificacion
     deleteCorreccion = (visible, correcta) => {
         // console.log('Visible: ', visible, '---- Correcta: ', correcta);
-
+        console.log(correcta);
         if(correcta != undefined) {
             if(correcta) {
                 this.acierto = 'acierto';
@@ -84,6 +84,18 @@ class Ejercicios extends Component {
         this.deleteCorreccion(true, res);
     }
 
+    mal = (escorrecta) => {
+        this.acierto = escorrecta;
+        if(this.acierto) {
+            this.setState({isCorreccionVisible: true, isNextVisible: true});
+        } else {
+            this.setState({isCorreccionVisible: true});
+        }
+    }
+
+
+
+
     // pasar al siguiente ejercicio
     nextExercise = () => {
         if(this.state.ejercicioActual < this.state.ejerciciosLeccionActual.length - 1) {
@@ -108,7 +120,7 @@ class Ejercicios extends Component {
                 res = <Voc_Ex2 imagen={ejercicio.bloqueString.imagenes} radioB={ejercicio.bloqueRadioButton} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 3:
-                res = <Voc_Ex3 everyPar={ejercicio.bloquePares} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
+                res = <Voc_Ex3 everyPar={ejercicio.bloquePares} buttonCheck={this.mal} onRef={ref => {this.child = ref}} />
                 break;
             case 4:
                 console.log('Soy tipo 4');

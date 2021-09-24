@@ -9,20 +9,24 @@ class Voc_Ex3 extends Component {
         super(props);
         
         this.pares = [...props.everyPar.pares];
-        this.par1 = [], this.par2 = [], this.seleccionUsuario = [];
+        let desordenados = []; this.seleccionUsuario = [];
 
         this.pares.map(el => {
-            this.par1.push(el.par[0]);
-            this.par2.push(el.par[1]);
-            this.seleccionUsuario.push('', '');       // cuando 'y' == correcto o selected; cuando 'n' incorrecto
+            desordenados.push(el.par[0], el.par[1]);
+            this.seleccionUsuario.push('', '');       // cuando 'c' == correcto o selected; cuando 'n' incorrecto
         })
 
-        this.desordenado1 = this.par1.sort(() => {return Math.random() - 0.5});
-        this.desordenado2 = this.par2.sort(() => {return Math.random() - 0.5});
+
+        // this.desordenado1 = [...this.par1].sort(() => {return Math.random() - 0.5});
+        // this.desordenado2 = [...this.par2].sort(() => {return Math.random() - 0.5});
+
+        this.todosDesordenados = desordenados.sort(() => {return Math.random() - 0.5});
 
         this.state = {
-            seleccionado: this.seleccionUsuario
+            seleccionado: [...this.seleccionUsuario]
         }
+
+        this.correcta = false;
         // this.showCheck = this.showCheck.bind();
         // this.checkAnswer = this.checkAnswer.bind();
     }
@@ -45,47 +49,90 @@ class Voc_Ex3 extends Component {
         this.correcta = correcta;
     }
 
-    checkAnswer = () => {
-        if(!this.correcta) {
-            this.props.buttonCheck(false);
-            // setTimeout(() => {
-                this.correcta = false;
-            // }, 3000);
+
+    iguales = (x, first, last) => {
+        console.log(x.par);
+        console.log([this.todosDesordenados[first], this.todosDesordenados[last]])
+        
+        if((x.par[0] == this.todosDesordenados[first] && this.todosDesordenados[last] == x.par[1])
+         || (x.par[0] == this.todosDesordenados[last] && this.todosDesordenados[first] == x.par[1])) {
+            return true;
         }
-        return this.correcta;      
+    }
+
+    checkAnswer = (first, last, pos, array) => {
+        console.log('*****************************')
+
+        const xx = this.pares.filter(x => this.iguales(x, first, last)); // Returns [10, 6]
+        
+        if(xx.length > 0) {
+            console.log('Son iguales');
+            return true;
+        } else {
+            console.log('son diferentes');
+            return false;
+        } 
     }
 
 
     seleccion = (columna) => {
         let c = this.state.seleccionado;
-        // console.log(columna);
-        c[columna] = 's';
 
-        this.setState({seleccionado: c});
+        if(c[columna] != 's' && c[columna] != 'c') {
+            c[columna] = 's';
 
-        // Cada dos 's' comprobar que son correctos o no
-        // Si son correctos sustituitlo por 'c'
-        // Si es incorrecto mostrar el modal de error y quitar las 's'
+            this.setState({seleccionado: c});
 
+            const cuantasS = c.indexOf('s');
+            const cuantasL = c.lastIndexOf('s');
+
+            // Cada dos 's' comprobar que son correctos o no
+            if(cuantasS != cuantasL) {
+                const esCorrecta = this.checkAnswer(cuantasS, cuantasL);
+
+                // Si son incorrectos sustituitlo por '' y mostrar el modal
+                if(!esCorrecta) {
+                    c[cuantasL] = 'n';
+                    c[cuantasS] = 'n';
+                    
+                    this.setState({seleccionado: c});
+
+                    this.props.buttonCheck('fallo');
+
+                    setTimeout(() => {
+                        // Eliminar LAS N
+                        const N1 = c.indexOf('n');
+                        const N2 = c.lastIndexOf('n');
+                        c[N1] = ''; c[N2] = '';
+                        this.setState({seleccionado: c})
+                    }, 500);
+                } else {
+                    // Si es correcto mostrar el modal de error y quitar las 's'    
+                    c[cuantasL] = 'c';
+                    c[cuantasS] = 'c';
+                    this.setState({seleccionado: c});
+
+                    if(c.filter(x=> x == 'c').length == this.state.seleccionado.length) {
+                        console.log('todas correctas');
+                        this.props.buttonCheck('acierto');
+
+                    }
+                }
+
+            } 
+    
+        } else {
+            c[columna] = '';
+            this.setState({seleccionado: c});
+        }
     }
 
 
 
-    getCard = (pos, array) => {
-        let c; 
-        let poss;
-
-        if(array % 2 == 1) {
-            c = this.desordenado2;
-            poss = pos * 2 + 1;
-        }   else {
-            c = this.desordenado1;
-            poss = pos * 2;
-        }
-        
+    getCard = (pos) => {
         return(
-            <Pressable style={[cards.cards, cards.cardPares, cards.centrar, this.state.seleccionado[poss] == 's' && cards.selected]} onPress={() => this.seleccion(poss)}>
-                <MyText title={c[pos]}></MyText>
+            <Pressable style={[cards.cards, cards.cardPares, cards.centrar, cards.pares, this.state.seleccionado[pos] == 's' || this.state.seleccionado[pos] == 'c' ? cards.selected : [this.state.seleccionado[pos] == 'n' && cards.incorrect]]} onPress={() => this.seleccion(pos)}>
+                <MyText title={this.todosDesordenados[pos]}></MyText>
             </Pressable>
         );
     }
@@ -94,13 +141,14 @@ class Voc_Ex3 extends Component {
         return (
             <View style={{marginTop: 20}}>
             {
-                this.pares.map((item, index) => {
+                this.todosDesordenados.map((item, index) => {
                     return (
+                        index % 2 == 0 && (
                         <View key={index} style={{flexDirection: 'row', height: 70, justifyContent: 'space-between', textAlign: 'center', marginBottom: 20}}>
-                            {this.getCard(index, 0)}
-                            {this.getCard(index, 1)}
+                            {this.getCard(index)}
+                            {this.getCard(index + 1)}
                         </View>
-                    );        
+                    ));        
                 })
             }
             </View>

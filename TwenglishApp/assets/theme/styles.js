@@ -242,7 +242,12 @@ const cards = StyleSheet.create({
     cardPares: {
         width: '47%',
         padding: 15,
-        elevation: 2
+        elevation: 3,
+        borderColor: 'white',
+        borderLeftWidth: 1.5,
+        borderRightWidth: 1.5,
+        borderTopWidth: 1.5,
+        borderBottomWidth: 1.5,   
     },
     centrar: {
         justifyContent: 'center', 
@@ -251,10 +256,14 @@ const cards = StyleSheet.create({
     selected: {
         backgroundColor: '#D5EFDC',
         borderColor: correcto,
-        borderLeftWidth: 1.5,
-        borderRightWidth: 1.5,
-        borderTopWidth: 1.5,
-        borderBottomWidth: 1.5,    }
+    },
+    incorrect: {
+        borderColor: secundary,
+        backgroundColor: '#FEE3E8'
+    },
+    pares: {
+       
+    }
 });
 
 const modal = StyleSheet.create({
