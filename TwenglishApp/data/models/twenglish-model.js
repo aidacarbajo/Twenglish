@@ -49,7 +49,8 @@ exports.Ejercicio = {
     intentos: 'int',
     tipo: 'int',
     bloqueString: 'Bloques',
-    bloqueRadioButton: 'RadioButton'
+    bloqueRadioButton: 'RadioButton',
+    bloquePares: 'Pares'
   }
 }
 
@@ -87,6 +88,20 @@ exports.Opcion = {
   properties: {
     frase: 'string?',
     esCorrecta: 'bool'
+  }
+}
+
+exports.Par = {
+  name: 'Par',
+  properties: {
+    par: 'string[]'
+  }
+}
+
+exports.Pares = {
+  name: 'Pares',
+  properties: {
+    pares: 'Par[]'
   }
 }
 

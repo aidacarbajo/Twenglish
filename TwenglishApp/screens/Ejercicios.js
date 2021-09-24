@@ -10,6 +10,7 @@ import ModalC from '../components/Modal/ModalC';
 import ModalNotificacion from '../components/Modal/ModalNotificacion';
 import { updateCurrentLesson } from '../data/queries/lecciones';
 import Voc_Ex2 from './Voc_Ex2';
+import Voc_Ex3 from './Voc_Ex3';
 
 class Ejercicios extends Component {
 
@@ -52,7 +53,7 @@ class Ejercicios extends Component {
 
     // Modal de notificacion
     deleteCorreccion = (visible, correcta) => {
-        console.log('Visible: ', visible, '---- Correcta: ', correcta);
+        // console.log('Visible: ', visible, '---- Correcta: ', correcta);
 
         if(correcta != undefined) {
             if(correcta) {
@@ -107,7 +108,7 @@ class Ejercicios extends Component {
                 res = <Voc_Ex2 imagen={ejercicio.bloqueString.imagenes} radioB={ejercicio.bloqueRadioButton} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 3:
-                console.log('Soy tipo 3');
+                res = <Voc_Ex3 everyPar={ejercicio.bloquePares} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 4:
                 console.log('Soy tipo 4');

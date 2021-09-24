@@ -232,11 +232,29 @@ const cards = StyleSheet.create({
     },
     cardApuntes: {
         width: '100%',
-        padding: 20,
-        borderRadius: 20,
+    },
+    cards: {
         backgroundColor: 'white',
-        elevation: 4
-    }
+        elevation: 4,
+        borderRadius: 20,
+        padding: 20,
+    },
+    cardPares: {
+        width: '47%',
+        padding: 15,
+        elevation: 2
+    },
+    centrar: {
+        justifyContent: 'center', 
+        alignItems: 'center'
+    },
+    selected: {
+        backgroundColor: '#D5EFDC',
+        borderColor: correcto,
+        borderLeftWidth: 1.5,
+        borderRightWidth: 1.5,
+        borderTopWidth: 1.5,
+        borderBottomWidth: 1.5,    }
 });
 
 const modal = StyleSheet.create({

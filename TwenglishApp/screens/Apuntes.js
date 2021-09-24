@@ -95,7 +95,7 @@ class Apuntes extends Component {
                 <MyTitle title={'Grammar'} style={{fontSize: 18, color: body, marginVertical: 15}}></MyTitle>
                     {this.state.gramatica.map((element) => {
                         return (
-                            <View style={[cards.cardApuntes, {marginBottom: 15}]} key={element.titulo}>
+                            <View style={[cards.cardApuntes, cards.cards, {marginBottom: 15}]} key={element.titulo}>
                                 <MyTitle title={element.titulo} style={{fontSize: 14, marginBottom: 10}}></MyTitle>
                                 <MyText title={element.explicacion} style={{fontSize: 12, textAlign: 'left', marginBottom: 10, padding: 4}}></MyText>
                                 <MyText title={element.ejemplo} style={{fontSize: 12, textAlign: 'left', color: example, paddingHorizontal: 4}}></MyText>
