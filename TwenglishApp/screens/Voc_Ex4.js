@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import { ActivityIndicator, ImageBackground, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import { cards } from '../assets/theme/styles';
 import RadioButton from '../components/RadioButton/RadioButton';
-import { getImage } from '../util/ImageManager';
+import MyText from '../components/Texts/MyText';
 
-class Voc_Ex2 extends Component {
+class Voc_Ex4 extends Component {
 
     constructor(props) {
         super(props);
         
-        this.imagen = props.imagen[0];
+        this.frase = props.frase;
         this.opcioness = props.radioB.opciones;
         this.opciones = JSON.parse(JSON.stringify(this.opcioness));
 
@@ -57,15 +57,11 @@ class Voc_Ex2 extends Component {
             );
         } else {
             return (
-                <View>
-                    <View style={{width: '100%', height: 180, marginTop: 20}}>
-                        <ImageBackground 
-                            source={getImage(this.imagen)} 
-                            resizeMode="cover" 
-                            style={[cards.image]} 
-                            imageStyle={{ borderRadius: 12, width: '100%', height: 180, shadowColor: 'black'}} >
-                        </ImageBackground>  
+                <View style={{marginTop: 20}}>
+                    <View style={[cards.cardApuntes, cards.cards]}>
+                        <MyText title={this.frase} style={{fontSize: 12, textAlign: 'left', padding: 4}}></MyText>
                     </View>
+
                     <RadioButton opciones={this.opciones} check={this.showCheck}></RadioButton>
                 </View>
             );
@@ -73,4 +69,4 @@ class Voc_Ex2 extends Component {
     }
 }
 
-export default Voc_Ex2;
+export default Voc_Ex4;

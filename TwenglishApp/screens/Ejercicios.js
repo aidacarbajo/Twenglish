@@ -11,6 +11,7 @@ import ModalNotificacion from '../components/Modal/ModalNotificacion';
 import { updateCurrentLesson } from '../data/queries/lecciones';
 import Voc_Ex2 from './Voc_Ex2';
 import Voc_Ex3 from './Voc_Ex3';
+import Voc_Ex4 from './Voc_Ex4';
 
 class Ejercicios extends Component {
 
@@ -74,7 +75,7 @@ class Ejercicios extends Component {
     
     // corregir el ejercicio 
     showButton = (visible) => {
-        if(!this.state.isCorreccionVisible) {
+        if(!this.state.isCorreccionVisible && !this.state.isNextVisible) {
             this.setState({isCheckVisible: visible});
         }
     }
@@ -123,7 +124,7 @@ class Ejercicios extends Component {
                 res = <Voc_Ex3 everyPar={ejercicio.bloquePares} buttonCheck={this.mal} />
                 break;
             case 4:
-                console.log('Soy tipo 4');
+                res = <Voc_Ex4 frase={ejercicio.bloqueString.frase} radioB={ejercicio.bloqueRadioButton} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 5:
                 console.log('Soy tipo 5');
