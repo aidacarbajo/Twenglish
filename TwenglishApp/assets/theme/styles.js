@@ -254,6 +254,10 @@ const cards = StyleSheet.create({
         alignItems: 'center'
     },
     selected: {
+        backgroundColor: '#CFF0FF',
+        borderColor: extra,
+    },
+    correct: {
         backgroundColor: '#D5EFDC',
         borderColor: correcto,
     },
@@ -261,9 +265,6 @@ const cards = StyleSheet.create({
         borderColor: secundary,
         backgroundColor: '#FEE3E8'
     },
-    pares: {
-       
-    }
 });
 
 const modal = StyleSheet.create({
@@ -275,7 +276,7 @@ const modal = StyleSheet.create({
         borderRadius: 26, 
         padding: 15, 
         elevation: 20,
-    }
+    },
 });
 
 export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, correcto, extra, example, cards, modal, regular, extrabold, bold };

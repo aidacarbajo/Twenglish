@@ -102,7 +102,7 @@ class Voc_Ex3 extends Component {
 
     getCard = (pos) => {
         return(
-            <Pressable style={[cards.cards, cards.cardPares, cards.centrar, cards.pares, this.state.seleccionado[pos] == 's' || this.state.seleccionado[pos] == 'c' ? cards.selected : [this.state.seleccionado[pos] == 'n' && cards.incorrect]]} onPress={() => this.seleccion(pos)}>
+            <Pressable style={[cards.cards, cards.cardPares, cards.centrar, cards.pares, this.state.seleccionado[pos] == 's' ? cards.selected : [this.state.seleccionado[pos] == 'c' ? cards.correct : [this.state.seleccionado[pos] == 'n' && cards.incorrect]]]} onPress={() => this.seleccion(pos)}>
                 <MyText title={this.todosDesordenados[pos]}></MyText>
             </Pressable>
         );

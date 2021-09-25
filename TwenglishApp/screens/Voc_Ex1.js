@@ -59,16 +59,25 @@ class Voc_Ex1 extends Component {
 
     isPressed = (index, refreshh) => {
         if(this.state.actual < this.state.pressed.length) {
-            this.respuestasUsuario[index] = this.state.dataRealm.palabraClave[this.state.actual]
+            if(this.respuestasUsuario[index] == '') { 
+                this.respuestasUsuario[index] = this.state.dataRealm.palabraClave[this.state.actual]
 
-            let arrayPressed = [...this.state.pressed];
-            arrayPressed[index] = true;
-
-            this.setState({pressed: arrayPressed, actual: this.state.actual + 1}); 
-            
-            if(this.state.actual === this.state.pressed.length - 1) {
-                this.props.buttonCheck(true);
+                let arrayPressed = [...this.state.pressed];
+                arrayPressed[index] = true;
+    
+                this.setState({pressed: arrayPressed, actual: this.state.actual + 1}); 
+                
+                if(this.state.actual === this.state.pressed.length - 1) {
+                    this.props.buttonCheck(true);
+                }
+            } else {
+                // si aprieta dos veces al mismo se deselecciona
+                // this.respuestasUsuario[index] = '';
+                // let arrayPressed = [...this.state.pressed];
+                // arrayPressed[index] = false;
+                // this.setState({pressed: arrayPressed, actual: this.state.actual - 1}); 
             }
+            
         }
     }
 

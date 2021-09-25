@@ -4,14 +4,15 @@ import Header from '../components/Header/Header';
 import { view } from '../assets/theme/styles';
 import MyText from '../components/Texts/MyText';
 import BlueButton from '../components/Buttons/BlueButton';
-import Voc_Ex1 from './Voc_Ex1';
 import ModalExit from '../components/Modal/ModalExit';
 import ModalC from '../components/Modal/ModalC';
 import ModalNotificacion from '../components/Modal/ModalNotificacion';
 import { updateCurrentLesson } from '../data/queries/lecciones';
+import Voc_Ex1 from './Voc_Ex1';
 import Voc_Ex2 from './Voc_Ex2';
 import Voc_Ex3 from './Voc_Ex3';
 import Voc_Ex4 from './Voc_Ex4';
+import Voc_Ex5 from './Voc_Ex5';
 
 class Ejercicios extends Component {
 
@@ -127,8 +128,7 @@ class Ejercicios extends Component {
                 res = <Voc_Ex4 frase={ejercicio.bloqueString.frase} radioB={ejercicio.bloqueRadioButton} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 5:
-                res = <Voc_Ex4 frase={ejercicio.bloqueString.frase} unidades={ejercicio.bloqueString.opcionesClave} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
-                console.log('Soy tipo 5');
+                res = <Voc_Ex5 frase={ejercicio.bloqueString.frase} unidades={ejercicio.bloqueString.opcionesClave} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 6:
                 console.log('Soy tipo 6');
