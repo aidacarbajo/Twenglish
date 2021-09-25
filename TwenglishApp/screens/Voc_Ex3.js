@@ -16,10 +16,6 @@ class Voc_Ex3 extends Component {
             this.seleccionUsuario.push('', '');       // cuando 'c' == correcto o selected; cuando 'n' incorrecto
         })
 
-
-        // this.desordenado1 = [...this.par1].sort(() => {return Math.random() - 0.5});
-        // this.desordenado2 = [...this.par2].sort(() => {return Math.random() - 0.5});
-
         this.todosDesordenados = desordenados.sort(() => {return Math.random() - 0.5});
 
         this.state = {
@@ -27,53 +23,29 @@ class Voc_Ex3 extends Component {
         }
 
         this.correcta = false;
-        // this.showCheck = this.showCheck.bind();
-        // this.checkAnswer = this.checkAnswer.bind();
-    }
-
-    componentDidMount() {
-        this.props.onRef(this)
-    }
-
-    componentWillUnmount() {
-        this.props.onRef(undefined)
     }
 
     shouldComponentUpdate(nextProps, nextState) {                                     
         return true;                      
     }
 
-
-    showCheck = (correcta) => {
-        this.props.buttonCheck(true, true);
-        this.correcta = correcta;
-    }
-
-
     iguales = (x, first, last) => {
-        console.log(x.par);
-        console.log([this.todosDesordenados[first], this.todosDesordenados[last]])
-        
         if((x.par[0] == this.todosDesordenados[first] && this.todosDesordenados[last] == x.par[1])
          || (x.par[0] == this.todosDesordenados[last] && this.todosDesordenados[first] == x.par[1])) {
             return true;
         }
+        return false;
     }
 
-    checkAnswer = (first, last, pos, array) => {
-        console.log('*****************************')
-
+    checkAnswer = (first, last) => {
         const xx = this.pares.filter(x => this.iguales(x, first, last)); // Returns [10, 6]
         
         if(xx.length > 0) {
-            console.log('Son iguales');
             return true;
         } else {
-            console.log('son diferentes');
             return false;
         } 
     }
-
 
     seleccion = (columna) => {
         let c = this.state.seleccionado;
@@ -113,7 +85,6 @@ class Voc_Ex3 extends Component {
                     this.setState({seleccionado: c});
 
                     if(c.filter(x=> x == 'c').length == this.state.seleccionado.length) {
-                        console.log('todas correctas');
                         this.props.buttonCheck('acierto');
 
                     }
@@ -122,12 +93,12 @@ class Voc_Ex3 extends Component {
             } 
     
         } else {
-            c[columna] = '';
-            this.setState({seleccionado: c});
+            if(c[columna] != 'c') {
+                c[columna] = '';
+                this.setState({seleccionado: c});    
+            }
         }
     }
-
-
 
     getCard = (pos) => {
         return(

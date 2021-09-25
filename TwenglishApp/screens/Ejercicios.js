@@ -86,7 +86,7 @@ class Ejercicios extends Component {
 
     mal = (escorrecta) => {
         this.acierto = escorrecta;
-        if(this.acierto) {
+        if(escorrecta == 'acierto') {
             this.setState({isCorreccionVisible: true, isNextVisible: true});
         } else {
             this.setState({isCorreccionVisible: true});
@@ -120,7 +120,7 @@ class Ejercicios extends Component {
                 res = <Voc_Ex2 imagen={ejercicio.bloqueString.imagenes} radioB={ejercicio.bloqueRadioButton} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 3:
-                res = <Voc_Ex3 everyPar={ejercicio.bloquePares} buttonCheck={this.mal} onRef={ref => {this.child = ref}} />
+                res = <Voc_Ex3 everyPar={ejercicio.bloquePares} buttonCheck={this.mal} />
                 break;
             case 4:
                 console.log('Soy tipo 4');
