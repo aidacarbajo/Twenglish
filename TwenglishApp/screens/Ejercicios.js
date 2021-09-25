@@ -127,6 +127,7 @@ class Ejercicios extends Component {
                 res = <Voc_Ex4 frase={ejercicio.bloqueString.frase} radioB={ejercicio.bloqueRadioButton} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 5:
+                res = <Voc_Ex4 frase={ejercicio.bloqueString.frase} unidades={ejercicio.bloqueString.opcionesClave} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 console.log('Soy tipo 5');
                 break;
             case 6:
