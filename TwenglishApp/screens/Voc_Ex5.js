@@ -12,21 +12,32 @@ class Voc_Ex5 extends Component {
         this.frase = props.frase;
 
         this.unidades = props.unidades;
-        this.todosDesordenados = [...props.unidades].sort(() => {return Math.random() - 0.5});
-        let hide = [], respu = [];
-        [...props.unidades].map(() => {hide.push(false), respu.push('')});
+        this.fraseCorrecta = [...this.unidades].join(' ');
 
-        console.log('length', respu.length);
+        this.todosDesordenados = [...props.unidades].sort(() => {return Math.random() - 0.5});
+        this.desordenados = this.todosDesordenados;
+
+        this.hide = [];
+        this.respu = [];
+
+        [...props.unidades].map(() => {this.hide.push(false), this.respu.push(-1)});
 
         this.state = {
-            respuestasUsuario: respu,
+            respuestasUsuario: [...this.respu],
             respuestaFrase: '',
-            hideWord: hide
+            hideWord: [...this.hide]
         }
 
-        // this.correcta = false;
+        this.correcta = false;
     }
 
+    componentDidMount() {
+        this.props.onRef(this)
+    }
+
+    componentWillUnmount() {
+        this.props.onRef(undefined)
+    }
     shouldComponentUpdate(nextProps, nextState) {                                     
         return true;                      
     }
@@ -39,56 +50,76 @@ class Voc_Ex5 extends Component {
         return false;
     }
 
-    checkAnswer = (first, last) => {
-        const xx = this.pares.filter(x => this.iguales(x, first, last)); // Returns [10, 6]
+    checkAnswer = () => {
+        const u = this.state.respuestasUsuario;
+
+        let a = [];
         
-        if(xx.length > 0) {
-            return true;
+        u.map((x) => {
+            a.push(this.desordenados[x])
+        })
+
+        const resUser = a.join(' ');
+        
+        if(resUser === this.fraseCorrecta) {
+            this.correcta = true;
         } else {
-            return false;
-        } 
+            this.correcta = false;
+            this.props.buttonCheck(false);
+
+            console.log(this.hide);
+
+            this.setState({respuestasUsuario: this.respu, hideWord: this.hide});
+        }
+        // console.log('correcta', this.correcta);
+        return this.correcta;
     }
 
-    seleccion = (word, index) => {
+    showCheck = () => {
+        this.props.buttonCheck('acierto');
+    }
+
+    seleccion = (index) => {
         let u = this.state.respuestasUsuario;
-        u[index] = word;
+
+        const i = u.indexOf(-1);
+        u[i] = index;
 
         let h = this.state.hideWord;
         h[index] = true;
-
-        console.log(h);
         
-        this.setState({respuestasUsuario: u, hideWord: h})
+        this.setState({respuestasUsuario: u, hideWord: h});
+
+        // Si ya ha seleccionado todos...
+        if(!this.state.respuestasUsuario.includes(-1)) {
+            this.showCheck();
+        }
     }
 
-    deseleccion = (word, index) => {
+    deseleccion = (index, indexx) => {
         let h = this.state.hideWord;
         h[index] = false;
 
-        console.log(h);
-
         let u = this.state.respuestasUsuario;
-
-        u[index] = "";
+        u.splice(indexx, 1);
+        u.push(-1);
         
-
-
-        // let u = this.state.respuestasUsuario;
-        // u.push(word);
-
         this.setState({respuestasUsuario: u, hideWord: h})
     }
 
-    getCard = (word, index, accion) => {
+    getCard = (index, accion, indexx) => {        
         return(
             <Pressable key={index} style={[cards.cards, cards.centrar, {padding: 10, marginBottom: 10, marginRight: 6}]} onPress={() => {
                 if(accion === 's') {
-                    this.seleccion(word, index)
+                    this.seleccion(index)
                 } else {
-                    this.deseleccion(word, index)}
+                    this.deseleccion(index, indexx)}
                 }
             }>
-                <MyText title={word} style={{fontSize: 12}}></MyText>
+            { accion === 's' 
+                ? <MyText title={this.todosDesordenados[index]} style={{fontSize: 12}}></MyText>
+                : <MyText title={this.desordenados[index]} style={{fontSize: 12}}></MyText>
+            }
             </Pressable>
         );
     }
@@ -103,36 +134,30 @@ class Voc_Ex5 extends Component {
                     <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', textAlign: 'center', width: '100%', marginTop: 20}}>
                         {
                             this.state.respuestasUsuario.map((item, index) => {
-                                if(item != '') {
-                                    return this.getCard(item, index, 'd')
+                                if(item != -1) {
+                                    return this.getCard(item, 'd', index)
                                 }
                             })
 
                         }
                     </View>
                 </View>
-                {
-                    this.state.respuestasUsuario.includes('') ? (
-                        <View style={{position: 'absolute', top: 300, width: '100%'}}>
-                            <MyTitle titleBold="Options" style={{fontSize: 14, marginBottom: 0}}></MyTitle>
-                            <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', paddingTop: 10, paddingHorizontal: 10, textAlign: 'center', width: '100%', marginTop: 30, backgroundColor: 'white', borderRadius: 12}}>
-                            {
-                                this.todosDesordenados.map((item, index) => {
-                                    if(!this.state.hideWord[index]) {
-                                        return this.getCard(item, index, 's')
-                                    }
-                                })
-                            }
-                            </View>
 
+                <View style={{position: 'absolute', top: 250, width: '100%', minHeight: 50}}>
+                    <MyTitle titleBold="Options" style={{fontSize: 14, marginBottom: 0}}></MyTitle>
+                        
+                        <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', paddingTop: 10, paddingHorizontal: 10, textAlign: 'center', width: '100%', minHeight: 55, marginTop: 20, backgroundColor: 'white', borderRadius: 12}}>
+                        {
+                            this.todosDesordenados.map((item, index) => {
+                                if(!this.state.hideWord[index]) {
+                                    return this.getCard(index, 's')
+                                }
+                            })
+                        }
                         </View>
 
-                    )
-                    : (
-                        console.log('Check')
-                    )
-                }
-                
+                </View>
+
                 
             </View>
         );

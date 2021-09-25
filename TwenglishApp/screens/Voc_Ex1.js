@@ -53,10 +53,6 @@ class Voc_Ex1 extends Component {
         return true;                      
     }
 
-    getEjercicio = () => {
-    
-    }
-
     isPressed = (index, refreshh) => {
         if(this.state.actual < this.state.pressed.length) {
             if(this.respuestasUsuario[index] == '') { 

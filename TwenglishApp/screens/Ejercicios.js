@@ -83,6 +83,7 @@ class Ejercicios extends Component {
 
     correctExercise = () => {
         const res = this.child.checkAnswer();
+        console.log(res);
         this.deleteCorreccion(true, res);
     }
 
