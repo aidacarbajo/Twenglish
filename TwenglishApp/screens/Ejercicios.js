@@ -28,7 +28,7 @@ class Ejercicios extends Component {
             isCheckVisible: false,
             isCorreccionVisible: false,
             isNextVisible: false,
-            ejercicioActual: 0,
+            ejercicioActual: 5,
             ejerciciosLeccionActual: null,
             enunciado: null
         };
@@ -86,9 +86,9 @@ class Ejercicios extends Component {
         this.deleteCorreccion(true, res);
     }
 
-    mal = (escorrecta) => {
+    mal = (escorrecta, nextNo) => {
         this.acierto = escorrecta;
-        if(escorrecta == 'acierto') {
+        if(escorrecta == 'acierto' && nextNo != undefined) {
             this.setState({isCorreccionVisible: true, isNextVisible: true});
         } else {
             this.setState({isCorreccionVisible: true});
@@ -131,7 +131,7 @@ class Ejercicios extends Component {
                 res = <Voc_Ex5 frase={ejercicio.bloqueString.frase} unidades={ejercicio.bloqueString.opcionesClave} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 6:
-                res = <Voc_Ex6 frases={ejercicio.bloqueConversacion.frases} persona={ejercicio.bloqueConversacion.persona} opciones={ejercicio.bloqueConversacion.opciones} tiene_opciones={ejercicio.bloqueConversacion.tiene_opciones} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
+                res = <Voc_Ex6 frases={ejercicio.bloqueConversacion.frases} persona={ejercicio.bloqueConversacion.persona} opciones={ejercicio.bloqueConversacion.opciones} tiene_opciones={ejercicio.bloqueConversacion.tiene_opciones} buttonCheck={this.mal} onRef={ref => {this.child = ref}} />
                 break;
             }    
 

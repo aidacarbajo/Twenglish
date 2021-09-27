@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import { Pressable, View } from 'react-native';
-import { bold, cards } from '../assets/theme/styles';
+import { Pressable, Text, View } from 'react-native';
+import { bold, button, cards, text } from '../assets/theme/styles';
 import MyText from '../components/Texts/MyText';
-import MyTitle from '../components/Texts/MyTitle';
 
 class Voc_Ex6 extends Component {
 
@@ -11,19 +10,34 @@ class Voc_Ex6 extends Component {
 
         this.frases = props.frases;
         this.persona = props.persona;
+        this.opciones = props.opciones;
+        this.tiene_opciones = [...props.tiene_opciones];
+        this.options = [];
+
+        for(let i = 0; i < props.opciones.length; i++) {
+            for(let j = 0; j < props.opciones[i].opciones.length; j++) {
+                if(props.opciones[i].opciones[j].esCorrecta) {
+                    this.options.push(props.opciones[i].opciones[j].frase);
+                }
+            } 
+        }
         
-        // this.todosDesordenados = [...props.unidades].sort(() => {return Math.random() - 0.5});
-        // this.desordenados = this.todosDesordenados;
-
-        this.respu = [];
-
-        // [...props.unidades].map(() => {this.hide.push(false), this.respu.push(-1)});
-
-        this.state = {
-            respuestasUsuario: [...this.respu],
+        // primeros que se muestran
+        this.fs = [];
+        let a = 0;
+        while (!this.tiene_opciones[a]) {
+            this.fs.push(this.frases[a]);
+            a++;
         }
 
-        this.correcta = false;
+        // return this.getNuevos(fs);
+        this.state = {
+            actualFrases: a,
+            actualOpciones: 0,
+            fin: false
+        }
+
+
     }
 
     componentDidMount() {
@@ -37,82 +51,127 @@ class Voc_Ex6 extends Component {
         return true;                      
     }
 
-    iguales = (x, first, last) => {
-        // if((x.par[0] == this.todosDesordenados[first] && this.todosDesordenados[last] == x.par[1])
-        //  || (x.par[0] == this.todosDesordenados[last] && this.todosDesordenados[first] == x.par[1])) {
-        //     return true;
-        // }
-        return false;
-    }
 
     checkAnswer = () => {
-        // const u = this.state.respuestasUsuario;
-
-        // let a = [];
-        
-        // u.map((x) => {
-        //     a.push(this.desordenados[x])
-        // })
-
-        // const resUser = a.join(' ');
-        
-        // if(resUser === this.fraseCorrecta) {
-        //     this.correcta = true;
-        // } else {
-        //     this.correcta = false;
-        //     this.props.buttonCheck(false);
-
-        //     console.log(this.hide);
-
-        //     this.setState({respuestasUsuario: this.respu, hideWord: this.hide});
-        // }
-        // console.log('correcta', this.correcta);
-        return this.correcta;
+        return true;
     }
 
-    showCheck = () => {
-        this.props.buttonCheck('acierto');
-    }
-
-    seleccion = (index) => {
-        let u = this.state.respuestasUsuario;
-
-        const i = u.indexOf(-1);
-        u[i] = index;
-
-        let h = this.state.hideWord;
-        h[index] = true;
-        
-        this.setState({respuestasUsuario: u, hideWord: h});
-
-        // Si ya ha seleccionado todos...
-        if(!this.state.respuestasUsuario.includes(-1)) {
-            this.showCheck();
+    showCheck = (show, next) => {
+        if(next == undefined) {
+            this.props.buttonCheck(show);
+        } else {
+            this.props.buttonCheck(show, next);
         }
     }
 
-    deseleccion = (index, indexx) => {
-        let u = this.state.respuestasUsuario;
-        u.splice(indexx, 1);
-        u.push(-1);
-        
-        this.setState({respuestasUsuario: u})
+    checkResponse = (index) => {
+        let a = this.state.actualOpciones;
+        let u = this.opciones[a].opciones[index];
+
+        if(u.esCorrecta) {
+            this.showCheck('acierto');
+
+            // Modificar array de frases acertadas
+            let c = this.fs;
+            c.push(this.frases[this.state.actualFrases]);
+            this.fs = c;
+
+            if(this.state.actualFrases === this.frases.length - 1) {    // ejercicio completado
+                this.setState({fin: true});
+                this.showCheck('acierto', true);
+            } else {
+                this.setState({actualOpciones: a + 1, actualFrases: this.state.actualFrases + 1})
+            }
+        } else {
+            // Cambiamos la opcion a rojo y sale el modal de error
+            this.showCheck('fallo');
+            // Incrementamos intentos += 1
+        }
     }
 
-    getCard = (index, accion, indexx) => {        
+   
+    getOptions = () => {  
         return(
-            <Pressable key={index} style={[cards.cards, cards.centrar, {padding: 10, marginBottom: 10, marginRight: 6}]} onPress={() => {
-                if(accion === 's') {
-                    this.seleccion(index)
-                } else {
-                    this.deseleccion(index, indexx)}
+            this.opciones[this.state.actualOpciones].opciones.map((item, index) => {
+                return (
+                    <Pressable key={index} style={[cards.cards, cards.centrar, {padding: 10, marginTop: 25}]} onPress={() => this.checkResponse(index)}>
+                        <MyText title={item.frase} style={{fontSize: 12}}></MyText>
+                    </Pressable>
+                );
+            })
+        );
+    }
+
+    opcionCorrecta = (pos) => {
+        return this.options[pos-1];
+    }
+
+    hueco = (fr, dest) => {
+        let frase;
+        frase = fr;
+
+        let numberOfItemsAdded = 0;
+        let result = frase.split(/\{\d+\}/);   
+        let x = [frase];
+        
+        let destacar = "___________";
+
+        if(dest != undefined) {
+            const rcorrecta = this.opcionCorrecta(dest);
+            destacar = rcorrecta;
+        }
+
+        x.forEach((text, i) => result.splice(++numberOfItemsAdded + i, 0, destacar));
+        return(
+            <MyText title={result} style={{textAlign: 'left', width: '100%'}} />
+        );
+    }
+
+
+    fraseNueva = () => {
+       const fraseActual = this.frases[this.state.actualFrases];
+
+       let color = {backgroundColor: '#CFF0FF'};
+       if(this.persona[this.state.actualFrases] % 2 == 0) {
+           color = button.optionSelected;
+       }
+
+       return (
+            <View style={[button.button, button.option, color, {width: '100%', flexWrap: 'wrap', paddingLeft: 10, paddingRight: 10}]}>
+                {this.hueco(fraseActual)}
+            </View>
+       );
+    }
+
+    frasesAntiguas = () => {
+        return (
+            <View style={{marginTop: -20}}>
+            
+            {this.fs.map((item, index) => {
+                let color = {backgroundColor: '#CFF0FF'};
+                if(this.persona[index] % 2 == 0) {
+                    color = button.optionSelected;
                 }
-            }>
-            { accion === 's' 
-                ? <MyText title={this.todosDesordenados[index]} style={{fontSize: 12}}></MyText>
-                : <MyText title={this.desordenados[index]} style={{fontSize: 12}}></MyText>
-            }
-            </Pressable>
+
+                return (
+                    <View key={index}>
+                        <View style={[button.button, button.option, color, {width: '100%', flexWrap: 'wrap', paddingLeft: 10, paddingRight: 10}]}>
+                            {
+                                !this.tiene_opciones[index] 
+                                ? (
+                                    <MyText title={item} style={{textAlign: 'left', width: '100%'}}></MyText>
+                                )
+                                : (
+                                    this.hueco(this.frases[index], index)
+                                )
+                            }
+                        </View>
+                    </View>
+
+                    
+                )
+            })}
+        </View>
         );
     }
 
@@ -120,36 +179,22 @@ class Voc_Ex6 extends Component {
         return (
             <View style={{marginTop: 20, height: '100%', justifyContent: 'flex-start'}}>
             
-                <MyTitle title={this.frases[0]} style={{fontSize: 12, fontFamily: bold, marginBottom: 4, textAlign: 'left'}}></MyTitle>
-
-                {/* <View>
-                    <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', textAlign: 'center', width: '100%', marginTop: 20}}>
+                <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', textAlign: 'center', width: '100%', marginTop: 20}}>
+                    {
+                        this.frasesAntiguas()   // desde actual hasta la primera que tenga opciones a seleccionar  
+                    }
+                    {
+                        !this.state.fin &&
+                        this.fraseNueva()
+                    }
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between', flexWrap: 'wrap', width: '100%'}}>
                         {
-                            this.state.respuestasUsuario.map((item, index) => {
-                                if(item != -1) {
-                                    return this.getCard(item, 'd', index)
-                                }
-                            })
+                            this.tiene_opciones[this.state.actualFrases] && !this.state.fin &&
 
+                            this.getOptions()
                         }
                     </View>
-                </View> */}
-
-                {/* <View style={{position: 'absolute', top: 250, width: '100%', minHeight: 50}}>
-                    <MyTitle titleBold="Options" style={{fontSize: 14, marginBottom: 0}}></MyTitle>
-                        
-                        <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', paddingTop: 10, paddingHorizontal: 10, textAlign: 'center', width: '100%', minHeight: 55, marginTop: 20, backgroundColor: 'white', borderRadius: 12}}>
-                        {
-                            this.todosDesordenados.map((item, index) => {
-                                if(!this.state.hideWord[index]) {
-                                    return this.getCard(index, 's')
-                                }
-                            })
-                        }
-                        </View>
-
-                </View> */}
-
+                </View>
                 
             </View>
         );
