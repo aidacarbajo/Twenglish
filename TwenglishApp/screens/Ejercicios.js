@@ -13,6 +13,7 @@ import Voc_Ex2 from './Voc_Ex2';
 import Voc_Ex3 from './Voc_Ex3';
 import Voc_Ex4 from './Voc_Ex4';
 import Voc_Ex5 from './Voc_Ex5';
+import Voc_Ex6 from './Voc_Ex6';
 
 class Ejercicios extends Component {
 
@@ -56,7 +57,6 @@ class Ejercicios extends Component {
     // Modal de notificacion
     deleteCorreccion = (visible, correcta) => {
         // console.log('Visible: ', visible, '---- Correcta: ', correcta);
-        console.log(correcta);
         if(correcta != undefined) {
             if(correcta) {
                 this.acierto = 'acierto';
@@ -83,7 +83,6 @@ class Ejercicios extends Component {
 
     correctExercise = () => {
         const res = this.child.checkAnswer();
-        console.log(res);
         this.deleteCorreccion(true, res);
     }
 
@@ -132,9 +131,8 @@ class Ejercicios extends Component {
                 res = <Voc_Ex5 frase={ejercicio.bloqueString.frase} unidades={ejercicio.bloqueString.opcionesClave} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 6:
-                console.log('Soy tipo 6');
+                res = <Voc_Ex6 frases={ejercicio.bloqueConversacion.frases} persona={ejercicio.bloqueConversacion.persona} opciones={ejercicio.bloqueConversacion.opciones} tiene_opciones={ejercicio.bloqueConversacion.tiene_opciones} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
-                
             }    
 
         return res;
@@ -173,7 +171,7 @@ class Ejercicios extends Component {
                     /////////////////////////*/}
                     <View style={[view.safeArea, {width: '100%', height: '85%'}]}>
                         {/* Enunciado del ejercicio */}
-                        <MyText title={this.state.enunciado} style={{marginTop: 20}}></MyText>
+                        <MyText title={this.state.enunciado} style={{marginTop: 20, textAlign: 'left'}}></MyText>
                         <View>{this.getEjercicio()}</View>
                     </View>
 

@@ -44,7 +44,8 @@ const text = StyleSheet.create({
         fontSize: 13,
         color: body,
         fontFamily: regular,
-        textAlign: 'center'
+        textAlign: 'center',
+        lineHeight: 20
         // width: '100%'
     },
     secundario: {

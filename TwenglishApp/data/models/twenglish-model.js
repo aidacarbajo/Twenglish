@@ -40,6 +40,16 @@ exports.Bloques = {
   }
 }
 
+exports.Conversacion = {
+  name: 'Conversacion',
+  properties: {
+    frases: 'string[]',
+    persona: 'int[]',
+    opciones: 'RadioButton[]',
+    tiene_opciones: 'bool[]'
+  }
+}
+
 exports.Ejercicio = {
   name: 'Ejercicio',
   primaryKey: '_id',
@@ -50,7 +60,8 @@ exports.Ejercicio = {
     tipo: 'int',
     bloqueString: 'Bloques',
     bloqueRadioButton: 'RadioButton',
-    bloquePares: 'Pares'
+    bloquePares: 'Pares',
+    bloqueConversacion: 'Conversacion'
   }
 }
 
@@ -111,4 +122,3 @@ exports.RadioButton = {
     opciones: 'Opcion[]'
   }
 }
-
