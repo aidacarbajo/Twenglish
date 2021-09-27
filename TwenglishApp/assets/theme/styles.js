@@ -8,6 +8,8 @@ const primary = '#2971FD';
 const secundary = '#F7002B';
 const body = '#4D4D4D';
 const example = '#949494';
+const correcto = '#00C136';
+const extra = '#00ADF7';
 
 const view = StyleSheet.create({
     container: {
@@ -42,7 +44,8 @@ const text = StyleSheet.create({
         fontSize: 13,
         color: body,
         fontFamily: regular,
-        textAlign: 'center'
+        textAlign: 'center',
+        lineHeight: 20
         // width: '100%'
     },
     secundario: {
@@ -63,19 +66,20 @@ const text = StyleSheet.create({
         borderRadius: 12,
         justifyContent: 'center',
         width: '100%',
-        height: 50
+        height: 50,
     }
 });
 
 const button = StyleSheet.create({
     button: {
         // colores, tamaño y texto
-        alignItems: 'center',
-        justifyContent: 'center',
+        // alignItems: 'center',
+        // justifyContent: 'center',
         borderRadius: 12,
         width: '100%',
         // en medio de la pantalla
-        marginVertical: 10,
+        marginTop: 10,
+        marginBottom: 5,
         marginRight: 'auto',
         marginLeft: 'auto',
         // paddingVertical: 20
@@ -99,7 +103,7 @@ const button = StyleSheet.create({
          elevation: 20,
     },
     option: {
-        width: '90%',
+        width: '95%',
         paddingVertical: 15,
         marginVertical: 10,
         shadowOpacity: 0,
@@ -107,12 +111,13 @@ const button = StyleSheet.create({
         borderLeftWidth: 1.5,
         borderRightWidth: 1.5,
         borderTopWidth: 1.5,
-        borderBottomWidth: 1.5
+        borderBottomWidth: 1.5,
     },
     optionSelected: {
         borderColor: secundary,
         backgroundColor: '#FEE3E8',
-        color: secundary
+        color: secundary,
+        paddingLeft: 15,
     },
     round: {
         width: 44,
@@ -228,11 +233,39 @@ const cards = StyleSheet.create({
     },
     cardApuntes: {
         width: '100%',
-        padding: 20,
-        borderRadius: 20,
+    },
+    cards: {
         backgroundColor: 'white',
-        elevation: 4
-    }
+        elevation: 4,
+        borderRadius: 20,
+        padding: 20,
+    },
+    cardPares: {
+        width: '47%',
+        padding: 15,
+        elevation: 3,
+        borderColor: 'white',
+        borderLeftWidth: 1.5,
+        borderRightWidth: 1.5,
+        borderTopWidth: 1.5,
+        borderBottomWidth: 1.5,   
+    },
+    centrar: {
+        justifyContent: 'center', 
+        alignItems: 'center'
+    },
+    selected: {
+        backgroundColor: '#CFF0FF',
+        borderColor: extra,
+    },
+    correct: {
+        backgroundColor: '#D5EFDC',
+        borderColor: correcto,
+    },
+    incorrect: {
+        borderColor: secundary,
+        backgroundColor: '#FEE3E8'
+    },
 });
 
 const modal = StyleSheet.create({
@@ -242,9 +275,9 @@ const modal = StyleSheet.create({
     content: {
         backgroundColor: 'white', 
         borderRadius: 26, 
-        padding: 20, 
-        elevation: 20
-    }
+        padding: 15, 
+        elevation: 20,
+    },
 });
 
-export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, example, cards, modal, regular, extrabold, bold };
+export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, correcto, extra, example, cards, modal, regular, extrabold, bold };

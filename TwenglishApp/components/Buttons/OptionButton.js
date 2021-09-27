@@ -13,7 +13,7 @@ class OptionButton extends Component {
 
  render() {
     return (
-      <Pressable style={[button.button, button.option]} onPress={this.sendData}>
+      <Pressable style={[button.button, button.option, {paddingLeft: 15}]} onPress={this.sendData}>
         <Text style={[text.primario, text.opcion]}>{this.props.title}</Text>
       </Pressable>  
     )

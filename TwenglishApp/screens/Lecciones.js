@@ -29,37 +29,8 @@ class Lecciones extends Component {
 
   }
 
-  // se ejecuta cada vez que hay un cambio en los props
-  // static getDerivedStateFromProps(props, state) { 
-  //   // console.log(props);
-  //   if(props.route.params != undefined && props.route.params != null && props.route.params.deleteModal) {
-  //     props.params = null;
-  //       return {
-  //           isSettingsVisible: false,
-  //           isLessonsVisible: false
-  //       }
-  //   }
-  //   return null;
-  // }
-
-
   componentDidMount() {
-    this._isMounted = true;
-
-    return getNivelSeleccionado().then(res => {
-      const nivel = res[0].nivel_seleccionado;    // el primero no sera siempre el seleccionado
-
-      if (this._isMounted) {
-        this.setState({
-          isLoading:false,
-          lecciones: nivel.lecciones,
-        }).catch( (error) => {
-          console.log(error.message);
-        });
-      }
-    }).catch((error) => {
-      // console.log(error.message);
-    });
+    this.changeLessons();
   }
 
   // cuando se destruye el componente
@@ -67,12 +38,30 @@ class Lecciones extends Component {
     this._isMounted = false;
   }
 
+  // actualizar lecciones porque se ha cambiado de nivel seleccionado
+  changeLessons = () => {
+
+    return getNivelSeleccionado().then(res => {
+      const nivel = res; 
+
+      this.setState({
+        isLoading:false,
+        lecciones: nivel.lecciones,
+      }).catch( (error) => {
+        console.log(error.message);
+      });
+    }).catch((error) => {
+      // console.log(error.message);
+    });
+  }
+
+  // ver modal info
   callbackFunction = (visible) => {
     this.setState({isSettingsVisible: visible, isLessonsVisible: false});
   }
 
+  // ver modal al apretar sobre una leccion
   callbackLessons = (visible, tema, portada) => {
-    // console.log('Estoy en el Lecciones y lo veo: ', visible, tema);
     if(visible) {
       this.setState({isSettingsVisible: false, isLessonsVisible: visible, temaLesson: tema, portadaName: portada});
     } else {
@@ -81,10 +70,12 @@ class Lecciones extends Component {
   }
 
   irApuntes = () => {
+    this.callbackFunction(false);
     return this.props.navigation.navigate('Apuntes', {tema: this.state.temaLesson, portada: this.state.portadaName, from: 'Lessons'});
   }
   irLeccion = () => {
-    return this.props.navigation.navigate('Ejercicios');
+    this.callbackFunction(false);
+    return this.props.navigation.navigate('Ejercicios', {tema: this.state.temaLesson, portada: this.state.portadaName});
   }
  
     render() {
@@ -101,13 +92,13 @@ class Lecciones extends Component {
             <StatusBar hidden />
             {/* Modal de ajustes */}
             <Modal visible={this.state.isSettingsVisible} tipo={'top'} navigation={this.props.navigation}>
-                <Pressable style={[button.button, button.option]} onPress={() => this.props.navigation.navigate('Settings')}>
+                <Pressable style={[button.button, button.option, {alignItems: 'center'}]} onPress={() => this.props.navigation.navigate('Settings')}>
                     <Text style={text.primario}>Más Información</Text>
                 </Pressable>  
             </Modal>
 
             {/* Modal de lecciones*/
-            <Modal lessonmodal={this.callbackLessons} visible={this.state.isLessonsVisible} tipo={'centro'}>
+            <Modal lessonmodal={this.callbackLessons} visible={this.state.isLessonsVisible} tipo={'close'}>
               <ModalLessons dataTitle={this.state.temaLesson} verApuntes={this.irApuntes} empezarLeccion={this.irLeccion}></ModalLessons>
             </Modal>
             }
@@ -121,7 +112,7 @@ class Lecciones extends Component {
               <MyTitle title="My" titleBold="Progress"></MyTitle>
             </View>
 
-            <NivelesList></NivelesList>
+            <NivelesList nivelSel={this.changeLessons}></NivelesList>
 
             <View style={view.safeArea}>
               <MyText title="What would you like to learn today?" style={{marginBottom: 15}}></MyText>

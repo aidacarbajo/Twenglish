@@ -72,17 +72,6 @@ class Apuntes extends Component {
     componentWillUnmount() {
         this._isMounted = false;
     }
-
-    getGramatica = () => {
-        return (
-            <View style={cards.cardApuntes}>
-                <MyTitle title="Must have + past participle verb" style={{fontSize: 14, marginBottom: 10}}></MyTitle>
-                <MyText title="Se usa cuando intentas adivinar algo sobre el pasado, y estás casi seguro de lo que piensas es correcto." style={{fontSize: 12, textAlign: 'left', marginBottom: 10, padding: 4}}></MyText>
-                <MyText title="'They must have gone to their aunt's restaurant.'" style={{fontSize: 12, textAlign: 'left', color: example, paddingHorizontal: 4}}></MyText>
-            </View>
-        );        
-    };
-
  
     render() {
     if(this.state.isLoading){
@@ -95,7 +84,7 @@ class Apuntes extends Component {
       return (
         <View style={view.allContainers}>
             <View style={[posiciones.abolute, posiciones.topleft]}>
-                <Pressable onPress={() => this.props.navigation.navigate(this.props.route.params.from)}>
+                <Pressable onPress={() => this.props.navigation.navigate(this.props.route.params.from, {tema: this.state.tema})}>
                     <Icon icon="back" color={secundary} size={icons.lg}></Icon>
                 </Pressable>
             </View>
@@ -106,14 +95,11 @@ class Apuntes extends Component {
                 <MyTitle title={'Grammar'} style={{fontSize: 18, color: body, marginVertical: 15}}></MyTitle>
                     {this.state.gramatica.map((element) => {
                         return (
-                            <ScrollView style={[cards.cardApuntes, {marginBottom: 15}]}>
-                                {/* <MyTitle title="Must have + past participle verb" style={{fontSize: 14, marginBottom: 5}}></MyTitle>
-                                <MyText title="Se usa cuando intentas adivinar algo sobre el pasado, y estás casi seguro de lo que piensas es correcto." style={{fontSize: 12, textAlign: 'left', marginBottom: 10, padding: 4}}></MyText>
-                                <MyText title="'They must have gone to their aunt's restaurant.'" style={{fontSize: 12, textAlign: 'left', color: example, paddingHorizontal: 4}}></MyText> */}
+                            <View style={[cards.cardApuntes, cards.cards, {marginBottom: 15}]} key={element.titulo}>
                                 <MyTitle title={element.titulo} style={{fontSize: 14, marginBottom: 10}}></MyTitle>
                                 <MyText title={element.explicacion} style={{fontSize: 12, textAlign: 'left', marginBottom: 10, padding: 4}}></MyText>
                                 <MyText title={element.ejemplo} style={{fontSize: 12, textAlign: 'left', color: example, paddingHorizontal: 4}}></MyText>
-                            </ScrollView>
+                            </View>
                         );     
                     })}
             </View>                

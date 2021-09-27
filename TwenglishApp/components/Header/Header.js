@@ -11,16 +11,15 @@ class Header extends Component {
         super(props);
     }
 
-    // sendData = () => {
-    //     this.props.lessonsModal(this.props.dataTitle, this.props.dataImagen);
-    // }
+    sendData = () => {
+        this.props.salir(true);
+    }
 
     render() {
         return (
             <View style={[view.allContainers, {paddingBottom: 0, paddingRight: 0}]}>
                 <View style={[posiciones.abolute, posiciones.topleft]}>
-                    {/* Falta el: ¿Seguro que quieres salir? */}
-                    <Pressable onPress={() => this.props.navigation.navigate('Lessons')}>      
+                    <Pressable onPress={this.sendData}>      
                         <Icon icon="back" color={secundary}></Icon>
                     </Pressable>
                 </View>
@@ -31,7 +30,7 @@ class Header extends Component {
                     </Pressable>
                 </View>
 
-                <MyTitle titleBold="Trip" style={{marginLeft: -7}}></MyTitle>
+                <MyTitle titleBold={this.props.tema} style={{marginLeft: -7}}></MyTitle>
 
             </View>
         );

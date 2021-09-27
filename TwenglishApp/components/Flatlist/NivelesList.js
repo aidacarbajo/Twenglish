@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Nivel from '../Niveles/Nivel';
-import { getNiveles } from '../../data/queries/nivel';
+import { getNiveles, updateCurrentLevel } from '../../data/queries/nivel';
 
 class NivelesList extends Component {
 
@@ -13,36 +13,36 @@ class NivelesList extends Component {
         this.state = {
           isLoading: true,
           levels: [],
-          nivelSeleccionado: 'A1'
+          nivelSeleccionado: null
         };
 
         this.callbackFunction = (nivelSeleccionado) => {
             this.setState({nivelSeleccionado: nivelSeleccionado});
-            ////////////////////////
-            // Cambiar nivel aqui //
-            ////////////////////////
-            this.getLevels();
+            updateCurrentLevel(nivelSeleccionado).then(res => {
+                this.getLevels();
+                
+            });
+            this.props.nivelSel();
         }
 
-      }
+    }
 
-      getLevels = () => {
-        // this.getLevels = () => {
-            return getNiveles().then(res => {
-                if (this._isMounted) {
-                    this.setState({
-                        isLoading:false,
-                        levels: res.nivel,
-                        // nivelSeleccionado: res.nivel[0].nombre       // Descomentar cuando este hecho el update
-                    }).catch( (error) => {
-                        console.log(error.message);
-                    });
-                }
-            }).catch((error) => {
-            // console.log(error.message);
-            });
-        // }
-      }
+    getLevels = () => {
+        return getNiveles().then(res => {
+            if (this._isMounted) {
+                this.setState({
+                    isLoading:false,
+                    levels: res.nivel,
+                    nivelSeleccionado: res.nivel[0].nombre
+                }).catch( (error) => {
+                    console.log(error.message);
+                });
+            }
+        }).catch((error) => {
+        // console.log(error.message);
+        });
+    // }
+    }
 
     componentDidMount() {
         this._isMounted = true;

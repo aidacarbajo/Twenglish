@@ -13,7 +13,7 @@ class CardVocabulary extends Component {
     render() {
         return (
             <FlatList 
-                style={[cards.cardApuntes]}
+                style={[cards.cardApuntes, cards.cards]}
                 data={this.props.vocabulary}
                 keyExtractor={(item) => item.palabra }
                 renderItem={(item) => 

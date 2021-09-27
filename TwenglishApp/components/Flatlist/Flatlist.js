@@ -19,6 +19,9 @@ class Flatlist extends Component {
         this.setState.bind({tema: temaA, portada: portadaA});
         this.props.lessonsModal(true, temaA, portadaA);
     }
+    shouldComponentUpdate() {
+        return true;
+    }
 
     render() {
         return (
