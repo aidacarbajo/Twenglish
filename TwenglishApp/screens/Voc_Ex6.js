@@ -57,11 +57,7 @@ class Voc_Ex6 extends Component {
     }
 
     showCheck = (show, next) => {
-        if(next == undefined) {
-            this.props.buttonCheck(show);
-        } else {
-            this.props.buttonCheck(show, next);
-        }
+        this.props.buttonCheck(show, next);
     }
 
     checkResponse = (index) => {
@@ -69,7 +65,7 @@ class Voc_Ex6 extends Component {
         let u = this.opciones[a].opciones[index];
 
         if(u.esCorrecta) {
-            this.showCheck('acierto');
+            this.showCheck('acierto', false);
 
             // Modificar array de frases acertadas
             let c = this.fs;
@@ -84,7 +80,7 @@ class Voc_Ex6 extends Component {
             }
         } else {
             // Cambiamos la opcion a rojo y sale el modal de error
-            this.showCheck('fallo');
+            this.showCheck('fallo', false);
             // Incrementamos intentos += 1
         }
     }

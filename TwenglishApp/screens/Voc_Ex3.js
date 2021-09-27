@@ -69,7 +69,7 @@ class Voc_Ex3 extends Component {
                     
                     this.setState({seleccionado: c});
 
-                    this.props.buttonCheck('fallo');
+                    this.props.buttonCheck('fallo', false);
 
                     setTimeout(() => {
                         // Eliminar LAS N
@@ -85,7 +85,7 @@ class Voc_Ex3 extends Component {
                     this.setState({seleccionado: c});
 
                     if(c.filter(x=> x == 'c').length == this.state.seleccionado.length) {
-                        this.props.buttonCheck('acierto');
+                        this.props.buttonCheck('acierto', true);
 
                     }
                 }

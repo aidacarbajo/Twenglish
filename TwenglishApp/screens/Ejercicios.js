@@ -28,7 +28,7 @@ class Ejercicios extends Component {
             isCheckVisible: false,
             isCorreccionVisible: false,
             isNextVisible: false,
-            ejercicioActual: 5,
+            ejercicioActual: 0,
             ejerciciosLeccionActual: null,
             enunciado: null
         };
@@ -87,11 +87,13 @@ class Ejercicios extends Component {
     }
 
     mal = (escorrecta, nextNo) => {
+        console.log(escorrecta, nextNo);
+
         this.acierto = escorrecta;
         if(escorrecta == 'acierto' && nextNo != undefined) {
-            this.setState({isCorreccionVisible: true, isNextVisible: true});
+            this.setState({isCorreccionVisible: true, isNextVisible: nextNo});
         } else {
-            this.setState({isCorreccionVisible: true});
+            this.setState({isCorreccionVisible: true, isNextVisible: false});
         }
     }
 
