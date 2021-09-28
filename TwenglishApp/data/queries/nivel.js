@@ -1,5 +1,6 @@
 import Realm from 'realm';
 import database from '../database/config';
+import { modifyProgress } from './lecciones';
 
 /////////////////////////////////////////////////////////////
 // Devuelve los niveles ordenados para la lista de niveles //
@@ -60,11 +61,13 @@ const updateCurrentLevel = nivel =>
                 niveles[0].nivel_seleccionado = nivelS[0];
             })
 
-            console.log(realm.objects('Niveles')[0].nivel_seleccionado)
+            // console.log(realm.objects('Niveles')[0].nivel_seleccionado)
             resolve(nivelS);
 
         }).catch((error) => reject(error));
     });
+
+
 
 
 // const insertNivel = newNivel => 

@@ -17,7 +17,6 @@ class NivelesList extends Component {
         };
 
         this.callbackFunction = (nivelSeleccionado) => {
-            console.log(nivelSeleccionado);
             this.setState({nivelSeleccionado: nivelSeleccionado});
             updateCurrentLevel(nivelSeleccionado).then(res => {
                 this.getLevels();
@@ -94,4 +93,3 @@ class NivelesList extends Component {
 }
 
 export default NivelesList;
-

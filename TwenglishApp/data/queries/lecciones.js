@@ -54,4 +54,30 @@ const getCurrentLesson = () => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-export { getApuntesLeccion, updateCurrentLesson, getCurrentLesson }
+const modifyProgress = mediaAciertos =>
+    new Promise((resolve, reject) => {
+        Realm.open(database).then(realm => {
+            const niveles = getNivelSeleccionado().then(res => {
+                let sum = 0;
+                let progresoSaved = res.leccion_seleccionada.progreso;
+
+                if(mediaAciertos > progresoSaved) {
+                    for(let i = 0; i < res.lecciones.length; i++) {     // ira dentro
+                        sum += res.lecciones[i].progreso;
+                    }
+                    sum = (sum - progresoSaved + mediaAciertos)/res.lecciones.length;
+
+                    progresoSaved = mediaAciertos;
+
+                    realm.write(() => {
+                        res.leccion_seleccionada.progreso = mediaAciertos;
+                        res.progreso = sum;
+                    })
+                }
+                resolve([progresoSaved, sum]);
+            })
+        }).catch((error) => reject(error));
+});
+
+
+export { getApuntesLeccion, updateCurrentLesson, getCurrentLesson, modifyProgress }

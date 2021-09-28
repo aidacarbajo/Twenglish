@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import Header from '../components/Header/Header';
+import { calculateMedia } from '../util/ProgressManager';
 import { view } from '../assets/theme/styles';
 import MyText from '../components/Texts/MyText';
 import BlueButton from '../components/Buttons/BlueButton';
@@ -14,6 +15,9 @@ import Voc_Ex3 from './Voc_Ex3';
 import Voc_Ex4 from './Voc_Ex4';
 import Voc_Ex5 from './Voc_Ex5';
 import Voc_Ex6 from './Voc_Ex6';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs(true);
 
 class Ejercicios extends Component {
 
@@ -21,6 +25,8 @@ class Ejercicios extends Component {
         super(props);
         
         this.acierto = '';
+        
+        this.numIntentos = [0, 0];       // [aciertos, fallos] --> en salir(), antes hay que llamar a una función en útil que se llame calcular para guardar el progreso
 
         this.state = {
             isLoading: true,
@@ -30,7 +36,7 @@ class Ejercicios extends Component {
             isNextVisible: false,
             ejercicioActual: 0,
             ejerciciosLeccionActual: null,
-            enunciado: null
+            enunciado: null,
         };
 
         this.correctExercise = this.correctExercise.bind(this);
@@ -49,7 +55,14 @@ class Ejercicios extends Component {
         this.setState({isExitVisible: visible});
     }
 
-    salir = () => {
+    salir = async() => {
+
+        if(this.state.ejercicioActual == this.state.ejerciciosLeccionActual.length - 1) {   // si es el ultimo ejercicio se guarda el progreso, sino no
+            console.log('Resultado', this.numIntentos);
+            await calculateMedia(this.numIntentos);  
+            this.props.route.params.update(true);
+        }
+
         this.setState({isExitVisible: false});
         this.props.navigation.navigate('Lessons');
     }
@@ -60,9 +73,11 @@ class Ejercicios extends Component {
         if(correcta != undefined) {
             if(correcta) {
                 this.acierto = 'acierto';
+                this.numIntentos[0] = this.numIntentos[0] + 1;
                 this.setState({isCorreccionVisible: visible, isCheckVisible: false, isNextVisible: true});
             } else {
                 this.acierto = 'fallo';
+                this.numIntentos[1] = this.numIntentos[1] + 1;
                 this.setState({isCorreccionVisible: visible, isCheckVisible: false, isNextVisible: false});
             }
         } else {
@@ -89,8 +104,10 @@ class Ejercicios extends Component {
     mal = (escorrecta, nextNo) => {
         this.acierto = escorrecta;
         if(escorrecta == 'acierto' && nextNo != undefined) {
+            this.numIntentos[0] = this.numIntentos[0] + 1;
             this.setState({isCorreccionVisible: true, isNextVisible: nextNo});
         } else {
+            this.numIntentos[1] = this.numIntentos[1] + 1;
             this.setState({isCorreccionVisible: true, isNextVisible: false});
         }
     }
@@ -187,7 +204,5 @@ class Ejercicios extends Component {
         }
     }
 }
-
-
 
 export default Ejercicios;

@@ -67,8 +67,6 @@ class Voc_Ex5 extends Component {
             this.correcta = false;
             this.props.buttonCheck(false);
 
-            console.log(this.hide);
-
             this.setState({respuestasUsuario: this.respu, hideWord: this.hide});
         }
         // console.log('correcta', this.correcta);

@@ -34,7 +34,7 @@ const App2 = () => {
             // console.log(le);
         });
   } else {
-      console.log('No es la primera vez que entro a la app')
+    //   console.log('No es la primera vez que entro a la app')
   }
 
   

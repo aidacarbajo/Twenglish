@@ -41,7 +41,7 @@ export default ( { nivel, nseleccionado, parentCallback } ) => {
                 <GradientCircularProgress
                     size={57}
                     strokeWidth={8}
-                    progress={90}
+                    progress={nivel.item.progreso}
                     emptyColor="#E3E3E3"
                     startColor={start}
                     middleColor={middle}

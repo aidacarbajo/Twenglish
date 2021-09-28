@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, GetDerivedStateFromProps} from 'react';
 import { TouchableOpacity, View, StatusBar, ActivityIndicator, Pressable, Text } from 'react-native';
 import MyTitle from '../components/Texts/MyTitle';
 import { view, posiciones, icons, text, button } from '../assets/theme/styles';
@@ -9,7 +9,6 @@ import { getNivelSeleccionado } from '../data/queries/nivel';
 import NivelesList from '../components/Flatlist/NivelesList';
 import Modal from '../components/Modal/ModalC';
 import ModalLessons from '../components/Modal/ModalLessons';
-
 
 class Lecciones extends Component {
 
@@ -24,7 +23,8 @@ class Lecciones extends Component {
       isSettingsVisible: false,
       isLessonsVisible: false,
       temaLesson: null,
-      portadaName: null
+      portadaName: null,
+      update: false
     };
 
   }
@@ -38,16 +38,23 @@ class Lecciones extends Component {
     this._isMounted = false;
   }
 
+  receivedUpdate = (value) => {
+    this.setState({update: true});
+  }
+
   // actualizar lecciones porque se ha cambiado de nivel seleccionado
   changeLessons = () => {
     return getNivelSeleccionado().then(res => {
       const nivel = res; 
+
       this.setState({
         isLoading:false,
         lecciones: nivel.lecciones,
+        update: false
       }).catch( (error) => {
         console.log(error.message);
       });
+      
     }).catch((error) => {
       // console.log(error.message);
     });
@@ -73,7 +80,7 @@ class Lecciones extends Component {
   }
   irLeccion = () => {
     this.callbackFunction(false);
-    return this.props.navigation.navigate('Ejercicios', {tema: this.state.temaLesson, portada: this.state.portadaName});
+    return this.props.navigation.navigate('Ejercicios', {tema: this.state.temaLesson, portada: this.state.portadaName, update: this.receivedUpdate});
   }
  
     render() {
@@ -85,7 +92,8 @@ class Lecciones extends Component {
       )
     } else {
       return (
-
+        // this.state.update && this.changeLessons(),
+        
         <View style={view.container}>
             <StatusBar hidden />
             {/* Modal de ajustes */}
@@ -116,9 +124,6 @@ class Lecciones extends Component {
               <MyText title="What would you like to learn today?" style={{marginBottom: 15}}></MyText>
               <Flatlist lessonsModal={this.callbackLessons} dataRealm={this.state.lecciones} navigation={this.props.navigation}></Flatlist>
             </View>
-
-
-            
 
           </View>
 
