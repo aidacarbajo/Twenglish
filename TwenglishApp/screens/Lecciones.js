@@ -40,10 +40,8 @@ class Lecciones extends Component {
 
   // actualizar lecciones porque se ha cambiado de nivel seleccionado
   changeLessons = () => {
-
     return getNivelSeleccionado().then(res => {
       const nivel = res; 
-
       this.setState({
         isLoading:false,
         lecciones: nivel.lecciones,

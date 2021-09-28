@@ -58,8 +58,11 @@ const updateCurrentLevel = nivel =>
             
             realm.write(() => {
                 niveles[0].nivel_seleccionado = nivelS[0];
-                resolve(nivelS);
             })
+
+            console.log(realm.objects('Niveles')[0].nivel_seleccionado)
+            resolve(nivelS);
+
         }).catch((error) => reject(error));
     });
 

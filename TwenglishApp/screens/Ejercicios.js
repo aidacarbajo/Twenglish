@@ -87,8 +87,6 @@ class Ejercicios extends Component {
     }
 
     mal = (escorrecta, nextNo) => {
-        console.log(escorrecta, nextNo);
-
         this.acierto = escorrecta;
         if(escorrecta == 'acierto' && nextNo != undefined) {
             this.setState({isCorreccionVisible: true, isNextVisible: nextNo});

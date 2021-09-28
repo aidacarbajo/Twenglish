@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import MainNavigator from "./config/MainNavigator";
 
