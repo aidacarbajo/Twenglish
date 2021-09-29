@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import { ActivityIndicator, ImageBackground, Pressable, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { cards, primary } from '../assets/theme/styles';
-import RoundButton from '../components/Buttons/RoundButton';
+import { cards } from '../assets/theme/styles';
 import { getImage } from '../util/ImageManager';
 import VoiceManager from '../util/VoiceManager';
 

@@ -17,6 +17,7 @@ import Voc_Ex5 from './Voc_Ex5';
 import Voc_Ex6 from './Voc_Ex6';
 import { LogBox } from 'react-native';
 import List_Ex7 from './List_Ex7';
+import List_Ex8 from './List_Ex8';
 
 LogBox.ignoreAllLogs(true);
 
@@ -35,7 +36,7 @@ class Ejercicios extends Component {
             isCheckVisible: false,
             isCorreccionVisible: false,
             isNextVisible: false,
-            ejercicioActual: 6,
+            ejercicioActual: 0,
             ejerciciosLeccionActual: null,
             enunciado: null,
         };
@@ -102,7 +103,6 @@ class Ejercicios extends Component {
     }
 
     mal = (escorrecta, nextNo) => {
-        console.log(nextNo);
         this.acierto = escorrecta;
         if(escorrecta == 'acierto' && nextNo != undefined) {
             this.numIntentos[0] = this.numIntentos[0] + 1;
@@ -153,6 +153,9 @@ class Ejercicios extends Component {
                 break;
             case 7:
                 res = <List_Ex7 imagenes={ejercicio.bloqueRadioButton.opciones} texto={ejercicio.textoListening} buttonCheck={this.mal} onRef={ref => {this.child = ref}} />
+                break;
+            case 8:
+                res = <List_Ex8 radioB={ejercicio.bloqueRadioButton.opciones} texto={ejercicio.textoListening} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             }    
 
