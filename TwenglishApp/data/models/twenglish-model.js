@@ -61,7 +61,8 @@ exports.Ejercicio = {
     bloqueString: 'Bloques',
     bloqueRadioButton: 'RadioButton',
     bloquePares: 'Pares',
-    bloqueConversacion: 'Conversacion'
+    bloqueConversacion: 'Conversacion',
+    textoListening: 'string?'
   }
 }
 
@@ -122,3 +123,4 @@ exports.RadioButton = {
     opciones: 'Opcion[]'
   }
 }
+

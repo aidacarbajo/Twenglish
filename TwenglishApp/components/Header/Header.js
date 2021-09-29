@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Pressable, View } from 'react-native';
 import { posiciones, secundary, view } from '../../assets/theme/styles';
-import { RoundButton } from '../Buttons/RoundButton';
+import RoundButton from '../Buttons/RoundButton';
 import Icon from '../Icons/Icon';
 import MyTitle from '../Texts/MyTitle';
 

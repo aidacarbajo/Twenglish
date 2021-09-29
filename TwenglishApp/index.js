@@ -14,14 +14,14 @@ import database from './data/database/config';
 
 const App2 = () => {
 
-//   await RNFS.unlink(RNFS.DocumentDirectoryPath + '/twenglish.realm')
-//   .then(() => {
-//     console.log('deleted');
-//     console.log(Realm.exists(database));
-//   })
-//   .catch((err) => {         
-//       console.log(err);
-//   })
+  // await RNFS.unlink(RNFS.DocumentDirectoryPath + '/twenglish.realm')
+  // .then(() => {
+  //   console.log('deleted');
+  //   console.log(Realm.exists(database));
+  // })
+  // .catch((err) => {         
+  //     console.log(err);
+  // })
 
   if(!Realm.exists(database)) {
         console.log('Primera vez que entro a la app')
@@ -30,11 +30,11 @@ const App2 = () => {
             Realm.copyBundledRealmFiles();
             const realm = new Realm(database);
     
-            // const le = realm.objects('Ejercicio');
-            // console.log(le);
+            const le = realm.objects('Ejercicio');
+            console.log(le);
         });
   } else {
-    //   console.log('No es la primera vez que entro a la app')
+      console.log('No es la primera vez que entro a la app')
   }
 
   

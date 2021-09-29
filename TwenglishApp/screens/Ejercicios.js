@@ -16,6 +16,7 @@ import Voc_Ex4 from './Voc_Ex4';
 import Voc_Ex5 from './Voc_Ex5';
 import Voc_Ex6 from './Voc_Ex6';
 import { LogBox } from 'react-native';
+import List_Ex7 from './List_Ex7';
 
 LogBox.ignoreAllLogs(true);
 
@@ -34,7 +35,7 @@ class Ejercicios extends Component {
             isCheckVisible: false,
             isCorreccionVisible: false,
             isNextVisible: false,
-            ejercicioActual: 0,
+            ejercicioActual: 6,
             ejerciciosLeccionActual: null,
             enunciado: null,
         };
@@ -58,7 +59,6 @@ class Ejercicios extends Component {
     salir = async() => {
 
         if(this.state.ejercicioActual == this.state.ejerciciosLeccionActual.length - 1) {   // si es el ultimo ejercicio se guarda el progreso, sino no
-            console.log('Resultado', this.numIntentos);
             await calculateMedia(this.numIntentos);  
             this.props.route.params.update(true);
         }
@@ -102,6 +102,7 @@ class Ejercicios extends Component {
     }
 
     mal = (escorrecta, nextNo) => {
+        console.log(nextNo);
         this.acierto = escorrecta;
         if(escorrecta == 'acierto' && nextNo != undefined) {
             this.numIntentos[0] = this.numIntentos[0] + 1;
@@ -149,6 +150,9 @@ class Ejercicios extends Component {
                 break;
             case 6:
                 res = <Voc_Ex6 frases={ejercicio.bloqueConversacion.frases} persona={ejercicio.bloqueConversacion.persona} opciones={ejercicio.bloqueConversacion.opciones} tiene_opciones={ejercicio.bloqueConversacion.tiene_opciones} buttonCheck={this.mal} onRef={ref => {this.child = ref}} />
+                break;
+            case 7:
+                res = <List_Ex7 imagenes={ejercicio.bloqueRadioButton.opciones} texto={ejercicio.textoListening} buttonCheck={this.mal} onRef={ref => {this.child = ref}} />
                 break;
             }    
 

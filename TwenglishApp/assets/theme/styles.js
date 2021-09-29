@@ -122,9 +122,14 @@ const button = StyleSheet.create({
     round: {
         width: 44,
         height: 44,
-        borderRadius: 22,
+        borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    buttonListen: {
+        backgroundColor: 'white', 
+        borderWidth: 1, 
+        borderColor: primary
     }
 });
 
