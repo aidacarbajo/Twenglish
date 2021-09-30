@@ -37,7 +37,7 @@ class Ejercicios extends Component {
             isCheckVisible: false,
             isCorreccionVisible: false,
             isNextVisible: false,
-            ejercicioActual: 8,
+            ejercicioActual: 7,
             ejerciciosLeccionActual: null,
             enunciado: null,
         };

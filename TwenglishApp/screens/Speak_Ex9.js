@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { ActivityIndicator, Pressable, View } from 'react-native';
-import { bold, cards, example, primary } from '../assets/theme/styles';
-import RoundButton from '../components/Buttons/RoundButton';
+import { View } from 'react-native';
+import { bold, example } from '../assets/theme/styles';
 import MyText from '../components/Texts/MyText';
 import MyTitle from '../components/Texts/MyTitle';
+import SpeakManager from '../util/SpeakManager';
 
 class Speak_Ex9 extends Component {
 
@@ -13,10 +13,6 @@ class Speak_Ex9 extends Component {
         // [ingles, traduccion]
         this.frases = props.frases;  
         this.respuestaUsuario = '';    
-
-        this.state = {
-            pressed: false
-        }
     }
 
     componentDidMount() {
@@ -49,16 +45,6 @@ class Speak_Ex9 extends Component {
         }
     }
 
-    recordVoice = () => {
-        console.log('Start grabacion');
-        this.setState({pressed: true});
-    }
-
-    stopRecord = () => {
-        console.log('Parar grabacion');
-        this.setState({pressed: false});
-    }
-
     render() {
         return(
             <View style={{ height: '100%'}}>
@@ -67,17 +53,8 @@ class Speak_Ex9 extends Component {
                     <MyText title={this.frases[1]} style={{fontSize: 12, marginTop: -10, color: example}}/>
                 </View>
 
-
-                <View style={[cards.centrar, {marginTop: 20, position: 'absolute', bottom: 150, width: '100%'}]}>
-                    <Pressable onPressIn={() => this.recordVoice()} onPressOut={() => this.stopRecord()}>
-                        {
-                            this.state.pressed
-                                ? <RoundButton key={0} icon="micro" color={primary} style={false}></RoundButton>
-                                : <RoundButton key={1} icon="micro" color={'white'} style={true}></RoundButton>
-                        }
-                    </Pressable>
-                    <MyText title="Press to record your voice" style={{fontSize: 12, marginTop: 10}}/>
-                </View>
+                <SpeakManager></SpeakManager>
+                
                 
             </View>    
         );
