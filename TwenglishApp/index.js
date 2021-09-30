@@ -24,7 +24,9 @@ const App2 = () => {
 //   })
 
   if(!Realm.exists(database)) {
-        console.log('Primera vez que entro a la app')
+        console.log('Primera vez que entro a la app');
+        console.log('');
+
         RNFS.copyFileAssets('twenglish.realm', RNFS.DocumentDirectoryPath + '/twenglish.realm')
         .then(() => {
             Realm.copyBundledRealmFiles();
@@ -34,8 +36,14 @@ const App2 = () => {
             console.log(le);
         });
   } else {
-      console.log('No es la primera vez que entro a la app')
-  }
+      console.log('No es la primera vez que entro a la app');
+    //   console.log('');
+        // Realm.open(database).then(realm => {
+        //     const lecciones = realm.objects('Ejercicio');
+        //     console.log(lecciones);
+        // }).catch((error) => reject(error));
+    }
+
 
   
 

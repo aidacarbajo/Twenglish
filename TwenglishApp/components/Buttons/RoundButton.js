@@ -8,6 +8,7 @@ class RoundButton extends Component {
   constructor(props) {
     super(props);
   } 
+
   render() {
     return (
       this.props.style === undefined 
@@ -16,11 +17,15 @@ class RoundButton extends Component {
           <Icon icon={this.props.icon} color={this.props.color}></Icon>
         </LinearGradient>
       )
-      : (
-        <View style={[button.round, button.buttonListen, {width: 60, height: 60}]}>
-          <Icon icon={this.props.icon} color={this.props.color}></Icon>
-        </View>
-      )    
+      : [
+        this.props.style
+        ? (<View style={[button.round, button.buttonListen, {width: 60, height: 60}]}>
+            <Icon icon={this.props.icon} color={this.props.color}></Icon>
+          </View>)
+        : (<View style={[button.round, button.buttonNoListen, {width: 60, height: 60}]}>
+            <Icon icon={this.props.icon} color={this.props.color}></Icon>
+          </View>)
+      ]  
     )
   }
 }

@@ -16,12 +16,15 @@ export default {
 
   /*
     PASOS PARA ACTUALIZAR BBDD DESDE REALM STUDIO
-    1.  Descomento en index.js el de eliminar archivo twenglish.realm y comento el de copiar
+    1.  Elimino Twenglish.realm
+        Descomento en index.js el de eliminar archivo twenglish.realm y comento el de copiar
         Poner async y await una vez y borrarlo porque sale error pero sí funciona: [Error: File does not exist]
         
-    2.  Control + C (y si he añadido nuevos objetos modificar el twenglish-model y añadirlo en los imports de este archivo)
+    2.  Control + C 
+
+              Si he añadido nuevos objetos modificar el twenglish-model y añadirlo en los imports de este archivo)
         
-    3.  Hago un link, descomento, comento y vuelvo a compilar
+    3.  Pego el nuevo twenglish, hago un link, descomento, comento y vuelvo a compilar
 
     4. Ya debería estar actualizado
   */

@@ -18,6 +18,7 @@ import Voc_Ex6 from './Voc_Ex6';
 import { LogBox } from 'react-native';
 import List_Ex7 from './List_Ex7';
 import List_Ex8 from './List_Ex8';
+import Speak_Ex9 from './Speak_Ex9';
 
 LogBox.ignoreAllLogs(true);
 
@@ -36,7 +37,7 @@ class Ejercicios extends Component {
             isCheckVisible: false,
             isCorreccionVisible: false,
             isNextVisible: false,
-            ejercicioActual: 0,
+            ejercicioActual: 8,
             ejerciciosLeccionActual: null,
             enunciado: null,
         };
@@ -157,6 +158,10 @@ class Ejercicios extends Component {
             case 8:
                 res = <List_Ex8 radioB={ejercicio.bloqueRadioButton.opciones} texto={ejercicio.textoListening} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
+            case 9:
+                res = <Speak_Ex9 frases={ejercicio.bloqueString.opcionesClave} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
+                break;
+    
             }    
 
         return res;

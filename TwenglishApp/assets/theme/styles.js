@@ -127,9 +127,12 @@ const button = StyleSheet.create({
         alignItems: 'center'
     },
     buttonListen: {
-        backgroundColor: 'white', 
+        backgroundColor: primary, 
+    },
+    buttonNoListen: {
         borderWidth: 1, 
-        borderColor: primary
+        borderColor: primary,
+        backgroundColor: 'white'
     }
 });
 
