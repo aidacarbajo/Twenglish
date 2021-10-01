@@ -128,11 +128,13 @@ const button = StyleSheet.create({
     },
     buttonListen: {
         backgroundColor: primary, 
+        elevation: 5
     },
     buttonNoListen: {
         borderWidth: 1, 
         borderColor: primary,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        // elevation: 5
     }
 });
 

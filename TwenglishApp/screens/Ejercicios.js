@@ -37,7 +37,7 @@ class Ejercicios extends Component {
             isCheckVisible: false,
             isCorreccionVisible: false,
             isNextVisible: false,
-            ejercicioActual: 7,
+            ejercicioActual: 6,
             ejerciciosLeccionActual: null,
             enunciado: null,
         };
@@ -159,7 +159,7 @@ class Ejercicios extends Component {
                 res = <List_Ex8 radioB={ejercicio.bloqueRadioButton.opciones} texto={ejercicio.textoListening} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 9:
-                res = <Speak_Ex9 frases={ejercicio.bloqueString.opcionesClave} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
+                res = <Speak_Ex9 frases={ejercicio.bloqueString.opcionesClave} buttonCheck={this.mal} onRef={ref => {this.child = ref}} />
                 break;
     
             }    

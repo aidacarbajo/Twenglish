@@ -1,9 +1,10 @@
 import React from 'react';
-import {View, AppRegistry, Pressable} from 'react-native';
+import {View, AppRegistry, Pressable, Dimensions} from 'react-native';
 import Voice from 'react-native-voice';
-import { cards, primary } from '../assets/theme/styles';
+import { cards, primary, secundary } from '../assets/theme/styles';
 import RoundButton from '../components/Buttons/RoundButton';
 import MyText from '../components/Texts/MyText';
+import MyTitle from '../components/Texts/MyTitle';
 
 const ERROR_MSG_NO_SPEECH = Platform.OS === 'ios' ? '203/Retry' : '7/No match';
 
@@ -19,6 +20,8 @@ export default class SpeakManager extends React.Component {
             results: [],
             partialResults: []
         };
+
+        this.correct = false;
 
         this.seeConfig();
 
@@ -59,10 +62,8 @@ export default class SpeakManager extends React.Component {
         // console.log('Finalizar grabacion');
         this.setState({started: 'X', pressed: false, isRecord: !this.state.isRecord});
 
-        console.log(this.state);
-        if(this.state.partialResults.length === 0) {
-            Voice.stop();
-        }
+        // Check responses
+        this.studentAnswer();
     };
 
     _onSpeechResults = (event) => {
@@ -115,21 +116,42 @@ export default class SpeakManager extends React.Component {
         );
     }
 
+    studentAnswer = () => {
+        // console.log('quiero enviar', this.state.partialResults);
+        this.props.studentAnswer(this.state.partialResults[0]);
+    }
+
     render() {
         return (
-            <View style={[cards.centrar, {marginTop: 20, position: 'absolute', bottom: 150, width: '100%'}]}>
-                <MyText title={'Resultados parciales: ' + this.state.partialResults} style={{marginBottom: 40}}/>
+            <View style={{height: '100%'}}>
+                <View style={{position: 'absolute', top: Dimensions.get('window').height/8, width: '100%', minHeight: 50}}>
+                    <MyTitle titleBold="My answer" style={{fontSize: 14, marginBottom: 0}}></MyTitle>
+                        
+                        <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', paddingVertical: 10, paddingHorizontal: 10, textAlign: 'left', width: '100%', minHeight: 60, marginTop: 20, backgroundColor: 'white', borderRadius: 12, elevation: 10}}>
+                            <MyText title={this.state.partialResults} style={{textAlign: 'left', fontSize: 12}}/>
+                        </View>
 
-                <Pressable onPressIn={this._startRecognition.bind(this)}>
+                        {
+                            this.props.casiCorrecta[0] != 'O'
+                            ? (<MyText title={this.props.casiCorrecta} style={{color: '#00C136', marginTop: 20, textAlign: 'center', width: '100%'}}/>)
+                            : (<MyText title={this.props.casiCorrecta} style={{color: secundary, marginTop: 20, textAlign: 'center', width: '100%'}}/>)
+                        }
+
+                </View>
+                
+                <View style={[cards.centrar, {marginTop: 20, position: 'absolute', bottom: 250, width: '100%'}]}>
+
+                    <Pressable onPressIn={this._startRecognition.bind(this)}>
                     {
                         this.state.pressed
                             ? <RoundButton key={0} icon="micro" color={primary} style={false}></RoundButton>
                             : <RoundButton key={1} icon="micro" color={'white'} style={true}></RoundButton>
                     }
-                </Pressable>
-                {
-                    this.getText()
-                }
+                    </Pressable>
+                    {
+                        this.getText()
+                    }
+                </View>
             </View>
         )
     }

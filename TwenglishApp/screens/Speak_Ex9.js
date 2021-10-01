@@ -12,7 +12,11 @@ class Speak_Ex9 extends Component {
 
         // [ingles, traduccion]
         this.frases = props.frases;  
-        this.respuestaUsuario = '';    
+        this.fraseCorrecta = props.frases[0];
+        this.respuestaUsuario = '';   
+        this.correcta = false;
+        this.casiCorrecta = ''; 
+        
     }
 
     componentDidMount() {
@@ -23,14 +27,8 @@ class Speak_Ex9 extends Component {
         this.props.onRef(undefined)
     }
 
-    showCheck = (correcta) => {
-        this.props.buttonCheck(true, true);
-        this.correcta = correcta;
-        this.checkAnswer();
-    }
-
     checkAnswer = () => {
-        if(this.correcta) {
+        if(this.casiCorrecta[0] != 'O') {
             this.props.buttonCheck('acierto', true);
             return true;
         } else {
@@ -39,10 +37,36 @@ class Speak_Ex9 extends Component {
         }
     }
 
-    saveCorrecta = (correcta) => {
-        if(this.fraseCorrecta === null) {
-            this.fraseCorrecta = correcta;
+    areSimilar = (fraseStudent) => {
+        const pxpS = fraseStudent.split(' ');
+        const pxpC = this.fraseCorrecta.split(' ');
+
+        if(JSON.stringify(pxpC) === JSON.stringify(pxpS)) {
+            this.correcta = true;
+            this.casiCorrecta = '';
+        } else {
+            this.correcta = false;
         }
+
+        if(!this.correcta) {
+            let same = 0;
+
+            for(let i = 0; i < pxpS.length; i++) {
+                if(pxpS[i] == pxpC[i]) {
+                    same++;
+                }
+            }
+
+            // console.log(same, pxpC.length/1.5, pxpC.length);
+
+            // MARGEN DE ERROR: Si acierta 1/4 de la frase se pone como correcto
+            if(same >= pxpC.length/1.5) {   
+                this.casiCorrecta = 'Almost perfect! ' + same + '/' + pxpC.length + ' words are correct';
+            } else {
+                this.casiCorrecta = 'Oops! Only ' + same + '/' + pxpC.length + ' words are correct';
+            }
+        }
+        this.checkAnswer();
     }
 
     render() {
@@ -53,8 +77,7 @@ class Speak_Ex9 extends Component {
                     <MyText title={this.frases[1]} style={{fontSize: 12, marginTop: -10, color: example}}/>
                 </View>
 
-                <SpeakManager></SpeakManager>
-                
+                <SpeakManager studentAnswer={this.areSimilar} casiCorrecta={this.casiCorrecta}></SpeakManager>
                 
             </View>    
         );
