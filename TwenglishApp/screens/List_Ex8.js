@@ -63,7 +63,7 @@ class List_Ex8 extends Component {
                 <View>
                     <VoiceManager texto={this.props.texto} />
                     {/* Radio Button */}
-                    <RadioButton opciones={this.props.radioB} check={this.showCheck}></RadioButton>
+                    <RadioButton opciones={this.props.radioB} check={this.showCheck} loading={true}></RadioButton>
                 </View>    
             );
         }

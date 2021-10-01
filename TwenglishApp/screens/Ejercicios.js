@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, View, LogBox } from 'react-native';
 import Header from '../components/Header/Header';
 import { calculateMedia } from '../util/ProgressManager';
 import { view } from '../assets/theme/styles';
@@ -15,12 +15,14 @@ import Voc_Ex3 from './Voc_Ex3';
 import Voc_Ex4 from './Voc_Ex4';
 import Voc_Ex5 from './Voc_Ex5';
 import Voc_Ex6 from './Voc_Ex6';
-import { LogBox } from 'react-native';
 import List_Ex7 from './List_Ex7';
 import List_Ex8 from './List_Ex8';
 import Speak_Ex9 from './Speak_Ex9';
+import Speak_Ex10 from './Speak_Ex10';
 
-LogBox.ignoreAllLogs(true);
+LogBox.ignoreLogs([
+    'Non-serializable values were found in the navigation state',
+]);
 
 class Ejercicios extends Component {
 
@@ -37,7 +39,7 @@ class Ejercicios extends Component {
             isCheckVisible: false,
             isCorreccionVisible: false,
             isNextVisible: false,
-            ejercicioActual: 6,
+            ejercicioActual: 9,
             ejerciciosLeccionActual: null,
             enunciado: null,
         };
@@ -161,6 +163,10 @@ class Ejercicios extends Component {
             case 9:
                 res = <Speak_Ex9 frases={ejercicio.bloqueString.opcionesClave} buttonCheck={this.mal} onRef={ref => {this.child = ref}} />
                 break;
+            case 10:
+                res = <Speak_Ex10 listening={ejercicio.textoListening} frases={ejercicio.bloqueRadioButton.opciones} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
+                break;
+    
     
             }    
 

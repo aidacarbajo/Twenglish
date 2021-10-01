@@ -10,7 +10,7 @@ export default {
         ? RNFS.MainBundlePath + '/twenglish.realm'
         : RNFS.DocumentDirectoryPath + '/twenglish.realm',
     schema: schema,
-    schemaVersion: 52,    
+    schemaVersion: 54,    
   };
 
 

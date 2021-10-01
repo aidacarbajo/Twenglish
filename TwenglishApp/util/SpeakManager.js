@@ -61,15 +61,15 @@ export default class SpeakManager extends React.Component {
      _onSpeechEnd = () => {
         // console.log('Finalizar grabacion');
         this.setState({started: 'X', pressed: false, isRecord: !this.state.isRecord});
-
-        // Check responses
-        this.studentAnswer();
     };
 
     _onSpeechResults = (event) => {
         // console.log('onSpeechResults');
         // console.log(event.value)
         this.setState({results: event.value});
+
+        // Check responses
+        this.studentAnswer();
     };
     _onSpeechPartialResults = (event) => {
         // console.log('onSpeechPartialResults');
@@ -118,28 +118,31 @@ export default class SpeakManager extends React.Component {
 
     studentAnswer = () => {
         // console.log('quiero enviar', this.state.partialResults);
-        this.props.studentAnswer(this.state.partialResults[0]);
+        this.props.studentAnswer(this.state.partialResults[0], this.state.results);
     }
 
     render() {
         return (
-            <View style={{height: '100%'}}>
-                <View style={{position: 'absolute', top: Dimensions.get('window').height/8, width: '100%', minHeight: 50}}>
-                    <MyTitle titleBold="My answer" style={{fontSize: 14, marginBottom: 0}}></MyTitle>
-                        
-                        <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', paddingVertical: 10, paddingHorizontal: 10, textAlign: 'left', width: '100%', minHeight: 60, marginTop: 20, backgroundColor: 'white', borderRadius: 12, elevation: 10}}>
-                            <MyText title={this.state.partialResults} style={{textAlign: 'left', fontSize: 12}}/>
+            <View style={{flex: 1}}>
+
+                {
+                    this.props.loading == undefined &&
+                        <View style={{top: Dimensions.get('window').height/8, width: '100%', minHeight: 50, marginBottom: 80}}>
+                            <MyTitle titleBold="My answer" style={{fontSize: 14, marginBottom: 0}}></MyTitle>
+                            
+                            <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', paddingVertical: 10, paddingHorizontal: 10, textAlign: 'left', width: '100%', minHeight: 60, marginTop: 20, backgroundColor: 'white', borderRadius: 12, elevation: 10}}>
+                                <MyText title={this.state.partialResults} style={{textAlign: 'left', fontSize: 12}}/>
+                            </View>
+
+                            {
+                                this.props.casiCorrecta[0] != 'O'
+                                ? (<MyText title={this.props.casiCorrecta} style={{color: '#00C136', marginTop: 20, textAlign: 'center', width: '100%'}}/>)
+                                : (<MyText title={this.props.casiCorrecta} style={{color: secundary, marginTop: 20, textAlign: 'center', width: '100%'}}/>)
+                            }
                         </View>
-
-                        {
-                            this.props.casiCorrecta[0] != 'O'
-                            ? (<MyText title={this.props.casiCorrecta} style={{color: '#00C136', marginTop: 20, textAlign: 'center', width: '100%'}}/>)
-                            : (<MyText title={this.props.casiCorrecta} style={{color: secundary, marginTop: 20, textAlign: 'center', width: '100%'}}/>)
-                        }
-
-                </View>
+                }
                 
-                <View style={[cards.centrar, {marginTop: 20, position: 'absolute', bottom: 250, width: '100%'}]}>
+                <View style={[cards.centrar, { top: 30, width: '100%'}]}>
 
                     <Pressable onPressIn={this._startRecognition.bind(this)}>
                     {

@@ -4,6 +4,7 @@ import {
   // TouchableOpacity,
   Pressable,
   Text,
+  View,
 } from 'react-native'
 
 class OptionButton extends Component {
@@ -13,9 +14,17 @@ class OptionButton extends Component {
 
  render() {
     return (
-      <Pressable style={[button.button, button.option, {paddingLeft: 15}]} onPress={this.sendData}>
-        <Text style={[text.primario, text.opcion]}>{this.props.title}</Text>
-      </Pressable>  
+      this.props.canPress 
+      ? (
+        <Pressable style={[button.button, button.option, {paddingLeft: 15}]} onPress={this.sendData}>
+          <Text style={[text.primario, text.opcion]}>{this.props.title}</Text>
+        </Pressable>  
+      )
+      : (
+        <View style={[button.button, button.option, {paddingLeft: 15}]} onPress={this.sendData}>
+          <Text style={[text.primario, text.opcion]}>{this.props.title}</Text>
+        </View>  
+      )
     )
   }
 }

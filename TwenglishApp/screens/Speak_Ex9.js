@@ -37,7 +37,7 @@ class Speak_Ex9 extends Component {
         }
     }
 
-    areSimilar = (fraseStudent) => {
+    areSimilar = (fraseStudent, allResults) => {
         const pxpS = fraseStudent.split(' ');
         const pxpC = this.fraseCorrecta.split(' ');
 
