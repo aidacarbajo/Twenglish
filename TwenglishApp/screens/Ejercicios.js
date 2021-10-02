@@ -39,7 +39,7 @@ class Ejercicios extends Component {
             isCheckVisible: false,
             isCorreccionVisible: false,
             isNextVisible: false,
-            ejercicioActual: 9,
+            ejercicioActual: 0,
             ejerciciosLeccionActual: null,
             enunciado: null,
         };
@@ -61,12 +61,6 @@ class Ejercicios extends Component {
     }
 
     salir = async() => {
-
-        if(this.state.ejercicioActual == this.state.ejerciciosLeccionActual.length - 1) {   // si es el ultimo ejercicio se guarda el progreso, sino no
-            await calculateMedia(this.numIntentos);  
-            this.props.route.params.update(true);
-        }
-
         this.setState({isExitVisible: false});
         this.props.navigation.navigate('Lessons');
     }
@@ -120,12 +114,15 @@ class Ejercicios extends Component {
 
 
     // pasar al siguiente ejercicio
-    nextExercise = () => {
+    nextExercise = async() => {
         if(this.state.ejercicioActual < this.state.ejerciciosLeccionActual.length - 1) {
             this.setState({isNextVisible: false, ejercicioActual: this.state.ejercicioActual + 1, isCorreccionVisible: false, enunciado: this.state.ejerciciosLeccionActual[this.state.ejercicioActual + 1].enunciado});
         } else {
-            console.log('No quedan ejercicios');
             // nos llevaria la página de resumen
+            const media = await calculateMedia(this.numIntentos);  
+            // this.props.route.params.update(true);
+
+            this.props.navigation.navigate('Resumen', {progreso: media, leccion: this.props.route.params.tema})
         }
     }
 

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import { Text, View } from "react-native";
 import Modal from "react-native-modal";
-import { modal } from "../../assets/theme/styles";
+import { correcto, modal, secundary } from "../../assets/theme/styles";
 
 class ModalC extends Component {
     constructor(props) {
@@ -33,7 +33,6 @@ class ModalC extends Component {
             this.animacionS = 'pulse';
             this.animacionE = 'pulse';
         }
-
     }
 
     sendData = () => {
@@ -55,6 +54,20 @@ class ModalC extends Component {
     }
       
     render() {
+        let styless = {};
+
+        if(this.props.msg != undefined) {
+            if(this.props.msg === 0) {
+                styless = {backgroundColor: secundary};
+            } else {
+                if(this.props.msg === 1) {
+                    styless = {backgroundColor: '#FF6100', };
+                } else {
+                    styless = {backgroundColor: correcto};
+                }
+            }
+        }
+
         return (
             <Modal 
                 isVisible={this.props.visible}
@@ -66,7 +79,7 @@ class ModalC extends Component {
                 coverScreen={false}
                 style={[modal.all, this.styleSettings]}>
                 
-                <View style={[modal.content]}>
+                <View style={[modal.content, styless]}>
                     {this.props.children}
 
                     {this.props.tipo === 'close' &&

@@ -19,7 +19,7 @@ class NivelesList extends Component {
         this.callbackFunction = (nivelSeleccionado) => {
             this.setState({nivelSeleccionado: nivelSeleccionado});
             updateCurrentLevel(nivelSeleccionado).then(res => {
-                this.getLevels();
+                this.getLevels(true);
                 
             });
             this.props.nivelSel();
@@ -27,9 +27,10 @@ class NivelesList extends Component {
 
     }
 
-    getLevels = () => {
+    getLevels = (ya) => {
+        // this._isMounted = true; // quitar si no va
         return getNiveles().then(res => {
-            if (this._isMounted) {
+            if (ya) {
                 this.setState({
                     isLoading:false,
                     levels: res.nivel,
@@ -45,8 +46,8 @@ class NivelesList extends Component {
     }
 
     componentDidMount() {
-        this._isMounted = true;
-        this.getLevels();
+        // this._isMounted = true;
+        this.getLevels(true);
     }
     
     componentWillUnmount() {

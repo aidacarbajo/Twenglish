@@ -9,7 +9,7 @@ class MyTextWhite extends Component {
       
     render() {
         return (
-            <Text style={[text.body, text.white]}>{this.props.title}</Text> 
+            <Text style={[text.body, text.white, this.props.style]}>{this.props.title}</Text> 
         );
     }
 }

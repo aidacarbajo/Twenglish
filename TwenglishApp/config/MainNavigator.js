@@ -5,6 +5,7 @@ import Settings from '../screens/Settings';
 import Apuntes from '../screens/Apuntes';
 import Ejercicios from '../screens/Ejercicios';
 import TabNavigator from '../config/TabNavigator';
+import Resumen from '../screens/Resumen';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,10 @@ const pantallas = [
     nombre: "Apuntes",
     componente: Apuntes,
   },
+  {
+    nombre: "Resumen",
+    componente: Resumen
+  }
 ];
 
 const MainNavigator = () => {

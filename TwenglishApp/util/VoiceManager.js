@@ -17,7 +17,8 @@ class VoiceManager extends Component {
         // Tts.requestInstallData();
 
         this.state = {
-            played: false
+            played: false,
+            _isMounted: false
         }
 
         this.listaVocesRandom = ['en-gb-x-rjs#male_2-local', 'en-us-x-sfg#female_3-local', "en-us-x-sfg#male_2-local", 'en-gb-x-fis#female_3-local']
@@ -36,6 +37,14 @@ class VoiceManager extends Component {
         // Tts.setDefaultPitch(1.2);  // Voz grave o de pito
         // Tts.setDefaultRate(0.6);    // Rapidez: entre 0.4 y 0.6 es algo aceptable
     }
+
+    componentDidMount() {
+        this.setState({_isMounted: true});
+    }
+
+    componentWillUnmount() {
+        this.setState({_isMounted: false});
+    }
     
     listenToAudio = () => {
         const random = Math.floor(Math.random() * (this.listaVocesRandom.length));
@@ -48,13 +57,17 @@ class VoiceManager extends Component {
     render() {
         return (
             <View style={[cards.centrar, {marginTop: 20}]}>
-                <Pressable onPress = {() => this.listenToAudio()}>
                 {
-                    this.state.played
-                        ? <RoundButton key={'0'} icon="listen" color={primary} style={false}></RoundButton>
-                        : <RoundButton key={'1'} icon="listen" color={'white'} style={true}></RoundButton>
-                }
-                </Pressable>
+                    this.state._isMounted &&
+                        <Pressable onPress = {() => this.listenToAudio()}>
+                        {
+                            this.state.played
+                                ? <RoundButton key={'2'} icon="listen" color={primary} style={false}></RoundButton>
+                                : <RoundButton key={'3'} icon="listen" color={'white'} style={true}></RoundButton>
+                        }
+                        </Pressable>
+                    }
+                
             </View>
         )
     }

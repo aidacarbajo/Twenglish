@@ -97,8 +97,6 @@ class Speak_Ex10 extends Component {
         }
 
         this.showbutton();
-        
-        // this.checkAnswer();
     }
 
     render() {

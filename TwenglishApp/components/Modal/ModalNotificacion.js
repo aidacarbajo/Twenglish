@@ -18,19 +18,35 @@ class ModalNotificacion extends Component {
 
     renderContent = () => {
         let obj = {titulo: '', color: '', icon: ''};
-        let styless;
-
-        this.props.tipo == 'acierto'
-            ?   obj = {titulo: 'Correct', color: correcto, icon: "tick"}
-            : [
-                (this.props.tipo == 'fallo'
-                  ? obj = {titulo:'Try again!', color: secundary, icon: "wrong"}
-                  : obj = {titulo:'Extra', color: extra, icon: "info"}
-                )
-              ]
-
+        let styless = {};
+        
+        if(this.props.tipo === 'resumen') {
+            if(this.props.msg === 0) {
+                obj = {titulo: 'Keep working!', color: "white", icon: 'happy'};
+                styless = {backgroundColor: secundary};
+            } else {
+                if(this.props.msg === 1) {
+                    obj = {titulo: 'Good work!', color: "white", icon: 'funny'};
+                    styless = {backgroundColor: '#FF6100', };
+                } else {
+                    obj = {titulo: "You're amazing!", color: "white", icon: 'surprise'};
+                    styless = {backgroundColor: correcto};
+                }
+            }
+        } else {
+            if(this.props.tipo === 'acierto') {
+                obj = {titulo: 'Correct', color: correcto, icon: "tick"}
+            } else {
+                if(this.props.tipo === 'fallo') {
+                    obj = {titulo:'Try again!', color: secundary, icon: "wrong"}
+                } else {
+                    obj = {titulo:'Extra', color: extra, icon: "info"}
+                }
+            }
+        }
+        
         return (
-                <View>
+                <View style={[styless]}>
                     <View style={{flexDirection: 'row', height: 17, width: '100%'}}>
                         <Icon icon={obj.icon} color={obj.color} style={{marginRight: 5, fontSize: 15}}></Icon>
                         <MyTitle titleBold={obj.titulo} style={{color: obj.color, fontSize: 13, height: 25}}></MyTitle>

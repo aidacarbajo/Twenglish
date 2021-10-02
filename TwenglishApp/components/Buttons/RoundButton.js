@@ -11,21 +11,29 @@ class RoundButton extends Component {
 
   render() {
     return (
-      this.props.style === undefined 
+      this.props.progress !== undefined
       ? (
-        <LinearGradient locations={[0, 1]} useAngle={true} angle={-45} angleCenter={{ x: 0.5, y: 0.5 }} colors={button.secundary.backgroundColor} style={[button.round]}>
-          <Icon icon={this.props.icon} color={this.props.color}></Icon>
+        <LinearGradient key={Math.random()*100} locations={[0, 1]} useAngle={true} angle={-45} angleCenter={{ x: 0.5, y: 0.5 }} colors={button.secundary.backgroundColor} style={[button.round, {width: 200, height: 200, borderRadius: 250}]}>
+          {this.props.children}
         </LinearGradient>
       )
       : [
-        this.props.style
-        ? (<View key={'listen'} style={[button.round, button.buttonListen, {width: 60, height: 60}]}>
+        this.props.style === undefined 
+        ? (
+          <LinearGradient  key={Math.random()*100} locations={[0, 1]} useAngle={true} angle={-45} angleCenter={{ x: 0.5, y: 0.5 }} colors={button.secundary.backgroundColor} style={[button.round]}>
             <Icon icon={this.props.icon} color={this.props.color}></Icon>
-          </View>)
-        : (<View key={'stoplisten'} style={[button.round, button.buttonNoListen, {width: 60, height: 60}]}>
-            <Icon icon={this.props.icon} color={this.props.color}></Icon>
-          </View>)
-      ]  
+          </LinearGradient>
+        )
+        : [
+          this.props.style
+          ? (<View key={Math.random()*100} style={[button.round, button.buttonListen, {width: 60, height: 60}]}>
+              <Icon icon={this.props.icon} color={this.props.color}></Icon>
+            </View>)
+          : (<View  key={Math.random()*100} style={[button.round, button.buttonNoListen, {width: 60, height: 60}]}>
+              <Icon icon={this.props.icon} color={this.props.color}></Icon>
+            </View>)
+        ]  
+      ] 
     )
   }
 }
