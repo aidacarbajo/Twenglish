@@ -107,7 +107,7 @@ class Voc_Ex5 extends Component {
 
     getCard = (index, accion, indexx) => {        
         return(
-            <Pressable key={index} style={[cards.cards, cards.centrar, {padding: 10, marginBottom: 10, marginRight: 6}]} onPress={() => {
+            <Pressable key={index} style={[cards.cards, cards.centrar, {padding: 10, marginBottom: 12, marginRight: 10}]} onPress={() => {
                 if(accion === 's') {
                     this.seleccion(index)
                 } else {
@@ -115,8 +115,8 @@ class Voc_Ex5 extends Component {
                 }
             }>
             { accion === 's' 
-                ? <MyText title={this.todosDesordenados[index]} style={{fontSize: 12}}></MyText>
-                : <MyText title={this.desordenados[index]} style={{fontSize: 12}}></MyText>
+                ? <MyText title={this.todosDesordenados[index]}></MyText>
+                : <MyText title={this.desordenados[index]}></MyText>
             }
             </Pressable>
         );

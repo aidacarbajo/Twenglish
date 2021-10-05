@@ -73,8 +73,8 @@ class Speak_Ex9 extends Component {
         return(
             <View style={{ height: '100%'}}>
                 <View>
-                    <MyTitle title={this.frases[0]} style={{fontSize: 12, fontFamily: bold, marginTop: 40}} />
-                    <MyText title={this.frases[1]} style={{fontSize: 12, marginTop: -10, color: example}}/>
+                    <MyTitle title={this.frases[0]} style={{fontSize: 11, fontFamily: bold, marginTop: 40}} />
+                    <MyText title={this.frases[1]} style={{fontSize: 10, marginTop: -10, color: example}}/>
                 </View>
 
                 <SpeakManager studentAnswer={this.areSimilar} casiCorrecta={this.casiCorrecta}></SpeakManager>

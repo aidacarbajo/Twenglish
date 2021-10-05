@@ -59,7 +59,7 @@ class Voc_Ex4 extends Component {
             return (
                 <View style={{marginTop: 20}}>
                     <View style={[cards.cardApuntes, cards.cards]}>
-                        <MyText title={this.frase} style={{fontSize: 12, textAlign: 'left', padding: 4}}></MyText>
+                        <MyText title={this.frase} style={{fontSize: 11, textAlign: 'left', padding: 4, lineHeight: 18}}></MyText>
                     </View>
 
                     <RadioButton opciones={this.opciones} check={this.showCheck}></RadioButton>

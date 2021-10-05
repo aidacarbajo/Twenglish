@@ -48,8 +48,8 @@ class ModalNotificacion extends Component {
         return (
                 <View style={[styless]}>
                     <View style={{flexDirection: 'row', height: 17, width: '100%'}}>
-                        <Icon icon={obj.icon} color={obj.color} style={{marginRight: 5, fontSize: 15}}></Icon>
-                        <MyTitle titleBold={obj.titulo} style={{color: obj.color, fontSize: 13, height: 25}}></MyTitle>
+                        <Icon icon={obj.icon} color={obj.color} style={{marginRight: 5, fontSize: 12}}></Icon>
+                        <MyTitle titleBold={obj.titulo} style={{color: obj.color, fontSize: 12, height: 25}}></MyTitle>
                     </View>
 
                     {

@@ -91,7 +91,7 @@ class Voc_Ex6 extends Component {
             this.opciones[this.state.actualOpciones].opciones.map((item, index) => {
                 return (
                     <Pressable key={index} style={[cards.cards, cards.centrar, {padding: 10, marginTop: 25}]} onPress={() => this.checkResponse(index)}>
-                        <MyText title={item.frase} style={{fontSize: 12}}></MyText>
+                        <MyText title={item.frase}></MyText>
                     </Pressable>
                 );
             })

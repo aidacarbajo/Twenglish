@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { View } from 'react-native';
-import { bold, extrabold } from '../assets/theme/styles';
+import { bold, extrabold, view } from '../assets/theme/styles';
 import RoundButton from '../components/Buttons/RoundButton';
 import MyTextWhite from '../components/Texts/MyTextWhite';
 import MyTitle from '../components/Texts/MyTitle';
@@ -49,7 +49,7 @@ class Resumen extends Component {
         }
 
         return(
-            <View>
+            <View style={[view.container, {height: '100%'}]}>
                 <View style={{height: '25%', justifyContent: 'center', alignItems: 'center', top: 50}}>
                     <MyTitle title={this.state.tema} style={{fontFamily: extrabold}} />
                 </View>
@@ -70,5 +70,5 @@ class Resumen extends Component {
         );
     }
 }
-
+ 
 export default Resumen;

@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import { Text, View } from "react-native";
 import Modal from "react-native-modal";
 import { correcto, modal, secundary } from "../../assets/theme/styles";
+import MyText from "../Texts/MyText";
 
 class ModalC extends Component {
     constructor(props) {
@@ -83,7 +84,7 @@ class ModalC extends Component {
                     {this.props.children}
 
                     {this.props.tipo === 'close' &&
-                        (<Text onPress={this.sendData} style={{marginTop: 10, marginLeft: 'auto', marginRight: 'auto', textDecorationLine: 'underline'}}>Close</Text>)
+                        (<MyText title="Close" onPress={this.sendData} style={{marginTop: 20, marginLeft: 'auto', marginRight: 'auto', textDecorationLine: 'underline'}}></MyText>)
                     }
                 </View>
 

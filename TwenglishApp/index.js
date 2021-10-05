@@ -11,6 +11,10 @@ import {name as appName} from './app.json';
 import * as RNFS from 'react-native-fs';
 
 import database from './data/database/config';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs();//Ignore all log notifications
+
 
 const App2 = () => {
 

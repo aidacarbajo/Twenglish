@@ -48,7 +48,10 @@ class VoiceManager extends Component {
     
     listenToAudio = () => {
         const random = Math.floor(Math.random() * (this.listaVocesRandom.length));
-        Tts.setDefaultVoice(this.listaVocesRandom[random]);
+        Tts.setDefaultVoice(this.listaVocesRandom[random])
+        .catch((e) => {
+            Tts.setDefaultVoice('default')
+        });
 
         Tts.stop();
         Tts.speak(this.props.texto);

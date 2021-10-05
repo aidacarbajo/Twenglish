@@ -112,7 +112,7 @@ export default class SpeakManager extends React.Component {
         }
 
         return(
-            <MyText title={titulo} style={{fontSize: 12, marginTop: 10}}/>
+            <MyText title={titulo} style={{fontSize: 10, marginTop: 10}}/>
         );
     }
 
@@ -131,7 +131,7 @@ export default class SpeakManager extends React.Component {
                             <MyTitle titleBold="My answer" style={{fontSize: 14, marginBottom: 0}}></MyTitle>
                             
                             <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', paddingVertical: 10, paddingHorizontal: 10, textAlign: 'left', width: '100%', minHeight: 60, marginTop: 20, backgroundColor: 'white', borderRadius: 12, elevation: 10}}>
-                                <MyText title={this.state.partialResults} style={{textAlign: 'left', fontSize: 12}}/>
+                                <MyText title={this.state.partialResults} style={{textAlign: 'left', fontSize: 11}}/>
                             </View>
 
                             {

@@ -26,7 +26,7 @@ class Nivel extends Component {
             textNivel: {
                 textAlign: 'center',
                 fontFamily: 'sen_extra_bold',
-                fontSize: 14,
+                fontSize: 12,
                 marginTop: -74 / 2
             }
         });
