@@ -67,7 +67,6 @@ class Ejercicios extends Component {
 
     // Modal de notificacion
     deleteCorreccion = (visible, correcta) => {
-        // console.log('Visible: ', visible, '---- Correcta: ', correcta);
         if(correcta != undefined) {
             if(correcta) {
                 this.acierto = 'acierto';
@@ -79,7 +78,7 @@ class Ejercicios extends Component {
                 this.setState({isCorreccionVisible: visible, isCheckVisible: false, isNextVisible: false});
             }
         } else {
-            this.setState({isCorreccionVisible: visible, isCheckVisible: false});
+            this.setState({isCorreccionVisible: visible});
         }
     }
  
@@ -89,7 +88,7 @@ class Ejercicios extends Component {
     
     // corregir el ejercicio 
     showButton = (visible) => {
-        if(!this.state.isCorreccionVisible && !this.state.isNextVisible) {
+        if(!this.state.isNextVisible) { // poner && !this.state.isCorreccionVisible
             this.setState({isCheckVisible: visible});
         }
     }
@@ -137,7 +136,7 @@ class Ejercicios extends Component {
                 res = <Voc_Ex1 ejercicio={ejercicio.bloqueString} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 2:
-                res = <Voc_Ex2 imagen={ejercicio.bloqueString.imagenes} radioB={ejercicio.bloqueRadioButton} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
+                res = <Voc_Ex2 imagen={ejercicio.bloqueString.imagenes} radioB={ejercicio.bloqueRadioButton} esCorrecta={this.acierto} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
                 break;
             case 3:
                 res = <Voc_Ex3 everyPar={ejercicio.bloquePares} buttonCheck={this.mal} />

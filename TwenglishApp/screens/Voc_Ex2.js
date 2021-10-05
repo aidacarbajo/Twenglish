@@ -66,7 +66,7 @@ class Voc_Ex2 extends Component {
                             imageStyle={{ borderRadius: 12, width: '100%', height: 180, shadowColor: 'black'}} >
                         </ImageBackground>  
                     </View>
-                    <RadioButton opciones={this.opciones} check={this.showCheck}></RadioButton>
+                    <RadioButton opciones={this.opciones} check={this.showCheck} correcta={this.props.esCorrecta}></RadioButton>
                 </View>
             );
         }
