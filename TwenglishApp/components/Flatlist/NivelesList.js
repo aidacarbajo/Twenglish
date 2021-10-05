@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, GetDerivedStateFromProps } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Nivel from '../Niveles/Nivel';
@@ -12,14 +12,16 @@ class NivelesList extends Component {
 
         this.state = {
           isLoading: true,
+          firstTime: true,
           levels: [],
-          nivelSeleccionado: null
+          nivelSeleccionado: null,
+          progreso: this.props.progreso
         };
 
         this.callbackFunction = (nivelSeleccionado) => {
             this.setState({nivelSeleccionado: nivelSeleccionado});
             updateCurrentLevel(nivelSeleccionado).then(res => {
-                this.getLevels(true);
+                this.getLevels(true, this.props.progreso);
                 
             });
             this.props.nivelSel();
@@ -27,14 +29,15 @@ class NivelesList extends Component {
 
     }
 
-    getLevels = (ya) => {
-        // this._isMounted = true; // quitar si no va
+    getLevels = (ya, props) => {
         return getNiveles().then(res => {
             if (ya) {
                 this.setState({
-                    isLoading:false,
                     levels: res.nivel,
-                    nivelSeleccionado: res.nivel[0].nombre
+                    isLoading:false,
+                    nivelSeleccionado: res.nivel[0].nombre,
+                    firstTime: false,
+                    progreso: this.props.progreso
                 }).catch( (error) => {
                     console.log(error.message);
                 });
@@ -46,12 +49,22 @@ class NivelesList extends Component {
     }
 
     componentDidMount() {
-        // this._isMounted = true;
         this.getLevels(true);
     }
     
     componentWillUnmount() {
         this._isMounted = false;
+    }
+
+    shouldComponentUpdate(props) {
+        if(this.state.progreso != props.progreso || this.state.firstTime) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    componentDidUpdate(props) {
+        this.getLevels(true, props);
     }
 
     render() {
@@ -60,7 +73,6 @@ class NivelesList extends Component {
                 height: 90,
                 justifyContent: 'center',
                 marginBottom: 25,
-                // marginLeft: 10,
             }
         });
 
@@ -71,7 +83,7 @@ class NivelesList extends Component {
                 </View>
             )
           } else {
-            return (
+            return (                
                 <View style={[styles.container]}>
                     <FlatList
                         horizontal

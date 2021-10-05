@@ -39,18 +39,25 @@ class Lecciones extends Component {
   }
 
   receivedUpdate = (value) => {
-    this.setState({update: true});
+    console.log('receivedUpdate', value);
+    this.changeLessons();
+    // this.changeUpdate(value)
+  }
+
+  changeUpdate = (value) => {
+    // this.setState({update: visible})
   }
 
   // actualizar lecciones porque se ha cambiado de nivel seleccionado
   changeLessons = () => {
     return getNivelSeleccionado().then(res => {
       const nivel = res; 
-
+      console.log(nivel);
       this.setState({
         isLoading:false,
         lecciones: nivel.lecciones,
-        update: false
+        progreso: nivel.progreso
+        // update: false
       }).catch( (error) => {
         console.log(error.message);
       });
@@ -91,9 +98,7 @@ class Lecciones extends Component {
           </View>
       )
     } else {
-      return (
-        // this.state.update && this.changeLessons(),
-        
+      return (        
         <View style={view.container}>
             <StatusBar hidden />
             {/* Modal de ajustes */}
@@ -118,7 +123,7 @@ class Lecciones extends Component {
               <MyTitle title="My" titleBold="Progress"></MyTitle>
             </View>
 
-            <NivelesList nivelSel={this.changeLessons}></NivelesList>
+            <NivelesList nivelSel={this.changeLessons} progreso={this.state.progreso}></NivelesList>
 
             <View style={view.safeArea}>
               <MyText title="What would you like to learn today?" style={{marginBottom: 15}}></MyText>

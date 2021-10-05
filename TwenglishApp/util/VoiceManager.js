@@ -57,7 +57,6 @@ class VoiceManager extends Component {
     render() {
         return (
             <View style={[cards.centrar, {marginTop: 20}]}>
-                {console.log(this.state._isMounted)}
                 {
                     this.state._isMounted &&
                         <Pressable onPress = {() => this.listenToAudio()}>
