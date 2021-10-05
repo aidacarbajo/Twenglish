@@ -53,7 +53,7 @@ class Voc_Ex1 extends Component {
         return true;                      
     }
 
-    isPressed = (index, refreshh) => {
+    isPressed = (index) => {
         if(this.state.actual < this.state.pressed.length) {
             if(this.respuestasUsuario[index] == '') { 
                 this.respuestasUsuario[index] = this.state.dataRealm.palabraClave[this.state.actual]
@@ -110,13 +110,12 @@ class Voc_Ex1 extends Component {
         }
 
         // si no son iguales borramos de nuevo las etiquetas de las fotos y aparece la primera frase
-        if(!iguales) {
-            this.respuestasUsuario = ['', '', '', ''];
-            
+        if(!iguales) {            
             this.props.buttonCheck(false);
             setTimeout(() => {
-                this.setState({pressed: [false, false, false, false], actual: 0})
-            }, 800);
+                this.setState({pressed: [false, false, false, false], actual: 0});
+                this.respuestasUsuario = ['', '', '', ''];
+            }, 1000);
         }
 
         return iguales;        
