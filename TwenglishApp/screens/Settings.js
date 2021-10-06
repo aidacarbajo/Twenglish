@@ -9,7 +9,7 @@ export default ({navigation}) => {
         <View style={view.container}>
             <View style={[posiciones.abolute, posiciones.topleft]}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Icon icon="back" color={secundary} size={icons.lg}></Icon>
+                    <Icon icon="back" color={secundary} style={icons.lg}></Icon>
                 </TouchableOpacity>
             </View>
 

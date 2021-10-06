@@ -104,8 +104,7 @@ const button = StyleSheet.create({
          elevation: 20,
     },
     option: {
-        // width: '95%',
-        paddingVertical: 15,
+        paddingVertical: 12,        
         marginVertical: 10,
         shadowOpacity: 0,
         borderColor: primary,
@@ -119,6 +118,7 @@ const button = StyleSheet.create({
         backgroundColor: '#FEE3E8',
         color: secundary,
         paddingLeft: 15,
+        paddingVertical: 15
     },
     round: {
         width: 44,
@@ -148,10 +148,10 @@ const icons = StyleSheet.create({
         // color: '#fff',
     },
     sm: {
-        fontSize: 20
+        fontSize: 16
     },
     lg: {
-        fontSize: 25
+        fontSize: 20
     },
     light: {
         color: 'white'
@@ -290,4 +290,4 @@ const modal = StyleSheet.create({
     },
 });
 
-export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, correcto, extra, example, cards, modal, regular, extrabold, bold };
+export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, correcto, extra, example, cards, modal, regular, extrabold, bold, fondo };

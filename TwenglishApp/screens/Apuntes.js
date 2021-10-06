@@ -1,12 +1,12 @@
 import React, {Component, useEffect, NavigationActions} from 'react';
 // import { TouchableOpacity, View, StatusBar, ActivityIndicator, Pressable, Text } from 'react-native';
 import MyTitle from '../components/Texts/MyTitle';
-import { view, posiciones, icons, text, button, cards, secundary, body, example } from '../assets/theme/styles';
+import { view, posiciones, icons, text, button, cards, secundary, body, example, fondo } from '../assets/theme/styles';
 import MyText from '../components/Texts/MyText';
 // import Flatlist from '../components/Flatlist/Flatlist';
 import { getApuntesLeccion } from '../data/queries/lecciones';
 import Modal from '../components/Modal/ModalC';
-import { ActivityIndicator, Pressable, StatusBar, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, SafeAreaView, StatusBar, Text, View } from 'react-native';
 import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from '../components/Icons/Icon';
 import CardVocabulary from '../components/Card/CardVocabulary';
@@ -82,34 +82,35 @@ class Apuntes extends Component {
       )
     } else {
       return (
-        <View style={view.allContainers}>
-            <View style={[posiciones.abolute, posiciones.topleft]}>
-                <Pressable onPress={() => this.props.navigation.navigate(this.props.route.params.from, {tema: this.state.tema})}>
-                    <Icon icon="back" color={secundary} size={icons.lg}></Icon>
-                </Pressable>
-            </View>
+        <ScrollView style={{backgroundColor: fondo}}>
+            <SafeAreaView style={{paddingHorizontal: 50, paddingVertical: 60}}>
 
-            <MyTitle title={this.state.tema} titleBold="notes"></MyTitle>
+                <View style={[posiciones.abolute, posiciones.topleft]}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate(this.props.route.params.from, {tema: this.state.tema})}>
+                        <Icon icon="back" color={secundary} style={icons.lg}></Icon>
+                    </TouchableOpacity>
+                </View>
 
-            <View style={{marginBottom: 1}}>
-                <MyTitle title={'Grammar'} style={{fontSize: 18, color: body, marginVertical: 15}}></MyTitle>
-                    {this.state.gramatica.map((element) => {
-                        return (
-                            <View style={[cards.cardApuntes, cards.cards, {marginBottom: 15}]} key={element.titulo}>
-                                <MyTitle title={element.titulo} style={{fontSize: 14, marginBottom: 10}}></MyTitle>
-                                <MyText title={element.explicacion} style={{fontSize: 12, textAlign: 'left', marginBottom: 10, padding: 4}}></MyText>
-                                <MyText title={element.ejemplo} style={{fontSize: 12, textAlign: 'left', color: example, paddingHorizontal: 4}}></MyText>
-                            </View>
-                        );     
-                    })}
-            </View>                
+                <MyTitle title={this.state.tema} titleBold="notes"></MyTitle>
 
-            <View>
-                <MyTitle title={'Vocabulary'} style={{fontSize: 18, color: body, marginVertical: 15}}></MyTitle>
-                <CardVocabulary vocabulary={this.state.vocabulario}></CardVocabulary>
-            </View>
-          </View>
+                {/* <SafeAreaView style={{paddingHorizontal: 50, paddingVertical: 60}}> */}
+                    <MyTitle title={'Grammar'} style={{fontSize: 14, color: body, marginTop: 10, marginBottom: 8}}></MyTitle>
+                        {this.state.gramatica.map((element) => {
+                            return (
+                                <View style={[cards.cardApuntes, cards.cards, {marginBottom: 15}]} key={element.titulo}>
+                                    <MyTitle title={element.titulo} style={{fontSize: 12, marginBottom: 10}}></MyTitle>
+                                    <MyText title={element.explicacion} style={{textAlign: 'left', marginBottom: 4, padding: 4, lineHeight: 14}}></MyText>
+                                    <MyText title={element.ejemplo} style={{textAlign: 'left', color: example, paddingHorizontal: 4}}></MyText>
+                                </View>
+                            );     
+                        })}
 
+                <View>
+                    <MyTitle title={'Vocabulary'} style={{fontSize: 14, color: body, marginTop: 10, marginBottom: 8}}></MyTitle>
+                    <CardVocabulary vocabulary={this.state.vocabulario}></CardVocabulary>
+                </View>
+            </SafeAreaView>
+        </ScrollView>
       );
     }
   }

@@ -16,12 +16,12 @@ class OptionButton extends Component {
     return (
       this.props.canPress 
       ? (
-        <Pressable style={[button.button, button.option, {paddingLeft: 15}]} onPress={this.sendData}>
+        <Pressable style={[button.button, button.option, {paddingLeft: 15, paddingVertical: 15}]} onPress={this.sendData}>
           <Text style={[text.primario, text.opcion]}>{this.props.title}</Text>
         </Pressable>  
       )
       : (
-        <View style={[button.button, button.option, {paddingLeft: 15}]} onPress={this.sendData}>
+        <View style={[button.button, button.option, {paddingLeft: 15, paddingVertical: 15}]} onPress={this.sendData}>
           <Text style={[text.primario, text.opcion]}>{this.props.title}</Text>
         </View>  
       )
