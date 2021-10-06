@@ -23,7 +23,6 @@ class ModalExit extends Component {
             <View style={{padding: 10}}>
                 <MyTitle title="Are you sure you want to leave?" style={{fontSize: 14, padding: 4, marginBottom: 5}}></MyTitle>
                 <MyText title="¿Seguro que quieres abandonar la lección?"></MyText>
-                {/* onPress={this.props.verApuntes} */}
 
                 <BlueButton title="Exit" screen={this.mevoy} style={{marginTop: 30, marginBottom: 5}}></BlueButton>
                 

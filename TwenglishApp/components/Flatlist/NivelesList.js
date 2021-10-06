@@ -8,6 +8,7 @@ class NivelesList extends Component {
 
     constructor(props) {
         super(props);
+        
         _isMounted = false;
 
         this.state = {
@@ -15,7 +16,7 @@ class NivelesList extends Component {
           firstTime: true,
           levels: [],
           nivelSeleccionado: null,
-          progreso: this.props.progreso
+          nivel: this.props.nivel
         };
 
         this.callbackFunction = (nivelSeleccionado) => {
@@ -37,7 +38,7 @@ class NivelesList extends Component {
                     isLoading:false,
                     nivelSeleccionado: res.nivel[0].nombre,
                     firstTime: false,
-                    progreso: this.props.progreso
+                    nivel: this.props.nivel
                 }).catch( (error) => {
                     console.log(error.message);
                 });
@@ -57,7 +58,7 @@ class NivelesList extends Component {
     }
 
     shouldComponentUpdate(props) {
-        if(this.state.progreso != props.progreso || this.state.firstTime) {
+        if(this.state.nivel != props.nivel || this.state.firstTime) {
             return true;
         } else {
             return false;

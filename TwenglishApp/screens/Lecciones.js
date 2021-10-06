@@ -24,7 +24,8 @@ class Lecciones extends Component {
       isLessonsVisible: false,
       temaLesson: null,
       portadaName: null,
-      update: false
+      update: false,
+      nivel: null
     };
 
   }
@@ -56,7 +57,8 @@ class Lecciones extends Component {
       this.setState({
         isLoading:false,
         lecciones: nivel.lecciones,
-        progreso: nivel.progreso
+        progreso: nivel.progreso,
+        nivel: nivel.nombre
         // update: false
       }).catch( (error) => {
         console.log(error.message);
@@ -123,7 +125,7 @@ class Lecciones extends Component {
               <MyTitle title="My" titleBold="Progress"></MyTitle>
             </View>
 
-            <NivelesList nivelSel={this.changeLessons} progreso={this.state.progreso}></NivelesList>
+            <NivelesList nivelSel={this.changeLessons} nivel={this.state.nivel}></NivelesList>
 
             <View style={view.safeArea}>
               <MyText title="What would you like to learn today?" style={{marginBottom: 15}}></MyText>
