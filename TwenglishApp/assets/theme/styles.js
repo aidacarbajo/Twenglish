@@ -42,7 +42,7 @@ const text = StyleSheet.create({
         fontFamily: extrabold,
     },
     body: {
-        fontSize: 10,
+        fontSize: 12,
         color: body,
         fontFamily: regular,
         textAlign: 'center',
@@ -148,10 +148,10 @@ const icons = StyleSheet.create({
         // color: '#fff',
     },
     sm: {
-        fontSize: 16
+        fontSize: 20
     },
     lg: {
-        fontSize: 20
+        fontSize: 22
     },
     light: {
         color: 'white'
@@ -203,7 +203,7 @@ const cards = StyleSheet.create({
     },
     padding: {
         paddingHorizontal: 15,
-        marginBottom: 130,
+        marginBottom: 135,
         flex: 1,
     },
     paddingLevel: {

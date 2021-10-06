@@ -125,7 +125,7 @@ class Lecciones extends Component {
               <MyTitle title="My" titleBold="Progress"></MyTitle>
             </View>
 
-            <NivelesList nivelSel={this.changeLessons} nivel={this.state.nivel}></NivelesList>
+            <NivelesList nivelSel={this.changeLessons} nivel={this.state.nivel} progreso={this.state.progreso}></NivelesList>
 
             <View style={view.safeArea}>
               <MyText title="What would you like to learn today?" style={{marginBottom: 15}}></MyText>
