@@ -5,11 +5,6 @@ import { secundary, text } from '../../assets/theme/styles';
 class MyTitle extends Component {
     constructor(props) {
         super(props);
-
-        // if(this.props.destacar == undefined) {
-        //     this.texto = this.props.title;
-        //     this.textoBold = this.props.titleBold;
-        // } 
     }
 
     applyBoldStyle = () => {

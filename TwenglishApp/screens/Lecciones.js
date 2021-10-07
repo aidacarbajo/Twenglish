@@ -40,7 +40,7 @@ class Lecciones extends Component {
   }
 
   receivedUpdate = (value) => {
-    console.log('receivedUpdate', value);
+    // console.log('receivedUpdate', value);
     this.changeLessons();
     // this.changeUpdate(value)
   }
@@ -53,7 +53,7 @@ class Lecciones extends Component {
   changeLessons = () => {
     return getNivelSeleccionado().then(res => {
       const nivel = res; 
-      console.log(nivel);
+
       this.setState({
         isLoading:false,
         lecciones: nivel.lecciones,

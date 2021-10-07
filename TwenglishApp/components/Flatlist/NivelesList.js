@@ -52,7 +52,7 @@ class NivelesList extends Component {
     }
 
     componentDidMount() {
-        this.getLevels(true);
+        this.getLevels(true, this.props);
     }
     
     componentWillUnmount() {

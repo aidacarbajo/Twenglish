@@ -7,6 +7,7 @@ const extrabold = 'sen_extra_bold';
 const primary = '#2971FD';
 const secundary = '#F7002B';
 const body = '#4D4D4D';
+const bodySub = '#9F9F9F';
 const example = '#949494';
 const correcto = '#00C136';
 const extra = '#00ADF7';
@@ -290,4 +291,4 @@ const modal = StyleSheet.create({
     },
 });
 
-export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, correcto, extra, example, cards, modal, regular, extrabold, bold, fondo };
+export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, bodySub, correcto, extra, example, cards, modal, regular, extrabold, bold, fondo };

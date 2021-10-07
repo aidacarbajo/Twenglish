@@ -6,7 +6,7 @@ import {
 
 import TabMenu from '../components/Menus/TabMenu';
 import Lecciones from '../screens/Lecciones';
-import Rutine from '../screens/Rutine';
+import Routine from '../screens/Routine';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +24,7 @@ const Navigation = () => {
       }
     >
       <Tab.Screen name={"Lessons"} component={Lecciones}/> 
-      <Tab.Screen name={"Routine"} component={Rutine}/> 
+      <Tab.Screen name={"Routine"} component={Routine}/> 
 
     </Tab.Navigator>
   );
