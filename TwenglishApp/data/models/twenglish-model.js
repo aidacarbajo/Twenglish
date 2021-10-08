@@ -50,6 +50,14 @@ exports.Conversacion = {
   }
 }
 
+exports.Dia = {
+  name: 'Dia',
+  properties: {
+    nombre: 'string',
+    Horas: 'date[]'
+  }
+}
+
 exports.Ejercicio = {
   name: 'Ejercicio',
   primaryKey: '_id',

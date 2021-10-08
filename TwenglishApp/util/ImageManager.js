@@ -1,5 +1,7 @@
 const Logo = require('../assets/img/logo.png');
 
+// Sin rutinas creadas
+const Rutina = require('../assets/img/routine-empty.png')
 // A1
 const FoodA1 = require('../assets/img/A1/foodA1.png');
 const FamilyA1 = require('../assets/img/A1/familyA1.png');
@@ -15,7 +17,13 @@ const GreetingsA1 = require('../assets/img/A1/greetingsA1.png');
 
 export const getImage = (name) => {
     let img;
+    
     switch (name) {
+        ///////////////////////////
+        // Cuando no hay rutinas //
+        ///////////////////////////
+        case 'routine':
+            img = Rutina; break;
         //////////////////////////////////////////////
         // IMAGENES REPRESENTATIVAS DE CADA LECCION //
         //////////////////////////////////////////////
