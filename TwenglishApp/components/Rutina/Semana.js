@@ -115,7 +115,7 @@ class Semana extends Component {
             const styless = [nohas, noselected, hoy, {borderRadius: 12, width: 35, height: 35, justifyContent: 'center', alignItems: 'center'}];
 
             return(
-                <View key={index}>
+                <View key={index} style={{zIndex: 0}}>
                     <Pressable onPress={() => this.select(index)} style={styless}>
                         <MyText title={day} key={index}/>
                     </Pressable>

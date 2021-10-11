@@ -7,6 +7,12 @@
         <item name="android:textColor">#000000</item>
     </style>
 
+    <style name="FontSizeStyle" parent="AppTheme">
+        <item name="android:textSize">11sp</item>
+        <item name="android:fontFamily">@fonts/sen_regular</item>
+        <item name="fontFamily">@fonts/sen_regular</item>
+    </style>
+
     <style name="BootTheme" parent="AppTheme">
         <!-- set the generated bootsplash.xml drawable as activity background -->
         <item name="android:background">@drawable/bootsplash</item>

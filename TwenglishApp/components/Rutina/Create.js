@@ -1,20 +1,25 @@
 import { Pressable, View } from 'react-native';
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import Semana from './Semana';
 import BlueButton from '../Buttons/BlueButton';
 import MyText from '../Texts/MyText';
-import { button, text } from '../../assets/theme/styles';
+import { body, button, extra, text } from '../../assets/theme/styles';
+import DatePicker from 'react-native-date-picker'
 
 class Create extends Component {
     constructor(props) {
         super(props);
 
-        this.child;
-
         this.state = {
             add: false,
+            date: new Date(),
             daysSelected: []
         }
+    }
+
+    setDate = (date) => {
+        // this.date = date;
+        console.log(date);
     }
   
     createRoutine = () => {
@@ -23,7 +28,7 @@ class Create extends Component {
 
     // Aqui hay que hacer la llamada a la bbdd
     routine = (r) => {
-        console.log(r);
+        // console.log(r);
         if([...r].includes(true)) {
             console.log('hay seleccionados');
             this.setState({daysSelected: r, add: false});
@@ -43,6 +48,16 @@ class Create extends Component {
 
                 <View style={{marginBottom: 15}}>
                     <MyText title="Time" />
+                    <DatePicker
+                        mode = "time"
+                        androidVariant = 'iosClone'
+                        is24hourSource = 'locale'
+                        locale = 'es-ES'
+                        minuteInterval = {5}
+                        textColor = {body}
+                        date={this.state.date} 
+                        onDateChange={date => this.setState({ date })}
+                    />
                 </View>
 
                 <View style={{flexDirection: 'row'}}>
