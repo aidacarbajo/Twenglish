@@ -147,8 +147,8 @@ export default class SpeakManager extends React.Component {
                     <Pressable onPressIn={this._startRecognition.bind(this)}>
                     {
                         this.state.pressed
-                            ? <RoundButton key={0} icon="micro" color={primary} style={false}></RoundButton>
-                            : <RoundButton key={1} icon="micro" color={'white'} style={true}></RoundButton>
+                            ? <RoundButton key={0} icon="micro" color={primary} style={false} size={60}></RoundButton>
+                            : <RoundButton key={1} icon="micro" color={'white'} style={true} size={60}></RoundButton>
                     }
                     </Pressable>
                     {

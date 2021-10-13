@@ -13,7 +13,7 @@ const funny = '&#xe812;';
 const surprise = '&#xe807;';
 
 export const getIcon = (name) => {
-    let icon = '';
+    let icon = null;
 
     switch (name) {
         case 'lessons':
@@ -42,8 +42,8 @@ export const getIcon = (name) => {
             icon = funny; break;
         case 'surprise':
             icon = surprise; break;
-        default:
-            icon = happy; break;
+        // default:
+        //     icon = happy; break;
     }
     
     return icon;

@@ -65,8 +65,8 @@ class VoiceManager extends Component {
                         <Pressable onPress = {() => this.listenToAudio()}>
                         {
                             this.state.played
-                                ? <RoundButton key={'2'} icon="listen" color={primary} style={false}></RoundButton>
-                                : <RoundButton key={'3'} icon="listen" color={'white'} style={true}></RoundButton>
+                                ? <RoundButton key={'2'} icon="listen" color={primary} style={false} size={60}></RoundButton>
+                                : <RoundButton key={'3'} icon="listen" color={'white'} style={true} size={60}></RoundButton>
                         }
                         </Pressable>
                     }

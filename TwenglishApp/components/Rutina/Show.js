@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import MyText from '../Texts/MyText';
 import Semana from './Semana';
 import { getImage } from '../../util/ImageManager';
-import { button, cards, icons, text } from '../../assets/theme/styles';
+import { button, cards, icons, primary, text } from '../../assets/theme/styles';
 import MyTitle from '../Texts/MyTitle';
 import BlueButton from '../Buttons/BlueButton';
 import RoundButton from '../Buttons/RoundButton';
@@ -49,18 +49,22 @@ class Show extends Component {
         console.log('Eliminar la hora del seleccionado')
     }
 
+    newRoutine = () => {
+        console.log('Crear nueva rutina');
+    }
+
     loadDay = () => {
         return(
-            this.state.horas.length > 0 ?
+            // this.state.horas.length > 0 ?
             (<View style={[cards.centrar, {width: '100%', marginTop: 30}]}>
                 {
                     this.state.horas.map((item, index) => {
                         return(            
                             <View key={index} style={[cards.cards, cards.cardPares, cards.centrar, {width: 200, height: 80}]}>
                                 {
-                                    this.props.action === 'edit' && 
-                                    <TouchableOpacity style={{width: 37, height: 37, position: 'absolute', right: -8, top: -10}} onPress={() => this.removeHour()}>
-                                        <RoundButton icon="wrong" color="white"></RoundButton>
+                                    this.props.action === 'edit' &&
+                                    <TouchableOpacity style={{position: 'absolute', right: -8, top: -10}} onPress={() => this.removeHour()}>
+                                        <RoundButton icon="wrong" color="white" size={37}></RoundButton>
                                     </TouchableOpacity>
                                 }
                                 <MyText title={item.getHours() + ':' + (item.getMinutes()<10?'0':'') + item.getMinutes()} style={{lineHeight: 20, fontSize: 14}}></MyText>
@@ -70,8 +74,12 @@ class Show extends Component {
                 }
 
                 {/* un + para crear nueva rutina */}
+                <TouchableOpacity onPress={() => this.newRoutine()} style={{marginVertical: 20}}>
+                    <RoundButton icon="+" color={primary} size={37} style={false}></RoundButton>
+                </TouchableOpacity>
             </View>)
-            :  this.norutina()
+            // :  this.norutina()
+
         )
     }
 
