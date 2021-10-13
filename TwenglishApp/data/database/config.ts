@@ -10,21 +10,19 @@ export default {
         ? RNFS.MainBundlePath + '/twenglish.realm'
         : RNFS.DocumentDirectoryPath + '/twenglish.realm',
     schema: schema,
-    schemaVersion: 55,    
+    schemaVersion: 58,    
   };
 
 
   /*
     PASOS PARA ACTUALIZAR BBDD DESDE REALM STUDIO
-    1.  Elimino Twenglish.realm
+    1.  (ejecutado en node terminal) 
         Descomento en index.js el de eliminar archivo twenglish.realm y comento el de copiar
         Poner async y await una vez y borrarlo porque sale error pero sí funciona: [Error: File does not exist]
         
-    2.  Control + C 
-
-              Si he añadido nuevos objetos modificar el twenglish-model y añadirlo en los imports de este archivo)
+    2.  Si he cambiado la estructura del twenglish-model, añadir el nuevo, e importarlo en los imports de este archivo)
         
-    3.  Pego el nuevo twenglish, hago un link, descomento, comento y vuelvo a compilar
+    3.  Hago un link desde VSC, descomento, comento y R
 
     4. Ya debería estar actualizado
   */

@@ -1,8 +1,8 @@
 import { button, text } from '../../assets/theme/styles';
 import React, { Component } from 'react'
 import {
-  // TouchableOpacity,
-  Pressable,
+  TouchableOpacity,
+  // Pressable,
   Text,
   View,
 } from 'react-native'
@@ -16,9 +16,9 @@ class OptionButton extends Component {
     return (
       this.props.canPress 
       ? (
-        <Pressable style={[button.button, button.option, {paddingLeft: 15, paddingVertical: 15}]} onPress={this.sendData}>
+        <TouchableOpacity style={[button.button, button.option, {paddingLeft: 15, paddingVertical: 15}]} onPress={this.sendData}>
           <Text style={[text.primario, text.opcion]}>{this.props.title}</Text>
-        </Pressable>  
+        </TouchableOpacity>  
       )
       : (
         <View style={[button.button, button.option, {paddingLeft: 15, paddingVertical: 15}]} onPress={this.sendData}>

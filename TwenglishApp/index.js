@@ -40,11 +40,11 @@ const App2 = () => {
         });
   } else {
       console.log('No es la primera vez que entro a la app');
-    //   console.log('');
-    //     Realm.open(database).then(realm => {
-    //         const le = realm.objects('Dia');
-    //         console.log(le);
-    //     }).catch((error) => reject(error));
+      console.log('');
+        Realm.open(database).then(realm => {
+            const le = realm.objects('Dia');
+            console.log(le);
+        }).catch((error) => reject(error));
     }
 
 

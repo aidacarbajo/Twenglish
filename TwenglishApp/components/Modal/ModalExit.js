@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Pressable, Text, View } from "react-native";
+import { TouchableOpacity, Text, View } from "react-native";
 import { button, text } from "../../assets/theme/styles";
 import MyTitle from "../Texts/MyTitle";
 import BlueButton from "../Buttons/BlueButton";
@@ -26,9 +26,9 @@ class ModalExit extends Component {
 
                 <BlueButton title="Exit" screen={this.mevoy} style={{marginTop: 30, marginBottom: 5}}></BlueButton>
                 
-                <Pressable style={[button.button, button.option, {alignItems: 'center', paddingVertical: 10}]} onPress={this.mequedo}>
+                <TouchableOpacity style={[button.button, button.option, {alignItems: 'center', paddingVertical: 10}]} onPress={this.mequedo}>
                   <MyText title="Cancel" style={text.primario}></MyText>
-                </Pressable>  
+                </TouchableOpacity>  
             </View>
         );
     }

@@ -7,24 +7,23 @@ import ModalC from '../components/Modal/ModalC';
 import Show from '../components/Rutina/Show';
 import Create from '../components/Rutina/Create';
 import ModalNotificacion from '../components/Modal/ModalNotificacion';
-
 import { emptyRoutine } from '../data/queries/rutina';
 
 class Routine extends Component {
     constructor(props) {
         super(props);
 
-        this.action = 'show';
         this.isRoutine = false;
 
         this.state = {
             isNewVisible: false,
             isEditVisible: false,
             isMessageVisible: false,
-            needUpdate: false
+            needUpdate: false,
+            action: 'show'
         }
 
-        emptyRoutine();
+        // emptyRoutine();
     }
 
 
@@ -43,10 +42,6 @@ class Routine extends Component {
         this.isRoutine = has;
     }
 
-    editRoutine = () => {
-        this.action = 'edit';
-    }
-
     changeModalVisible = (visible) => {
         if(!this.isRoutine || visible != undefined) {   // no tiene rutinas creadas
             if(visible != undefined) {
@@ -55,16 +50,22 @@ class Routine extends Component {
                 this.setState({isNewVisible: !this.state.isNewVisible});
             }
         } else {
-            this.setState({isEditVisible: !this.state.isEditVisible})   
+            console.log('i want to edit')
+            this.setState({action: 'edit'});
         }
     }
 
     hideMsg = (visible) => {
-        this.setState({isMessageVisible: visible});
+        this.setState({isMessageVisible: false});
     }
 
     setUpdate = () => {
         this.setState({needUpdate: false});
+    }
+
+    back2show = () => {
+        console.log('show otra vez')
+        this.setState({action: 'show'});
     }
 
     render() {
@@ -73,7 +74,7 @@ class Routine extends Component {
                 <MyTitle title="My" titleBold="Routine" style={{marginBottom: 10}}></MyTitle>
                 <MyText title="Be constant with a routine" style={{color: bodySub, marginBottom: 10}} />
 
-                { (this.action == 'show' || this.action == 'edit') && <Show hasroutine={this.hasroutine} action={this.action} create={this.changeModalVisible} needUpdate={this.state.needUpdate} setUpdate={this.setUpdate} /> }                
+                { (this.state.action != 'create') && <Show hasroutine={this.hasroutine} action={this.state.action} create={this.changeModalVisible} needUpdate={this.state.needUpdate} setUpdate={this.setUpdate} back2show={this.back2show} /> }                
 
                 {/* Modal de crear nueva rutina */}
                 <ModalC visible={this.state.isNewVisible}>
@@ -84,7 +85,6 @@ class Routine extends Component {
                 <ModalC hide={this.hideMsg} visible={this.state.isMessageVisible} tiempoCount={1000} tipo={'abajo'} msg={2}>
                     <ModalNotificacion tipo={'resumen'} msg={'Created successfully'}></ModalNotificacion>
                 </ModalC>
-
             </View>
         );    
     }

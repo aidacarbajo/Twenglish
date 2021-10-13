@@ -54,7 +54,8 @@ exports.Dia = {
   name: 'Dia',
   properties: {
     nombre: 'string',
-    Horas: 'date[]'
+    Horas: 'date[]',
+    orden: 'int'
   }
 }
 

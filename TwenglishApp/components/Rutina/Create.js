@@ -1,4 +1,4 @@
-import { Pressable, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import React, { Component, useState } from 'react'
 import Semana from './Semana';
 import BlueButton from '../Buttons/BlueButton';
@@ -17,11 +17,6 @@ class Create extends Component {
         }
     }
 
-    setDate = (date) => {
-        // this.date = date;
-        // console.log(date);
-    }
-  
     createRoutine = () => {
         this.setState({add: true});
     }
@@ -65,9 +60,9 @@ class Create extends Component {
                 </View>
 
                 <View style={{flexDirection: 'row'}}>
-                    <Pressable style={[button.button, button.option, {width: '47%', alignItems: 'center'}]} onPress={this.props.mequedo}>
+                    <TouchableOpacity style={[button.button, button.option, {width: '47%', alignItems: 'center'}]} onPress={this.props.mequedo}>
                         <MyText title="Cancel" style={[text.primario, {lineHeight: 21}]} />
-                    </Pressable>  
+                    </TouchableOpacity>  
                     <BlueButton title="Add" screen={this.createRoutine} style={{width: '47%'}} />
                 </View>
 

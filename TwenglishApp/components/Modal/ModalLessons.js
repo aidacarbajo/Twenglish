@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Pressable, Text, View } from "react-native";
+import { TouchableOpacity, Text, View } from "react-native";
 import { button, text } from "../../assets/theme/styles";
 import MyTitle from "../Texts/MyTitle";
 import BlueButton from "../Buttons/BlueButton";
@@ -17,9 +17,9 @@ class ModalLessons extends Component {
                 
                 <BlueButton title="Start lesson" screen={this.props.empezarLeccion} style={{width: '90%'}}></BlueButton>
 
-                <Pressable style={[button.button, button.option, {width: '90%', alignItems: 'center'}]} onPress={this.props.verApuntes}>
+                <TouchableOpacity style={[button.button, button.option, {width: '90%', alignItems: 'center'}]} onPress={this.props.verApuntes}>
                   <MyText title="Notes" style={[text.primario, {padding: 0}]}></MyText>
-                </Pressable>  
+                </TouchableOpacity>  
             </View>
         );
     }

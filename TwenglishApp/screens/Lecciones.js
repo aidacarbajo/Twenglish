@@ -105,9 +105,9 @@ class Lecciones extends Component {
             <StatusBar hidden />
             {/* Modal de ajustes */}
             <Modal visible={this.state.isSettingsVisible} tipo={'top'} navigation={this.props.navigation}>
-                <Pressable style={[button.button, button.option, {alignItems: 'center', width: '95%', paddingVertical: 12}]} onPress={() => this.props.navigation.navigate('Settings')}>
+                <TouchableOpacity style={[button.button, button.option, {alignItems: 'center', width: '95%', paddingVertical: 12}]} onPress={() => this.props.navigation.navigate('Settings')}>
                     <MyText title={"Más Información"} style={text.primario} />
-                </Pressable>  
+                </TouchableOpacity>  
             </Modal>
 
             {/* Modal de lecciones*/
