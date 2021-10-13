@@ -1,18 +1,24 @@
-import { ImageBackground, Pressable, View } from 'react-native';
+import { ImageBackground, View } from 'react-native';
 import React, { Component } from 'react'
-import { getWeek } from '../../data/queries/rutina';
 import MyText from '../Texts/MyText';
 import Semana from './Semana';
 import { getImage } from '../../util/ImageManager';
 import { cards } from '../../assets/theme/styles';
 import MyTitle from '../Texts/MyTitle';
 import BlueButton from '../Buttons/BlueButton';
+import { getDay } from '../../data/queries/rutina';
 
 class Show extends Component {
     constructor(props) {
         super(props);
 
         this.tieneRutina = false;
+    
+        this.state = {
+            dia: undefined,
+            horas: []
+        }
+
     }
   
     hideModal = () => {
@@ -30,14 +36,33 @@ class Show extends Component {
 
     loadDay = () => {
         return(
-            <MyText title="Loading day..."></MyText>
+            <View>
+                
+                <MyText title="Loading day..."></MyText>
+
+            </View>
         )
+    }
+
+    shouldComponentUpdate(props, state) {
+        return true;
+    }
+
+    setSelected = (dia) => {
+        this.setState({dia: dia});
+
+        if(this.tieneRutina) {    
+            getDay(dia).then(res => {
+                console.log(res);
+                
+            });
+        } 
     }
 
     render() {
         return(
             <View>
-                <Semana selected={this.props.action} hasroutinee={this.hasroutine} update={this.props.needUpdate} setUpdate={this.setUpdate} />
+                <Semana selected={this.props.action} hasroutinee={this.hasroutine} update={this.props.needUpdate} setUpdate={this.setUpdate} dayS={this.setSelected} />
 
                 <View style={{height: '100%'}}>
                 {
@@ -60,7 +85,7 @@ class Show extends Component {
                     </View>
                 }
                 {
-                    this.tieneRutina && this.props.action == 'show' && this.loadDay()
+                    this.state.dia != undefined && this.tieneRutina && this.loadDay()
                 }
                 </View>
 

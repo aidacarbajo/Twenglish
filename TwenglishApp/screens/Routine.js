@@ -38,7 +38,6 @@ class Routine extends Component {
             if(this.isRoutine != has) {
                 this.setState({needUpdate: true});
                 // Cargar info del dia seleccionado
-
             }
         }
         this.isRoutine = has;
@@ -54,11 +53,9 @@ class Routine extends Component {
                 this.setState({isNewVisible: visible})
             } else {
                 this.setState({isNewVisible: !this.state.isNewVisible});
-                return true;
             }
         } else {
             this.setState({isEditVisible: !this.state.isEditVisible})   
-            return false;
         }
     }
 

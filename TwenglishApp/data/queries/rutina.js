@@ -33,13 +33,16 @@ const getWeek = () => new Promise((resolve, reject) => {
 // Devuelve sobre el dia que está seleccionado (default: hoy) //
 ////////////////////////////////////////////////////////////////
 
-const getDay = (nombre) => new Promise((resolve, reject) => {
+const getDay = orden => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
-        const day = realm.objects('Dia').filtered(`nombre == '${nombre}'`);
-        if(day[0].Horas != null) {
+        const day = realm.objects('Dia').filtered(`orden == '${orden}'`);
+
+        if(day.length > 0) {
             resolve(day[0].Horas);
+        } else{
+            resolve(null);
         }
-        resolve([]);
+        
     }).catch((error) => reject(error));
 });
 
