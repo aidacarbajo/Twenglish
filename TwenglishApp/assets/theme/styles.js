@@ -10,6 +10,7 @@ const body = '#4D4D4D';
 const bodySub = '#9F9F9F';
 const example = '#949494';
 const correcto = '#00C136';
+const fondoCorrecto = '#D5EFDC';
 const extra = '#00ADF7';
 const fondo = '#F6F5F8';
 
@@ -270,7 +271,7 @@ const cards = StyleSheet.create({
         borderColor: extra,
     },
     correct: {
-        backgroundColor: '#D5EFDC',
+        backgroundColor: fondoCorrecto,
         borderColor: correcto,
     },
     incorrect: {
@@ -291,4 +292,4 @@ const modal = StyleSheet.create({
     },
 });
 
-export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, bodySub, correcto, extra, example, cards, modal, regular, extrabold, bold, fondo };
+export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, bodySub, correcto, fondoCorrecto, extra, example, cards, modal, regular, extrabold, bold, fondo };

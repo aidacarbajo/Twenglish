@@ -2,7 +2,7 @@ import { Pressable, View } from 'react-native';
 import React, { Component } from 'react'
 import { getWeek } from '../../data/queries/rutina';
 import MyText from '../Texts/MyText';
-import { primary, secundary } from '../../assets/theme/styles';
+import { correcto, fondoCorrecto, primary, secundary } from '../../assets/theme/styles';
 
 class Semana extends Component {
     constructor(props) {
@@ -52,80 +52,81 @@ class Semana extends Component {
         }
     }
 
-    getSelected = () => {
-        if(this.props.hasRoutinee != undefined) {
-            this.props.hasRoutinee(this.state.has);
-        } 
+    update = () => {
+        this.props.setUpdate();
+        this.getWeek();
     }
 
+    render() {
+        this.props.pressed && this.props.hasRoutinee != undefined && this.props.hasRoutinee(this.state.has);
+        this.props.update != undefined && this.props.update && this.update();
 
-  shouldComponentUpdate(props, state) {
-        return true;
-  }
-
-//   componentDidUpdate(props) {
-    // console.log('update', props);
-//   }
-
-
- render() {
-
-    this.props.pressed && this.getSelected()
-
-   return(
-    <View style={{flexDirection: 'row', marginTop: 10, justifyContent: 'space-between'}}>
-    {
-        this.state.weekDays.map((day, index) => {
-            let nohas = {}, noselected = {}, hoy = {};
-           
-            if(this.props.selected == 'create' && this.state.has[index]) {
-                nohas = {
-                    backgroundColor: '#FEE3E8',
-                    borderColor: secundary,
-                    borderLeftWidth: 1.5,
-                    borderRightWidth: 1.5,
-                    borderTopWidth: 1.5,
-                    borderBottomWidth: 1.5,            
-                    elevation: 4,
-                }
-            } else {
-                if(this.props.selected == 'show') {
-                    if(this.today === index) {
-                        hoy = {
-                            backgroundColor: '#D2EEFF',
-                            borderColor: primary,
+        return(
+            <View style={{flexDirection: 'row', marginTop: 10, justifyContent: 'space-between'}}>
+            {
+                this.state.weekDays.map((day, index) => {
+                    let nohas = {}, noselected = {}, hoy = {};
+                
+                    if(this.props.selected == 'create' && this.state.has[index]) {
+                        nohas = {
+                            backgroundColor: '#FEE3E8',
+                            borderColor: secundary,
                             borderLeftWidth: 1.5,
                             borderRightWidth: 1.5,
                             borderTopWidth: 1.5,
                             borderBottomWidth: 1.5,            
-                            elevation: 4,        
+                            elevation: 4,
                         }
                     } else {
-                        if(this.state.studentS === index) {
-                            noselected = {
-                                backgroundColor: 'white',
-                                elevation: 4
-                            }        
+                        if(this.props.selected == 'show' || this.props.selected == 'edit') {
+                            if(this.today === index) {
+                                hoy = {
+                                    backgroundColor: '#D2EEFF',
+                                    borderColor: primary,
+                                    borderLeftWidth: 1.5,
+                                    borderRightWidth: 1.5,
+                                    borderTopWidth: 1.5,
+                                    borderBottomWidth: 1.5,            
+                                    elevation: 4,        
+                                }
+                            } else {
+                                if(this.state.studentS === index) {
+                                    noselected = {
+                                        backgroundColor: 'white',
+                                        elevation: 4
+                                    }        
+                                } else {
+                                    if(this.state.has[index]) {
+                                        hoy = {
+                                            backgroundColor: fondoCorrecto,
+                                            borderColor: correcto,
+                                            borderLeftWidth: 1.5,
+                                            borderRightWidth: 1.5,
+                                            borderTopWidth: 1.5,
+                                            borderBottomWidth: 1.5,            
+                                            elevation: 4,        
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
+                    
+
+                    const styless = [nohas, noselected, hoy, {borderRadius: 12, width: 35, height: 35, justifyContent: 'center', alignItems: 'center'}];
+
+                    return(
+                        <View key={index} style={{zIndex: 0}}>
+                            <Pressable onPress={() => this.select(index)} style={styless}>
+                                <MyText title={day} key={index}/>
+                            </Pressable>
+                        </View>
+                    )
+                })
                 }
-            }
-            
-
-            const styless = [nohas, noselected, hoy, {borderRadius: 12, width: 35, height: 35, justifyContent: 'center', alignItems: 'center'}];
-
-            return(
-                <View key={index} style={{zIndex: 0}}>
-                    <Pressable onPress={() => this.select(index)} style={styless}>
-                        <MyText title={day} key={index}/>
-                    </Pressable>
                 </View>
             )
-        })
+        }
     }
-    </View>
-   )
-  }
-}
 
 export default Semana;

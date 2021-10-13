@@ -5,8 +5,10 @@ import MyTitle from '../components/Texts/MyTitle';
 import MyText from '../components/Texts/MyText';
 import ModalC from '../components/Modal/ModalC';
 import Show from '../components/Rutina/Show';
-import Edit from '../components/Rutina/Edit';
 import Create from '../components/Rutina/Create';
+import ModalNotificacion from '../components/Modal/ModalNotificacion';
+
+import { emptyRoutine } from '../data/queries/rutina';
 
 class Routine extends Component {
     constructor(props) {
@@ -17,26 +19,55 @@ class Routine extends Component {
 
         this.state = {
             isNewVisible: false,
-            isEditVisible: false
+            isEditVisible: false,
+            isMessageVisible: false,
+            needUpdate: false
         }
+
+        emptyRoutine();
     }
 
 
     hasroutine = (has) => {
+        if(has){
+            // Creado con exito
+            this.setState({isMessageVisible: true});
+            // ocultar modal de crear rutina
+            this.changeModalVisible(false);
+            // actualizar colores de la semana
+            if(this.isRoutine != has) {
+                this.setState({needUpdate: true});
+                // Cargar info del dia seleccionado
+
+            }
+        }
         this.isRoutine = has;
     }
 
     editRoutine = () => {
-        console.log('I want to edit');
+        this.action = 'edit';
     }
 
-    changeModalVisible = () => {
-        if(!this.isRoutine) {   // no tiene rutinas creadas
-            console.log('preparing create routine');
-            this.setState({isNewVisible: !this.state.isNewVisible})
+    changeModalVisible = (visible) => {
+        if(!this.isRoutine || visible != undefined) {   // no tiene rutinas creadas
+            if(visible != undefined) {
+                this.setState({isNewVisible: visible})
+            } else {
+                this.setState({isNewVisible: !this.state.isNewVisible});
+                return true;
+            }
         } else {
             this.setState({isEditVisible: !this.state.isEditVisible})   
+            return false;
         }
+    }
+
+    hideMsg = (visible) => {
+        this.setState({isMessageVisible: visible});
+    }
+
+    setUpdate = () => {
+        this.setState({needUpdate: false});
     }
 
     render() {
@@ -45,13 +76,18 @@ class Routine extends Component {
                 <MyTitle title="My" titleBold="Routine" style={{marginBottom: 10}}></MyTitle>
                 <MyText title="Be constant with a routine" style={{color: bodySub, marginBottom: 10}} />
 
-                { this.action == 'show' && <Show hasroutine={this.hasroutine} action={this.action} create={this.changeModalVisible} /> }
-                { this.action == 'edit' && <Edit hasroutine={this.hasroutine} action={this.action} /> }
-                
+                { (this.action == 'show' || this.action == 'edit') && <Show hasroutine={this.hasroutine} action={this.action} create={this.changeModalVisible} needUpdate={this.state.needUpdate} setUpdate={this.setUpdate} /> }                
 
+                {/* Modal de crear nueva rutina */}
                 <ModalC visible={this.state.isNewVisible}>
-                    <Create action={'create'} mequedo={this.changeModalVisible} />
+                    <Create action={'create'} hasroutine={this.hasroutine} />
                 </ModalC>
+
+                {/* Modal de creado correctamente */}
+                <ModalC hide={this.hideMsg} visible={this.state.isMessageVisible} tiempoCount={1000} tipo={'abajo'} msg={2}>
+                    <ModalNotificacion tipo={'resumen'} msg={'Created successfully'}></ModalNotificacion>
+                </ModalC>
+
             </View>
         );    
     }

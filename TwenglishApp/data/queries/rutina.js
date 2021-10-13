@@ -43,24 +43,39 @@ const getDay = (nombre) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-///////////////////////////////////////////////////////////////////////////////
-// Actualiza la leccion seleccionada de la portada que se pasa por parametro //
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+// Le añadimos los nuevos horarios a los dias seleccionados //
+//////////////////////////////////////////////////////////////
 
-const updateCurrentLesson = portada => 
+const createRoutine = (listDays, time) => 
     new Promise((resolve, reject) => {
 
         Realm.open(database).then(realm => {
-            const lessonS = realm.objects('Leccion').filtered(`portada == '${portada}'`);
-            const niveles = getNivelSeleccionado().then(res => {
-                realm.write(() => {
-                    res.leccion_seleccionada = lessonS[0]
-                })
-            })
-            resolve(lessonS[0]);
-
+            const days = realm.objects('Dia');
+            
+            for(let i = 0; i < days.length; i++) {
+                if(listDays[i]) {
+                    realm.write(() => {
+                        days[i].Horas = [time]
+                    })
+                }
+            }
+            resolve(days);
         }).catch((error) => reject(error));
     });
 
 
-export { getDay, getWeek, updateCurrentLesson }
+const emptyRoutine = () => new Promise((resolve, reject) => {
+    Realm.open(database).then(realm => {
+        for (item of realm.objects('Dia')) {
+            realm.write(() => {
+                item.Horas = []
+            })
+        }
+        resolve(true)
+
+    }).catch((error) => reject(error));
+});
+
+
+export { getDay, getWeek, createRoutine, emptyRoutine }

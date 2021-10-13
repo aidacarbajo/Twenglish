@@ -5,6 +5,7 @@ import BlueButton from '../Buttons/BlueButton';
 import MyText from '../Texts/MyText';
 import { body, button, extra, text } from '../../assets/theme/styles';
 import DatePicker from 'react-native-date-picker'
+import { createRoutine } from '../../data/queries/rutina';
 
 class Create extends Component {
     constructor(props) {
@@ -13,30 +14,33 @@ class Create extends Component {
         this.state = {
             add: false,
             date: new Date(),
-            daysSelected: []
         }
     }
 
     setDate = (date) => {
         // this.date = date;
-        console.log(date);
+        // console.log(date);
     }
   
     createRoutine = () => {
         this.setState({add: true});
     }
 
-    // Aqui hay que hacer la llamada a la bbdd
     routine = (r) => {
-        // console.log(r);
         if([...r].includes(true)) {
-            console.log('hay seleccionados');
-            this.setState({daysSelected: r, add: false});
+            // Aqui hay que hacer la llamada a la bbdd
+            createRoutine([...r], this.state.date);
+            this.setState({add: false});
+            this.props.hasroutine(r);
         } else {
-            console.log('no hay seleccionados');
             // insertar mensaje de que debe seleccionar algun valor
         }
     }
+
+    setUpdate = () => {
+        this.update = false;
+    }
+
 
     render() {
         return(
@@ -53,7 +57,7 @@ class Create extends Component {
                         androidVariant = 'iosClone'
                         is24hourSource = 'locale'
                         locale = 'es-ES'
-                        minuteInterval = {5}
+                        // minuteInterval = {5}
                         textColor = {body}
                         date={this.state.date} 
                         onDateChange={date => this.setState({ date })}

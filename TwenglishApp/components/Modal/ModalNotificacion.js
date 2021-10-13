@@ -29,7 +29,13 @@ class ModalNotificacion extends Component {
                     obj = {titulo: 'Good work!', color: "white", icon: 'funny'};
                     styless = {backgroundColor: '#FF6100', };
                 } else {
-                    obj = {titulo: "You're amazing!", color: "white", icon: 'surprise'};
+                    let tit = "You're amazing!";    // Para el resumen del final de la leccion
+
+                    if(typeof(this.props.msg) != Number) {
+                        tit = this.props.msg;
+                    }
+
+                    obj = {titulo: tit, color: "white", icon: 'surprise'};
                     styless = {backgroundColor: correcto};
                 }
             }
