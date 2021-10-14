@@ -1,4 +1,4 @@
-import Realm from 'realm';
+import Realm, { UpdateMode } from 'realm';
 import database from '../database/config';
 
 
@@ -59,7 +59,7 @@ const createRoutine = (listDays, time) =>
             for(let i = 0; i < days.length; i++) {
                 if(listDays[i]) {
                     realm.write(() => {
-                        days[i].Horas = [time]
+                        days[i].Horas.push(time)
                     })
                 }
             }
@@ -94,4 +94,61 @@ const deleteAnHour = (day, position) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-export { getDay, getWeek, createRoutine, emptyRoutine, deleteAnHour }
+
+const applyChanges = (changes, modificados) => new Promise((resolve, reject) => {
+    let tiene_horario = 0;
+
+    Realm.open(database).then(realm => {
+        const week = realm.objects('Dia');
+        for(let index = 0; index < week.length; index++) {
+            const item = week[index];
+
+            if(modificados[index]) {
+                if(changes[index].horas.length <= 0) {
+                    tiene_horario++;
+                    // console.log('Ha eliminado todos los elementos');
+                    realm.write(() => {
+                        item.Horas = [];
+                    })
+                    continue;
+                }
+
+                if(item.Horas.length > changes[index].horas.length) {
+                    // console.log('He eliminado algun elemento de', item.nombre);
+
+                    // Recorremos array para ver cual no está y lo eliminamos
+                    for(let i = 0; i < item.Horas.length; i++) {
+                        // console.log(changes[index].horas);
+                        // console.log(typeof(item.Horas[i].toString()))
+                        if(!isInArray(changes[index].horas, item.Horas[i])) {
+                            // console.log('quiero borrar');
+                            deleteAnHour(week[index].orden, i);
+                        } else {
+                            // console.log('coinciden')
+                        }
+                    }
+
+                    function isInArray(array, value) {
+                        return !!array.find(item => {
+                            return item.getTime() == value.getTime();
+                        });
+                    }
+                } 
+            } else {
+                // console.log('Elemento', item.nombre, 'no modificado');
+                if(item.Horas.length === 0) {
+                    tiene_horario++;
+                }
+            }
+        }
+
+        if(tiene_horario < 7) {
+            resolve(true);
+        } else {
+            resolve(false);
+        }
+                
+    }).catch((error) => reject(error));
+});
+
+export { getDay, getWeek, createRoutine, emptyRoutine, deleteAnHour, applyChanges }

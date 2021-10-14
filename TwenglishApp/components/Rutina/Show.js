@@ -1,4 +1,4 @@
-import { ImageBackground, Pressable, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, TouchableOpacity, View } from 'react-native';
 import React, { Component } from 'react'
 import MyText from '../Texts/MyText';
 import Semana from './Semana';
@@ -7,7 +7,7 @@ import { button, cards, icons, primary, text } from '../../assets/theme/styles';
 import MyTitle from '../Texts/MyTitle';
 import BlueButton from '../Buttons/BlueButton';
 import RoundButton from '../Buttons/RoundButton';
-import { deleteAnHour, getDay } from '../../data/queries/rutina';
+import { applyChanges, deleteAnHour, getDay } from '../../data/queries/rutina';
 
 class Show extends Component {
     constructor(props) {
@@ -25,6 +25,8 @@ class Show extends Component {
 
         // Añado y elimino este array (es provisional hasta que se de a Save changes)
         this.firstTime = [true, true, true, true, true, true, true];
+        this.cuantosHorarios = [0, 0, 0, 0, 0, 0, 0];
+        this.modificados = [false, false, false, false, false, false, false];
 
         this.state = {
             dia: this.today,
@@ -53,38 +55,33 @@ class Show extends Component {
     }
 
     removeHour = (index) => {
-        // Aqui cuando le de a saveChanges se realiza la accion
-        // deleteAnHour(this.state.dia, index).then(res=> {
-        //     this.setState({horas: res[0].Horas})
-        // })
         var array = [...this.state.copy];
             array[this.state.dia].horas.splice(index, 1);
-            
             this.setState({copy: array});
 
-        // const copia = this.state.copy[this.state.dia];
-        // console.log(copia.horas);
-        // this.setState({copy: this.state.copy[this.state.dia].horas.splice(index, 1)});
-        // this.setState({horas: this.copy})
+        this.modificados[this.state.dia] = true;
     }
 
-    newRoutine = () => {
-        console.log('Crear nueva rutina');
+    modifyRoutine = () => {
+        // Le paso la copy y cuando sea diferente de lo que haya en la bbdd hacemos un write
+        applyChanges(this.state.copy, this.modificados).then(res => {
+            this.back2show(res);
+            this.tieneRutina = res
+            this.setSelected(this.state.dia)
+        });
     }
-
-    
 
 
     loadDay = () => {
         return(
             // this.state.horas.length > 0 ?
-            (<View style={[cards.centrar, {width: '100%', marginTop: 30}]}>
+            (<View style={[cards.centrar, {width: '100%', marginTop: 30, zIndex: -1}]}>
                 {
                     // Si no está editando recorre el array de this.state.horas (que es la de la bbdd)
                     this.props.action === 'show' && 
                     this.state.horas.map((item, index) => {
                             return(            
-                                <View key={index} style={[cards.cards, cards.cardPares, cards.centrar, {width: 200, height: 80,  marginBottom: 12}]}>
+                                <View key={index} style={[cards.cards, cards.cardPares, cards.centrar, {width: 180, height: 70,  marginBottom: 12}]}>
                                     <MyText title={item.getHours() + ':' + (item.getMinutes()<10?'0':'') + item.getMinutes()} style={{lineHeight: 20, fontSize: 14}}></MyText>
                                 </View>
                             )    
@@ -95,7 +92,7 @@ class Show extends Component {
                     this.props.action === 'edit' &&
                     this.state.copy[this.state.dia].horas.map((item, index) => {
                         return(            
-                            <View key={index} style={[cards.cards, cards.cardPares, cards.centrar, {width: 200, height: 80,  marginBottom: 12}]}>
+                            <View key={index} style={[cards.cards, cards.cardPares, cards.centrar, {width: 180, height: 70,  marginBottom: 12}]}>
                                 {
                                     this.props.action === 'edit' &&
                                     <TouchableOpacity style={{position: 'absolute', right: -8, top: -10}} onPress={() => this.removeHour(index)}>
@@ -110,7 +107,7 @@ class Show extends Component {
 
                 {/* un + para crear nueva rutina */
                 this.props.action === 'edit' && 
-                <TouchableOpacity onPress={() => this.newRoutine()} style={{marginVertical: 20}}>
+                <TouchableOpacity onPress={() => this.props.create('', 'create')} style={{marginVertical: 5}}>
                     <RoundButton icon="+" color={primary} size={37} style={false}></RoundButton>
                 </TouchableOpacity>
                 }
@@ -152,24 +149,35 @@ class Show extends Component {
             getDay(dia).then(res => {
                 // array provisional
                 if(this.firstTime[dia]) {
+                    // Guardamos la longitud de cada uno de los dias
+                    if(res.length > 0) {
+                        this.cuantosHorarios[dia] = res.length;
+                    }
+
                     let p = this.state.copy;
                     p[dia].horas = [...res];
-                    this.setState({copy: p})
-                    
+                    this.setState({copy: p});
                     this.firstTime[dia] = false;
-                    console.log(p)
                 }
+
+                // Si se han creado nuevos desde la edición, se actualizan
+                if(res.length > this.cuantosHorarios[dia]) {
+                    this.cuantosHorarios[dia] = res.length;
+                    let p = this.state.copy;
+                    p[dia].horas.push(res[res.length - 1]);
+                    this.setState({copy: p});
+                }
+
                 // el array de horas real
                 this.setState({horas: [...res]})
             });
         } 
     }
 
-    back2show = () => {
+    back2show = (norutina) => {
         this.firstTime = [true, true, true, true, true, true, true];
-
         // volver a mostrar sin editar
-        this.props.back2show();
+        this.props.back2show(norutina);
     }
 
     needUpdate = () => {
@@ -204,15 +212,16 @@ class Show extends Component {
                             ? <BlueButton title="Edit routine" screen={this.editRoutine} />
                             : <View style={{flexDirection: 'row'}}>
                                 
-                                <TouchableOpacity style={[button.button, button.option, {alignItems: 'center', width: '45%'}]} onPress={() => this.back2show()}>
+                                <TouchableOpacity style={[button.button, button.option, {alignItems: 'center', width: '45%'}]} onPress={() => this.back2show(true)}>
                                     <MyText title="Discard" style={text.primario}></MyText>
                                 </TouchableOpacity>  
 
-                                <BlueButton title="Save changes" screen={this.editRoutine} style={{width: '45%'}} />
+                                <BlueButton title="Save changes" screen={this.modifyRoutine} style={{width: '45%'}} />
                             </View>
                         ]
                     }
                 </View>
+
             </View>
         )
     }

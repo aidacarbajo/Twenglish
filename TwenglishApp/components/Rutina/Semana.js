@@ -65,9 +65,10 @@ class Semana extends Component {
 
     getWeek = () => {
         return getWeek().then(res => {
-            this.setState({weekDays: res[0], has: res[1], hasroutine: res[2]});
+            this.setState({weekDays: res[0], hasroutine: res[2]});
 
             if(this.props.selected != 'create') {
+                this.setState({has: res[1]});
                 this.props.dayS(this.state.studentS != undefined ? this.state.studentS : this.today);                
             }
 

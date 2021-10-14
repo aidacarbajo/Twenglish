@@ -36,37 +36,33 @@ class Routine extends Component {
             if(this.isRoutine != has) {
                 this.setState({needUpdate: true});
             }
+            this.isRoutine = has;
+
+        } else {
+            this.setState({isNewVisible: false});
         }
-        this.isRoutine = has;
     }
 
     changeModalVisible = (visible, accion) => {
-        // Visible = tieneRutina?
-        console.log('')
-        console.log('Visible: ', visible);
-        console.log('Tiene rutina: ', this.isRoutine);
-        console.log('Accion', accion)
-
-        if(!this.isRoutine) {   // no tiene rutinas creadas
+        if(!this.isRoutine && this.isRoutine!=undefined) {   // no tiene rutinas creadas
             if(!visible) {  // no tiene rutina? Se abre el modal
                 this.setState({isNewVisible: true})
-            } else {
-                // Tiene rutina o acabar de crear una? Ocultamos modal
-                console.log('no tengo rutina pero estoy visible')
-                // this.setState({isNewVisible: false});
-            }
+            } 
         } else {
-            // Tiene rutina?
-            this.setState({isNewVisible: false});
+            if(accion === 'create') {
+                this.setState({isNewVisible: true});
+            } else {        
+                // Tiene rutina?
+                this.setState({isNewVisible: false});
 
-            if(accion === 'edit') {
-                console.log('i want to edit')
-                this.setState({action: 'edit'})
+                if(accion === 'edit') {
+                    this.setState({action: 'edit'})
+                } 
             }
         }
     }
 
-    hideMsg = (visible) => {
+    hideMsg = () => {
         this.setState({isMessageVisible: false});
     }
 
@@ -74,8 +70,8 @@ class Routine extends Component {
         this.setState({needUpdate: false});
     }
 
-    back2show = () => {
-        console.log('show otra vez')
+    back2show = (sinnada) => {
+        this.isRoutine = sinnada;
         this.setState({action: 'show'});
     }
 
@@ -89,7 +85,7 @@ class Routine extends Component {
 
                 {/* Modal de crear nueva rutina */}
                 <ModalC visible={this.state.isNewVisible}>
-                    <Create action={'create'} hasroutine={this.hasroutine} />
+                    <Create action={'create'} hasroutine={this.hasroutine} mequedo={this.hasroutine}/>
                 </ModalC>
 
                 {/* Modal de creado correctamente */}

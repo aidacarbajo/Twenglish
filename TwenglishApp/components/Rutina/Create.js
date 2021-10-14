@@ -1,9 +1,9 @@
 import { TouchableOpacity, View } from 'react-native';
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 import Semana from './Semana';
 import BlueButton from '../Buttons/BlueButton';
 import MyText from '../Texts/MyText';
-import { body, button, extra, text } from '../../assets/theme/styles';
+import { body, button, text } from '../../assets/theme/styles';
 import DatePicker from 'react-native-date-picker'
 import { createRoutine } from '../../data/queries/rutina';
 
@@ -11,9 +11,11 @@ class Create extends Component {
     constructor(props) {
         super(props);
 
+        this.nuevo = true;
+
         this.state = {
             add: false,
-            date: new Date(),
+            date: new Date()
         }
     }
 
@@ -26,10 +28,15 @@ class Create extends Component {
             // Aqui hay que hacer la llamada a la bbdd
             createRoutine([...r], this.state.date);
             this.setState({add: false});
+            this.nuevo = true;
             this.props.hasroutine(r, 'create');
         } else {
             // insertar mensaje de que debe seleccionar algun valor
         }
+    }
+
+    setNuevo = () => {
+        this.nuevo = false;    
     }
 
     setUpdate = () => {
@@ -52,7 +59,6 @@ class Create extends Component {
                         androidVariant = 'iosClone'
                         is24hourSource = 'locale'
                         locale = 'es-ES'
-                        // minuteInterval = {5}
                         textColor = {body}
                         date={this.state.date} 
                         onDateChange={date => this.setState({ date })}
@@ -60,7 +66,7 @@ class Create extends Component {
                 </View>
 
                 <View style={{flexDirection: 'row'}}>
-                    <TouchableOpacity style={[button.button, button.option, {width: '47%', alignItems: 'center'}]} onPress={this.props.mequedo}>
+                    <TouchableOpacity style={[button.button, button.option, {width: '47%', alignItems: 'center'}]} onPress={() => this.props.mequedo()}>
                         <MyText title="Cancel" style={[text.primario, {lineHeight: 21}]} />
                     </TouchableOpacity>  
                     <BlueButton title="Add" screen={this.createRoutine} style={{width: '47%'}} />
