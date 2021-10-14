@@ -81,4 +81,17 @@ const emptyRoutine = () => new Promise((resolve, reject) => {
 });
 
 
-export { getDay, getWeek, createRoutine, emptyRoutine }
+const deleteAnHour = (day, position) => new Promise((resolve, reject) => {
+    Realm.open(database).then(realm => {
+        const dia = realm.objects('Dia').filtered(`orden == '${day}'`)
+
+        realm.write(() => {
+            dia[0].Horas.splice(position, 1);
+        })
+        
+        resolve(dia)
+
+    }).catch((error) => reject(error));
+});
+
+export { getDay, getWeek, createRoutine, emptyRoutine, deleteAnHour }

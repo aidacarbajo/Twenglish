@@ -58,7 +58,7 @@ class Semana extends Component {
         this.props.setUpdate();
         this.getWeek();
     }
-
+    
     componentWillUnmount() {
 
     }

@@ -17,7 +17,6 @@ class Routine extends Component {
 
         this.state = {
             isNewVisible: false,
-            isEditVisible: false,
             isMessageVisible: false,
             needUpdate: false,
             action: 'show'
@@ -32,26 +31,38 @@ class Routine extends Component {
             // Creado con exito
             this.setState({isMessageVisible: true});
             // ocultar modal de crear rutina
-            this.changeModalVisible(false);
+            this.changeModalVisible();
             // actualizar colores de la semana
             if(this.isRoutine != has) {
                 this.setState({needUpdate: true});
-                // Cargar info del dia seleccionado
             }
         }
         this.isRoutine = has;
     }
 
-    changeModalVisible = (visible) => {
-        if(!this.isRoutine || visible != undefined) {   // no tiene rutinas creadas
-            if(visible != undefined) {
-                this.setState({isNewVisible: visible})
+    changeModalVisible = (visible, accion) => {
+        // Visible = tieneRutina?
+        console.log('')
+        console.log('Visible: ', visible);
+        console.log('Tiene rutina: ', this.isRoutine);
+        console.log('Accion', accion)
+
+        if(!this.isRoutine) {   // no tiene rutinas creadas
+            if(!visible) {  // no tiene rutina? Se abre el modal
+                this.setState({isNewVisible: true})
             } else {
-                this.setState({isNewVisible: !this.state.isNewVisible});
+                // Tiene rutina o acabar de crear una? Ocultamos modal
+                console.log('no tengo rutina pero estoy visible')
+                // this.setState({isNewVisible: false});
             }
         } else {
-            console.log('i want to edit')
-            this.setState({action: 'edit'});
+            // Tiene rutina?
+            this.setState({isNewVisible: false});
+
+            if(accion === 'edit') {
+                console.log('i want to edit')
+                this.setState({action: 'edit'})
+            }
         }
     }
 

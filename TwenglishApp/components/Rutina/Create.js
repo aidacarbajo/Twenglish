@@ -26,7 +26,7 @@ class Create extends Component {
             // Aqui hay que hacer la llamada a la bbdd
             createRoutine([...r], this.state.date);
             this.setState({add: false});
-            this.props.hasroutine(r);
+            this.props.hasroutine(r, 'create');
         } else {
             // insertar mensaje de que debe seleccionar algun valor
         }
