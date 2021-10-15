@@ -61,13 +61,10 @@ const updateCurrentLevel = nivel =>
                 niveles[0].nivel_seleccionado = nivelS[0];
             })
 
-            // console.log(realm.objects('Niveles')[0].nivel_seleccionado)
             resolve(nivelS);
 
         }).catch((error) => reject(error));
     });
-
-
 
 
 // const insertNivel = newNivel => 

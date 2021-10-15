@@ -9,11 +9,11 @@ import App from './App';
 import {name as appName} from './app.json';
 import * as RNFS from 'react-native-fs';
 import { LogBox } from 'react-native';
-LogBox.ignoreAllLogs();//Ignore all log notifications
 import database from './data/database/config';
-
 import PushNotification from "react-native-push-notification";
  
+LogBox.ignoreAllLogs();//Ignore all log notifications
+
 PushNotification.configure({
     onNotification: function (notification) {
         console.log("NOTIFICATION:", notification);
@@ -21,11 +21,6 @@ PushNotification.configure({
     },
     requestPermissions: Platform.OS === 'ios'
 }); 
-
-
-
-
-
 
 
 const App2 = () => {
@@ -40,9 +35,8 @@ const App2 = () => {
 //   })
 
   if(!Realm.exists(database)) {
-        console.log('Primera vez que entro a la app');
-        console.log('');
-
+        // console.log('Primera vez que entro a la app');
+        // console.log('');
         RNFS.copyFileAssets('twenglish.realm', RNFS.DocumentDirectoryPath + '/twenglish.realm')
         .then(() => {
             Realm.copyBundledRealmFiles();
@@ -52,12 +46,12 @@ const App2 = () => {
             console.log(le);
         });
   } else {
-      console.log('No es la primera vez que entro a la app');
-      console.log('');
-        Realm.open(database).then(realm => {
-            const le = realm.objects('Dia');
-            console.log(le);
-        }).catch((error) => reject(error));
+    //   console.log('No es la primera vez que entro a la app');
+    //   console.log('');
+        // Realm.open(database).then(realm => {
+        //     const le = realm.objects('Dia');
+        //     console.log(le);
+        // }).catch((error) => reject(error));
     }
 
 

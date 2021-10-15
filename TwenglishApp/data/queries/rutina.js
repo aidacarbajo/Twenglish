@@ -1,6 +1,6 @@
 import Realm from 'realm';
 import database from '../database/config';
-
+import moment from 'moment';
 
 ////////////////////////////////////////////////////////////////
 // Devuelve sobre el dia que está seleccionado (default: hoy) //
@@ -40,7 +40,6 @@ const getHours = () => new Promise((resolve, reject) => {
                 // Le quitamos la fecha y solo dejamos la hora
                 // const time = item.getHours() + ':' + item.getMinutes();
                 // console.log(new Date(item));
-
                 dia.push(item);
             }            
             hours.push(dia);
@@ -72,22 +71,42 @@ const getDay = orden => new Promise((resolve, reject) => {
 // Le añadimos los nuevos horarios a los dias seleccionados //
 //////////////////////////////////////////////////////////////
 
-const createRoutine = (listDays, time) => 
-    new Promise((resolve, reject) => {
+const createRoutine = (listDays, time) => new Promise((resolve, reject) => {
+    Realm.open(database).then(realm => {
+        const days = realm.objects('Dia');
 
-        Realm.open(database).then(realm => {
-            const days = realm.objects('Dia');
-            
-            for(let i = 0; i < days.length; i++) {
-                if(listDays[i]) {
-                    realm.write(() => {
-                        days[i].Horas.push(time)
-                    })
-                }
+        let hoy = new Date().getDay();
+            hoy -= 1;
+            if(hoy === -1) {
+                hoy = 6;
             }
-            resolve(days);
-        }).catch((error) => reject(error));
-    });
+        
+        for(let i = 0; i < days.length; i++) {
+            if(listDays[i]) {
+                const tiempo = 'T' + time.getHours() + ':' + (time.getMinutes()<10?'0':'') + time.getMinutes() + ':00.000Z';
+                let dia = null;
+
+                if(i > hoy) {
+                    dia = moment(Date.now()).add(i-hoy, 'days').format('YYYY-MM-DD');
+                } else {
+                    if(i < hoy) {
+                        dia = moment(Date.now()).add(hoy-i+7, 'days').format('YYYY-MM-DD');
+                    } else {
+                        dia = moment(Date.now()).format('YYYY-MM-DD')
+                    }
+                }
+
+                const fecha = dia + tiempo;
+                console.log(fecha);
+
+                realm.write(() => {
+                    days[i].Horas.push(fecha)
+                })
+            }
+        }
+        resolve(days);
+    }).catch((error) => reject(error));
+});
 
 
 const emptyRoutine = () => new Promise((resolve, reject) => {

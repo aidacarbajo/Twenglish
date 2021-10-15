@@ -72,12 +72,8 @@ const modifyProgress = mediaAciertos =>
                     realm.write(() => {
                         res.leccion_seleccionada.progreso = Math.round(mediaAciertos);
                         res.progreso = Math.round(sum);
-                        // res.leccion_seleccionada.progreso = 80;
-                        // res.progreso = 80;
-
                     })
                 }
-                // console.log(Math.round(sum), Math.round(progresoSaved));
                 resolve([progresoSaved, sum]);
             })
         }).catch((error) => reject(error));

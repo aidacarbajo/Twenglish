@@ -16,6 +16,7 @@
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/stack": "^6.0.7",
     "html-entities": "^2.3.2",
+    "moment": "^2.29.1",
     "patch-package": "^6.4.7",
     "react": "17.0.1",
     "react-native": "0.64.2",

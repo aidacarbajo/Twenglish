@@ -6,6 +6,7 @@ import MyText from '../Texts/MyText';
 import { body, button, text } from '../../assets/theme/styles';
 import DatePicker from 'react-native-date-picker'
 import { createRoutine } from '../../data/queries/rutina';
+import { createScheduleNotification } from '../../util/NotificationManager';
 
 class Create extends Component {
     constructor(props) {
@@ -20,13 +21,14 @@ class Create extends Component {
     }
 
     createRoutine = () => {
+        createScheduleNotification();
         this.setState({add: true});
     }
 
     routine = (r) => {
         if([...r].includes(true)) {
             // Aqui hay que hacer la llamada a la bbdd
-            createRoutine([...r], this.state.date);
+            createRoutine([...r], this.state.date );
             this.setState({add: false});
             this.nuevo = true;
             this.props.hasroutine(r, 'create');
@@ -57,8 +59,8 @@ class Create extends Component {
                     <DatePicker
                         mode = "time"
                         androidVariant = 'iosClone'
-                        is24hourSource = 'locale'
-                        locale = 'es-ES'
+                        is24hourSource = 'device'
+                        // locale = 'es-ES'
                         textColor = {body}
                         date={this.state.date} 
                         onDateChange={date => this.setState({ date })}

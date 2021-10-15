@@ -27,7 +27,6 @@ class RadioButton extends Component {
   }
 
   componentDidUpdate(props) {
-    // console.log('update', props);
   }
 
   list = () => {

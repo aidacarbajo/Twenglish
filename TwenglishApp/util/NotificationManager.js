@@ -5,7 +5,7 @@ import { getHours, getWeek } from "../data/queries/rutina";
 const icono = 'icono_twenglish';
 const titulo = 'Hey student!';
 const msg = "It's time to practise a little bit :)";
-const lema = 'Learn faster english';
+const lema = 'Learn faster than ever';
 
 let options = {
     channelId: "test-channel",
@@ -37,32 +37,27 @@ export const createScheduleNotification = () => {
 
     options["repeatType"] = 'week';
     options["repeatTime"] = 1;
-    // options["date"] = new Date(Date.now() + (5 * 1000));
-
-    
 
     getHours().then(hoursday => {
         console.log('****');
-        
-        hoursday.map(day => {
-            if(day.length > 0) {
-                day.map(hour => {
-                    console.log(hour);
-                    // options["date"] = hour;
-                    // PushNotification.localNotificationSchedule(options);
-                })
+
+        for(let i = 0; i < hoursday.length; i++) {
+            for(let j = 0; j < hoursday[i].length; j++) {
+                const hour = hoursday[i][j];
+                console.log(hour);
+                options["date"] = hour;
+                options["id"] = i.toString() + j.toString();    // formado por el dia de la semana y la posicion del horario (para poder eliminarlo luego)
+                PushNotification.localNotificationSchedule(options);
             }
-        })
-        console.log('****');
-
+        }
+        
     })
-    // recorro las fechas
-    
-
-    // console.log(options);
-
 }
 
 const cancelAllLocalNotifications = () => {
     PushNotification.cancelAllLocalNotifications();
+}
+
+const cancelOneNotification = (id) => {
+    PushNotification.cancelLocalNotification(id);
 }

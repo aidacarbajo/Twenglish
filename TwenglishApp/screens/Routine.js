@@ -37,10 +37,6 @@ class Routine extends Component {
                 this.setState({needUpdate: true});
             }
             this.isRoutine = has;
-
-            // createNotification();
-            createScheduleNotification();
-            
         } else {
             this.setState({isNewVisible: false});
         }

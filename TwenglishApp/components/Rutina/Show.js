@@ -40,7 +40,6 @@ class Show extends Component {
     }
 
     editRoutine = () => {
-        // console.log('i want to edit');
         this.props.create(false, 'edit');    // true porque tiene rutina
     }
 
