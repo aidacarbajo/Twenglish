@@ -38,10 +38,10 @@ const getHours = () => new Promise((resolve, reject) => {
 
             for (item of item.Horas) {
                 // Le quitamos la fecha y solo dejamos la hora
-                const time = item.getHours() + ':' + item.getMinutes();
+                // const time = item.getHours() + ':' + item.getMinutes();
                 // console.log(new Date(item));
 
-                dia.push(time);
+                dia.push(item);
             }            
             hours.push(dia);
         }

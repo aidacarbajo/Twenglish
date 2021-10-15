@@ -39,23 +39,22 @@ export const createScheduleNotification = () => {
     options["repeatTime"] = 1;
     // options["date"] = new Date(Date.now() + (5 * 1000));
 
-    // hoy:
-    let today = new Date().getDay();
-    today -= 1;
-
-    if(today === -1) {
-        today = 6;
-    }
     
+
     getHours().then(hoursday => {
-        console.log('Creando noti');
-        options["date"] = new Date(Date.now() + (5 * 1000));
-        PushNotification.localNotificationSchedule(options);
-        // hoursday.map(day => {
-        //     if(day.length > 0) {
-        //         console.log(day);
-        //     }
-        // })
+        console.log('****');
+        
+        hoursday.map(day => {
+            if(day.length > 0) {
+                day.map(hour => {
+                    console.log(hour);
+                    // options["date"] = hour;
+                    // PushNotification.localNotificationSchedule(options);
+                })
+            }
+        })
+        console.log('****');
+
     })
     // recorro las fechas
     
