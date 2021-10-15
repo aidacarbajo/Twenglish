@@ -1,4 +1,4 @@
-import Realm, { UpdateMode } from 'realm';
+import Realm from 'realm';
 import database from '../database/config';
 
 
@@ -27,6 +27,28 @@ const getWeek = () => new Promise((resolve, reject) => {
         resolve([names, selected, hasroutine]);
     }).catch((error) => reject(error));
 });
+
+
+const getHours = () => new Promise((resolve, reject) => {
+    Realm.open(database).then(realm => {
+        let hours = [];
+
+        for (item of realm.objects('Dia')) {
+            let dia = [];
+
+            for (item of item.Horas) {
+                // Le quitamos la fecha y solo dejamos la hora
+                const time = item.getHours() + ':' + item.getMinutes();
+                // console.log(new Date(item));
+
+                dia.push(time);
+            }            
+            hours.push(dia);
+        }
+        resolve(hours);
+    }).catch((error) => reject(error));
+});
+
 
 
 ////////////////////////////////////////////////////////////////
@@ -151,4 +173,4 @@ const applyChanges = (changes, modificados) => new Promise((resolve, reject) => 
     }).catch((error) => reject(error));
 });
 
-export { getDay, getWeek, createRoutine, emptyRoutine, deleteAnHour, applyChanges }
+export { getDay, getWeek, createRoutine, emptyRoutine, deleteAnHour, applyChanges, getHours }

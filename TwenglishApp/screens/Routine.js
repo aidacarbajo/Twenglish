@@ -8,6 +8,7 @@ import Show from '../components/Rutina/Show';
 import Create from '../components/Rutina/Create';
 import ModalNotificacion from '../components/Modal/ModalNotificacion';
 import { emptyRoutine } from '../data/queries/rutina';
+import {createNotification, createScheduleNotification} from '../util/NotificationManager'
 
 class Routine extends Component {
     constructor(props) {
@@ -25,7 +26,6 @@ class Routine extends Component {
         // emptyRoutine();
     }
 
-
     hasroutine = (has) => {
         if(has){
             // Creado con exito
@@ -38,13 +38,16 @@ class Routine extends Component {
             }
             this.isRoutine = has;
 
+            // createNotification();
+            createScheduleNotification();
+            
         } else {
             this.setState({isNewVisible: false});
         }
     }
 
     changeModalVisible = (visible, accion) => {
-        if(!this.isRoutine && this.isRoutine!=undefined) {   // no tiene rutinas creadas
+        if(! this.isRoutine && this.isRoutine!=undefined) {   // no tiene rutinas creadas
             if(!visible) {  // no tiene rutina? Se abre el modal
                 this.setState({isNewVisible: true})
             } 

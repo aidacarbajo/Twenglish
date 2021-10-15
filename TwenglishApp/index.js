@@ -2,17 +2,30 @@
  * @format
  */
 
-import {AppRegistry} from 'react-native';
+import {AppRegistry, Platform} from 'react-native';
 import React from 'react';
 import Realm from 'realm';
 import App from './App';
 import {name as appName} from './app.json';
 import * as RNFS from 'react-native-fs';
 import { LogBox } from 'react-native';
-
+LogBox.ignoreAllLogs();//Ignore all log notifications
 import database from './data/database/config';
 
-LogBox.ignoreAllLogs();//Ignore all log notifications
+import PushNotification from "react-native-push-notification";
+ 
+PushNotification.configure({
+    onNotification: function (notification) {
+        console.log("NOTIFICATION:", notification);
+        // notification.finish(PushNotificationIOS.FetchResult.NoData);
+    },
+    requestPermissions: Platform.OS === 'ios'
+}); 
+
+
+
+
+
 
 
 const App2 = () => {

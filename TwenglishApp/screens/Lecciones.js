@@ -1,4 +1,4 @@
-import React, {Component, GetDerivedStateFromProps} from 'react';
+import React, {Component, GetDerivedStateFromProps, useEffect} from 'react';
 import { TouchableOpacity, View, StatusBar, ActivityIndicator, Pressable, Text } from 'react-native';
 import MyTitle from '../components/Texts/MyTitle';
 import { view, posiciones, icons, text, button } from '../assets/theme/styles';
@@ -9,9 +9,9 @@ import { getNivelSeleccionado } from '../data/queries/nivel';
 import NivelesList from '../components/Flatlist/NivelesList';
 import Modal from '../components/Modal/ModalC';
 import ModalLessons from '../components/Modal/ModalLessons';
+import PushNotification from "react-native-push-notification";
 
 class Lecciones extends Component {
-
   constructor(props) {
     super(props);
 
@@ -34,19 +34,26 @@ class Lecciones extends Component {
     this.changeLessons();
   }
 
+  componentDidUpdate() {
+    this.createChannels();
+  }
+
+  createChannels = () => {
+    console.log('esto es un canal');
+
+    PushNotification.createChannel({
+      channelId: "test-channel",
+      channelName: "Test Channel"
+    })   
+  }
+
   // cuando se destruye el componente
   componentWillUnmount() {
     this._isMounted = false;
   }
 
   receivedUpdate = (value) => {
-    // console.log('receivedUpdate', value);
     this.changeLessons();
-    // this.changeUpdate(value)
-  }
-
-  changeUpdate = (value) => {
-    // this.setState({update: visible})
   }
 
   // actualizar lecciones porque se ha cambiado de nivel seleccionado
@@ -92,7 +99,7 @@ class Lecciones extends Component {
     return this.props.navigation.navigate('Ejercicios', {tema: this.state.temaLesson, portada: this.state.portadaName, update: this.receivedUpdate});
   }
  
-    render() {
+  render() {
     if(this.state.isLoading){
       return (
           <View>
