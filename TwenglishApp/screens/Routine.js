@@ -7,8 +7,6 @@ import ModalC from '../components/Modal/ModalC';
 import Show from '../components/Rutina/Show';
 import Create from '../components/Rutina/Create';
 import ModalNotificacion from '../components/Modal/ModalNotificacion';
-import { emptyRoutine } from '../data/queries/rutina';
-import {createNotification, createScheduleNotification} from '../util/NotificationManager'
 
 class Routine extends Component {
     constructor(props) {
@@ -28,19 +26,10 @@ class Routine extends Component {
 
     hasroutine = (has) => {
         if(has){
-            console.log('tengo rutina', this.isRoutine, has);
-
-            // ocultar modal de crear rutina
             this.changeModalVisible(has);
-
             if(!this.isRoutine) {
                 this.isRoutine = true;
             }
-            // actualizar colores de la semana
-            // if(this.isRoutine != has) {                
-            //     this.setState({needUpdate: true});
-            //     this.isRoutine = has;
-            // }
         } else {
             this.setState({isNewVisible: false});
         }
@@ -49,7 +38,6 @@ class Routine extends Component {
     create = () => {
         if(!this.isRoutine) {
             this.isRoutine = true;
-            console.log(true);
         }
         this.setState({needUpdate: true, isNewVisible: false, isMessageVisible: true});
     }
@@ -59,9 +47,6 @@ class Routine extends Component {
     }
 
     changeModalVisible = (visible, accion) => {
-        console.log('Visible', visible);
-        console.log('Accion', accion);
-
         // Cuando le da al boton crear rutina
         if(visible || accion === 'create') {
             this.setState({isNewVisible: true})
@@ -70,26 +55,9 @@ class Routine extends Component {
                 this.setState({isNewVisible: false});
             } 
             if(accion === 'edit') {
-                console.log('es edit');
                 this.setState({action: 'edit'})
             } 
         }
-
-            // if(!this.isRoutine) {   // no tiene rutinas creadas
-            //     if(!visible) {  // no tiene rutina? Se abre el modal
-            //         this.setState({isNewVisible: true})
-            //     } 
-            // } else {
-            //     if(accion === 'create') {
-            //         this.setState({isNewVisible: true});
-            //     } else {        
-            //         // Tiene rutina?
-            //         this.setState({isNewVisible: false});
-    
-            //     }
-            // }
-    
-        
     }
 
     hideMsg = () => {
@@ -106,14 +74,12 @@ class Routine extends Component {
     }
 
     render() {
-        console.log('******');
-
         return (
             <View style={[view.container, {paddingHorizontal: 50}]}>
                 <MyTitle title="My" titleBold="Routine" style={{marginBottom: 10}}></MyTitle>
                 <MyText title="Be constant with a routine" style={{color: bodySub, marginBottom: 10}} />
 
-                { this.state.action != 'create' && console.log(this.state.action), <Show hasroutine={this.hasroutine} action={this.state.action} create={this.changeModalVisible} needUpdate={this.state.needUpdate} setUpdate={this.setUpdate} back2show={this.back2show} /> }                
+                { this.state.action != 'create' && <Show hasroutine={this.hasroutine} action={this.state.action} create={this.changeModalVisible} needUpdate={this.state.needUpdate} setUpdate={this.setUpdate} back2show={this.back2show} /> }                
 
                 {/* Modal de crear nueva rutina */}
                 <ModalC visible={this.state.isNewVisible}>
