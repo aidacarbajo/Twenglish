@@ -21,7 +21,6 @@ class Create extends Component {
     }
 
     createRoutine = () => {
-        createScheduleNotification();
         this.setState({add: true});
     }
 
@@ -29,6 +28,7 @@ class Create extends Component {
         if([...r].includes(true)) {
             // Aqui hay que hacer la llamada a la bbdd
             createRoutine([...r], this.state.date );
+            createScheduleNotification();
             this.setState({add: false});
             this.nuevo = true;
             this.props.hasroutine(r, 'create');

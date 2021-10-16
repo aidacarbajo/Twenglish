@@ -83,27 +83,27 @@ const createRoutine = (listDays, time) => new Promise((resolve, reject) => {
         
         for(let i = 0; i < days.length; i++) {
             if(listDays[i]) {
-                const tiempo = 'T' + time.getHours() + ':' + (time.getMinutes()<10?'0':'') + time.getMinutes() + ':00.000Z';
-                let dia = null;
+                const tiempo = 'T' + (time.getHours()<10?'0':'') + time.getHours() + ':' + (time.getMinutes()<10?'0':'') + time.getMinutes() + ':00.000Z';
+                let dia = moment(Date.now()).format('YYYY-MM-DD');
 
                 if(i > hoy) {
                     dia = moment(Date.now()).add(i-hoy, 'days').format('YYYY-MM-DD');
                 } else {
                     if(i < hoy) {
-                        dia = moment(Date.now()).add(hoy-i+7, 'days').format('YYYY-MM-DD');
-                    } else {
-                        dia = moment(Date.now()).format('YYYY-MM-DD')
+                        dia = moment(Date.now()).add(i-hoy+7, 'days').format('YYYY-MM-DD');
                     }
                 }
 
                 const fecha = dia + tiempo;
-                console.log(fecha);
+                console.log('añadir', fecha);
 
                 realm.write(() => {
                     days[i].Horas.push(fecha)
                 })
             }
         }
+        console.log(days[5].Horas);
+
         resolve(days);
     }).catch((error) => reject(error));
 });

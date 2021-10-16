@@ -8,6 +8,7 @@ import MyTitle from '../Texts/MyTitle';
 import BlueButton from '../Buttons/BlueButton';
 import RoundButton from '../Buttons/RoundButton';
 import { applyChanges, deleteAnHour, getDay } from '../../data/queries/rutina';
+import { createScheduleNotification } from '../../util/NotificationManager';
 
 class Show extends Component {
     constructor(props) {
@@ -40,6 +41,7 @@ class Show extends Component {
     }
 
     editRoutine = () => {
+        this.firstTime = [true, true, true, true, true, true, true];
         this.props.create(false, 'edit');    // true porque tiene rutina
     }
 
@@ -66,7 +68,10 @@ class Show extends Component {
         applyChanges(this.state.copy, this.modificados).then(res => {
             this.back2show(res);
             this.tieneRutina = res
-            this.setSelected(this.state.dia)
+            this.setSelected(this.state.dia);
+
+            // Borrar anteriores y crear nuevas
+            createScheduleNotification();
         });
     }
 

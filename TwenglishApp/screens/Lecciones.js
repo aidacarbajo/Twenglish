@@ -35,17 +35,17 @@ class Lecciones extends Component {
   }
 
   componentDidUpdate() {
-    this.createChannels();
+    // this.createChannels();
   }
 
-  createChannels = () => {
-    console.log('esto es un canal');
+  // createChannels = () => {
+  //   console.log('esto es un canal');
 
-    PushNotification.createChannel({
-      channelId: "test-channel",
-      channelName: "Test Channel"
-    })   
-  }
+  //   PushNotification.createChannel({
+  //     channelId: "test-channel",
+  //     channelName: "Test Channel"
+  //   })   
+  // }
 
   // cuando se destruye el componente
   componentWillUnmount() {
