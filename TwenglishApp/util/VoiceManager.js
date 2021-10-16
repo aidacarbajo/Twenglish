@@ -21,7 +21,7 @@ class VoiceManager extends Component {
             _isMounted: false
         }
 
-        this.listaVocesRandom = ['en-gb-x-rjs#male_2-local', 'en-us-x-sfg#female_3-local', "en-us-x-sfg#male_2-local", 'en-gb-x-fis#female_3-local']
+        // this.listaVocesRandom = ['en-gb-x-rjs#male_2-local', 'en-us-x-sfg#female_3-local', "en-us-x-sfg#male_2-local", 'en-gb-x-fis#female_3-local']
 
         Tts.addEventListener('tts-start', event => {
             this.setState({played: true})
@@ -47,11 +47,11 @@ class VoiceManager extends Component {
     }
     
     listenToAudio = () => {
-        const random = Math.floor(Math.random() * (this.listaVocesRandom.length));
-        Tts.setDefaultVoice(this.listaVocesRandom[random])
-        .catch((e) => {
-            Tts.setDefaultVoice('default')
-        });
+        // const random = Math.floor(Math.random() * (this.listaVocesRandom.length));
+        // Tts.setDefaultVoice(this.listaVocesRandom[random] || 'default')
+        // .catch((e) => {
+            // Tts.setDefaultVoice('default')
+        // });
 
         Tts.stop();
         Tts.speak(this.props.texto);

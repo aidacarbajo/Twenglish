@@ -31,7 +31,7 @@ class Create extends Component {
             createScheduleNotification();
             this.setState({add: false});
             this.nuevo = true;
-            this.props.hasroutine(r, 'create');
+            this.props.hasroutine();
         } else {
             // insertar mensaje de que debe seleccionar algun valor
         }

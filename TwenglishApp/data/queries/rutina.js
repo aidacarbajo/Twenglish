@@ -95,15 +95,13 @@ const createRoutine = (listDays, time) => new Promise((resolve, reject) => {
                 }
 
                 const fecha = dia + tiempo;
-                console.log('añadir', fecha);
+                // console.log('añadir', fecha);
 
                 realm.write(() => {
                     days[i].Horas.push(fecha)
                 })
             }
         }
-        console.log(days[5].Horas);
-
         resolve(days);
     }).catch((error) => reject(error));
 });
@@ -160,7 +158,6 @@ const applyChanges = (changes, modificados) => new Promise((resolve, reject) => 
                     // Recorremos array para ver cual no está y lo eliminamos
                     for(let i = 0; i < item.Horas.length; i++) {
                         // console.log(changes[index].horas);
-                        // console.log(typeof(item.Horas[i].toString()))
                         if(!isInArray(changes[index].horas, item.Horas[i])) {
                             // console.log('quiero borrar');
                             deleteAnHour(week[index].orden, i);

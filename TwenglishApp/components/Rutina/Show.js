@@ -17,12 +17,15 @@ class Show extends Component {
         this.action = 'show';
 
         this.tieneRutina = false;
+        this.update = false;
+
         this.today = new Date().getDay();
         this.today -= 1;
 
         if(this.today === -1) {
             this.today = 6;
         }
+
 
         // Añado y elimino este array (es provisional hasta que se de a Save changes)
         this.firstTime = [true, true, true, true, true, true, true];
@@ -37,7 +40,7 @@ class Show extends Component {
     }
   
     hideModal = () => {
-        this.props.create(false, 'show');   // false porque no tiene rutina
+        this.props.create(true, 'show');   // false porque no tiene rutina
     }
 
     editRoutine = () => {
@@ -47,12 +50,13 @@ class Show extends Component {
 
     // Vuelve a estar a falso la necesidad de actualizar
     setUpdate = () => {
+        this.update = false;
         this.props.setUpdate();
     }
 
     hasroutine = (has) => {
         this.tieneRutina = true;
-        this.props.hasroutine(has);
+        this.props.hasroutine(!has);
     }
 
     removeHour = (index) => {
@@ -67,28 +71,29 @@ class Show extends Component {
         // Le paso la copy y cuando sea diferente de lo que haya en la bbdd hacemos un write
         applyChanges(this.state.copy, this.modificados).then(res => {
             this.back2show(res);
-            this.tieneRutina = res
+            this.tieneRutina = res;
             this.setSelected(this.state.dia);
 
-            // Borrar anteriores y crear nuevas
-            createScheduleNotification();
+            // Borrar anteriores y crear nuevas cuando haya alguna modificacion
+            if(this.modificados.includes(true)) {
+                createScheduleNotification();
+                this.update = true;        
+            }
         });
     }
 
-
     loadDay = () => {
         return(
-            // this.state.horas.length > 0 ?
-            (<View style={[cards.centrar, {width: '100%', marginTop: 30, zIndex: -1}]}>
+            <View style={[cards.centrar, {width: '100%', marginTop: 30, zIndex: -1}]}>
                 {
                     // Si no está editando recorre el array de this.state.horas (que es la de la bbdd)
                     this.props.action === 'show' && 
                     this.state.horas.map((item, index) => {
-                            return(            
-                                <View key={index} style={[cards.cards, cards.cardPares, cards.centrar, {width: 180, height: 70,  marginBottom: 12}]}>
-                                    <MyText title={item.getHours() + ':' + (item.getMinutes()<10?'0':'') + item.getMinutes()} style={{lineHeight: 20, fontSize: 14}}></MyText>
-                                </View>
-                            )    
+                        return(            
+                            <View key={index} style={[cards.cards, cards.cardPares, cards.centrar, {width: 180, height: 70,  marginBottom: 12}]}>
+                                <MyText title={item.getHours() + ':' + (item.getMinutes()<10?'0':'') + item.getMinutes()} style={{lineHeight: 20, fontSize: 14}}></MyText>
+                            </View>
+                        )    
                     })
                 }
                 { 
@@ -115,9 +120,7 @@ class Show extends Component {
                     <RoundButton icon="+" color={primary} size={37} style={false}></RoundButton>
                 </TouchableOpacity>
                 }
-            </View>)
-            // :  this.norutina()
-
+            </View>
         )
     }
 
@@ -142,9 +145,9 @@ class Show extends Component {
         )
     }
 
-    shouldComponentUpdate(props, state) {
-        return true;
-    }
+    // shouldComponentUpdate(props, state) {
+    //     return true;
+    // }
 
     setSelected = (dia) => {
         this.setState({dia: dia});
@@ -180,12 +183,11 @@ class Show extends Component {
 
     back2show = (norutina) => {
         this.firstTime = [true, true, true, true, true, true, true];
-        // volver a mostrar sin editar
         this.props.back2show(norutina);
     }
 
     needUpdate = () => {
-        if(this.props.needUpdate || this.action === 'edit'){
+        if(this.props.needUpdate || this.update){
             return true;
         }
         return false;
@@ -197,22 +199,16 @@ class Show extends Component {
                 <Semana selected={this.props.action} hasroutinee={this.hasroutine} update={this.needUpdate()} setUpdate={this.setUpdate} dayS={this.setSelected} />
 
                 <View style={{height: '100%'}}>
-                {   // Cuando no hay ninguna rutina creada
-                    this.props.action == 'show' && !this.tieneRutina && this.norutina()
-                   
-                }
-                {   // cargar dia seleccionado
-                    this.state.dia != undefined && this.loadDay()
-                }
-               
+                    {/* Cuando no hay ninguna rutina creada */}
+                    { this.props.action == 'show' && !this.tieneRutina && this.norutina() } 
+                    {/* Cargar dia seleccionado */}
+                    { this.state.dia != undefined && this.loadDay() }
                 </View>
 
                 <View style={{position: 'absolute', bottom: 70, width: '115%', alignSelf: 'center', minHeight: 50}}>
-                    {
-                        !this.tieneRutina
+                    {!this.tieneRutina
                         ? <BlueButton title="Create routine" screen={this.hideModal} />
-                        :   [
-                            this.props.action == 'show' 
+                        :   [ this.props.action == 'show' 
                             ? <BlueButton title="Edit routine" screen={this.editRoutine} />
                             : <View style={{flexDirection: 'row'}}>
                                 
@@ -222,8 +218,7 @@ class Show extends Component {
 
                                 <BlueButton title="Save changes" screen={this.modifyRoutine} style={{width: '45%'}} />
                             </View>
-                        ]
-                    }
+                        ]}
                 </View>
 
             </View>

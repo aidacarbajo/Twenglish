@@ -48,6 +48,8 @@ class Semana extends Component {
             hasroutine: false,  
             studentS: undefined // por defecto se muestra el dia de hoy, pero si aprieta sobre otro dia se selecciona ese
         }
+
+        // this.needUpdate = false;
     }
   
     componentDidMount() {
@@ -55,13 +57,12 @@ class Semana extends Component {
     }
 
     update = () => {
-        this.props.setUpdate();
+        console.log('update')
         this.getWeek();
+        this.props.setUpdate();
     }
-    
-    componentWillUnmount() {
 
-    }
+    componentWillUnmount() {}
 
     getWeek = () => {
         return getWeek().then(res => {
@@ -118,9 +119,10 @@ class Semana extends Component {
                     const styless = [styles, {borderRadius: 12, width: 35, height: 35, justifyContent: 'center', alignItems: 'center'}];
 
                     return(
+                        // console.log(index),
                         <View key={index} style={{zIndex: 0}}>
                             <Pressable onPress={() => this.select(index)} style={styless}>
-                                <MyText title={day} key={index}/>
+                                <MyText title={day}/>
                             </Pressable>
                         </View>
                     )

@@ -28,37 +28,68 @@ class Routine extends Component {
 
     hasroutine = (has) => {
         if(has){
-            // Creado con exito
-            this.setState({isMessageVisible: true});
+            console.log('tengo rutina', this.isRoutine, has);
+
             // ocultar modal de crear rutina
-            this.changeModalVisible();
-            // actualizar colores de la semana
-            if(this.isRoutine != has) {
-                this.setState({needUpdate: true});
+            this.changeModalVisible(has);
+
+            if(!this.isRoutine) {
+                this.isRoutine = true;
             }
-            this.isRoutine = has;
+            // actualizar colores de la semana
+            // if(this.isRoutine != has) {                
+            //     this.setState({needUpdate: true});
+            //     this.isRoutine = has;
+            // }
         } else {
             this.setState({isNewVisible: false});
         }
     }
 
-    changeModalVisible = (visible, accion) => {
-        if(! this.isRoutine && this.isRoutine!=undefined) {   // no tiene rutinas creadas
-            if(!visible) {  // no tiene rutina? Se abre el modal
-                this.setState({isNewVisible: true})
-            } 
-        } else {
-            if(accion === 'create') {
-                this.setState({isNewVisible: true});
-            } else {        
-                // Tiene rutina?
-                this.setState({isNewVisible: false});
-
-                if(accion === 'edit') {
-                    this.setState({action: 'edit'})
-                } 
-            }
+    create = () => {
+        if(!this.isRoutine) {
+            this.isRoutine = true;
+            console.log(true);
         }
+        this.setState({needUpdate: true, isNewVisible: false, isMessageVisible: true});
+    }
+
+    mequedo = () => {
+        this.setState({isNewVisible: false});
+    }
+
+    changeModalVisible = (visible, accion) => {
+        console.log('Visible', visible);
+        console.log('Accion', accion);
+
+        // Cuando le da al boton crear rutina
+        if(visible || accion === 'create') {
+            this.setState({isNewVisible: true})
+        } else {
+            if(this.isRoutine) {
+                this.setState({isNewVisible: false});
+            } 
+            if(accion === 'edit') {
+                console.log('es edit');
+                this.setState({action: 'edit'})
+            } 
+        }
+
+            // if(!this.isRoutine) {   // no tiene rutinas creadas
+            //     if(!visible) {  // no tiene rutina? Se abre el modal
+            //         this.setState({isNewVisible: true})
+            //     } 
+            // } else {
+            //     if(accion === 'create') {
+            //         this.setState({isNewVisible: true});
+            //     } else {        
+            //         // Tiene rutina?
+            //         this.setState({isNewVisible: false});
+    
+            //     }
+            // }
+    
+        
     }
 
     hideMsg = () => {
@@ -70,21 +101,23 @@ class Routine extends Component {
     }
 
     back2show = (sinnada) => {
-        this.isRoutine = sinnada;
+        // this.isRoutine = sinnada;
         this.setState({action: 'show'});
     }
 
     render() {
+        console.log('******');
+
         return (
             <View style={[view.container, {paddingHorizontal: 50}]}>
                 <MyTitle title="My" titleBold="Routine" style={{marginBottom: 10}}></MyTitle>
                 <MyText title="Be constant with a routine" style={{color: bodySub, marginBottom: 10}} />
 
-                { (this.state.action != 'create') && <Show hasroutine={this.hasroutine} action={this.state.action} create={this.changeModalVisible} needUpdate={this.state.needUpdate} setUpdate={this.setUpdate} back2show={this.back2show} /> }                
+                { this.state.action != 'create' && console.log(this.state.action), <Show hasroutine={this.hasroutine} action={this.state.action} create={this.changeModalVisible} needUpdate={this.state.needUpdate} setUpdate={this.setUpdate} back2show={this.back2show} /> }                
 
                 {/* Modal de crear nueva rutina */}
                 <ModalC visible={this.state.isNewVisible}>
-                    <Create action={'create'} hasroutine={this.hasroutine} mequedo={this.hasroutine}/>
+                    <Create action={'create'} hasroutine={this.create} mequedo={this.mequedo}/>
                 </ModalC>
 
                 {/* Modal de creado correctamente */}
