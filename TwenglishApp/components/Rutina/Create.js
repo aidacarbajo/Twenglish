@@ -26,6 +26,8 @@ class Create extends Component {
 
     routine = (r) => {
         if([...r].includes(true)) {
+            // console.log('Fecha a añadir:', this.state.date);
+
             // Aqui hay que hacer la llamada a la bbdd
             createRoutine([...r], this.state.date );
             createScheduleNotification();

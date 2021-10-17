@@ -57,7 +57,6 @@ class Semana extends Component {
     }
 
     update = () => {
-        console.log('update')
         this.getWeek();
         this.props.setUpdate();
     }
@@ -119,7 +118,6 @@ class Semana extends Component {
                     const styless = [styles, {borderRadius: 12, width: 35, height: 35, justifyContent: 'center', alignItems: 'center'}];
 
                     return(
-                        // console.log(index),
                         <View key={index} style={{zIndex: 0}}>
                             <Pressable onPress={() => this.select(index)} style={styless}>
                                 <MyText title={day}/>

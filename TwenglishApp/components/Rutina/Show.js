@@ -9,6 +9,7 @@ import BlueButton from '../Buttons/BlueButton';
 import RoundButton from '../Buttons/RoundButton';
 import { applyChanges, deleteAnHour, getDay } from '../../data/queries/rutina';
 import { createScheduleNotification } from '../../util/NotificationManager';
+import moment from 'moment';
 
 class Show extends Component {
     constructor(props) {
@@ -89,9 +90,12 @@ class Show extends Component {
                     // Si no está editando recorre el array de this.state.horas (que es la de la bbdd)
                     this.props.action === 'show' && 
                     this.state.horas.map((item, index) => {
+                        const hora = (item.getHours() < 10 ? '0' : '') + item.getHours();
+                        const minutos = (item.getMinutes()<10?'0':'') + item.getMinutes();
+
                         return(            
                             <View key={index} style={[cards.cards, cards.cardPares, cards.centrar, {width: 180, height: 70,  marginBottom: 12}]}>
-                                <MyText title={item.getHours() + ':' + (item.getMinutes()<10?'0':'') + item.getMinutes()} style={{lineHeight: 20, fontSize: 14}}></MyText>
+                                <MyText title={hora + ':' + minutos} style={{lineHeight: 20, fontSize: 14}}></MyText>
                             </View>
                         )    
                     })
@@ -100,6 +104,9 @@ class Show extends Component {
                     // Si está editando coge el de copy
                     this.props.action === 'edit' &&
                     this.state.copy[this.state.dia].horas.map((item, index) => {
+                        const hora = (item.getHours() < 10 ? '0' : '') + item.getHours();
+                        const minutos = (item.getMinutes()<10?'0':'') + item.getMinutes();
+
                         return(            
                             <View key={index} style={[cards.cards, cards.cardPares, cards.centrar, {width: 180, height: 70,  marginBottom: 12}]}>
                                 {
@@ -108,7 +115,7 @@ class Show extends Component {
                                         <RoundButton icon="wrong" color="white" size={32}></RoundButton>
                                     </TouchableOpacity>
                                 }
-                                <MyText title={item.getHours() + ':' + (item.getMinutes()<10?'0':'') + item.getMinutes()} style={{lineHeight: 20, fontSize: 14}}></MyText>
+                                <MyText title={hora + ':' + minutos} style={{lineHeight: 20, fontSize: 14}}></MyText>
                             </View>
                         )    
                     })
@@ -183,6 +190,8 @@ class Show extends Component {
 
     back2show = (norutina) => {
         this.firstTime = [true, true, true, true, true, true, true];
+        this.setSelected(this.state.dia);
+        // this.setState({copy: [{horas: []}, {horas: []}, {horas: []}, {horas: []}, {horas: []}, {horas: []}, {horas: []}]});
         this.props.back2show(norutina);
     }
 

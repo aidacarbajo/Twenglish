@@ -83,7 +83,10 @@ const createRoutine = (listDays, time) => new Promise((resolve, reject) => {
         
         for(let i = 0; i < days.length; i++) {
             if(listDays[i]) {
-                const tiempo = 'T' + (time.getHours()<10?'0':'') + time.getHours() + ':' + (time.getMinutes()<10?'0':'') + time.getMinutes() + ':00.000Z';
+                const hora = ((time.getHours() + time.getTimezoneOffset()/60) < 10 ? '0' : '') + (time.getHours() + time.getTimezoneOffset()/60);
+                const minutos = (time.getMinutes()<10?'0':'') + time.getMinutes();
+                const tiempo = 'T' + hora + ':' + minutos + ':00.000Z';
+                
                 let dia = moment(Date.now()).format('YYYY-MM-DD');
 
                 if(i > hoy) {
@@ -95,7 +98,6 @@ const createRoutine = (listDays, time) => new Promise((resolve, reject) => {
                 }
 
                 const fecha = dia + tiempo;
-                // console.log('añadir', fecha);
 
                 realm.write(() => {
                     days[i].Horas.push(fecha)
@@ -139,6 +141,7 @@ const applyChanges = (changes, modificados) => new Promise((resolve, reject) => 
 
     Realm.open(database).then(realm => {
         const week = realm.objects('Dia');
+        
         for(let index = 0; index < week.length; index++) {
             const item = week[index];
 
@@ -156,7 +159,7 @@ const applyChanges = (changes, modificados) => new Promise((resolve, reject) => 
                     // console.log('He eliminado algun elemento de', item.nombre);
 
                     // Recorremos array para ver cual no está y lo eliminamos
-                    for(let i = 0; i < item.Horas.length; i++) {
+                    for(let i = item.Horas.length - 1; i >= 0; i--) {
                         // console.log(changes[index].horas);
                         if(!isInArray(changes[index].horas, item.Horas[i])) {
                             // console.log('quiero borrar');
