@@ -3,30 +3,21 @@ import React, { Component } from 'react'
 import MyText from '../Texts/MyText';
 import Semana from './Semana';
 import { getImage } from '../../util/ImageManager';
-import { button, cards, icons, primary, text } from '../../assets/theme/styles';
+import { button, cards, primary, text } from '../../assets/theme/styles';
 import MyTitle from '../Texts/MyTitle';
 import BlueButton from '../Buttons/BlueButton';
 import RoundButton from '../Buttons/RoundButton';
-import { applyChanges, deleteAnHour, getDay } from '../../data/queries/rutina';
+import { applyChanges, getDay } from '../../data/queries/rutina';
 import { createScheduleNotification } from '../../util/NotificationManager';
-import moment from 'moment';
+import { getTime, getToday } from '../../util/Time';
 
 class Show extends Component {
     constructor(props) {
         super(props);
 
         this.action = 'show';
-
         this.tieneRutina = false;
         this.update = false;
-
-        this.today = new Date().getDay();
-        this.today -= 1;
-
-        if(this.today === -1) {
-            this.today = 6;
-        }
-
 
         // Añado y elimino este array (es provisional hasta que se de a Save changes)
         this.firstTime = [true, true, true, true, true, true, true];
@@ -34,7 +25,7 @@ class Show extends Component {
         this.modificados = [false, false, false, false, false, false, false];
 
         this.state = {
-            dia: this.today,
+            dia: getToday(),
             horas: [],
             copy: [{horas: []}, {horas: []}, {horas: []}, {horas: []}, {horas: []}, {horas: []}, {horas: []}]
         }
@@ -90,8 +81,8 @@ class Show extends Component {
                     // Si no está editando recorre el array de this.state.horas (que es la de la bbdd)
                     this.props.action === 'show' && 
                     this.state.horas.map((item, index) => {
-                        const hora = (item.getHours() < 10 ? '0' : '') + item.getHours();
-                        const minutos = (item.getMinutes()<10?'0':'') + item.getMinutes();
+                        const hora = getTime(item.getHours());
+                        const minutos = getTime(item.getMinutes());
 
                         return(            
                             <View key={index} style={[cards.cards, cards.cardPares, cards.centrar, {width: 180, height: 70,  marginBottom: 12}]}>
@@ -104,8 +95,8 @@ class Show extends Component {
                     // Si está editando coge el de copy
                     this.props.action === 'edit' &&
                     this.state.copy[this.state.dia].horas.map((item, index) => {
-                        const hora = (item.getHours() < 10 ? '0' : '') + item.getHours();
-                        const minutos = (item.getMinutes()<10?'0':'') + item.getMinutes();
+                        const hora = getTime(item.getHours());
+                        const minutos = getTime(item.getMinutes());
 
                         return(            
                             <View key={index} style={[cards.cards, cards.cardPares, cards.centrar, {width: 180, height: 70,  marginBottom: 12}]}>
@@ -152,10 +143,6 @@ class Show extends Component {
         )
     }
 
-    // shouldComponentUpdate(props, state) {
-    //     return true;
-    // }
-
     setSelected = (dia) => {
         this.setState({dia: dia});
 
@@ -163,7 +150,7 @@ class Show extends Component {
             getDay(dia).then(res => {
                 // array provisional
                 if(this.firstTime[dia]) {
-                    // Guardamos la longitud de cada uno de los dias
+                    // Guardamos la longitud de cada uno de los dias, por si hay algun cambio actualizarlo
                     if(res.length > 0) {
                         this.cuantosHorarios[dia] = res.length;
                     }

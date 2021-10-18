@@ -11,6 +11,7 @@ import Routine from '../screens/Routine';
 const Tab = createBottomTabNavigator();
 
 const Navigation = () => {
+
   return (
       <Tab.Navigator
       initialRouteName="Lessons"
@@ -23,6 +24,7 @@ const Navigation = () => {
         />
       }
     >
+
       <Tab.Screen name={"Lessons"} component={Lecciones}/> 
       <Tab.Screen name={"Routine"} component={Routine}/> 
 

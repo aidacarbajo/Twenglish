@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { getWeek } from '../../data/queries/rutina';
 import MyText from '../Texts/MyText';
 import { primary, secundary } from '../../assets/theme/styles';
+import { getToday } from '../../util/Time';
 
 const selected = {
     backgroundColor: '#FEE3E8',
@@ -34,14 +35,6 @@ class Semana extends Component {
     constructor(props) {
         super(props);
 
-        // hoy:
-        this.today = new Date().getDay();
-        this.today -= 1;
-
-        if(this.today === -1) {
-            this.today = 6;
-        }
-
         this.state = {
             weekDays: [],  // nombre
             has: [],    // se completa en funcion de si tiene algun horario guardado o no
@@ -57,8 +50,8 @@ class Semana extends Component {
     }
 
     update = () => {
+        console.log('update de semana', this.state.studentS)
         this.getWeek();
-        this.props.setUpdate();
     }
 
     componentWillUnmount() {}
@@ -68,8 +61,9 @@ class Semana extends Component {
             this.setState({weekDays: res[0], hasroutine: res[2]});
 
             if(this.props.selected != 'create') {
+                this.props.setUpdate();          
                 this.setState({has: res[1]});
-                this.props.dayS(this.state.studentS != undefined ? this.state.studentS : this.today);                
+                this.props.dayS(this.state.studentS != undefined ? this.state.studentS : getToday());      
             }
 
             if(this.props.hasroutinee != undefined && res[2]) { // res[2] es true/false dependiendo de si hay rutina creada o no
@@ -105,7 +99,7 @@ class Semana extends Component {
                         styles = selected;
                     } else {
                         if(this.props.selected == 'show' || this.props.selected == 'edit') {
-                            if(this.today === index) {
+                            if(getToday() === index) {
                                 styles = hoy;
                             } else {
                                 if(this.state.has[index]) {

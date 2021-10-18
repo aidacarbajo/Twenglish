@@ -68,8 +68,7 @@ class Routine extends Component {
         this.setState({needUpdate: false});
     }
 
-    back2show = (sinnada) => {
-        // this.isRoutine = sinnada;
+    back2show = () => {
         this.setState({action: 'show'});
     }
 
