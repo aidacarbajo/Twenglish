@@ -12,16 +12,28 @@ const Rutina = require('../assets/img/routine-empty.png')
     const FoodA1 = require('../assets/img/A1/Lecciones/foodA1.png');
     const CityA1 = require('../assets/img/A1/Lecciones/cityA1.png');
 
-    // Ejercicios
-    const MorningA1 = require('../assets/img/A1/Ejercicios/morning1.png');
-    const AfternoonA1 = require('../assets/img/A1/Ejercicios/afternoon1.png');
-    const EveningA1 = require('../assets/img/A1/Ejercicios/evening1.png');
-    const NightA1 = require('../assets/img/A1/Ejercicios/night1.png');
-    const BirthdayA1 = require('../assets/img/A1/Ejercicios/birthday.png');
-    const BoyA1 = require('../assets/img/A1/Ejercicios/happyboy.png');
-    const NTMYA1 = require('../assets/img/A1/Ejercicios/saludo.png');
-    const GiftA1 = require('../assets/img/A1/Ejercicios/gift.png');
+    // Ejercicios > Greetings
+    const MorningA1 = require('../assets/img/A1/Ejercicios/Greetings/morning1.png');
+    const AfternoonA1 = require('../assets/img/A1/Ejercicios/Greetings/afternoon1.png');
+    const EveningA1 = require('../assets/img/A1/Ejercicios/Greetings/evening1.png');
+    const NightA1 = require('../assets/img/A1/Ejercicios/Greetings/night1.png');
+    const BirthdayA1 = require('../assets/img/A1/Ejercicios/Greetings/birthday.png');
+    const BoyA1 = require('../assets/img/A1/Ejercicios/Greetings/happyboy.png');
+    const NTMYA1 = require('../assets/img/A1/Ejercicios/Greetings/saludo.png');
+    const GiftA1 = require('../assets/img/A1/Ejercicios/Greetings/gift.png');
 
+    // Ejercicios > Family
+    const FatherA1 = require('../assets/img/A1/Ejercicios/Family/FatherA1.png');
+    const MotherA1 = require('../assets/img/A1/Ejercicios/Family/MotherA1.png');
+    const SisterA1 = require('../assets/img/A1/Ejercicios/Family/SisterA1.png');
+    const BrotherA1 = require('../assets/img/A1/Ejercicios/Family/BrotherA1.png');
+    const GrandmotherA1 = require('../assets/img/A1/Ejercicios/Family/GrandmotherA1.png');
+    const TallA1 = require('../assets/img/A1/Ejercicios/Family/TallA1.png');
+    const EnergeticA1 = require('../assets/img/A1/Ejercicios/Family/EnergeticA1.png');
+    const LongA1 = require('../assets/img/A1/Ejercicios/Family/LongA1.png');
+    const ShortA1 = require('../assets/img/A1/Ejercicios/Family/ShortA1.png');
+    const CurlyA1 = require('../assets/img/A1/Ejercicios/Family/CurlyA1.png');
+    const BlondeA1 = require('../assets/img/A1/Ejercicios/Family/BlondeA1.png');
 
 // A2
     // Lecciones
@@ -39,7 +51,10 @@ export const getImage = (name) => {
         case 'routine':
             img = Rutina; break;
         
-            // Portadas Nivel A1 //
+        ///////////////////////
+        // Portadas Nivel A1 //
+        ///////////////////////
+
         case 'greetingsA1':
             img = GreetingsA1; break;
         case 'foodA1':
@@ -53,7 +68,7 @@ export const getImage = (name) => {
         case 'animalsA1':
             img = AnimalsA1; break;
 
-        // Ejercicios
+        // Ejercicios > Greetings
         case 'MorningA1':
             img = MorningA1; break;
         case 'AfternoonA1':
@@ -71,7 +86,36 @@ export const getImage = (name) => {
         case 'GiftA1':
             img = GiftA1; break;              
     
-        // Portada lecciones A2
+        // Ejercicios > Family
+        case 'FatherA1':
+            img = FatherA1; break;
+        case 'MotherA1':
+            img = MotherA1; break;
+        case 'BrotherA1':
+            img = BrotherA1; break;
+        case 'SisterA1':
+            img = SisterA1; break;
+        case 'GrandmotherA1':
+            img = GrandmotherA1; break;
+        case 'TallA1':
+            img = TallA1; break;
+        case 'EnergeticA1':
+            img = EnergeticA1; break;
+        case 'LongA1':
+            img = LongA1; break;
+        case 'BlondeA1':
+            img = BlondeA1; break;
+        case 'CurlyA1':
+            img = CurlyA1; break;
+        case 'ShortA1':
+            img = ShortA1; break;
+
+        // Ejercicios > Animals
+    
+        //////////////////////////
+        // Portada lecciones A2 //
+        //////////////////////////
+
         case 'homeA1':
             img = HomeA1; break;
         case 'routineA1':

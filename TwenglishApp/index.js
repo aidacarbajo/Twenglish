@@ -16,8 +16,7 @@ LogBox.ignoreAllLogs();//Ignore all log notifications
 
 PushNotification.configure({
     onNotification: function (notification) {
-        console.log("NOTIFICATION:", notification);
-        // notification.finish(PushNotificationIOS.FetchResult.NoData);
+        // console.log("NOTIFICATION:", notification);
     },
     requestPermissions: Platform.OS === 'ios'
 }); 
@@ -25,15 +24,14 @@ PushNotification.configure({
 
 const App2 = () => {
 
-    // borra la bbdd local
-    // await RNFS.unlink(RNFS.DocumentDirectoryPath + '/twenglish.realm')
-    // .then(() => {
-    //     console.log('deleted');
-    //     console.log(Realm.exists(database));
-    // })
-    // .catch((err) => {         
-    //     console.log(err);
-    // })
+//   await RNFS.unlink(RNFS.DocumentDirectoryPath + '/twenglish.realm')
+//   .then(() => {
+//     console.log('deleted');
+//     console.log(Realm.exists(database));
+//   })
+//   .catch((err) => {         
+//       console.log(err);
+//   })
 
   if(!Realm.exists(database)) {
         // console.log('Primera vez que entro a la app');
@@ -44,15 +42,15 @@ const App2 = () => {
             const realm = new Realm(database);
     
             const le = realm.objects('Ejercicio');
-            console.log(le);
+            console.log(le.length);
         });
   } else {
-    //   console.log('No es la primera vez que entro a la app');
-    //   console.log('');
-        // Realm.open(database).then(realm => {
-        //     const le = realm.objects('Ejercicio');
-        //     console.log(le);
-        // }).catch((error) => reject(error));
+      console.log('No es la primera vez que entro a la app');
+      console.log('');
+        Realm.open(database).then(realm => {
+            const le = realm.objects('Ejercicio');
+            console.log(le.length);
+        }).catch((error) => reject(error));
     }
 
 
