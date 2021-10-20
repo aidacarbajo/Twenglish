@@ -17,7 +17,6 @@ class RadioButton extends Component {
   }
   
   callbackFunction = (opcionSeleccionada) => {
-    console.log(opcionSeleccionada);
     this.setState({opcionSeleccionada: opcionSeleccionada});
     const value = [...this.state.opciones].find(elem => elem.frase == opcionSeleccionada);
     this.props.check(value.esCorrecta);

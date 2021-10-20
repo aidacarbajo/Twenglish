@@ -8,12 +8,8 @@ class MyTitle extends Component {
     }
 
     applyBoldStyle = () => {
-        console.log('titulo', this.props.title);
-
         let numberOfItemsAdded = 0;
         let result = this.props.title.split(/\{\d+\}/);    
-
-        console.log('split', result);
         this.props.destacar.forEach((boldText, i) => result.splice(++numberOfItemsAdded + i, 0, <Text style={[text.body, { color: secundary, fontSize:12, fontStyle: 'italic', color: '#EE8300'}]} key={i}>{boldText}</Text>));
         
         return <Text style={[text.primario, text.primarioTitulo, text.rightt, this.props.style, { marginBottom: 0}]}>{result}</Text>;

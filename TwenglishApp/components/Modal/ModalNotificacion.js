@@ -36,7 +36,6 @@ class ModalNotificacion extends Component {
                     }
 
                     obj = {titulo: tit, color: "white", icon: 'surprise'};
-                    console.log(obj);
                     styless = {backgroundColor: correcto};
                 }
             }

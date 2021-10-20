@@ -115,7 +115,6 @@ class Ejercicios extends Component {
     // pasar al siguiente ejercicio
     nextExercise = async() => {
         if(this.state.ejercicioActual < this.state.ejerciciosLeccionActual.length - 1) {
-            console.log('Numero ejercicio', this.state.ejercicioActual + 1);
             this.setState({isNextVisible: false, ejercicioActual: this.state.ejercicioActual + 1, isCorreccionVisible: false, enunciado: this.state.ejerciciosLeccionActual[this.state.ejercicioActual + 1].enunciado});
         } else {
             // nos llevaria la página de resumen

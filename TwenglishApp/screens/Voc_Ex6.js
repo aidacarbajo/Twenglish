@@ -116,7 +116,6 @@ class Voc_Ex6 extends Component {
         if(dest != undefined) {
             const rcorrecta = this.opcionCorrecta(dest);
             destacar = rcorrecta;
-            console.log(destacar);
         }
         x.forEach((text, i) => result.splice(++numberOfItemsAdded + i, 0, destacar));
 
@@ -127,14 +126,6 @@ class Voc_Ex6 extends Component {
 
 
     fraseNueva = () => {
-        let a = [];
-
-
-        console.log(this.tiene_opciones.includes(true, this.state.actualFrases));
-        console.log('ACTUAL FRASES', this.state.actualFrases);
-        console.log('FRASES LNGTH', this.state.frases.length - 1);
-
-
         if(!this.tiene_opciones.includes(true, this.state.actualFrases)) {
             this.setState({fs: this.state.frases, actualFrases: this.state.frases.length - 1, fin: true})
             this.showCheck('acierto', true);

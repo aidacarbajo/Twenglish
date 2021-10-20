@@ -31,6 +31,19 @@ class Nivel extends Component {
             }
         });
 
+        this.state = {
+            progreso: this.props.nivel.item.progreso
+        }
+
+    }
+
+    static getDerivedStateFromProps(nextProps, state) {
+        if(nextProps.nivel.item.progreso != state.progreso) {
+            return {
+                progreso: nextProps.nivel.item.progreso
+            }
+        }
+        return null;
     }
 
     sendNivel = () => {
@@ -43,7 +56,7 @@ class Nivel extends Component {
                 <GradientCircularProgress
                     size={57}
                     strokeWidth={8}
-                    progress={this.props.nivel.item.progreso}
+                    progress={this.state.progreso}
                     emptyColor="#E3E3E3"
                     startColor={start}
                     middleColor={middle}
