@@ -79,7 +79,7 @@ class Show extends Component {
             <View style={[cards.centrar, {width: '100%', marginTop: 30, zIndex: -1}]}>
                 {
                     // Si no está editando recorre el array de this.state.horas (que es la de la bbdd)
-                    this.props.action === 'show' && 
+                    this.props.action === 'show' ? 
                     this.state.horas.map((item, index) => {
                         const hora = getTime(item.getHours());
                         const minutos = getTime(item.getMinutes());
@@ -90,8 +90,7 @@ class Show extends Component {
                             </View>
                         )    
                     })
-                }
-                { 
+                    :
                     // Si está editando coge el de copy
                     this.props.action === 'edit' &&
                     this.state.copy[this.state.dia].horas.map((item, index) => {
@@ -99,7 +98,7 @@ class Show extends Component {
                         const minutos = getTime(item.getMinutes());
 
                         return(            
-                            <View key={index} style={[cards.cards, cards.cardPares, cards.centrar, {width: 180, height: 70,  marginBottom: 12}]}>
+                            <View key={index + Math.random()*100} style={[cards.cards, cards.cardPares, cards.centrar, {width: 180, height: 70,  marginBottom: 12}]}>
                                 {
                                     this.props.action === 'edit' &&
                                     <TouchableOpacity style={{position: 'absolute', right: -8, top: -10}} onPress={() => this.removeHour(index)}>

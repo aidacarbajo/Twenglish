@@ -8,17 +8,18 @@ class RadioButton extends Component {
   constructor(props) {
     super(props);
 
-    this.opcionSeleccionada = null;
-    this.opciones = this.props.opciones;
-
     this.state = {
       valores: null,
+      opcionSeleccionada: null,
+      opciones: this.props.opciones
+
     }
   }
   
   callbackFunction = (opcionSeleccionada) => {
-    this.opcionSeleccionada = opcionSeleccionada;
-    const value = [...this.opciones].find(elem => elem.frase == opcionSeleccionada);
+    console.log(opcionSeleccionada);
+    this.setState({opcionSeleccionada: opcionSeleccionada});
+    const value = [...this.state.opciones].find(elem => elem.frase == opcionSeleccionada);
     this.props.check(value.esCorrecta);
   }
 
@@ -26,17 +27,27 @@ class RadioButton extends Component {
     return true;
   }
 
-  componentDidUpdate(props) {
-  }
+  
+  static getDerivedStateFromProps(nextProps, state) {
+    if(nextProps.opciones[0].frase != state.opciones[0].frase) {
+      return {
+          opciones: nextProps.opciones,
+          opcionSeleccionada: null
+      }
+    }
+    return null;
+}
+
 
   list = () => {
     let canPress = true;
+
     if(this.props.selected !== undefined) {
       canPress = false;
     }
 
-    return this.opciones.map((element, index) => {
-        if(this.opcionSeleccionada != null && this.opcionSeleccionada === element.frase || this.props.selected === index) {
+    return this.state.opciones.map((element, index) => {
+        if(this.state.opcionSeleccionada != null && this.state.opcionSeleccionada === element.frase || this.props.selected === index) {
             return (
                 <OptionSelectedButton key={index} title={element.frase} parentCallback = {this.callbackFunction} canPress={canPress}></OptionSelectedButton>
             );        
@@ -47,10 +58,6 @@ class RadioButton extends Component {
         }
     });
   };
-
-
-  // hacer functionamiento onPress para cambiar de Selected a noSelected
-
 
  render() {
     return (

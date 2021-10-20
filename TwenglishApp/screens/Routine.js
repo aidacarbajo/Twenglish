@@ -82,7 +82,7 @@ class Routine extends Component {
 
                 {/* Modal de crear nueva rutina */}
                 <ModalC visible={this.state.isNewVisible}>
-                    <Create action={'create'} hasroutine={this.create} mequedo={this.mequedo}/>
+                    <Create action={'create'} create={this.create} mequedo={this.mequedo}/>
                 </ModalC>
 
                 {/* Modal de creado correctamente */}

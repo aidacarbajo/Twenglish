@@ -8,7 +8,6 @@ class Voc_Ex6 extends Component {
     constructor(props) {
         super(props);
 
-        this.frases = props.frases;
         this.persona = props.persona;
         this.opciones = props.opciones;
         this.tiene_opciones = [...props.tiene_opciones];
@@ -23,10 +22,10 @@ class Voc_Ex6 extends Component {
         }
         
         // primeros que se muestran
-        this.fs = [];
+        let fs = [];
         let a = 0;
         while (!this.tiene_opciones[a]) {
-            this.fs.push(this.frases[a]);
+            fs.push(props.frases[a]);
             a++;
         }
 
@@ -34,7 +33,9 @@ class Voc_Ex6 extends Component {
         this.state = {
             actualFrases: a,
             actualOpciones: 0,
-            fin: false
+            fin: false,
+            frases: props.frases,
+            fs: fs
         }
 
 
@@ -68,11 +69,11 @@ class Voc_Ex6 extends Component {
             this.showCheck('acierto', false);
 
             // Modificar array de frases acertadas
-            let c = this.fs;
-            c.push(this.frases[this.state.actualFrases]);
-            this.fs = c;
+            let c = this.state.fs;
+            c.push(this.state.frases[this.state.actualFrases]);
+            this.setState({fs: c});
 
-            if(this.state.actualFrases === this.frases.length - 1) {    // ejercicio completado
+            if(this.state.actualFrases === this.state.frases.length - 1) {    // ejercicio completado
                 this.setState({fin: true});
                 this.showCheck('acierto', true);
             } else {
@@ -99,7 +100,7 @@ class Voc_Ex6 extends Component {
     }
 
     opcionCorrecta = (pos) => {
-        return this.options[pos-1];
+        return this.options[this.state.actualOpciones-1];
     }
 
     hueco = (fr, dest) => {
@@ -107,17 +108,18 @@ class Voc_Ex6 extends Component {
         frase = fr;
 
         let numberOfItemsAdded = 0;
-        let result = frase.split(/\{\d+\}/);   
-        let x = [frase];
+        let result = frase.split(/\{\d\}/);   
+        let x = [result];
         
         let destacar = "___________";
 
         if(dest != undefined) {
             const rcorrecta = this.opcionCorrecta(dest);
             destacar = rcorrecta;
+            console.log(destacar);
         }
-
         x.forEach((text, i) => result.splice(++numberOfItemsAdded + i, 0, destacar));
+
         return(
             <MyText title={result} style={{textAlign: 'left', width: '100%'}} />
         );
@@ -125,25 +127,41 @@ class Voc_Ex6 extends Component {
 
 
     fraseNueva = () => {
-       const fraseActual = this.frases[this.state.actualFrases];
+        let a = [];
 
-       let color = {backgroundColor: '#CFF0FF'};
-       if(this.persona[this.state.actualFrases] % 2 == 0) {
-           color = button.optionSelected;
-       }
 
-       return (
-            <View style={[button.button, button.option, color, {width: '100%', flexWrap: 'wrap', paddingLeft: 10, paddingRight: 10}]}>
-                {this.hueco(fraseActual)}
-            </View>
-       );
+        console.log(this.tiene_opciones.includes(true, this.state.actualFrases));
+        console.log('ACTUAL FRASES', this.state.actualFrases);
+        console.log('FRASES LNGTH', this.state.frases.length - 1);
+
+
+        if(!this.tiene_opciones.includes(true, this.state.actualFrases)) {
+            this.setState({fs: this.state.frases, actualFrases: this.state.frases.length - 1, fin: true})
+            this.showCheck('acierto', true);
+            return(<></>)
+
+        } else {
+           console.log('Tiene true a partir de', this.state.actualFrases, this.tiene_opciones.includes(true, this.state.actualFrases));
+            let oa = this.state.frases[this.state.actualFrases];
+            let color = {backgroundColor: '#CFF0FF'};
+            if(this.persona[this.state.actualFrases] % 2 == 0) {
+                color = button.optionSelected;
+            }
+
+            return (
+                <View style={[button.button, button.option, color, {width: '100%', flexWrap: 'wrap', paddingLeft: 10, paddingRight: 10}]}>
+                    {this.hueco(oa)}
+                </View>
+            );
+       }      
     }
 
     frasesAntiguas = () => {
+
         return (
             <View style={{marginTop: -20}}>
             
-            {this.fs.map((item, index) => {
+            {this.state.fs.map((item, index) => {
                 let color = {backgroundColor: '#CFF0FF'};
                 if(this.persona[index] % 2 == 0) {
                     color = button.optionSelected;
@@ -154,17 +172,11 @@ class Voc_Ex6 extends Component {
                         <View style={[button.button, button.option, color, {width: '100%', flexWrap: 'wrap', paddingLeft: 10, paddingRight: 10}]}>
                             {
                                 !this.tiene_opciones[index] 
-                                ? (
-                                    <MyText title={item} style={{textAlign: 'left', width: '100%'}}></MyText>
-                                )
-                                : (
-                                    this.hueco(this.frases[index], index)
-                                )
+                                ? <MyText title={item} style={{textAlign: 'left', width: '100%'}}></MyText>
+                                : this.hueco(this.state.frases[index], index)
                             }
                         </View>
-                    </View>
-
-                    
+                    </View>                    
                 )
             })}
         </View>
@@ -186,7 +198,6 @@ class Voc_Ex6 extends Component {
                     <View style={{flexDirection: 'row', justifyContent: 'space-between', flexWrap: 'wrap', width: '100%'}}>
                         {
                             this.tiene_opciones[this.state.actualFrases] && !this.state.fin &&
-
                             this.getOptions()
                         }
                     </View>

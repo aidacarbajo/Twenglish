@@ -1,4 +1,4 @@
-import React, {Component, GetDerivedStateFromProps, useEffect} from 'react';
+import React, {Component} from 'react';
 import { TouchableOpacity, View, StatusBar, ActivityIndicator, Pressable, Text } from 'react-native';
 import MyTitle from '../components/Texts/MyTitle';
 import { view, posiciones, icons, text, button } from '../assets/theme/styles';

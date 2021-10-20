@@ -10,7 +10,7 @@ export default {
         ? RNFS.MainBundlePath + '/twenglish.realm'
         : RNFS.DocumentDirectoryPath + '/twenglish.realm',
     schema: schema,
-    schemaVersion: 58,    
+    schemaVersion: 57,    
   };
 
 
@@ -21,7 +21,7 @@ export default {
         Poner async y await una vez y borrarlo porque sale error pero sí funciona: [Error: File does not exist]
         
     2.  Si he cambiado la estructura del twenglish-model, añadir el nuevo, e importarlo en los imports de este archivo)
-        
+      
     3.  Hago un link desde VSC, descomento, comento y R
 
     4. Ya debería estar actualizado

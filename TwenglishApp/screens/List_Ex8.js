@@ -8,15 +8,12 @@ class List_Ex8 extends Component {
     constructor(props) {
         super(props);
 
-        // console.log(props.radioB);
-
         // RadioButton con 4 opciones (nombreImagen, true/false)
-        this.fraseCorrecta = null;       
-        this.respuestaUsuario = '';    
-
         this.state = {
             isLoading: true,
-            pause: false
+            pause: false,
+            fraseCorrecta: null,
+            respuestaUsuario: ''
         };
     }
 
@@ -46,8 +43,8 @@ class List_Ex8 extends Component {
     }
 
     saveCorrecta = (correcta) => {
-        if(this.fraseCorrecta === null) {
-            this.fraseCorrecta = correcta;
+        if(this.state.fraseCorrecta === null) {
+            this.setState({fraseCorrecta: correcta})
         }
     }
 

@@ -31,11 +31,12 @@ class ModalNotificacion extends Component {
                 } else {
                     let tit = "You're amazing!";    // Para el resumen del final de la leccion
 
-                    if(typeof(this.props.msg) != Number) {
+                    if(this.props.msg.toString() != '2') {
                         tit = this.props.msg;
                     }
 
                     obj = {titulo: tit, color: "white", icon: 'surprise'};
+                    console.log(obj);
                     styless = {backgroundColor: correcto};
                 }
             }

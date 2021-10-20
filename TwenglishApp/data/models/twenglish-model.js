@@ -108,7 +108,7 @@ exports.Opcion = {
   name: 'Opcion',
   properties: {
     frase: 'string?',
-    esCorrecta: 'bool'
+    esCorrecta: 'bool',
   }
 }
 
