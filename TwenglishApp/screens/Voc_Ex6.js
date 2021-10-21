@@ -8,12 +8,17 @@ class Voc_Ex6 extends Component {
     constructor(props) {
         super(props);
 
-        this.persona = props.persona;
         this.opciones = props.opciones;
-        this.tiene_opciones = [...props.tiene_opciones];
         this.options = [];
 
-        for(let i = 0; i < props.opciones.length; i++) {
+        // Guardamos los ints de la posicion cuando la frase tiene opcion a elegir
+        this.nanoIndexes = [];
+        this.nanoIndexes = props.tiene_opciones
+            .map((car, i) => car === true ? i : -1)
+            .filter(index => index !== -1);
+
+        // Guardar en this.options el valor correcto
+        for(let i = 0; i < [...props.opciones].length; i++) {
             for(let j = 0; j < props.opciones[i].opciones.length; j++) {
                 if(props.opciones[i].opciones[j].esCorrecta) {
                     this.options.push(props.opciones[i].opciones[j].frase);
@@ -24,13 +29,16 @@ class Voc_Ex6 extends Component {
         // primeros que se muestran
         let fs = [];
         let a = 0;
-        while (!this.tiene_opciones[a]) {
+        while (!props.tiene_opciones[a]) {
             fs.push(props.frases[a]);
             a++;
         }
 
-        // return this.getNuevos(fs);
+        fs.push(props.frases[a]);
+
         this.state = {
+            tiene_opciones: [...props.tiene_opciones],
+            persona: props.persona,
             actualFrases: a,
             actualOpciones: 0,
             fin: false,
@@ -61,6 +69,10 @@ class Voc_Ex6 extends Component {
         this.props.buttonCheck(show, next);
     }
 
+    shouldComponentUpdate() {
+        return true;
+    }
+
     checkResponse = (index) => {
         let a = this.state.actualOpciones;
         let u = this.opciones[a].opciones[index];
@@ -69,15 +81,21 @@ class Voc_Ex6 extends Component {
             this.showCheck('acierto', false);
 
             // Modificar array de frases acertadas
-            let c = this.state.fs;
-            c.push(this.state.frases[this.state.actualFrases]);
-            this.setState({fs: c});
+            let c = [...this.state.fs];
 
-            if(this.state.actualFrases === this.state.frases.length - 1) {    // ejercicio completado
-                this.setState({fin: true});
+            for(let i = this.state.actualFrases + 1; i < this.state.frases.length; i++) {
+                c.push(this.state.frases[i]);
+
+                if(this.state.tiene_opciones[i]) {
+                    break;
+                } 
+            }
+
+            if(c.length === this.state.frases.length) {    // ejercicio completado
+                this.setState({fin: true, fs: c, actualFrases: c.length - 1, actualOpciones: a + 1});
                 this.showCheck('acierto', true);
             } else {
-                this.setState({actualOpciones: a + 1, actualFrases: this.state.actualFrases + 1})
+                this.setState({fs: c, actualFrases: c.length - 1, actualOpciones: a + 1})
             }
         } else {
             // Cambiamos la opcion a rojo y sale el modal de error
@@ -100,7 +118,12 @@ class Voc_Ex6 extends Component {
     }
 
     opcionCorrecta = (pos) => {
-        return this.options[this.state.actualOpciones-1];
+        const cual = this.nanoIndexes.indexOf(pos);
+
+        if(pos < this.state.actualFrases) {
+            return this.options[cual];
+        } 
+        return "___________";
     }
 
     hueco = (fr, dest) => {
@@ -125,36 +148,13 @@ class Voc_Ex6 extends Component {
     }
 
 
-    fraseNueva = () => {
-        if(!this.tiene_opciones.includes(true, this.state.actualFrases)) {
-            this.setState({fs: this.state.frases, actualFrases: this.state.frases.length - 1, fin: true})
-            this.showCheck('acierto', true);
-            return(<></>)
-
-        } else {
-           console.log('Tiene true a partir de', this.state.actualFrases, this.tiene_opciones.includes(true, this.state.actualFrases));
-            let oa = this.state.frases[this.state.actualFrases];
-            let color = {backgroundColor: '#CFF0FF'};
-            if(this.persona[this.state.actualFrases] % 2 == 0) {
-                color = button.optionSelected;
-            }
-
-            return (
-                <View style={[button.button, button.option, color, {width: '100%', flexWrap: 'wrap', paddingLeft: 10, paddingRight: 10}]}>
-                    {this.hueco(oa)}
-                </View>
-            );
-       }      
-    }
-
     frasesAntiguas = () => {
-
         return (
             <View style={{marginTop: -20}}>
             
             {this.state.fs.map((item, index) => {
                 let color = {backgroundColor: '#CFF0FF'};
-                if(this.persona[index] % 2 == 0) {
+                if(this.state.persona[index] % 2 == 0) {
                     color = button.optionSelected;
                 }
 
@@ -162,9 +162,9 @@ class Voc_Ex6 extends Component {
                     <View key={index}>
                         <View style={[button.button, button.option, color, {width: '100%', flexWrap: 'wrap', paddingLeft: 10, paddingRight: 10}]}>
                             {
-                                !this.tiene_opciones[index] 
+                                !this.state.tiene_opciones[index] 
                                 ? <MyText title={item} style={{textAlign: 'left', width: '100%'}}></MyText>
-                                : this.hueco(this.state.frases[index], index)
+                                : this.hueco(item, index)
                             }
                         </View>
                     </View>                    
@@ -180,17 +180,13 @@ class Voc_Ex6 extends Component {
             
                 <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', textAlign: 'center', width: '100%', marginTop: 20}}>
                     {
-                        this.frasesAntiguas()   // desde actual hasta la primera que tenga opciones a seleccionar  
-                    }
-                    {
-                        !this.state.fin &&
-                        this.fraseNueva()
-                    }
+                        this.frasesAntiguas()   }  
+
                     <View style={{flexDirection: 'row', justifyContent: 'space-between', flexWrap: 'wrap', width: '100%'}}>
-                        {
-                            this.tiene_opciones[this.state.actualFrases] && !this.state.fin &&
-                            this.getOptions()
-                        }
+                    {
+                        this.state.tiene_opciones[this.state.actualFrases] && !this.state.fin &&
+                        this.getOptions()
+                    }
                     </View>
                 </View>
                 

@@ -22,6 +22,22 @@ const Rutina = require('../assets/img/routine-empty.png')
     const NTMYA1 = require('../assets/img/A1/Ejercicios/Greetings/saludo.png');
     const GiftA1 = require('../assets/img/A1/Ejercicios/Greetings/gift.png');
 
+    // Ejercicios > Food
+    const AppleA1 = require('../assets/img/A1/Ejercicios/Food/AppleA1.png');
+    const BananaA1 = require('../assets/img/A1/Ejercicios/Food/BananaA1.png');
+    const WatermelonA1 = require('../assets/img/A1/Ejercicios/Food/WatermelonA1.png');
+    const OrangeA1 = require('../assets/img/A1/Ejercicios/Food/OrangeA1.png');
+    const PeachesA1 = require('../assets/img/A1/Ejercicios/Food/PeachesA1.png');
+    const CherriesA1 = require('../assets/img/A1/Ejercicios/Food/CherriesA1.png');
+    const SaltA1 = require('../assets/img/A1/Ejercicios/Food/SaltA1.png');
+    const PepperA1 = require('../assets/img/A1/Ejercicios/Food/PepperA1.png');
+    const AvocadoA1 = require('../assets/img/A1/Ejercicios/Food/AvocadoA1.png');
+    const PinneappleA1 = require('../assets/img/A1/Ejercicios/Food/PinneappleA1.png');
+    const CarrotA1 = require('../assets/img/A1/Ejercicios/Food/CarrotA1.png');
+    const CucumberA1 = require('../assets/img/A1/Ejercicios/Food/CucumberA1.png');
+    const TomatoA1 = require('../assets/img/A1/Ejercicios/Food/TomatoA1.png');
+    const OnionA1 = require('../assets/img/A1/Ejercicios/Food/OnionA1.png')
+
     // Ejercicios > Family
     const FatherA1 = require('../assets/img/A1/Ejercicios/Family/FatherA1.png');
     const MotherA1 = require('../assets/img/A1/Ejercicios/Family/MotherA1.png');
@@ -84,8 +100,38 @@ export const getImage = (name) => {
         case 'NTMYA1':
             img = NTMYA1; break;              
         case 'GiftA1':
-            img = GiftA1; break;              
-    
+            img = GiftA1; break;      
+            
+        // Ejercicios > Food
+        case 'AppleA1':
+            img = AppleA1; break;
+        case 'BananaA1':
+            img = BananaA1; break;
+        case 'WatermelonA1':
+            img = WatermelonA1; break;
+        case 'OrangeA1':
+            img = OrangeA1; break;
+        case 'PeachesA1':
+            img = PeachesA1; break;              
+        case 'CherriesA1':
+            img = CherriesA1; break;              
+        case 'SaltA1':
+            img = SaltA1; break;   
+        case 'PepperA1':
+            img = PepperA1; break;
+        case 'AvocadoA1':
+            img = AvocadoA1; break;
+        case 'PinneappleA1':
+            img = PinneappleA1; break;
+        case 'CarrotA1':
+            img = CarrotA1; break;
+        case 'CucumberA1':
+            img = CucumberA1; break;              
+        case 'TomatoA1':
+            img = TomatoA1; break;              
+        case 'OnionA1':
+            img = OnionA1; break;   
+
         // Ejercicios > Family
         case 'FatherA1':
             img = FatherA1; break;
@@ -110,7 +156,6 @@ export const getImage = (name) => {
         case 'ShortA1':
             img = ShortA1; break;
 
-        // Ejercicios > Animals
     
         //////////////////////////
         // Portada lecciones A2 //
