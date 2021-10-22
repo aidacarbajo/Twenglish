@@ -11,7 +11,6 @@ class Voc_Ex1 extends Component {
     constructor(props) {
         super(props);
         
-        this.respuestasUsuario = ['', '', '', ''];
 
         // crear otro array llamado fotos desordenadas
         // Si antes era:    [a, b, c, d]
@@ -34,7 +33,8 @@ class Voc_Ex1 extends Component {
             isLoading: false,
             dataRealm: data,
             pressed: [false, false, false, false],
-            actual: 0
+            actual: 0,
+            respuestasUsuario: ['', '', '', '']
         };
 
         this.isPressed = this.isPressed.bind(this);
@@ -53,15 +53,43 @@ class Voc_Ex1 extends Component {
         return true;                      
     }
 
+    static getDerivedStateFromProps(nextProps, state) {
+        if(nextProps.ejercicio.imagenes[0] != state.dataRealm.portada[0]) {
+            const frases = nextProps.ejercicio.frase;
+            const opcionesClave = nextProps.ejercicio.opcionesClave;        
+            const imagenes = JSON.parse(JSON.stringify(nextProps.ejercicio.imagenes));
+            const desordenado = [...imagenes].sort(() => {return Math.random() - 0.5});
+
+            const data = {
+                            frases: frases.split('"'), 
+                            portada: imagenes,
+                            portadaDesordenada: desordenado,
+                            palabraClave: opcionesClave,
+                        }
+
+            return {
+                isLoading: false,
+                dataRealm: data,
+                pressed: [false, false, false, false],
+                actual: 0,
+                respuestasUsuario: ['', '', '', '']            
+            }
+        }
+        return null;
+    }
+
     isPressed = (index) => {
         if(this.state.actual < this.state.pressed.length) {
-            if(this.respuestasUsuario[index] == '') { 
-                this.respuestasUsuario[index] = this.state.dataRealm.palabraClave[this.state.actual]
+            console.log(this.state.respuestasUsuario[index]);
+
+            if(this.state.respuestasUsuario[index] == '') { 
+                let o = this.state.respuestasUsuario;
+               o[index] = this.state.dataRealm.palabraClave[this.state.actual]
 
                 let arrayPressed = [...this.state.pressed];
                 arrayPressed[index] = true;
     
-                this.setState({pressed: arrayPressed, actual: this.state.actual + 1}); 
+                this.setState({pressed: arrayPressed, actual: this.state.actual + 1, respuestasUsuario: o}); 
                 
                 if(this.state.actual === this.state.pressed.length - 1) {
                     this.props.buttonCheck(true);
@@ -89,7 +117,7 @@ class Voc_Ex1 extends Component {
 
     checkAnswer = () => {
         const pd = this.state.dataRealm.portadaDesordenada;
-        const ru = this.respuestasUsuario;
+        const ru = this.state.respuestasUsuario;
 
         const po = this.state.dataRealm.portada;
         const pc = this.state.dataRealm.palabraClave;
@@ -113,8 +141,7 @@ class Voc_Ex1 extends Component {
         if(!iguales) {            
             this.props.buttonCheck(false);
             setTimeout(() => {
-                this.setState({pressed: [false, false, false, false], actual: 0});
-                this.respuestasUsuario = ['', '', '', ''];
+                this.setState({pressed: [false, false, false, false], actual: 0, respuestasUsuario: ['', '', '', '']});
             }, 1000);
         }
 
@@ -150,7 +177,7 @@ class Voc_Ex1 extends Component {
                                             imageStyle={{ borderRadius: 12}}
                                         >
                                             {this.state.pressed[item.index] === true && (
-                                                <Tag dataTitle={this.respuestasUsuario[item.index]}></Tag>
+                                                <Tag dataTitle={this.state.respuestasUsuario[item.index]}></Tag>
                                             )}
 
                                         </ImageBackground> 

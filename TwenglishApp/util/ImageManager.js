@@ -51,6 +51,23 @@ const Rutina = require('../assets/img/routine-empty.png')
     const CurlyA1 = require('../assets/img/A1/Ejercicios/Family/CurlyA1.png');
     const BlondeA1 = require('../assets/img/A1/Ejercicios/Family/BlondeA1.png');
 
+    // Ejercicios > Weather
+    const SkyA1 = require('../assets/img/A1/Ejercicios/Weather/SkyA1.png');
+    const FieldA1 = require('../assets/img/A1/Ejercicios/Weather/FieldA1.png');
+    const MountainA1 = require('../assets/img/A1/Ejercicios/Weather/MountainA1.png');
+    const SeaA1 = require('../assets/img/A1/Ejercicios/Weather/SeaA1.png');
+    const CloudyA1 = require('../assets/img/A1/Ejercicios/Weather/CloudyA1.png');
+    const SunnyA1 = require('../assets/img/A1/Ejercicios/Weather/SunnyA1.png');
+    const RainyA1 = require('../assets/img/A1/Ejercicios/Weather/RainyA1.png');
+    const SnowyA1 = require('../assets/img/A1/Ejercicios/Weather/SnowyA1.png');
+    const ColdA1 = require('../assets/img/A1/Ejercicios/Weather/ColdA1.png');
+    const LightningA1 = require('../assets/img/A1/Ejercicios/Weather/LightningA1.png');
+    const CloudsA1 = require('../assets/img/A1/Ejercicios/Weather/CloudsA1.png');
+    const SunA1 = require('../assets/img/A1/Ejercicios/Weather/SunA1.png');
+    const MoonA1 = require('../assets/img/A1/Ejercicios/Weather/MoonA1.png');
+    const AstronautsA1 = require('../assets/img/A1/Ejercicios/Weather/AstronautsA1.png')
+    
+
 // A2
     // Lecciones
     const HomeA1 = require('../assets/img/A2/Lecciones/homeA1.png');
@@ -155,6 +172,37 @@ export const getImage = (name) => {
             img = CurlyA1; break;
         case 'ShortA1':
             img = ShortA1; break;
+
+        // Ejercicios > Weather
+        case 'SkyA1':
+            img = SkyA1; break;
+        case 'FieldA1':
+            img = FieldA1; break;
+        case 'MountainA1':
+            img = MountainA1; break;
+        case 'SeaA1':
+            img = SeaA1; break;
+        case 'CloudyA1':
+            img = CloudyA1; break;              
+        case 'SunnyA1':
+            img = SunnyA1; break;              
+        case 'RainyA1':
+            img = RainyA1; break;   
+        case 'SnowyA1':
+            img = SnowyA1; break;
+        case 'ColdA1':
+            img = ColdA1; break;
+        case 'CloudsA1':
+            img = CloudsA1; break;
+        case 'SunA1':
+            img = SunA1; break;
+        case 'MoonA1':
+            img = MoonA1; break;              
+        case 'LightningA1':
+            img = LightningA1; break;              
+        case 'AstronautsA1':
+            img = AstronautsA1; break;   
+
 
     
         //////////////////////////
