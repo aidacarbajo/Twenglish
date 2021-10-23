@@ -65,7 +65,35 @@ const Rutina = require('../assets/img/routine-empty.png')
     const CloudsA1 = require('../assets/img/A1/Ejercicios/Weather/CloudsA1.png');
     const SunA1 = require('../assets/img/A1/Ejercicios/Weather/SunA1.png');
     const MoonA1 = require('../assets/img/A1/Ejercicios/Weather/MoonA1.png');
-    const AstronautsA1 = require('../assets/img/A1/Ejercicios/Weather/AstronautsA1.png')
+    const AstronautsA1 = require('../assets/img/A1/Ejercicios/Weather/AstronautsA1.png');
+
+    // Ejercicios > Positions
+    const Background2A1 = require('../assets/img/A1/Ejercicios/Positions/Background2A1.png');
+    const BackgroundA1 = require('../assets/img/A1/Ejercicios/Positions/BackgroundA1.png');
+    const BehindA1 = require('../assets/img/A1/Ejercicios/Positions/BehindA1.png');
+    const BetweenA1 = require('../assets/img/A1/Ejercicios/Positions/BetweenA1.png');
+    const BottomA1 = require('../assets/img/A1/Ejercicios/Positions/BottomA1.png');
+    const Far2A1 = require('../assets/img/A1/Ejercicios/Positions/Far2A1.png');
+    const FarA1 = require('../assets/img/A1/Ejercicios/Positions/FarA1.png');
+    const Foreground2A1 = require('../assets/img/A1/Ejercicios/Positions/Foreground2A1.png');
+    const ForegroundA1 = require('../assets/img/A1/Ejercicios/Positions/ForegroundA1.png');
+    const InA1 = require('../assets/img/A1/Ejercicios/Positions/InA1.png');
+    const InFrontOfA1 = require('../assets/img/A1/Ejercicios/Positions/InFrontOfA1.png');
+    const Inside2A1 = require('../assets/img/A1/Ejercicios/Positions/Inside2A1.png');
+    const InsideA1 = require('../assets/img/A1/Ejercicios/Positions/InsideA1.png');
+    const LeftA1 = require('../assets/img/A1/Ejercicios/Positions/LeftA1.png');
+    const Near2A1 = require('../assets/img/A1/Ejercicios/Positions/Near2A1.png');
+    const NearA1 = require('../assets/img/A1/Ejercicios/Positions/NearA1.png');
+    const NextToA1 = require('../assets/img/A1/Ejercicios/Positions/NextToA1.png');
+    const OnA1 = require('../assets/img/A1/Ejercicios/Positions/OnA1.png');
+    const Outside2A1 = require('../assets/img/A1/Ejercicios/Positions/Outside2A1.png');
+    const OutsideA1 = require('../assets/img/A1/Ejercicios/Positions/OutsideA1.png');
+    const RightA1 = require('../assets/img/A1/Ejercicios/Positions/RightA1.png');
+    const SignalA1 = require('../assets/img/A1/Ejercicios/Positions/SignalA1.png');
+    const SurroundedA1 = require('../assets/img/A1/Ejercicios/Positions/SurroundedA1.png');
+    const TopA1 = require('../assets/img/A1/Ejercicios/Positions/TopA1.png');
+    const UnderA1 = require('../assets/img/A1/Ejercicios/Positions/UnderA1.png');
+
     
 
 // A2
@@ -202,6 +230,59 @@ export const getImage = (name) => {
             img = LightningA1; break;              
         case 'AstronautsA1':
             img = AstronautsA1; break;   
+
+        // Ejercicios > Positions
+        case 'Background2A1':
+            img = Background2A1; break;
+        case 'BackgroundA1':
+            img = BackgroundA1; break;
+        case 'BehindA1':
+            img = BehindA1; break;
+        case 'BetweenA1':
+            img = BetweenA1; break;
+        case 'BottomA1':
+            img = BottomA1; break;              
+        case 'Far2A1':
+            img = Far2A1; break;              
+        case 'FarA1':
+            img = FarA1; break;   
+        case 'Foreground2A1':
+            img = Foreground2A1; break;
+        case 'ForegroundA1':
+            img = ForegroundA1; break;
+        case 'InA1':
+            img = InA1; break;
+        case 'InFrontOfA1':
+            img = InFrontOfA1; break;
+        case 'Inside2A1':
+            img = Inside2A1; break;              
+        case 'InsideA1':
+            img = InsideA1; break;              
+        case 'LeftA1':
+            img = LeftA1; break;   
+        case 'Near2A1':
+            img = Near2A1; break;
+        case 'NearA1':
+            img = NearA1; break;              
+        case 'NextToA1':
+            img = NextToA1; break;              
+        case 'OnA1':
+            img = OnA1; break;   
+        case 'Outside2A1':
+            img = Outside2A1; break;
+        case 'OutsideA1':
+            img = OutsideA1; break;
+        case 'RightA1':
+            img = RightA1; break;
+        case 'SignalA1':
+            img = SignalA1; break;
+        case 'SurroundedA1':
+            img = SurroundedA1; break;              
+        case 'TopA1':
+            img = TopA1; break;              
+        case 'UnderA1':
+            img = UnderA1; break;   
+
 
 
     

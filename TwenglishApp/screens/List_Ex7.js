@@ -11,16 +11,22 @@ class List_Ex7 extends Component {
         super(props);
 
         // RadioButton con 4 opciones (nombreImagen, true/false)
-        this.imagenCorrecta = null;       
         const imagenes = JSON.parse(JSON.stringify(props.imagenes));
-        this.desordenado = [];
-        this.desordenado = [...imagenes].sort(() => {return Math.random() - 0.5});
+        let desordenado = [];
+        desordenado = [...imagenes].sort(() => {return Math.random() - 0.5});
+        
+        let imagenCorrecta = desordenado.find(item => {
+            return item.esCorrecta;
+        })
 
-        this.respuestaUsuario = '';    
+        console.log('Hola');
 
         this.state = {
             isLoading: true,
-            pause: false
+            pause: false,
+            imagenCorrecta: imagenCorrecta.frase,
+            ordenado: props.imagenes,
+            desordenado: desordenado,
         };
     }
 
@@ -33,19 +39,38 @@ class List_Ex7 extends Component {
         this.props.onRef(undefined)
     }
 
+    static getDerivedStateFromProps(nextProps, state) {
+        console.log(nextProps.imagenes[0].frase, state.ordenado[0].frase);
+
+        if(nextProps.imagenes[0].frase != state.ordenado[0].frase) {
+
+            const imagenes = JSON.parse(JSON.stringify(nextProps.imagenes));
+            
+            let desordenado = [];
+            desordenado = [...imagenes].sort(() => {return Math.random() - 0.5});
+            
+            let imagenCorrecta = desordenado.find(item => {
+                return item.esCorrecta;
+            })
+    
+            return {
+                pause: false,
+                imagenCorrecta: imagenCorrecta.frase,
+                desordenado: desordenado,
+                ordenado: imagenes
+            };
+        }
+        
+        return null;
+    }
+
     checkAnswer = (frasePressed) => {
-        if(frasePressed === this.imagenCorrecta) {
+        if(frasePressed === this.state.imagenCorrecta) {
             this.props.buttonCheck('acierto', true);
             return true;
         } else {
             this.props.buttonCheck('fallo');
             return false;
-        }
-    }
-
-    saveCorrecta = (correcta) => {
-        if(this.imagenCorrecta === null) {
-            this.imagenCorrecta = correcta;
         }
     }
 
@@ -59,13 +84,14 @@ class List_Ex7 extends Component {
         } else {
             return(
                 <View>
+                    {console.log(this.state.desordenado)}
                     <VoiceManager texto={this.props.texto} />
                     <FlatList
                         style={{paddingHorizontal: cards.padding.paddingHorizontal, paddingVertical: 20}}
                         numColumns={2}
                         columnWrapperStyle={{justifyContent: 'space-between'}}
                         showsVerticalScrollIndicator={false}
-                        data={this.desordenado}
+                        data={this.state.desordenado}
                         keyExtractor={(item, index) => index }
                         renderItem={(item, index) => 
                             <View style={[cards.card, cards.dimensions]}>
@@ -77,9 +103,6 @@ class List_Ex7 extends Component {
                                             style={[cards.image]} 
                                             imageStyle={{ borderRadius: 12}}
                                         />
-                                        {
-                                            item.item.esCorrecta && this.saveCorrecta(item.item.frase)
-                                        }
                                     </View>
                                 </Pressable>
                             </View>

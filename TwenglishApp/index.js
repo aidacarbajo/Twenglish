@@ -15,9 +15,6 @@ import PushNotification from "react-native-push-notification";
 LogBox.ignoreAllLogs();//Ignore all log notifications
 
 PushNotification.configure({
-    onNotification: function (notification) {
-        // console.log("NOTIFICATION:", notification);
-    },
     requestPermissions: Platform.OS === 'ios'
 }); 
 
@@ -34,8 +31,6 @@ const App2 = () => {
 //   })
 
   if(!Realm.exists(database)) {
-        // console.log('Primera vez que entro a la app');
-        // console.log('');
         RNFS.copyFileAssets('twenglish.realm', RNFS.DocumentDirectoryPath + '/twenglish.realm')
         .then(() => {
             Realm.copyBundledRealmFiles();
@@ -44,14 +39,7 @@ const App2 = () => {
             const le = realm.objects('Ejercicio');
             console.log(le.length);
         });
-  } else {
-      console.log('No es la primera vez que entro a la app');
-      console.log('');
-        Realm.open(database).then(realm => {
-            const le = realm.objects('Ejercicio');
-            console.log(le.length);
-        }).catch((error) => reject(error));
-    }
+  } 
 
 
   

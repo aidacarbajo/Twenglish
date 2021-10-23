@@ -57,8 +57,6 @@ class Speak_Ex9 extends Component {
                 }
             }
 
-            // console.log(same, pxpC.length/1.5, pxpC.length);
-
             // MARGEN DE ERROR: Si acierta 1/4 de la frase se pone como correcto
             if(same >= pxpC.length/1.5) {   
                 this.casiCorrecta = 'Almost perfect! ' + same + '/' + pxpC.length + ' words are correct';

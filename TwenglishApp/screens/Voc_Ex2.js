@@ -36,7 +36,6 @@ class Voc_Ex2 extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, state) {
-        console.log(nextProps.imagen[0], state.imagen)
         if(nextProps.imagen[0] != state.imagen) {
             const opcioness = nextProps.radioB.opciones;
             const opciones = JSON.parse(JSON.stringify(opcioness));

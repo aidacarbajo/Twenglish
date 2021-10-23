@@ -46,7 +46,6 @@ class Apuntes extends Component {
             });
         }
     }).catch((error) => {
-        // console.log('Esta lección no tiene apuntes');   // en realidad todas las lecciones tienen apuntes
         this.setState({
             isLoading:false,
             vocabulario: [],

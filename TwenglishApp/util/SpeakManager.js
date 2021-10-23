@@ -6,8 +6,6 @@ import RoundButton from '../components/Buttons/RoundButton';
 import MyText from '../components/Texts/MyText';
 import MyTitle from '../components/Texts/MyTitle';
 
-const ERROR_MSG_NO_SPEECH = Platform.OS === 'ios' ? '203/Retry' : '7/No match';
-
 export default class SpeakManager extends React.Component {
     constructor(props) {
         super(props)
@@ -46,39 +44,30 @@ export default class SpeakManager extends React.Component {
             speechServicesAndroid = await Voice.getSpeechRecognitionServices();
         }
         this.setState({recognized: speechServicesAndroid});
-        // console.log(isAvailable, isRecognizing, speechServicesAndroid);
     }
 
     _onSpeechStart = (event) => {
-        // console.log('Empezar a grabar', event);
         this.setState({started: '√'})
     };
     _onSpeechRecognized = (event) => {
-        // console.log('Recnognized', event);
         this.setState({recognized: '√'});
     }
 
      _onSpeechEnd = () => {
-        // console.log('Finalizar grabacion');
         this.setState({started: 'X', pressed: false, isRecord: !this.state.isRecord});
     };
 
     _onSpeechResults = (event) => {
-        // console.log('onSpeechResults');
-        // console.log(event.value)
         this.setState({results: event.value});
 
         // Check responses
         this.studentAnswer();
     };
     _onSpeechPartialResults = (event) => {
-        // console.log('onSpeechPartialResults');
-        // console.log(event.value);
         this.setState({partialResults: event.value});
     };
 
     _onSpeechError = (error) => {
-        // console.log(error.error);
         this.setState({error: JSON.stringify(error.error), pressed: false, started: 'X'});
         Voice.destroy().then(Voice.removeAllListeners());
     };
@@ -117,7 +106,6 @@ export default class SpeakManager extends React.Component {
     }
 
     studentAnswer = () => {
-        // console.log('quiero enviar', this.state.partialResults);
         this.props.studentAnswer(this.state.partialResults[0], this.state.results);
     }
 

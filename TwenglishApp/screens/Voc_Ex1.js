@@ -80,8 +80,6 @@ class Voc_Ex1 extends Component {
 
     isPressed = (index) => {
         if(this.state.actual < this.state.pressed.length) {
-            console.log(this.state.respuestasUsuario[index]);
-
             if(this.state.respuestasUsuario[index] == '') { 
                 let o = this.state.respuestasUsuario;
                o[index] = this.state.dataRealm.palabraClave[this.state.actual]

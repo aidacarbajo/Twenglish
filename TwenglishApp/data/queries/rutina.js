@@ -37,9 +37,6 @@ const getHours = () => new Promise((resolve, reject) => {
             let dia = [];
 
             for (item of item.Horas) {
-                // Le quitamos la fecha y solo dejamos la hora
-                // const time = item.getHours() + ':' + item.getMinutes();
-                // console.log(new Date(item));
                 dia.push(item);
             }            
             hours.push(dia);
@@ -176,7 +173,6 @@ const applyChanges = (changes, modificados) => new Promise((resolve, reject) => 
                     }
                 } 
             } else {
-                // console.log('Elemento', item.nombre, 'no modificado');
                 if(item.Horas.length === 0) {
                     tiene_horario++;
                 }
