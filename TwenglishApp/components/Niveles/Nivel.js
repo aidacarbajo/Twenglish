@@ -37,13 +37,15 @@ class Nivel extends Component {
 
     }
 
-    static getDerivedStateFromProps(nextProps, state) {
-        if(nextProps.nivel.item.progreso != state.progreso) {
-            return {
-                progreso: nextProps.nivel.item.progreso
-            }
+    shouldComponentUpdate(props) {
+        if(props.progreso != this.state.progreso) {
+            return true;
         }
-        return null;
+        return false;
+    }
+
+    componentDidUpdate(props) {
+        this.setState({progreso: props.progreso});
     }
 
     sendNivel = () => {
@@ -51,12 +53,16 @@ class Nivel extends Component {
     }
 
     getCircle = (start, middle, end) => {
+        let prog = this.props.nivel.item.progreso;
+        if(this.props.nivel.item.nombre === this.props.nseleccionado) {
+            prog = this.state.progreso;
+        }
         return (
             <Pressable onPress={this.sendNivel}>
                 <GradientCircularProgress
                     size={57}
                     strokeWidth={8}
-                    progress={this.state.progreso}
+                    progress={prog}
                     emptyColor="#E3E3E3"
                     startColor={start}
                     middleColor={middle}

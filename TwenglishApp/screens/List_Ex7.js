@@ -19,8 +19,6 @@ class List_Ex7 extends Component {
             return item.esCorrecta;
         })
 
-        console.log('Hola');
-
         this.state = {
             isLoading: true,
             pause: false,
@@ -40,8 +38,6 @@ class List_Ex7 extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, state) {
-        console.log(nextProps.imagenes[0].frase, state.ordenado[0].frase);
-
         if(nextProps.imagenes[0].frase != state.ordenado[0].frase) {
 
             const imagenes = JSON.parse(JSON.stringify(nextProps.imagenes));

@@ -60,14 +60,24 @@ class NivelesList extends Component {
     }
 
     shouldComponentUpdate(props) {
-        if(this.state.nivel != props.nivel || this.state.firstTime) {
+        if(this.state.nivel != props.nivel || this.state.firstTime || props.progreso != this.state.progreso) {
             return true;
         } else {
             return false;
         }
     }
+    
     componentDidUpdate(props) {
         this.getLevels(true, props);
+    }
+
+    static getDerivedStateFromProps(nextProps, state) {
+        if(nextProps.progreso != state.progreso) {
+            return {
+                progreso: nextProps.progreso
+            }
+        }
+        return null;
     }
 
     render() {
@@ -97,7 +107,7 @@ class NivelesList extends Component {
                         keyExtractor={(item) => item.nombre} 
                         renderItem={(item) =>  
                             <View>
-                                <Nivel nivel={item} nseleccionado={this.state.nivelSeleccionado} parentCallback = {this.callbackFunction}></Nivel>
+                                <Nivel nivel={item} progreso={this.state.progreso} nseleccionado={this.state.nivelSeleccionado} parentCallback = {this.callbackFunction}></Nivel>
                             </View>
                         }
                         >
