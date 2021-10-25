@@ -125,7 +125,7 @@ class Lecciones extends Component {
 
             <NivelesList nivelSel={this.changeLessons} nivel={this.state.nivel} progreso={this.state.progreso}></NivelesList>
 
-            <View style={view.safeArea}>
+            <View style={[view.safeArea, {paddingBottom: 30}]}>
               <MyText title="What would you like to learn today?" style={{marginBottom: 15}}></MyText>
               <Flatlist lessonsModal={this.callbackLessons} dataRealm={this.state.lecciones} navigation={this.props.navigation}></Flatlist>
             </View>

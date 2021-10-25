@@ -9,14 +9,15 @@ class Voc_Ex4 extends Component {
     constructor(props) {
         super(props);
         
-        this.frase = props.frase;
-        this.opcioness = props.radioB.opciones;
-        this.opciones = JSON.parse(JSON.stringify(this.opcioness));
+        const opcioness = props.radioB.opciones;
+        const opciones = JSON.parse(JSON.stringify(opcioness));
 
         this.correcta = false;
 
         this.state = {
             isLoading: false,
+            frase: props.frase,
+            opciones:opciones
         };
 
         this.showCheck = this.showCheck.bind();
@@ -33,6 +34,21 @@ class Voc_Ex4 extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {                                     
         return true;                      
+    }
+
+    static getDerivedStateFromProps(nextProps, state) {
+        if(nextProps.frase != state.frase) {
+            const opcioness = nextProps.radioB.opciones;
+            const opciones = JSON.parse(JSON.stringify(opcioness));
+            
+            console.log(nextProps.frase);
+
+            return {
+                opciones: opciones,
+                frase: nextProps.frase
+            }
+          }
+          return null;
     }
 
     showCheck = (correcta) => {
@@ -59,10 +75,10 @@ class Voc_Ex4 extends Component {
             return (
                 <View style={{marginTop: 20}}>
                     <View style={[cards.cardApuntes, cards.cards]}>
-                        <MyText title={this.frase} style={{fontSize: 11, textAlign: 'left', padding: 4, lineHeight: 18}}></MyText>
+                        <MyText title={this.state.frase} style={{fontSize: 11, textAlign: 'left', padding: 4, lineHeight: 18}}></MyText>
                     </View>
 
-                    <RadioButton opciones={this.opciones} check={this.showCheck}></RadioButton>
+                    <RadioButton opciones={this.state.opciones} check={this.showCheck}></RadioButton>
                 </View>
             );
         }
