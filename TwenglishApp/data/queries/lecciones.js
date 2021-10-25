@@ -21,8 +21,27 @@ const getApuntesLeccion = (nombre) => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
         const apuntes = realm.objects('Leccion').filtered(`portada == '${nombre}'`);
         if(apuntes[0].explicacion != null) {
-            resolve(apuntes[0].explicacion.apartados[0]);
+            let titulos = [], vocabulario = [], gramatica = [];
+
+            for(let i = 0; i < apuntes[0].explicacion.apartados.length; i++) {
+                titulos.push(apuntes[0].explicacion.apartados[i].titulo);
+
+                if(apuntes[0].explicacion.apartados[i].listaVocabulario.length > 0) {
+                    vocabulario.push(apuntes[0].explicacion.apartados[i].listaVocabulario);
+                }
+
+                if(apuntes[0].explicacion.apartados[i].listaGramatica.length > 0) {
+                    gramatica.push(apuntes[0].explicacion.apartados[i].listaGramatica);
+                }
+            }
+
+            console.log('BACK');
+            console.log(titulos, vocabulario, gramatica);
+            console.log('SEND');
+
+            resolve([titulos, vocabulario, gramatica]);
         }
+
         resolve(null);
     }).catch((error) => reject(error));
 });

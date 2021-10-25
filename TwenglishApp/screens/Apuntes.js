@@ -25,6 +25,8 @@ class Apuntes extends Component {
         portada: params.portada,
         vocabulario: [],
         gramatica: [],
+        titulo: [],
+        needUpdate: false
     };
 
     _isMounted = false;
@@ -33,16 +35,23 @@ class Apuntes extends Component {
   getApuntess = (portadaID, temaID) => {
     this._isMounted = true;
 
+    console.log(portadaID, temaID);
+
     return getApuntesLeccion(portadaID).then(res => {
         const apuntes = res; 
-        
+        console.log('I HAVE RECEIVED:');
+        console.log(apuntes);
+
         if(this._isMounted) {
             this.setState({
                 isLoading:false,
-                vocabulario: apuntes.listaVocabulario,
-                gramatica: apuntes.listaGramatica,
+                apuntes: apuntes,
+                vocabulario: apuntes[1],
+                gramatica: apuntes[2],
+                titulo: apuntes[0],
                 tema: temaID,
                 portada: portadaID,
+                needUpdate: false
             });
         }
     }).catch((error) => {
@@ -52,19 +61,27 @@ class Apuntes extends Component {
             gramatica: [],
             tema: temaID,
             portada: portadaID,
+            titulo: [],
+            needUpdate: false
         });
     });
   }
 
     componentDidMount() {
-        return this.getApuntess(this.props.route.params.portada, this.props.route.params.tema);
+        this.getApuntess(this.props.route.params.portada, this.props.route.params.tema);
     }
 
-  
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        if (nextProps.route.params.tema !== this.state.tema) {
-            return this.getApuntess(nextProps.route.params.portada, nextProps.route.params.tema);
+    static getDerivedStateFromProps(nextProps, state) {
+        console.log(nextProps.route.params);
+
+        if(nextProps.route.params.tema != state.tema) {
+            return {
+                tema: nextProps.route.params.tema,
+                portada: nextProps.route.params.portada,
+                needUpdate: true
+            }
         }
+        return null;
     }
 
 
@@ -80,8 +97,10 @@ class Apuntes extends Component {
           </View>
       )
     } else {
+        this.state.needUpdate && this.getApuntess(this.state.portada, this.state.tema)
+
       return (
-        <ScrollView style={{backgroundColor: fondo}}>
+        <ScrollView style={{backgroundColor: fondo}}>            
             <SafeAreaView style={{paddingHorizontal: 50, paddingVertical: 60}}>
 
                 <View style={[posiciones.abolute, posiciones.topleft]}>
@@ -92,22 +111,35 @@ class Apuntes extends Component {
 
                 <MyTitle title={this.state.tema} titleBold="notes"></MyTitle>
 
-                {/* <SafeAreaView style={{paddingHorizontal: 50, paddingVertical: 60}}> */}
-                    <MyTitle title={'Grammar'} style={{fontSize: 14, color: body, marginTop: 10, marginBottom: 8}}></MyTitle>
-                        {this.state.gramatica.map((element) => {
-                            return (
-                                <View style={[cards.cardApuntes, cards.cards, {marginBottom: 15}]} key={element.titulo}>
-                                    <MyTitle title={element.titulo} style={{fontSize: 12, marginBottom: 10}}></MyTitle>
-                                    <MyText title={element.explicacion} style={{textAlign: 'left', marginBottom: 4, padding: 4, lineHeight: 14}}></MyText>
-                                    <MyText title={element.ejemplo} style={{textAlign: 'left', color: example, paddingHorizontal: 4}}></MyText>
-                                </View>
-                            );     
-                        })}
-
-                <View>
+                {
+                    this.state.vocabulario.length > 0 &&
                     <MyTitle title={'Vocabulary'} style={{fontSize: 14, color: body, marginTop: 10, marginBottom: 8}}></MyTitle>
-                    <CardVocabulary vocabulary={this.state.vocabulario}></CardVocabulary>
-                </View>
+                }
+
+                {this.state.vocabulario.map((element, index) => {
+                    return(
+                        <View style={{marginBottom: 10}}>
+                            <MyText title={this.state.titulo[index]} style={{marginTop: 15}} />
+                            <CardVocabulary vocabulary={element} titulo={this.state.titulo}></CardVocabulary>
+                        </View>
+                    );
+                })}
+
+                {
+                    this.state.gramatica.length > 0 &&
+                    <MyTitle title={'Grammar'} style={{fontSize: 14, color: body, marginTop: 20, marginBottom: 8}}></MyTitle>
+                }
+                    {this.state.gramatica.map((element, index) => {
+                        return (
+                            <View style={[cards.cardApuntes, cards.cards, {marginBottom: 15}]} key={index}>
+                                <MyTitle title={element[0].titulo} style={{fontSize: 12, marginBottom: 10}}></MyTitle>
+                                <MyText title={element[0].explicacion} style={{textAlign: 'left', marginBottom: 4, padding: 4, lineHeight: 14}}></MyText>
+                                <MyText title={element[0].ejemplo} style={{textAlign: 'left', color: example, paddingHorizontal: 4}}></MyText>
+                            </View>
+                        );     
+                    })}
+
+                
             </SafeAreaView>
         </ScrollView>
       );

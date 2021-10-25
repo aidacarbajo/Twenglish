@@ -32,21 +32,26 @@ class Nivel extends Component {
         });
 
         this.state = {
-            progreso: this.props.nivel.item.progreso
+            progreso: this.props.nivel.item.progreso,
+            needUpdate: false
         }
 
     }
 
-    shouldComponentUpdate(props) {
-        if(props.progreso != this.state.progreso) {
-            return true;
-        }
-        return false;
+    componentDidMount() {
+        this.setState({needUpdate: true})
     }
 
-    componentDidUpdate(props) {
-        this.setState({progreso: props.progreso});
+    static getDerivedStateFromProps(nextProps, state) {
+        if(nextProps.progreso != state.progreso) {
+            return {
+                progreso: nextProps.progreso,
+                needUpdate: false
+            };
+        }
+        return null;
     }
+
 
     sendNivel = () => {
         this.props.parentCallback(this.props.nivel.item.nombre);
