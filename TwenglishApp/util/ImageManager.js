@@ -103,6 +103,12 @@ const Rutina = require('../assets/img/routine-empty.png')
     const RoutineA1 = require('../assets/img/A2/Lecciones/routineA1.png');
     const HobbiesA1 = require('../assets/img/A2/Lecciones/sportsA1.png');
 
+    // Ejercicios > Routine
+    const Hora1 = require('../assets/img/A2/Ejercicios/Routine/Hora1.png');
+    const Hora2 = require('../assets/img/A2/Ejercicios/Routine/Hora2.png');
+    const Hora3 = require('../assets/img/A2/Ejercicios/Routine/Hora3.png');
+    const Hora4 = require('../assets/img/A2/Ejercicios/Routine/Hora4.png');
+
 
 export const getImage = (name) => {
     let img;
@@ -283,8 +289,6 @@ export const getImage = (name) => {
         case 'UnderA1':
             img = UnderA1; break;   
 
-
-
     
         //////////////////////////
         // Portada lecciones A2 //
@@ -298,6 +302,17 @@ export const getImage = (name) => {
             img = SchoolA1; break;
         case 'hobbiesA1':
             img = HobbiesA1; break;
+
+        // Routine
+        case 'Hora1':
+            img = Hora1; break;
+        case 'Hora2':
+            img = Hora2; break;
+        case 'Hora3':
+            img = Hora3; break;
+        case 'Hora4':
+            img = Hora4; break;
+
 
         default:
             img = Logo; break;

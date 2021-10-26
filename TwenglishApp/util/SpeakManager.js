@@ -47,6 +47,7 @@ export default class SpeakManager extends React.Component {
     }
 
     _onSpeechStart = (event) => {
+        console.log('start');
         this.setState({started: '√'})
     };
     _onSpeechRecognized = (event) => {
@@ -68,11 +69,12 @@ export default class SpeakManager extends React.Component {
     };
 
     _onSpeechError = (error) => {
+        console.log(error);
         this.setState({error: JSON.stringify(error.error), pressed: false, started: 'X'});
         Voice.destroy().then(Voice.removeAllListeners());
     };
 
-    _startRecognition() {
+    _startRecognition() {        
         if(!this.state.isRecord) {
             this.setState({
                 started: 'X',

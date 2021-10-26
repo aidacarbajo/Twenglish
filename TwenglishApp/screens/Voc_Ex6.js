@@ -8,12 +8,11 @@ class Voc_Ex6 extends Component {
     constructor(props) {
         super(props);
 
-        this.opciones = props.opciones;
-        this.options = [];
+        let options = [];
 
         // Guardamos los ints de la posicion cuando la frase tiene opcion a elegir
-        this.nanoIndexes = [];
-        this.nanoIndexes = props.tiene_opciones
+        let nanoIndexes = [];
+        nanoIndexes = props.tiene_opciones
             .map((car, i) => car === true ? i : -1)
             .filter(index => index !== -1);
 
@@ -21,7 +20,7 @@ class Voc_Ex6 extends Component {
         for(let i = 0; i < [...props.opciones].length; i++) {
             for(let j = 0; j < props.opciones[i].opciones.length; j++) {
                 if(props.opciones[i].opciones[j].esCorrecta) {
-                    this.options.push(props.opciones[i].opciones[j].frase);
+                    options.push(props.opciones[i].opciones[j].frase);
                 }
             } 
         }
@@ -37,6 +36,9 @@ class Voc_Ex6 extends Component {
         fs.push(props.frases[a]);
 
         this.state = {
+            nanoIndexes: nanoIndexes,
+            opciones: props.opciones,
+            options: options,
             tiene_opciones: [...props.tiene_opciones],
             persona: props.persona,
             actualFrases: a,
@@ -56,8 +58,51 @@ class Voc_Ex6 extends Component {
     componentWillUnmount() {
         this.props.onRef(undefined)
     }
-    shouldComponentUpdate(nextProps, nextState) {                                     
-        return true;                      
+    
+    static getDerivedStateFromProps(nextProps, state) {
+        if(nextProps.frases[0] != state.frases[0]) {
+            let options = [];
+
+            // Guardamos los ints de la posicion cuando la frase tiene opcion a elegir
+            let nanoIndexes = [];
+            nanoIndexes = nextProps.tiene_opciones
+                .map((car, i) => car === true ? i : -1)
+                .filter(index => index !== -1);
+
+            // Guardar en this.options el valor correcto
+            for(let i = 0; i < [...nextProps.opciones].length; i++) {
+                for(let j = 0; j < nextProps.opciones[i].opciones.length; j++) {
+                    if(nextProps.opciones[i].opciones[j].esCorrecta) {
+                        options.push(nextProps.opciones[i].opciones[j].frase);
+                    }
+                } 
+            }
+            
+            // primeros que se muestran
+            let fs = [];
+            let a = 0;
+            while (!nextProps.tiene_opciones[a]) {
+                fs.push(nextProps.frases[a]);
+                a++;
+            }
+
+            fs.push(nextProps.frases[a]);
+
+            return {
+                nanoIndexes: nanoIndexes,
+                opciones: nextProps.opciones,
+                options: options,
+                tiene_opciones: [...nextProps.tiene_opciones],
+                persona: nextProps.persona,
+                actualFrases: a,
+                actualOpciones: 0,
+                fin: false,
+                frases: nextProps.frases,
+                fs: fs
+            }
+
+        }
+        return null;
     }
 
 
@@ -75,7 +120,7 @@ class Voc_Ex6 extends Component {
 
     checkResponse = (index) => {
         let a = this.state.actualOpciones;
-        let u = this.opciones[a].opciones[index];
+        let u = this.state.opciones[a].opciones[index];
 
         if(u.esCorrecta) {
             this.showCheck('acierto', false);
@@ -107,7 +152,7 @@ class Voc_Ex6 extends Component {
    
     getOptions = () => {  
         return(
-            this.opciones[this.state.actualOpciones].opciones.map((item, index) => {
+            this.state.opciones[this.state.actualOpciones].opciones.map((item, index) => {
                 return (
                     <Pressable key={index} style={[cards.cards, cards.centrar, {padding: 10, marginTop: 25}]} onPress={() => this.checkResponse(index)}>
                         <MyText title={item.frase}></MyText>
@@ -118,10 +163,10 @@ class Voc_Ex6 extends Component {
     }
 
     opcionCorrecta = (pos) => {
-        const cual = this.nanoIndexes.indexOf(pos);
+        const cual = this.state.nanoIndexes.indexOf(pos);
 
         if(pos < this.state.actualFrases) {
-            return this.options[cual];
+            return this.state.options[cual];
         } 
         return "___________";
     }

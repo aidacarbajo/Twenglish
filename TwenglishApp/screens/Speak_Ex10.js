@@ -11,13 +11,13 @@ class Speak_Ex10 extends Component {
     constructor(props) {
         super(props);
 
-        this.opcionCorrecta = null;
+        let opcionCorrecta = null;
 
-        this.masParecida = [];
+        let masParecida = [];
         for(let i = 0; i < props.frases.length; i++) {
-            this.masParecida[i] = 0;
+            masParecida[i] = 0;
             if(props.frases[i].esCorrecta) {
-                this.opcionCorrecta = i;
+                opcionCorrecta = i;
             }
         }
 
@@ -25,10 +25,13 @@ class Speak_Ex10 extends Component {
 
         this.state = {
             pause: false,
-            seleccionado: -1
+            seleccionado: -1,
+            frases: props.frases,
+            opcionCorrecta: opcionCorrecta,
+            masParecida: masParecida,
+            preSpeaking: true
         }
 
-        this.preSpeaking = true;
         this.perdon = "I didn't get that. Could you try again?";
         
     }
@@ -39,6 +42,34 @@ class Speak_Ex10 extends Component {
 
     componentWillUnmount() {
         this.props.onRef(undefined)
+    }
+
+    static getDerivedStateFromProps(nextProps, state) {
+        if(nextProps.frases[0].frase != state.frases[0].frase) {
+            console.log('son diferentes');
+
+            let opcionCorrecta = null;
+            let masParecida = [];
+    
+            for(let i = 0; i < nextProps.frases.length; i++) {
+                masParecida[i] = 0;
+                if(nextProps.frases[i].esCorrecta) {
+                    opcionCorrecta = i;
+                }
+            }
+    
+            return {
+                pause: false,
+                seleccionado: -1,
+                frases: nextProps.frases,
+                opcionCorrecta: opcionCorrecta,
+                masParecida: masParecida,
+                preSpeaking: true
+            }
+    
+        }
+
+        return null;
     }
 
     checkAnswer = () => {
@@ -55,7 +86,7 @@ class Speak_Ex10 extends Component {
         if(this.state.seleccionado != -1) {
             this.props.buttonCheck(true);
             
-            if(this.opcionCorrecta === this.state.seleccionado) {
+            if(this.state.opcionCorrecta === this.state.seleccionado) {
                 this.correcta = true;
             } else {
                 this.correcta = false;
@@ -68,8 +99,9 @@ class Speak_Ex10 extends Component {
     }
 
     areSimilar = (fraseStudent, allResults) => {
-        this.preSpeaking = false;
-        this.setState({seleccionado: -1});
+        this.setState({seleccionado: -1, preSpeaking: false});
+
+        let masParecida = this.state.masParecida;
 
         for(let i = 0; i < allResults.length; i++) {
             for(let j = 0; j < this.props.frases.length && this.state.seleccionado === -1; j++) {
@@ -86,14 +118,14 @@ class Speak_Ex10 extends Component {
                             same++;
                         }
                     }
-                    this.masParecida[j] += same;
+                    masParecida[j] += same;
                 }
             }
         }
 
         if(this.state.seleccionado === -1) {
-            const indexMax = this.masParecida.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
-            this.setState({seleccionado: indexMax});
+            const indexMax = this.state.masParecida.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+            this.setState({seleccionado: indexMax, masParecida: masParecida});
         }
 
         this.showbutton();
@@ -107,10 +139,10 @@ class Speak_Ex10 extends Component {
                 <RadioButton opciones={this.props.frases} selected={this.state.seleccionado}></RadioButton>
 
                 {
-                    !this.preSpeaking && this.state.seleccionado === -1 &&
+                    !this.state.preSpeaking && this.state.seleccionado === -1 &&
                     <MyText title={this.perdon} style={{fontSize: 12, color: secundary}}></MyText>
                 }
-                <SpeakManager studentAnswer={this.areSimilar} casiCorrecta={this.casiCorrecta} loading={true}></SpeakManager>
+                <SpeakManager studentAnswer={this.areSimilar} casiCorrecta={undefined} loading={true}></SpeakManager>
             </View>    
         );
     }

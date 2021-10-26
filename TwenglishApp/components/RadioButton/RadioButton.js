@@ -2,14 +2,13 @@ import OptionButton  from "../Buttons/OptionButton";
 import { OptionSelectedButton } from "../Buttons/OptionSelectedButton";
 import { View } from 'react-native';
 import { radiobutton } from "../../assets/theme/styles";
-import React, { Component, GetDerivedStateFromProps } from 'react'
+import React, { Component } from 'react'
 
 class RadioButton extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      valores: null,
       opcionSeleccionada: null,
       opciones: this.props.opciones
 
@@ -22,16 +21,18 @@ class RadioButton extends Component {
     this.props.check(value.esCorrecta);
   }
 
-  shouldComponentUpdate(props, state) {
-    return true;
-  }
+  // shouldComponentUpdate(props, state) {
+  //   return true;
+  // }
 
   
   static getDerivedStateFromProps(nextProps, state) {
     if(nextProps.opciones[0].frase != state.opciones[0].frase) {
+      console.log('Son otras');
+      
       return {
           opciones: nextProps.opciones,
-          opcionSeleccionada: null
+          opcionSeleccionada: null,
       }
     }
     return null;
