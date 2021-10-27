@@ -98,10 +98,12 @@ const Rutina = require('../assets/img/routine-empty.png')
 
 // A2
     // Lecciones
-    const HomeA1 = require('../assets/img/A2/Lecciones/homeA1.png');
-    const SchoolA1 = require('../assets/img/A2/Lecciones/schoolA1.png');
-    const RoutineA1 = require('../assets/img/A2/Lecciones/routineA1.png');
-    const HobbiesA1 = require('../assets/img/A2/Lecciones/sportsA1.png');
+    const RoutineA2 = require('../assets/img/A2/Lecciones/routineA1.png');
+    const HomeA2 = require('../assets/img/A2/Lecciones/homeA1.png');
+    const PeopleA2 = require('../assets/img/A2/Lecciones/people.png');
+
+    const SchoolA2 = require('../assets/img/A2/Lecciones/schoolA1.png');
+    const HobbiesA2 = require('../assets/img/A2/Lecciones/sportsA1.png');
 
     // Ejercicios > Routine
     const Hora1 = require('../assets/img/A2/Ejercicios/Routine/Hora1.png');
@@ -118,6 +120,13 @@ const Rutina = require('../assets/img/routine-empty.png')
     const Pizza = require('../assets/img/A2/Ejercicios/Home/Pizza.png');
     const Salad = require('../assets/img/A2/Ejercicios/Home/Salad.png');
     const Grass = require('../assets/img/A2/Ejercicios/Home/Grass.png');
+
+    // Ejercicios > People
+    const Gafas = require('../assets/img/A2/Ejercicios/People/Gafas.png');
+    const Ojos = require('../assets/img/A2/Ejercicios/People/Ojos.png');
+    const Sonrisa = require('../assets/img/A2/Ejercicios/People/Sonrisa.png');
+    const Rubia = require('../assets/img/A2/Ejercicios/People/Rubia.png');
+
 
 export const getImage = (name) => {
     let img;
@@ -304,13 +313,16 @@ export const getImage = (name) => {
         //////////////////////////
 
         case 'homeA1':
-            img = HomeA1; break;
+            img = HomeA2; break;
         case 'routineA1':
-            img = RoutineA1; break;
+            img = RoutineA2; break;
+        case 'PeopleA2':
+            img = PeopleA2; break;
         case 'studiesA1':
-            img = SchoolA1; break;
+            img = SchoolA2; break;
         case 'hobbiesA1':
-            img = HobbiesA1; break;
+            img = HobbiesA2; break;
+        
 
         // Routine
         case 'Hora1':
@@ -340,6 +352,15 @@ export const getImage = (name) => {
         case 'Salad':
             img = Salad; break;
 
+        // People
+        case 'Gafas':
+            img = Gafas; break;
+        case 'Sonrisa':
+            img = Sonrisa; break;
+        case 'Rubia':
+            img = Rubia; break;
+        case 'Ojos':
+            img = Ojos; break;
 
         default:
             img = Logo; break;
