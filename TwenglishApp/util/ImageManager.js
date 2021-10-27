@@ -109,6 +109,15 @@ const Rutina = require('../assets/img/routine-empty.png')
     const Hora3 = require('../assets/img/A2/Ejercicios/Routine/Hora3.png');
     const Hora4 = require('../assets/img/A2/Ejercicios/Routine/Hora4.png');
 
+    // Ejercicios > Home
+    const Clean = require('../assets/img/A2/Ejercicios/Home/Clean.png');
+    const Kitchen = require('../assets/img/A2/Ejercicios/Home/Kitchen.png');
+    const Laundry = require('../assets/img/A2/Ejercicios/Home/Laundry.png');
+    const Nuggets = require('../assets/img/A2/Ejercicios/Home/Nuggets.png');
+    const Pancakes = require('../assets/img/A2/Ejercicios/Home/Pancakes.png');
+    const Pizza = require('../assets/img/A2/Ejercicios/Home/Pizza.png');
+    const Salad = require('../assets/img/A2/Ejercicios/Home/Salad.png');
+    const Grass = require('../assets/img/A2/Ejercicios/Home/Grass.png');
 
 export const getImage = (name) => {
     let img;
@@ -312,6 +321,24 @@ export const getImage = (name) => {
             img = Hora3; break;
         case 'Hora4':
             img = Hora4; break;
+
+        // Home
+        case 'Clean':
+            img = Clean; break;
+        case 'Grass':
+            img = Grass; break;
+        case 'Kitchen':
+            img = Kitchen; break;
+        case 'Laundry':
+            img = Laundry; break;
+        case 'Nuggets':
+            img = Nuggets; break;
+        case 'Pancakes':
+            img = Pancakes; break;
+        case 'Pizza':
+            img = Pizza; break;
+        case 'Salad':
+            img = Salad; break;
 
 
         default:

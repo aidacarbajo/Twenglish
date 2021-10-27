@@ -36,7 +36,7 @@ class Voc_Ex2 extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, state) {
-        if(nextProps.imagen[0] != state.imagen) {
+        if(nextProps.radioB.opciones[0].frase != state.opciones[0].frase) {
             const opcioness = nextProps.radioB.opciones;
             const opciones = JSON.parse(JSON.stringify(opcioness));
     
@@ -72,14 +72,18 @@ class Voc_Ex2 extends Component {
         } else {
             return (
                 <View>
-                    <View style={{width: '100%', height: 180, marginTop: 20}}>
-                        <ImageBackground 
-                            source={getImage(this.state.imagen)} 
-                            resizeMode="cover" 
-                            style={[cards.image]} 
-                            imageStyle={{ borderRadius: 12, width: '100%', height: 180, shadowColor: 'black'}} >
-                        </ImageBackground>  
-                    </View>
+                    {
+                        this.state.imagen != 'null' &&
+                        <View style={{width: '100%', height: 180, marginTop: 20}}>
+                            <ImageBackground 
+                                source={getImage(this.state.imagen)} 
+                                resizeMode="cover" 
+                                style={[cards.image]} 
+                                imageStyle={{ borderRadius: 12, width: '100%', height: 180, shadowColor: 'black'}} >
+                            </ImageBackground>  
+                        </View>
+
+                    }
                     <RadioButton opciones={this.state.opciones} check={this.showCheck} correcta={this.props.esCorrecta}></RadioButton>
                 </View>
             );
