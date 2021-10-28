@@ -46,8 +46,6 @@ class Speak_Ex10 extends Component {
 
     static getDerivedStateFromProps(nextProps, state) {
         if(nextProps.frases[0].frase != state.frases[0].frase) {
-            console.log('son diferentes');
-
             let opcionCorrecta = null;
             let masParecida = [];
     

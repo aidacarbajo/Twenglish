@@ -35,12 +35,8 @@ class Apuntes extends Component {
   getApuntess = (portadaID, temaID) => {
     this._isMounted = true;
 
-    console.log(portadaID, temaID);
-
     return getApuntesLeccion(portadaID).then(res => {
         const apuntes = res; 
-        console.log('I HAVE RECEIVED:');
-        console.log(apuntes);
 
         if(this._isMounted) {
             this.setState({
@@ -72,8 +68,6 @@ class Apuntes extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, state) {
-        console.log(nextProps.route.params);
-
         if(nextProps.route.params.tema != state.tema) {
             return {
                 tema: nextProps.route.params.tema,

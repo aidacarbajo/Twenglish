@@ -28,8 +28,6 @@ class RadioButton extends Component {
   
   static getDerivedStateFromProps(nextProps, state) {
     if(nextProps.opciones[0].frase != state.opciones[0].frase) {
-      console.log('Son otras');
-      
       return {
           opciones: nextProps.opciones,
           opcionSeleccionada: null,

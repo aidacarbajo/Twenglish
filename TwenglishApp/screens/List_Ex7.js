@@ -80,7 +80,6 @@ class List_Ex7 extends Component {
         } else {
             return(
                 <View>
-                    {console.log(this.state.desordenado)}
                     <VoiceManager texto={this.props.texto} />
                     <FlatList
                         style={{paddingHorizontal: cards.padding.paddingHorizontal, paddingVertical: 20}}

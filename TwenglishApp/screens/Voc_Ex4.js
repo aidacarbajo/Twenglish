@@ -41,8 +41,6 @@ class Voc_Ex4 extends Component {
             const opcioness = nextProps.radioB.opciones;
             const opciones = JSON.parse(JSON.stringify(opcioness));
             
-            console.log(nextProps.frase);
-
             return {
                 opciones: opciones,
                 frase: nextProps.frase

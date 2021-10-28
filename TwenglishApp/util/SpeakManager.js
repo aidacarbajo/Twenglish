@@ -47,7 +47,6 @@ export default class SpeakManager extends React.Component {
     }
 
     _onSpeechStart = (event) => {
-        console.log('start');
         this.setState({started: '√'})
     };
     _onSpeechRecognized = (event) => {

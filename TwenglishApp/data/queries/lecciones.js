@@ -35,10 +35,6 @@ const getApuntesLeccion = (nombre) => new Promise((resolve, reject) => {
                 }
             }
 
-            console.log('BACK');
-            console.log(titulos, vocabulario, gramatica);
-            console.log('SEND');
-
             resolve([titulos, vocabulario, gramatica]);
         }
 

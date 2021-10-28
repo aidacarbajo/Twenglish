@@ -101,9 +101,9 @@ const Rutina = require('../assets/img/routine-empty.png')
     const RoutineA2 = require('../assets/img/A2/Lecciones/routineA1.png');
     const HomeA2 = require('../assets/img/A2/Lecciones/homeA1.png');
     const PeopleA2 = require('../assets/img/A2/Lecciones/people.png');
-
-    const SchoolA2 = require('../assets/img/A2/Lecciones/schoolA1.png');
-    const HobbiesA2 = require('../assets/img/A2/Lecciones/sportsA1.png');
+    const Transports = require('../assets/img/A2/Lecciones/Transports.png');
+    const Accommodation = require('../assets/img/A2/Lecciones/Accommodation.png');
+    const Shoppings = require('../assets/img/A2/Lecciones/Shoppings.png');
 
     // Ejercicios > Routine
     const Hora1 = require('../assets/img/A2/Ejercicios/Routine/Hora1.png');
@@ -126,6 +126,18 @@ const Rutina = require('../assets/img/routine-empty.png')
     const Ojos = require('../assets/img/A2/Ejercicios/People/Ojos.png');
     const Sonrisa = require('../assets/img/A2/Ejercicios/People/Sonrisa.png');
     const Rubia = require('../assets/img/A2/Ejercicios/People/Rubia.png');
+
+    // Ejercicios > Transports
+    const Balloon = require('../assets/img/A2/Ejercicios/Transports/Balloon.png');
+    const Bus = require('../assets/img/A2/Ejercicios/Transports/Bus.png');
+    const Car = require('../assets/img/A2/Ejercicios/Transports/Car.png');
+    const Foot = require('../assets/img/A2/Ejercicios/Transports/Foot.png');
+    const GetIn = require('../assets/img/A2/Ejercicios/Transports/GetIn.png');
+    const GetOff = require('../assets/img/A2/Ejercicios/Transports/GetOff.png');
+    const GetOn = require('../assets/img/A2/Ejercicios/Transports/GetOn.png');
+    const GetOut = require('../assets/img/A2/Ejercicios/Transports/GetOut.png');
+    const Helicopter = require('../assets/img/A2/Ejercicios/Transports/Helicopter.png');
+    const Train = require('../assets/img/A2/Ejercicios/Transports/Train.png');
 
 
 export const getImage = (name) => {
@@ -318,10 +330,12 @@ export const getImage = (name) => {
             img = RoutineA2; break;
         case 'PeopleA2':
             img = PeopleA2; break;
-        case 'studiesA1':
-            img = SchoolA2; break;
-        case 'hobbiesA1':
-            img = HobbiesA2; break;
+        case 'Transports':
+            img = Transports; break;
+        case 'Accomodation':
+            img = Accommodation; break;
+        case 'Shoppings':
+            img = Shoppings; break;
         
 
         // Routine
@@ -361,6 +375,28 @@ export const getImage = (name) => {
             img = Rubia; break;
         case 'Ojos':
             img = Ojos; break;
+
+        // Transports
+        case 'Balloon':
+            img = Balloon; break;
+        case 'Bus':
+            img = Bus; break;
+        case 'Car':
+            img = Car; break;
+        case 'Foot':
+            img = Foot; break;
+        case 'GetIn':
+            img = GetIn; break;
+        case 'GetOff':
+            img = GetOff; break;
+        case 'GetOn':
+            img = GetOn; break;
+        case 'GetOut':
+            img = GetOut; break;
+        case 'Helicopter':
+            img = Helicopter; break;
+        case 'Train':
+            img = Train; break;
 
         default:
             img = Logo; break;
