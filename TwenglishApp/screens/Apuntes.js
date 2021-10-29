@@ -125,10 +125,19 @@ class Apuntes extends Component {
                 }
                     {this.state.gramatica.map((element, index) => {
                         return (
-                            <View style={[cards.cardApuntes, cards.cards, {marginBottom: 15}]} key={index}>
-                                <MyTitle title={element[0].titulo} style={{fontSize: 12, marginBottom: 10}}></MyTitle>
-                                <MyText title={element[0].explicacion} style={{textAlign: 'left', marginBottom: 4, padding: 4, lineHeight: 14}}></MyText>
-                                <MyText title={element[0].ejemplo} style={{textAlign: 'left', color: example, paddingHorizontal: 4}}></MyText>
+                            <View>
+                                {
+                                    this.state.titulo[index + this.state.vocabulario.length] != null && this.state.titulo[index + this.state.vocabulario.length] != '' &&
+                                    <MyText title={this.state.titulo[index + this.state.vocabulario.length]} style={{marginVertical: 15}} />
+                                }
+                                <View style={[cards.cardApuntes, cards.cards, {marginBottom: 15}]} key={index}>
+                                    <MyTitle title={element[0].titulo} style={{fontSize: 12, marginBottom: 10}}></MyTitle>
+                                    {
+                                        element[0].explicacion != null && element[0].explicacion != '' &&
+                                        <MyText title={element[0].explicacion} style={{textAlign: 'left', marginBottom: 4, padding: 4, lineHeight: 14}}></MyText>
+                                    }
+                                    <MyText title={element[0].ejemplo} style={{textAlign: 'left', color: example, paddingHorizontal: 4}}></MyText>
+                                </View>
                             </View>
                         );     
                     })}
