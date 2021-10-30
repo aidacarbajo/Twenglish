@@ -9,7 +9,6 @@ import { getNivelSeleccionado } from '../data/queries/nivel';
 import NivelesList from '../components/Flatlist/NivelesList';
 import Modal from '../components/Modal/ModalC';
 import ModalLessons from '../components/Modal/ModalLessons';
-import PushNotification from "react-native-push-notification";
 
 class Lecciones extends Component {
   constructor(props) {

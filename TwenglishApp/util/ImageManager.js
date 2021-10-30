@@ -140,6 +140,28 @@ const Rutina = require('../assets/img/routine-empty.png')
     const Train = require('../assets/img/A2/Ejercicios/Transports/Train.png');
 
 
+// B1
+    // Lecciones
+    const Education = require('../assets/img/B1/Lecciones/Education.png');
+    const Environment = require('../assets/img/B1/Lecciones/Environment.png');
+    const FreeTime = require('../assets/img/B1/Lecciones/FreeTime.png');
+    const Health = require('../assets/img/B1/Lecciones/Health.png');
+    const Travel = require('../assets/img/B1/Lecciones/Travel.png');
+    const Work = require('../assets/img/B1/Lecciones/Work.png');
+
+    // Travel
+    const Parachute = require('../assets/img/B1/Ejercicios/Travel/Parachute.png');
+    const SunBath = require('../assets/img/B1/Ejercicios/Travel/SunBathe.png');
+    const Swim = require('../assets/img/B1/Ejercicios/Travel/Swim.png');
+    const Hiking = require('../assets/img/B1/Ejercicios/Travel/Hiking.png');
+
+    // Environment
+    const AirPollution = require('../assets/img/B1/Ejercicios/Environment/AirPollution.png');
+    const PlasticPollution = require('../assets/img/B1/Ejercicios/Environment/PlasticPollution.png');
+    const Deforestation = require('../assets/img/B1/Ejercicios/Environment/Deforestation.png');
+    const Flood = require('../assets/img/B1/Ejercicios/Environment/Flood.png');
+
+
 export const getImage = (name) => {
     let img;
     
@@ -397,6 +419,44 @@ export const getImage = (name) => {
             img = Helicopter; break;
         case 'Train':
             img = Train; break;
+
+         
+        //////////////////////////
+        // Portada lecciones B1 //
+        //////////////////////////
+        case 'Education':
+            img = Education; break;
+        case 'Environment':
+            img = Environment; break;
+        case 'FreeTime':
+            img = FreeTime; break;
+        case 'Health':
+            img = Health; break;
+        case 'Travel':
+            img = Travel; break;
+        case 'Work':
+            img = Work; break;
+
+        // Travel
+        case 'SunBath':
+            img = SunBath; break;
+        case 'Swim':
+            img = Swim; break;
+        case 'Hiking':
+            img = Hiking; break;
+        case 'Parachute':
+            img = Parachute; break;
+
+        // Environment
+        case 'AirPollution':
+            img = AirPollution; break;
+        case 'PlasticPollution':
+            img = PlasticPollution; break;
+        case 'Deforestation':
+            img = Deforestation; break;
+        case 'Flood':
+            img = Flood; break;
+        
 
         default:
             img = Logo; break;
