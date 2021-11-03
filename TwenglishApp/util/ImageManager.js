@@ -161,6 +161,11 @@ const Rutina = require('../assets/img/routine-empty.png')
     const Deforestation = require('../assets/img/B1/Ejercicios/Environment/Deforestation.png');
     const Flood = require('../assets/img/B1/Ejercicios/Environment/Flood.png');
 
+    // Work
+    const Journalist = require('../assets/img/B1/Ejercicios/Work/Journalist.png');
+    const Teacher = require('../assets/img/B1/Ejercicios/Work/Teacher.png');
+    const Doctor = require('../assets/img/B1/Ejercicios/Work/Doctor.png');
+    const Law = require('../assets/img/B1/Ejercicios/Work/Law.png');
 
 export const getImage = (name) => {
     let img;
@@ -457,6 +462,15 @@ export const getImage = (name) => {
         case 'Flood':
             img = Flood; break;
         
+        // Work
+        case 'Teacher':
+            img = Teacher; break;
+        case 'Doctor':
+            img = Doctor; break;
+        case 'Journalist':
+            img = Journalist; break;
+        case 'Law':
+            img = Law; break;        
 
         default:
             img = Logo; break;
