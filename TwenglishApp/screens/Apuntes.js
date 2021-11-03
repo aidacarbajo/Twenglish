@@ -136,7 +136,7 @@ class Apuntes extends Component {
                                         element[0].explicacion != null && element[0].explicacion != '' &&
                                         <MyText title={element[0].explicacion} style={{textAlign: 'left', marginBottom: 4, padding: 4, lineHeight: 14}}></MyText>
                                     }
-                                    <MyText title={element[0].ejemplo} style={{textAlign: 'left', color: example, paddingHorizontal: 4}}></MyText>
+                                    <MyText title={element[0].ejemplo} style={{textAlign: 'left', color: example, paddingHorizontal: 4, lineHeight: 14}}></MyText>
                                 </View>
                             </View>
                         );     
