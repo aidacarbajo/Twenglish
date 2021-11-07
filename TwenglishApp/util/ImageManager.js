@@ -167,6 +167,27 @@ const Rutina = require('../assets/img/routine-empty.png')
     const Doctor = require('../assets/img/B1/Ejercicios/Work/Doctor.png');
     const Law = require('../assets/img/B1/Ejercicios/Work/Law.png');
 
+// B2
+    // Lecciones
+    const Technology = require('../assets/img/B2/Lecciones/Technology.png');
+    const Crime = require('../assets/img/B2/Lecciones/Crime.png');
+    const Fashion = require('../assets/img/B2/Lecciones/Fashion.png');
+    const Relationships = require('../assets/img/B2/Lecciones/Relationship.png');
+
+// C1
+    // Lecciones
+    const Communication = require('../assets/img/C1/Lecciones/Communication.png');
+    const Success = require('../assets/img/C1/Lecciones/Success.png');
+    const Sports = require('../assets/img/C1/Lecciones/Sports.png');
+    const RelationshipsC1 = require('../assets/img/C1/Lecciones/RelationshipsC1.png');
+
+// C2
+    // Lecciones
+    const Fame = require('../assets/img/C2/Lecciones/Fame.png');
+    const Luck = require('../assets/img/C2/Lecciones/Luck.png');
+    const Languages = require('../assets/img/C2/Lecciones/Languages.png');
+    const Natural = require('../assets/img/C2/Lecciones/Natural.png');
+
 export const getImage = (name) => {
     let img;
     
@@ -470,7 +491,46 @@ export const getImage = (name) => {
         case 'Journalist':
             img = Journalist; break;
         case 'Law':
-            img = Law; break;        
+            img = Law; break;       
+
+    ////////////////////////////
+    ///////////  B2  ///////////
+    ////////////////////////////
+        // Lecciones
+        case 'Technology':
+            img = Technology; break;
+        case 'Crime':
+            img = Crime; break;
+        case 'Fashion':
+            img = Fashion; break;
+        case 'Relationships':
+            img = Relationships; break;        
+    
+    ////////////////////////////
+    ///////////  C1  ///////////
+    ////////////////////////////
+        // Lecciones
+        case 'Communication':
+            img = Communication; break;
+        case 'Success':
+            img = Success; break;
+        case 'Sports':
+            img = Sports; break;
+        case 'RelationshipsC1':
+            img = RelationshipsC1; break;   
+
+    ////////////////////////////
+    ///////////  C2  ///////////
+    ////////////////////////////
+        // Lecciones
+        case 'Fame':
+            img = Fame; break;
+        case 'Luck':
+            img = Luck; break;
+        case 'Languages':
+            img = Languages; break;
+        case 'Natural':
+            img = Natural; break;   
 
         default:
             img = Logo; break;

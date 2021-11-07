@@ -12,7 +12,7 @@ import { LogBox } from 'react-native';
 import database from './data/database/config';
 import PushNotification from "react-native-push-notification";
  
-LogBox.ignoreAllLogs();//Ignore all log notifications
+LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 PushNotification.configure({
     requestPermissions: Platform.OS === 'ios'
@@ -21,14 +21,14 @@ PushNotification.configure({
 
 const App2 = () => {
 
-//   await RNFS.unlink(RNFS.DocumentDirectoryPath + '/twenglish.realm')
-//   .then(() => {
-//     console.log('deleted');
-//     console.log(Realm.exists(database));
-//   })
-//   .catch((err) => {         
-//       console.log(err);
-//   })
+  // await RNFS.unlink(RNFS.DocumentDirectoryPath + '/twenglish.realm')
+  // .then(() => {
+  //   console.log('deleted');
+  //   console.log(Realm.exists(database));
+  // })
+  // .catch((err) => {         
+  //     console.log(err);
+  // })
 
   if(!Realm.exists(database)) {
         RNFS.copyFileAssets('twenglish.realm', RNFS.DocumentDirectoryPath + '/twenglish.realm')
@@ -41,8 +41,6 @@ const App2 = () => {
         });
   } 
 
-
-  
 
     return (
         <App />
