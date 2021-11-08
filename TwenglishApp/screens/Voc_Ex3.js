@@ -8,18 +8,18 @@ class Voc_Ex3 extends Component {
     constructor(props) {
         super(props);
         
-        this.pares = [...props.everyPar.pares];
-        let desordenados = []; this.seleccionUsuario = [];
+        let pares = [...props.everyPar.pares];
+        let desordenados = []; let seleccionUsuario = [];
 
-        this.pares.map(el => {
+        pares.map(el => {
             desordenados.push(el.par[0], el.par[1]);
-            this.seleccionUsuario.push('', '');       // cuando 'c' == correcto o selected; cuando 'n' incorrecto
+            seleccionUsuario.push('', '');       // cuando 'c' == correcto o selected; cuando 'n' incorrecto
         })
 
-        this.todosDesordenados = desordenados.sort(() => {return Math.random() - 0.5});
-
         this.state = {
-            seleccionado: [...this.seleccionUsuario]
+            seleccionado: seleccionUsuario,
+            pares: pares,
+            todosDesordenados: desordenados.sort(() => {return Math.random() - 0.5})
         }
 
         this.correcta = false;
@@ -29,16 +29,36 @@ class Voc_Ex3 extends Component {
         return true;                      
     }
 
+    static getDerivedStateFromProps(nextProps, state) {
+        if(nextProps.everyPar.pares[0].par[0] != state.pares[0].par[0]) {
+            let pares = [...nextProps.everyPar.pares];
+            let desordenados = []; let seleccionUsuario = [];
+    
+            pares.map(el => {
+                desordenados.push(el.par[0], el.par[1]);
+                seleccionUsuario.push('', '');       // cuando 'c' == correcto o selected; cuando 'n' incorrecto
+            })
+    
+            return {
+                seleccionado: seleccionUsuario,
+                pares: pares,
+                todosDesordenados: desordenados.sort(() => {return Math.random() - 0.5})
+            }
+        }
+        
+        return null;
+    }
+
     iguales = (x, first, last) => {
-        if((x.par[0] == this.todosDesordenados[first] && this.todosDesordenados[last] == x.par[1])
-         || (x.par[0] == this.todosDesordenados[last] && this.todosDesordenados[first] == x.par[1])) {
+        if((x.par[0] == this.state.todosDesordenados[first] && this.state.todosDesordenados[last] == x.par[1])
+         || (x.par[0] == this.state.todosDesordenados[last] && this.state.todosDesordenados[first] == x.par[1])) {
             return true;
         }
         return false;
     }
 
     checkAnswer = (first, last) => {
-        const xx = this.pares.filter(x => this.iguales(x, first, last)); // Returns [10, 6]
+        const xx = this.state.pares.filter(x => this.iguales(x, first, last)); // Returns [10, 6]
         
         if(xx.length > 0) {
             return true;
@@ -103,7 +123,7 @@ class Voc_Ex3 extends Component {
     getCard = (pos) => {
         return(
             <Pressable style={[cards.cards, cards.cardPares, cards.centrar, this.state.seleccionado[pos] == 's' ? cards.selected : [this.state.seleccionado[pos] == 'c' ? cards.correct : [this.state.seleccionado[pos] == 'n' && cards.incorrect]]]} onPress={() => this.seleccion(pos)}>
-                <MyText title={this.todosDesordenados[pos]} style={{lineHeight: 10, fontSize: 10}}></MyText>
+                <MyText title={this.state.todosDesordenados[pos]} style={{lineHeight: 10, fontSize: 10}}></MyText>
             </Pressable>
         );
     }
@@ -112,7 +132,7 @@ class Voc_Ex3 extends Component {
         return (
             <View style={{marginTop: 20}}>
             {
-                this.todosDesordenados.map((item, index) => {
+                this.state.todosDesordenados.map((item, index) => {
                     return (
                         index % 2 == 0 && (
                         <View key={index} style={{flexDirection: 'row', height: 70, justifyContent: 'space-between', textAlign: 'center', marginBottom: 20}}>
