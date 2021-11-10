@@ -58,7 +58,7 @@ class Lecciones extends Component {
         nivel: nivel.nombre
         // update: false
       }).catch( (error) => {
-        console.log(error.message);
+        // console.log(error.message);
       });
       
     }).catch((error) => {

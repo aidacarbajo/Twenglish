@@ -42,7 +42,7 @@ class NivelesList extends Component {
                     nivel: props.nivel,
                     progreso: props.progreso
                 }).catch( (error) => {
-                    console.log(error.message);
+                    // console.log(error.message);
                 });
             }
         }).catch((error) => {
