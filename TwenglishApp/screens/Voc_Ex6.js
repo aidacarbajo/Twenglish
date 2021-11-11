@@ -135,7 +135,6 @@ class Voc_Ex6 extends Component {
                     break;
                 } 
             }
-            console.log(c.length, this.state.frases.length)
             if(c.length === this.state.frases.length) {    // ejercicio completado
                 this.setState({fin: true, fs: c, actualFrases: c.length - 1, actualOpciones: a + 1});
                 this.showCheck('acierto', true);

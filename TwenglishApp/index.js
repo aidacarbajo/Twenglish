@@ -37,7 +37,7 @@ const App2 = () => {
             const realm = new Realm(database);
     
             const le = realm.objects('Ejercicio');
-            console.log(le.length);
+            // console.log(le.length);
         });
   } 
 

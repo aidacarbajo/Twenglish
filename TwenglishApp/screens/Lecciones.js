@@ -42,8 +42,7 @@ class Lecciones extends Component {
     this._isMounted = false;
   }
 
-  receivedUpdate = (value) => {
-    console.log('actualizando');
+  receivedUpdate = () => {
     this.changeLessons();
   }
 
