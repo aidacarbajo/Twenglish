@@ -43,8 +43,11 @@ class Lecciones extends Component {
   }
 
   receivedUpdate = (value) => {
+    console.log('actualizando');
     this.changeLessons();
   }
+
+
 
   // actualizar lecciones porque se ha cambiado de nivel seleccionado
   changeLessons = () => {

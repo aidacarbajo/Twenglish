@@ -82,6 +82,12 @@ class Apuntes extends Component {
     componentWillUnmount() {
         this._isMounted = false;
     }
+
+    volver = () => {
+        // this.props.navigation.navigate(this.props.route.params.from, {tema: this.state.tema, portada: this.state.portada})
+        this.props.navigation.goBack();
+    }
+
  
     render() {
     if(this.state.isLoading){
@@ -98,7 +104,7 @@ class Apuntes extends Component {
             <SafeAreaView style={{paddingHorizontal: 50, paddingVertical: 60}}>
 
                 <View style={[posiciones.abolute, posiciones.topleft]}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate(this.props.route.params.from, {tema: this.state.tema})}>
+                    <TouchableOpacity onPress={this.volver}>
                         <Icon icon="back" color={secundary} style={icons.lg}></Icon>
                     </TouchableOpacity>
                 </View>

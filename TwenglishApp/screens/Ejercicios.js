@@ -44,6 +44,10 @@ class Ejercicios extends Component {
             enunciado: null,
         };
 
+        // this.update = () => {
+        //     this.props.route.params.update(true);
+        // }
+
         this.correctExercise = this.correctExercise.bind(this);
         this.deleteCorreccion = this.deleteCorreccion.bind(this);
     }
@@ -117,7 +121,7 @@ class Ejercicios extends Component {
         } else {
             // nos llevaria la página de resumen
             const media = await calculateMedia(this.numIntentos);  
-            this.props.route.params.update(true);
+            this.update();
             this.props.navigation.navigate('Resumen', {progreso: media, leccion: this.props.route.params.tema})
         }
     }
@@ -166,6 +170,11 @@ class Ejercicios extends Component {
         return res;
     }
 
+    update = () => {
+        console.log('Voy a actualizar');
+        this.props.route.params.update(true);
+    }
+
  
     render() {
         if(this.state.isLoading){
@@ -180,7 +189,7 @@ class Ejercicios extends Component {
                     {/////////////////////////////////////////////////////////
                     /* Cabecera con titulo, acceso a los apuntes y a salir ///
                     ////////////////////////////////////////////////////////*/}
-                    <Header salir={this.modalExit} navigation={this.props.navigation} tema={this.props.route.params.tema}></Header>
+                    <Header salir={this.modalExit} navigation={this.props.navigation} tema={this.props.route.params.tema} portada={this.props.route.params.portada}></Header>
                     
                     {/* Modal de salir del ejercicio*/
                     <ModalC lessonmodal={this.modalExit} visible={this.state.isExitVisible} tipo={'centro'}>

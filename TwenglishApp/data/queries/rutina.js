@@ -69,8 +69,6 @@ const getDay = orden => new Promise((resolve, reject) => {
 //////////////////////////////////////////////////////////////
 
 const createRoutine = (listDays, time) => new Promise((resolve, reject) => {
-    console.log(listDays, time);
-
     Realm.open(database).then(realm => {
         const days = realm.objects('Dia');
 
@@ -79,8 +77,6 @@ const createRoutine = (listDays, time) => new Promise((resolve, reject) => {
             if(hoy === -1) {
                 hoy = 6;
             }
-        
-        console.log('ANTES', days);
         
         for(let i = 0; i < days.length; i++) {
             if(listDays[i] == true) {
@@ -101,8 +97,6 @@ const createRoutine = (listDays, time) => new Promise((resolve, reject) => {
                     }
                 }
 
-                console.log(dia);
-                console.log(tiempo);
                 const fecha = dia + tiempo;
 
                 realm.write(() => {
@@ -111,7 +105,6 @@ const createRoutine = (listDays, time) => new Promise((resolve, reject) => {
             }
         }
 
-        console.log('DESPUES', days);
         resolve(days);
     }).catch((error) => reject(error));
 });

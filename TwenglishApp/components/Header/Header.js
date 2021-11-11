@@ -26,7 +26,7 @@ class Header extends Component {
                 </View>
 
                 <View style={[posiciones.abolute, {right: 25, top: 25}]}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Apuntes', {tema: 'Greetings', portada: 'greetingsA1', from: 'Ejercicios'}) }>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Apuntes', {tema: this.props.tema, portada: this.props.portada, from: 'Ejercicios'}) }>
                         <RoundButton icon="notes" color={'white'}></RoundButton>
                     </TouchableOpacity>
                 </View>
