@@ -171,10 +171,8 @@ class Ejercicios extends Component {
     }
 
     update = () => {
-        console.log('Voy a actualizar');
         this.props.route.params.update(true);
     }
-
  
     render() {
         if(this.state.isLoading){

@@ -12,9 +12,11 @@ const Tab = createBottomTabNavigator();
 
 const Navigation = () => {
 
+  let initialRoute = "Lessons";
+
   return (
       <Tab.Navigator
-      initialRouteName="Lessons"
+      initialRouteName={initialRoute}
       tabBar={({ state, descriptors, navigation }) =>
         <TabMenu
           state={state}

@@ -29,19 +29,18 @@ const App2 = () => {
   // .catch((err) => {         
   //     console.log(err);
   // })
+  global.firstTime = true;
 
   if(!Realm.exists(database)) {
         RNFS.copyFileAssets('twenglish.realm', RNFS.DocumentDirectoryPath + '/twenglish.realm')
         .then(() => {
             Realm.copyBundledRealmFiles();
             const realm = new Realm(database);
-    
-            const le = realm.objects('Ejercicio');
-            // console.log(le.length);
         });
-  } 
-
-
+  } else {
+    // global.firstTime = false;
+    global.firstTime = true;
+  }
     return (
         <App />
     );

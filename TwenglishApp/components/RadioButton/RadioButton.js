@@ -11,20 +11,20 @@ class RadioButton extends Component {
     this.state = {
       opcionSeleccionada: null,
       opciones: this.props.opciones
-
     }
   }
   
   callbackFunction = (opcionSeleccionada) => {
     this.setState({opcionSeleccionada: opcionSeleccionada});
-    const value = [...this.state.opciones].find(elem => elem.frase == opcionSeleccionada);
-    this.props.check(value.esCorrecta);
+
+    if(this.state.opciones[0].titulo != undefined) {
+      this.props.continuar(opcionSeleccionada);
+    } else {
+      const value = [...this.state.opciones].find(elem => elem.frase == opcionSeleccionada);
+      this.props.check(value.esCorrecta);    
+    }
+
   }
-
-  // shouldComponentUpdate(props, state) {
-  //   return true;
-  // }
-
   
   static getDerivedStateFromProps(nextProps, state) {
     if(nextProps.opciones[0].frase != state.opciones[0].frase) {
@@ -47,11 +47,11 @@ class RadioButton extends Component {
     return this.state.opciones.map((element, index) => {
         if(this.state.opcionSeleccionada != null && this.state.opcionSeleccionada === element.frase || this.props.selected === index) {
             return (
-                <OptionSelectedButton key={index} title={element.frase} parentCallback = {this.callbackFunction} canPress={canPress}></OptionSelectedButton>
+                <OptionSelectedButton key={index} title={element.frase} titulo={element.titulo} parentCallback = {this.callbackFunction} canPress={canPress}></OptionSelectedButton>
             );        
         } else {
             return (
-              <OptionButton key={index} title={element.frase} parentCallback = {this.callbackFunction} canPress={canPress}></OptionButton>
+              <OptionButton key={index} title={element.frase} titulo={element.titulo} parentCallback = {this.callbackFunction} canPress={canPress}></OptionButton>
             ); 
         }
     });

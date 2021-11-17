@@ -14,7 +14,7 @@ class Lecciones extends Component {
   constructor(props) {
     super(props);
 
-    _isMounted = false;
+    // _isMounted = false;
 
     this.state = {
       isLoading: true,
@@ -24,7 +24,8 @@ class Lecciones extends Component {
       temaLesson: null,
       portadaName: null,
       update: false,
-      nivel: null
+      nivel: null,
+      beginner: null
     };
 
   }
@@ -33,19 +34,14 @@ class Lecciones extends Component {
     this.changeLessons();
   }
 
-  componentDidUpdate() {
-    // this.createChannels();
-  }
-
   // cuando se destruye el componente
   componentWillUnmount() {
-    this._isMounted = false;
+    // this._isMounted = false;
   }
 
   receivedUpdate = () => {
     this.changeLessons();
   }
-
 
 
   // actualizar lecciones porque se ha cambiado de nivel seleccionado
@@ -57,7 +53,8 @@ class Lecciones extends Component {
         isLoading:false,
         lecciones: nivel.lecciones,
         progreso: nivel.progreso,
-        nivel: nivel.nombre
+        nivel: nivel.nombre,
+        first: false
         // update: false
       }).catch( (error) => {
         // console.log(error.message);
@@ -90,12 +87,19 @@ class Lecciones extends Component {
     this.callbackFunction(false);
     return this.props.navigation.navigate('Ejercicios', {tema: this.state.temaLesson, portada: this.state.portadaName, update: this.receivedUpdate});
   }
+
+  soyBeginner = (soy) => {
+    if(soy) {
+      this.changeLessons();
+      this.setState({beginner: true});
+    }
+  }
  
   render() {
     if(this.state.isLoading){
       return (
           <View>
-            <ActivityIndicator/>
+            <StatusBar hidden />
           </View>
       )
     } else {

@@ -3,6 +3,8 @@ const Logo = require('../assets/img/logo.png');
 // Sin rutinas creadas
 const Rutina = require('../assets/img/routine-empty.png')
 
+const Test = require('../assets/img/preTest.png')
+
 // A1
     // Lecciones
     const GreetingsA1 = require('../assets/img/A1/Lecciones/greetingsA1.png');
@@ -195,6 +197,8 @@ export const getImage = (name) => {
         // Cuando no hay rutinas //
         case 'routine':
             img = Rutina; break;
+        case 'preTest':
+            img = Test; break;
         
         ///////////////////////
         // Portadas Nivel A1 //

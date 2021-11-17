@@ -1,11 +1,12 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-
 import Settings from '../screens/Settings';
 import Apuntes from '../screens/Apuntes';
 import Ejercicios from '../screens/Ejercicios';
 import TabNavigator from '../config/TabNavigator';
 import Resumen from '../screens/Resumen';
+import PreTest from '../screens/PreTest';
+import Test from '../screens/Test';
 
 const Stack = createStackNavigator();
 
@@ -29,10 +30,23 @@ const pantallas = [
   {
     nombre: "Resumen",
     componente: Resumen
-  }
+  },
+  {
+    nombre: "Test",
+    componente: Test
+  },
 ];
 
+
 const MainNavigator = () => {
+  if(global.firstTime && pantallas[0].nombre != 'preTest') {
+    // Meter en primera posicion
+    pantallas.unshift({
+      nombre: "PreTest",
+      componente: PreTest
+    });
+  }
+
   return (
     <Stack.Navigator
       screenOptions={{
