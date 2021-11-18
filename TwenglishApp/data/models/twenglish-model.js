@@ -133,3 +133,9 @@ exports.RadioButton = {
   }
 }
 
+exports.Test = {
+  name: 'Test',
+  properties: {
+    Ejercicios: 'Ejercicio[]'
+  }
+}

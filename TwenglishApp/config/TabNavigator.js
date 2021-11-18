@@ -10,7 +10,7 @@ import Routine from '../screens/Routine';
 
 const Tab = createBottomTabNavigator();
 
-const Navigation = () => {
+const Navigation = (props) => {
 
   let initialRoute = "Lessons";
 
@@ -26,8 +26,11 @@ const Navigation = () => {
         />
       }
     >
-
-      <Tab.Screen name={"Lessons"} component={Lecciones}/> 
+      
+      <Tab.Screen 
+          name={"Lessons"} 
+          children={() => <Lecciones test={props.route.params != undefined ? props.route.params.test : null} />}
+      /> 
       <Tab.Screen name={"Routine"} component={Routine}/> 
 
     </Tab.Navigator>

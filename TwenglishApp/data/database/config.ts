@@ -1,8 +1,8 @@
 import { Platform } from 'react-native';
 import * as RNFS from 'react-native-fs';
-import { Apartado, Apuntes, Ejercicio, Leccion, Nivel, Niveles, ApartadoGram, ApartadoVoc, Bloques, RadioButton, Opcion, Pares, Par, Conversacion, Dia } from "../../data/models/twenglish-model";
-// Test
-const schema = [Apuntes, Apartado, Ejercicio, Leccion, Nivel, Niveles, ApartadoGram, ApartadoVoc, Bloques, RadioButton, Opcion, Pares, Par, Conversacion, Dia]; // importar todos los modelos de 'models'
+import { Apartado, Apuntes, Ejercicio, Leccion, Nivel, Niveles, ApartadoGram, ApartadoVoc, Bloques, RadioButton, Opcion, Pares, Par, Conversacion, Dia, Test } from "../../data/models/twenglish-model";
+
+const schema = [Apuntes, Apartado, Ejercicio, Leccion, Nivel, Niveles, ApartadoGram, ApartadoVoc, Bloques, RadioButton, Opcion, Pares, Par, Conversacion, Dia, Test]; // importar todos los modelos de 'models'
 
 export default {
     path:
@@ -10,7 +10,7 @@ export default {
         ? RNFS.MainBundlePath + '/twenglish.realm'
         : RNFS.DocumentDirectoryPath + '/twenglish.realm',
     schema: schema,
-    schemaVersion: 61,    
+    schemaVersion: 62,    
   };
 
 

@@ -25,13 +25,16 @@ class Header extends Component {
                     </TouchableOpacity>
                 </View>
 
-                <View style={[posiciones.abolute, {right: 25, top: 25}]}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Apuntes', {tema: this.props.tema, portada: this.props.portada, from: 'Ejercicios'}) }>
-                        <RoundButton icon="notes" color={'white'}></RoundButton>
-                    </TouchableOpacity>
-                </View>
+                {
+                    this.props.tema != undefined &&
+                    <View style={[posiciones.abolute, {right: 25, top: 25}]}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Apuntes', {tema: this.props.tema, portada: this.props.portada, from: 'Ejercicios'}) }>
+                            <RoundButton icon="notes" color={'white'}></RoundButton>
+                        </TouchableOpacity>
+                    </View>
+                }
 
-                <MyTitle titleBold={this.props.tema} style={{marginLeft: -7}}></MyTitle>
+                <MyTitle titleBold={this.props.tema != undefined ? this.props.tema : 'Test'} style={{marginLeft: -7}}></MyTitle>
 
             </View>
         );

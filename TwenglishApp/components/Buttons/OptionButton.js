@@ -17,7 +17,7 @@ class OptionButton extends Component {
       this.props.canPress 
       ? (
         <TouchableOpacity style={[button.button, button.option, {paddingLeft: 15, paddingVertical: 15}]} onPress={this.sendData}>
-          <Text style={[text.primario, this.props.titulo != undefined  && {fontFamily: 'sen_extra_bold', marginBottom: 5}]}>{this.props.titulo}</Text>
+          {this.props.titulo != undefined && <Text style={[text.primario, {fontFamily: 'sen_extra_bold', marginBottom: 5}]}>{this.props.titulo}</Text>}
           <Text style={[text.primario, text.opcion]}>{this.props.title}</Text>
         </TouchableOpacity>  
       )

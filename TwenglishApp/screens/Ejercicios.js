@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { ActivityIndicator, View, LogBox } from 'react-native';
 import Header from '../components/Header/Header';
-import { calculateMedia } from '../util/ProgressManager';
+import { calculateLevel, calculateMedia } from '../util/ProgressManager';
 import { view } from '../assets/theme/styles';
 import MyText from '../components/Texts/MyText';
 import BlueButton from '../components/Buttons/BlueButton';
@@ -19,6 +19,7 @@ import List_Ex7 from './List_Ex7';
 import List_Ex8 from './List_Ex8';
 import Speak_Ex9 from './Speak_Ex9';
 import Speak_Ex10 from './Speak_Ex10';
+import { getTest } from '../data/queries/test';
 
 LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
@@ -31,32 +32,36 @@ class Ejercicios extends Component {
         
         this.acierto = '';
         
-        this.numIntentos = [0, 0];       // [aciertos, fallos] --> en salir(), antes hay que llamar a una función en útil que se llame calcular para guardar el progreso
-
         this.state = {
             isLoading: true,
             isExitVisible: false,
             isCheckVisible: false,
             isCorreccionVisible: false,
             isNextVisible: false,
-            ejercicioActual: 0,
+            ejercicioActual: 11,
             ejerciciosLeccionActual: null,
             enunciado: null,
+            numIntentos: [0, 0] // [aciertos, fallos] --> en salir(), antes hay que llamar a una función en útil que se llame calcular para guardar el progreso
         };
-
-        // this.update = () => {
-        //     this.props.route.params.update(true);
-        // }
 
         this.correctExercise = this.correctExercise.bind(this);
         this.deleteCorreccion = this.deleteCorreccion.bind(this);
     }
 
     componentDidMount () {
-        const lessonId = this.props.route.params.portada;
-        updateCurrentLesson(lessonId).then(res => {
-            this.setState({ejerciciosLeccionActual: res.ejercicios, enunciado: res.ejercicios[this.state.ejercicioActual].enunciado, isLoading: false})
-        });
+        if(this.props.route.params != undefined) {
+            const lessonId = this.props.route.params.portada;
+            updateCurrentLesson(lessonId).then(res => {
+                this.setState({numIntentos: [0,0], ejerciciosLeccionActual: res.ejercicios, enunciado: res.ejercicios[this.state.ejercicioActual].enunciado, isLoading: false})
+            });    
+        } else {
+            // Es el TEST de calculo de nivel
+            getTest().then(res => {
+                this.setState({numIntentos: [0,0], ejerciciosLeccionActual: res.Ejercicios, enunciado: res.Ejercicios[this.state.ejercicioActual].enunciado, isLoading: false})
+            })
+
+        }
+        
     }
 
     // Modal ¿Estas seguro de que quieres salir?
@@ -66,7 +71,13 @@ class Ejercicios extends Component {
 
     salir = async() => {
         this.setState({isExitVisible: false});
-        this.props.navigation.navigate('Lessons');
+
+        if(this.props.route.params != undefined) {
+            this.props.navigation.navigate('Lessons');
+        } else {
+            // Volver al pretest
+            this.props.navigation.navigate('PreTest');
+        }
     }
 
     // Modal de notificacion
@@ -74,12 +85,14 @@ class Ejercicios extends Component {
         if(correcta != undefined) {
             if(correcta) {
                 this.acierto = 'acierto';
-                this.numIntentos[0] = this.numIntentos[0] + 1;
-                this.setState({isCorreccionVisible: visible, isCheckVisible: false, isNextVisible: true});
+                let num = this.state.numIntentos;
+                num[0] = this.state.numIntentos[0] + 1;
+                this.setState({isCorreccionVisible: visible, isCheckVisible: false, isNextVisible: true, numIntentos: num});
             } else {
                 this.acierto = 'fallo';
-                this.numIntentos[1] = this.numIntentos[1] + 1;
-                this.setState({isCorreccionVisible: visible, isCheckVisible: false, isNextVisible: false});
+                let num = this.state.numIntentos;
+                num[1] = this.state.numIntentos[1] + 1;
+                this.setState({isCorreccionVisible: visible, isCheckVisible: false, isNextVisible: false, numIntentos: num});
             }
         } else {
             this.setState({isCorreccionVisible: visible});
@@ -105,11 +118,13 @@ class Ejercicios extends Component {
     mal = (escorrecta, nextNo) => {
         this.acierto = escorrecta;
         if(escorrecta == 'acierto' && nextNo != undefined) {
-            this.numIntentos[0] = this.numIntentos[0] + 1;
-            this.setState({isCorreccionVisible: true, isNextVisible: nextNo});
+            let num = this.state.numIntentos;
+            num[0] = this.state.numIntentos[0] + 1;
+            this.setState({isCorreccionVisible: true, isNextVisible: nextNo, numIntentos: num});
         } else {
-            this.numIntentos[1] = this.numIntentos[1] + 1;
-            this.setState({isCorreccionVisible: true, isNextVisible: false});
+            let num = this.state.numIntentos;
+            num[1] = this.state.numIntentos[1] + 1;
+            this.setState({isCorreccionVisible: true, isNextVisible: false, numIntentos: num});
         }
     }
 
@@ -119,10 +134,16 @@ class Ejercicios extends Component {
         if(this.state.ejercicioActual < this.state.ejerciciosLeccionActual.length - 1) {
             this.setState({isNextVisible: false, ejercicioActual: this.state.ejercicioActual + 1, isCorreccionVisible: false, enunciado: this.state.ejerciciosLeccionActual[this.state.ejercicioActual + 1].enunciado});
         } else {
-            // nos llevaria la página de resumen
-            const media = await calculateMedia(this.numIntentos);  
-            this.update();
-            this.props.navigation.navigate('Resumen', {progreso: media, leccion: this.props.route.params.tema})
+            if(this.props.route.params != undefined) {
+                // nos llevaria la página de resumen
+                const media = await calculateMedia(this.state.numIntentos);  
+                this.update();
+                this.props.navigation.navigate('Resumen', {progreso: media, leccion: this.props.route.params.tema})
+            } else {
+                const aciertos = this.state.numIntentos[0] + '/' + (this.state.numIntentos[0] + this.state.numIntentos[1]) + ' aciertos';
+                const nivel = await calculateLevel(this.state.numIntentos);
+                this.props.navigation.navigate('Resumen', {progreso: nivel, leccion: aciertos})
+            }
         }
     }
 
@@ -171,7 +192,7 @@ class Ejercicios extends Component {
     }
 
     update = () => {
-        this.props.route.params.update(true);
+        this.props.route.params.update();
     }
  
     render() {
@@ -187,11 +208,11 @@ class Ejercicios extends Component {
                     {/////////////////////////////////////////////////////////
                     /* Cabecera con titulo, acceso a los apuntes y a salir ///
                     ////////////////////////////////////////////////////////*/}
-                    <Header salir={this.modalExit} navigation={this.props.navigation} tema={this.props.route.params.tema} portada={this.props.route.params.portada}></Header>
+                    <Header salir={this.modalExit} navigation={this.props.navigation} tema={this.props.route.params != undefined ? this.props.route.params.tema : undefined} portada={this.props.route.params != undefined ? this.props.route.params.portada : undefined}></Header>
                     
                     {/* Modal de salir del ejercicio*/
                     <ModalC lessonmodal={this.modalExit} visible={this.state.isExitVisible} tipo={'centro'}>
-                        <ModalExit mevoy={this.salir} mequedo={this.modalExit}></ModalExit>
+                        <ModalExit mevoy={this.salir} mequedo={this.modalExit} test={this.props.route.params != undefined ? false : true}></ModalExit>
                     </ModalC>
                     }
 
