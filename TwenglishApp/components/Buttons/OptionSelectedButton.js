@@ -1,13 +1,12 @@
 import React from 'react';
-import { Pressable, Text } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
 import { button, text } from '../../assets/theme/styles';
 
-export const OptionSelectedButton = ({title}) => {
-//   const onPress = async () => {
-//   };
+export const OptionSelectedButton = ({title, titulo}) => {
   return (
-   <Pressable style={[button.button, button.option, button.optionSelected]}>
+   <TouchableOpacity style={[button.button, button.option, button.optionSelected]}>
+      { titulo != undefined && <Text style={[text.secundario, {fontFamily: 'sen_extra_bold', marginBottom: 5}]}>{titulo}</Text>}
       <Text style={[text.secundario, text.opcion]}>{title}</Text>
-   </Pressable>  
+   </TouchableOpacity>  
   );
 };

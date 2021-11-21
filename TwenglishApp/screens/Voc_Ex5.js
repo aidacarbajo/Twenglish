@@ -9,23 +9,24 @@ class Voc_Ex5 extends Component {
     constructor(props) {
         super(props);
 
-        this.frase = props.frase;
+        const todosDesordenados = [...props.unidades].sort(() => {return Math.random() - 0.5});
+        const desordenados = todosDesordenados;
 
-        this.unidades = props.unidades;
-        this.fraseCorrecta = [...this.unidades].join(' ');
+        let hide = [];
+        let respu = [];
 
-        this.todosDesordenados = [...props.unidades].sort(() => {return Math.random() - 0.5});
-        this.desordenados = this.todosDesordenados;
-
-        this.hide = [];
-        this.respu = [];
-
-        [...props.unidades].map(() => {this.hide.push(false), this.respu.push(-1)});
+        [...props.unidades].map(() => {hide.push(false), respu.push(-1)});
 
         this.state = {
-            respuestasUsuario: [...this.respu],
+            frase: props.frase,
+            fraseCorrecta: [...props.unidades].join(' '),
+            todosDesordenados: todosDesordenados,
+            desordenados: desordenados,
+            respuestasUsuario: [...respu],
             respuestaFrase: '',
-            hideWord: [...this.hide]
+            respu: respu,
+            hide: hide,
+            hideWord: [...hide]
         }
 
         this.correcta = false;
@@ -38,13 +39,38 @@ class Voc_Ex5 extends Component {
     componentWillUnmount() {
         this.props.onRef(undefined)
     }
-    shouldComponentUpdate(nextProps, nextState) {                                     
-        return true;                      
+    // shouldComponentUpdate(nextProps, nextState) {                                     
+    //     return true;                      
+    // }
+
+    static getDerivedStateFromProps(nextProps, state) {
+        if(nextProps.frase != state.frase) {
+            const todosDesordenados = [...nextProps.unidades].sort(() => {return Math.random() - 0.5});
+            const desordenados = todosDesordenados;
+
+            let hide = [];
+            let respu = [];
+    
+            [...nextProps.unidades].map(() => {hide.push(false), respu.push(-1)});
+    
+            return {
+                frase: nextProps.frase,
+                fraseCorrecta: [...nextProps.unidades].join(' '),
+                todosDesordenados: todosDesordenados,
+                desordenados: desordenados,
+                respuestasUsuario: [...respu],
+                respuestaFrase: '',
+                hide: hide,
+                respu: respu,
+                hideWord: [...hide]
+            }
+        }
+        return null;
     }
 
     iguales = (x, first, last) => {
-        if((x.par[0] == this.todosDesordenados[first] && this.todosDesordenados[last] == x.par[1])
-         || (x.par[0] == this.todosDesordenados[last] && this.todosDesordenados[first] == x.par[1])) {
+        if((x.par[0] == this.state.todosDesordenados[first] && this.state.todosDesordenados[last] == x.par[1])
+         || (x.par[0] == this.state.todosDesordenados[last] && this.state.todosDesordenados[first] == x.par[1])) {
             return true;
         }
         return false;
@@ -56,22 +82,19 @@ class Voc_Ex5 extends Component {
         let a = [];
         
         u.map((x) => {
-            a.push(this.desordenados[x])
+            a.push(this.state.desordenados[x])
         })
 
         const resUser = a.join(' ');
         
-        if(resUser === this.fraseCorrecta) {
+        if(resUser === this.state.fraseCorrecta) {
             this.correcta = true;
         } else {
             this.correcta = false;
             this.props.buttonCheck(false);
 
-            console.log(this.hide);
-
-            this.setState({respuestasUsuario: this.respu, hideWord: this.hide});
+            this.setState({respuestasUsuario: this.state.respu, hideWord: this.state.hide});
         }
-        // console.log('correcta', this.correcta);
         return this.correcta;
     }
 
@@ -109,7 +132,7 @@ class Voc_Ex5 extends Component {
 
     getCard = (index, accion, indexx) => {        
         return(
-            <Pressable key={index} style={[cards.cards, cards.centrar, {padding: 10, marginBottom: 10, marginRight: 6}]} onPress={() => {
+            <Pressable key={index} style={[cards.cards, cards.centrar, {padding: 10, marginBottom: 12, marginRight: 10}]} onPress={() => {
                 if(accion === 's') {
                     this.seleccion(index)
                 } else {
@@ -117,8 +140,8 @@ class Voc_Ex5 extends Component {
                 }
             }>
             { accion === 's' 
-                ? <MyText title={this.todosDesordenados[index]} style={{fontSize: 12}}></MyText>
-                : <MyText title={this.desordenados[index]} style={{fontSize: 12}}></MyText>
+                ? <MyText title={this.state.todosDesordenados[index]}></MyText>
+                : <MyText title={this.state.desordenados[index]}></MyText>
             }
             </Pressable>
         );
@@ -128,7 +151,7 @@ class Voc_Ex5 extends Component {
         return (
             <View style={{marginTop: 20, height: '100%'}}>
             
-                <MyTitle title={this.frase + '.'} style={{fontSize: 12, fontFamily: bold, marginBottom: 4}}></MyTitle>
+                <MyTitle title={this.state.frase + '.'} style={{fontSize: 12, fontFamily: bold, marginBottom: 4}}></MyTitle>
 
                 <View>
                     <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', textAlign: 'center', width: '100%', marginTop: 20}}>
@@ -148,7 +171,7 @@ class Voc_Ex5 extends Component {
                         
                         <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', paddingTop: 10, paddingHorizontal: 10, textAlign: 'center', width: '100%', minHeight: 55, marginTop: 20, backgroundColor: 'white', borderRadius: 12}}>
                         {
-                            this.todosDesordenados.map((item, index) => {
+                            this.state.todosDesordenados.map((item, index) => {
                                 if(!this.state.hideWord[index]) {
                                     return this.getCard(index, 's')
                                 }

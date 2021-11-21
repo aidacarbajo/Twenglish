@@ -21,8 +21,23 @@ const getApuntesLeccion = (nombre) => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
         const apuntes = realm.objects('Leccion').filtered(`portada == '${nombre}'`);
         if(apuntes[0].explicacion != null) {
-            resolve(apuntes[0].explicacion.apartados[0]);
+            let titulos = [], vocabulario = [], gramatica = [];
+
+            for(let i = 0; i < apuntes[0].explicacion.apartados.length; i++) {
+                titulos.push(apuntes[0].explicacion.apartados[i].titulo);
+
+                if(apuntes[0].explicacion.apartados[i].listaVocabulario.length > 0) {
+                    vocabulario.push(apuntes[0].explicacion.apartados[i].listaVocabulario);
+                }
+
+                if(apuntes[0].explicacion.apartados[i].listaGramatica.length > 0) {
+                    gramatica.push(apuntes[0].explicacion.apartados[i].listaGramatica);
+                }
+            }
+
+            resolve([titulos, vocabulario, gramatica]);
         }
+
         resolve(null);
     }).catch((error) => reject(error));
 });
@@ -54,4 +69,30 @@ const getCurrentLesson = () => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-export { getApuntesLeccion, updateCurrentLesson, getCurrentLesson }
+const modifyProgress = mediaAciertos =>
+    new Promise((resolve, reject) => {
+        Realm.open(database).then(realm => {
+            const niveles = getNivelSeleccionado().then(res => {
+                let sum = 0;
+                let progresoSaved = res.leccion_seleccionada.progreso;
+
+                if(mediaAciertos > progresoSaved) {
+                    for(let i = 0; i < res.lecciones.length; i++) {     // ira dentro
+                        sum += res.lecciones[i].progreso;
+                    }
+                    sum = (sum - progresoSaved + mediaAciertos)/res.lecciones.length;
+
+                    progresoSaved = mediaAciertos;
+
+                    realm.write(() => {
+                        res.leccion_seleccionada.progreso = Math.round(mediaAciertos);
+                        res.progreso = Math.round(sum);
+                    })
+                }
+                resolve([progresoSaved, sum]);
+            })
+        }).catch((error) => reject(error));
+});
+
+
+export { getApuntesLeccion, updateCurrentLesson, getCurrentLesson, modifyProgress }

@@ -10,13 +10,9 @@ import NivelesList from '../components/Flatlist/NivelesList';
 import Modal from '../components/Modal/ModalC';
 import ModalLessons from '../components/Modal/ModalLessons';
 
-
 class Lecciones extends Component {
-
   constructor(props) {
     super(props);
-
-    _isMounted = false;
 
     this.state = {
       isLoading: true,
@@ -24,32 +20,53 @@ class Lecciones extends Component {
       isSettingsVisible: false,
       isLessonsVisible: false,
       temaLesson: null,
-      portadaName: null
+      portadaName: null,
+      update: false,
+      nivel: null,
+      beginner: null
     };
 
   }
 
   componentDidMount() {
-    this.changeLessons();
+    if(!isNaN(Math.round(this.props.test))) {
+      this.changeLessons(null)
+    } else {
+      this.changeLessons(this.props.test)
+    }
   }
+
+  // static getDerivedStateFromProps(nextProps, state) {
+  //   console.log('DERIVED', nextProps.test);
+  //   return null;
+  // }
 
   // cuando se destruye el componente
   componentWillUnmount() {
-    this._isMounted = false;
+    // this._isMounted = false;
   }
 
-  // actualizar lecciones porque se ha cambiado de nivel seleccionado
-  changeLessons = () => {
+  receivedUpdate = () => {  // si test no es undefined es que hay que actualizar el nivel seleccionado
+    this.changeLessons(null);
+  }
 
-    return getNivelSeleccionado().then(res => {
+
+  // actualizar lecciones porque se ha cambiado de nivel seleccionado
+  changeLessons = (test) => {
+    return getNivelSeleccionado(test).then(res => {
       const nivel = res; 
 
       this.setState({
-        isLoading:false,
+        isLoading: false,
         lecciones: nivel.lecciones,
+        progreso: nivel.progreso,
+        nivel: nivel.nombre,
+        first: false
+        // update: false
       }).catch( (error) => {
-        console.log(error.message);
+        // console.log(error.message);
       });
+      
     }).catch((error) => {
       // console.log(error.message);
     });
@@ -71,30 +88,30 @@ class Lecciones extends Component {
 
   irApuntes = () => {
     this.callbackFunction(false);
+    console.log(this.props);
     return this.props.navigation.navigate('Apuntes', {tema: this.state.temaLesson, portada: this.state.portadaName, from: 'Lessons'});
   }
   irLeccion = () => {
     this.callbackFunction(false);
-    return this.props.navigation.navigate('Ejercicios', {tema: this.state.temaLesson, portada: this.state.portadaName});
+    return this.props.navigation.navigate('Ejercicios', {tema: this.state.temaLesson, portada: this.state.portadaName, update: this.receivedUpdate});
   }
  
-    render() {
+  render() {
     if(this.state.isLoading){
       return (
           <View>
-            <ActivityIndicator/>
+            <StatusBar hidden />
           </View>
       )
     } else {
-      return (
-
+      return (        
         <View style={view.container}>
             <StatusBar hidden />
             {/* Modal de ajustes */}
             <Modal visible={this.state.isSettingsVisible} tipo={'top'} navigation={this.props.navigation}>
-                <Pressable style={[button.button, button.option, {alignItems: 'center'}]} onPress={() => this.props.navigation.navigate('Settings')}>
-                    <Text style={text.primario}>Más Información</Text>
-                </Pressable>  
+                <TouchableOpacity style={[button.button, button.option, {alignItems: 'center', width: '95%', paddingVertical: 12}]} onPress={() => this.props.navigation.navigate('Settings')}>
+                    <MyText title={"Más Información"} style={text.primario} />
+                </TouchableOpacity>  
             </Modal>
 
             {/* Modal de lecciones*/
@@ -112,15 +129,12 @@ class Lecciones extends Component {
               <MyTitle title="My" titleBold="Progress"></MyTitle>
             </View>
 
-            <NivelesList nivelSel={this.changeLessons}></NivelesList>
+            <NivelesList nivelSel={this.changeLessons} nivel={this.state.nivel} progreso={this.state.progreso}></NivelesList>
 
-            <View style={view.safeArea}>
+            <View style={[view.safeArea, {paddingBottom: 30}]}>
               <MyText title="What would you like to learn today?" style={{marginBottom: 15}}></MyText>
               <Flatlist lessonsModal={this.callbackLessons} dataRealm={this.state.lecciones} navigation={this.props.navigation}></Flatlist>
             </View>
-
-
-            
 
           </View>
 

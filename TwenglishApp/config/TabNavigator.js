@@ -6,14 +6,17 @@ import {
 
 import TabMenu from '../components/Menus/TabMenu';
 import Lecciones from '../screens/Lecciones';
-import Rutine from '../screens/Rutine';
+import Routine from '../screens/Routine';
 
 const Tab = createBottomTabNavigator();
 
-const Navigation = () => {
+const Navigation = (props) => {
+
+  let initialRoute = "Lessons";
+
   return (
       <Tab.Navigator
-      initialRouteName="Lessons"
+      initialRouteName={initialRoute}
       tabBar={({ state, descriptors, navigation }) =>
         <TabMenu
           state={state}
@@ -23,8 +26,12 @@ const Navigation = () => {
         />
       }
     >
-      <Tab.Screen name={"Lessons"} component={Lecciones}/> 
-      <Tab.Screen name={"Routine"} component={Rutine}/> 
+      
+      <Tab.Screen 
+          name={"Lessons"} 
+          children={() => <Lecciones test={props.route.params != undefined ? props.route.params.test : null} navigation={props.navigation} />}
+      /> 
+      <Tab.Screen name={"Routine"} component={Routine}/> 
 
     </Tab.Navigator>
   );

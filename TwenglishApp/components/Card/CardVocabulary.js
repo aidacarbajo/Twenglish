@@ -13,16 +13,16 @@ class CardVocabulary extends Component {
     render() {
         return (
             <FlatList 
-                style={[cards.cardApuntes, cards.cards]}
+                style={[cards.cardApuntes, cards.cards, {marginTop: 10}]}
                 data={this.props.vocabulary}
                 keyExtractor={(item) => item.palabra }
                 renderItem={(item) => 
                     <View style={{flexDirection: 'row'}}>
                         <View style={{width: '45%'}}>
-                            <MyText style={{fontSize:12, marginVertical: 0}} title={item.item.palabra}></MyText>
+                            <MyText style={{textAlign: 'left', marginVertical: 0}} title={item.item.palabra}></MyText>
                         </View>
                         <View style={{width: '55%'}}>
-                            <MyText style={{fontSize:12, textAlign: 'left', marginVertical: 0}} title={item.item.traduccion}></MyText>
+                            <MyText style={{textAlign: 'left', marginVertical: 0}} title={item.item.traduccion}></MyText>
                         </View>
                     </View>
                 }>

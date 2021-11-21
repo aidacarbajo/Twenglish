@@ -18,22 +18,44 @@ class ModalNotificacion extends Component {
 
     renderContent = () => {
         let obj = {titulo: '', color: '', icon: ''};
-        let styless;
+        let styless = {};
+        
+        if(this.props.tipo === 'resumen') {
+            if(this.props.msg === 0) {
+                obj = {titulo: 'Keep working!', color: "white", icon: 'happy'};
+                styless = {backgroundColor: secundary};
+            } else {
+                if(this.props.msg === 1) {
+                    obj = {titulo: 'Good work!', color: "white", icon: 'funny'};
+                    styless = {backgroundColor: '#FF6100', };
+                } else {
+                    let tit = "You're amazing!";    // Para el resumen del final de la leccion
 
-        this.props.tipo == 'acierto'
-            ?   obj = {titulo: 'Correct', color: correcto, icon: "tick"}
-            : [
-                (this.props.tipo == 'fallo'
-                  ? obj = {titulo:'Try again!', color: secundary, icon: "wrong"}
-                  : obj = {titulo:'Extra', color: extra, icon: "info"}
-                )
-              ]
+                    if(this.props.msg.toString() != '2') {
+                        tit = this.props.msg;
+                    }
 
+                    obj = {titulo: tit, color: "white", icon: 'surprise'};
+                    styless = {backgroundColor: correcto};
+                }
+            }
+        } else {
+            if(this.props.tipo === 'acierto') {
+                obj = {titulo: 'Correct', color: correcto, icon: "tick"}
+            } else {
+                if(this.props.tipo === 'fallo') {
+                    obj = {titulo:'Try again!', color: secundary, icon: "wrong"}
+                } else {
+                    obj = {titulo:'Extra', color: extra, icon: "info"}
+                }
+            }
+        }
+        
         return (
-                <View>
+                <View style={[styless]}>
                     <View style={{flexDirection: 'row', height: 17, width: '100%'}}>
-                        <Icon icon={obj.icon} color={obj.color} style={{marginRight: 5, fontSize: 15}}></Icon>
-                        <MyTitle titleBold={obj.titulo} style={{color: obj.color, fontSize: 13, height: 25}}></MyTitle>
+                        <Icon icon={obj.icon} color={obj.color} style={{marginRight: 5, fontSize: 12}}></Icon>
+                        <MyTitle titleBold={obj.titulo} style={{color: obj.color, fontSize: 12, height: 25}}></MyTitle>
                     </View>
 
                     {

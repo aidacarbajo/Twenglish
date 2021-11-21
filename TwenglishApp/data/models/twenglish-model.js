@@ -50,6 +50,15 @@ exports.Conversacion = {
   }
 }
 
+exports.Dia = {
+  name: 'Dia',
+  properties: {
+    nombre: 'string',
+    Horas: 'date[]',
+    orden: 'int'
+  }
+}
+
 exports.Ejercicio = {
   name: 'Ejercicio',
   primaryKey: '_id',
@@ -61,7 +70,8 @@ exports.Ejercicio = {
     bloqueString: 'Bloques',
     bloqueRadioButton: 'RadioButton',
     bloquePares: 'Pares',
-    bloqueConversacion: 'Conversacion'
+    bloqueConversacion: 'Conversacion',
+    textoListening: 'string?'
   }
 }
 
@@ -98,7 +108,7 @@ exports.Opcion = {
   name: 'Opcion',
   properties: {
     frase: 'string?',
-    esCorrecta: 'bool'
+    esCorrecta: 'bool',
   }
 }
 
@@ -120,5 +130,12 @@ exports.RadioButton = {
   name: 'RadioButton',
   properties: {
     opciones: 'Opcion[]'
+  }
+}
+
+exports.Test = {
+  name: 'Test',
+  properties: {
+    Ejercicios: 'Ejercicio[]'
   }
 }

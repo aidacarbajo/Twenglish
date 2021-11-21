@@ -7,10 +7,9 @@
  */
 
 import React from 'react';
-import { NavigationContainer } from "@react-navigation/native";
-import MainNavigator from "./config/MainNavigator";
-
 import RNBootSplash from "react-native-bootsplash";
+import PreTest from './screens/PreTest';
+import Navigators from './screens/Navigators';
 
 const App = () => {
   React.useEffect(() => {
@@ -20,10 +19,8 @@ const App = () => {
     });
   }, []);
 
-  return (
-      <NavigationContainer screenOptions={{headerShown: false}}>
-        <MainNavigator />
-      </NavigationContainer>
+    return (
+      <Navigators />
   );
 };
 

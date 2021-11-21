@@ -8,41 +8,54 @@ class RadioButton extends Component {
   constructor(props) {
     super(props);
 
-    this.opcionSeleccionada = null;
-    this.opciones = this.props.opciones;
-
     this.state = {
-      valores: null
+      opcionSeleccionada: null,
+      opciones: this.props.opciones
     }
   }
   
   callbackFunction = (opcionSeleccionada) => {
-    this.opcionSeleccionada = opcionSeleccionada;
-    const value = [...this.opciones].find(elem => elem.frase == opcionSeleccionada);
-    // console.log(value);
+    this.setState({opcionSeleccionada: opcionSeleccionada});
 
-    // if(value.esCorrecta) {
-      this.props.check(value.esCorrecta);
-    // }
+    if(this.state.opciones[0].titulo != undefined) {
+      this.props.continuar(opcionSeleccionada);
+    } else {
+      const value = [...this.state.opciones].find(elem => elem.frase == opcionSeleccionada);
+      this.props.check(value.esCorrecta);    
+    }
+
   }
+  
+  static getDerivedStateFromProps(nextProps, state) {
+    if(nextProps.opciones[0].frase != state.opciones[0].frase) {
+      return {
+          opciones: nextProps.opciones,
+          opcionSeleccionada: null,
+      }
+    }
+    return null;
+}
+
 
   list = () => {
-    return this.opciones.map((element, index) => {
-        if(this.opcionSeleccionada != null && this.opcionSeleccionada === element.frase) {
+    let canPress = true;
+
+    if(this.props.selected !== undefined) {
+      canPress = false;
+    }
+
+    return this.state.opciones.map((element, index) => {
+        if(this.state.opcionSeleccionada != null && this.state.opcionSeleccionada === element.frase || this.props.selected === index) {
             return (
-                <OptionSelectedButton key={index} title={element.frase} parentCallback = {this.callbackFunction}></OptionSelectedButton>
+                <OptionSelectedButton key={index} title={element.frase} titulo={element.titulo} parentCallback = {this.callbackFunction} canPress={canPress}></OptionSelectedButton>
             );        
         } else {
             return (
-              <OptionButton key={index} title={element.frase} parentCallback = {this.callbackFunction}></OptionButton>
+              <OptionButton key={index} title={element.frase} titulo={element.titulo} parentCallback = {this.callbackFunction} canPress={canPress}></OptionButton>
             ); 
         }
     });
   };
-
-
-  // hacer functionamiento onPress para cambiar de Selected a noSelected
-
 
  render() {
     return (

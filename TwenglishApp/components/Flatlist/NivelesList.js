@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, GetDerivedStateFromProps } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Nivel from '../Niveles/Nivel';
@@ -8,18 +8,22 @@ class NivelesList extends Component {
 
     constructor(props) {
         super(props);
+
         _isMounted = false;
 
         this.state = {
           isLoading: true,
+          firstTime: true,
           levels: [],
-          nivelSeleccionado: null
+          nivelSeleccionado: null,
+          progreso: this.props.progreso,
+          nivel: this.props.nivel
         };
 
         this.callbackFunction = (nivelSeleccionado) => {
             this.setState({nivelSeleccionado: nivelSeleccionado});
             updateCurrentLevel(nivelSeleccionado).then(res => {
-                this.getLevels();
+                this.getLevels(true, this.props);
                 
             });
             this.props.nivelSel();
@@ -27,15 +31,18 @@ class NivelesList extends Component {
 
     }
 
-    getLevels = () => {
+    getLevels = (ya, props) => {
         return getNiveles().then(res => {
-            if (this._isMounted) {
+            if (ya) {
                 this.setState({
-                    isLoading:false,
                     levels: res.nivel,
-                    nivelSeleccionado: res.nivel[0].nombre
+                    isLoading:false,
+                    nivelSeleccionado: res.nivel[0].nombre,
+                    firstTime: false,
+                    nivel: props.nivel,
+                    progreso: props.progreso
                 }).catch( (error) => {
-                    console.log(error.message);
+                    // console.log(error.message);
                 });
             }
         }).catch((error) => {
@@ -45,12 +52,32 @@ class NivelesList extends Component {
     }
 
     componentDidMount() {
-        this._isMounted = true;
-        this.getLevels();
+        this.getLevels(true, this.props);
     }
     
     componentWillUnmount() {
         this._isMounted = false;
+    }
+
+    shouldComponentUpdate(props) {
+        if(this.state.nivel != props.nivel || this.state.firstTime || props.progreso != this.state.progreso) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    componentDidUpdate(props) {
+        this.getLevels(true, props);
+    }
+
+    static getDerivedStateFromProps(nextProps, state) {
+        if(nextProps.progreso != state.progreso) {
+            return {
+                progreso: nextProps.progreso
+            }
+        }
+        return null;
     }
 
     render() {
@@ -59,7 +86,6 @@ class NivelesList extends Component {
                 height: 90,
                 justifyContent: 'center',
                 marginBottom: 25,
-                // marginLeft: 10,
             }
         });
 
@@ -70,7 +96,7 @@ class NivelesList extends Component {
                 </View>
             )
           } else {
-            return (
+            return (                
                 <View style={[styles.container]}>
                     <FlatList
                         horizontal
@@ -81,7 +107,7 @@ class NivelesList extends Component {
                         keyExtractor={(item) => item.nombre} 
                         renderItem={(item) =>  
                             <View>
-                                <Nivel nivel={item} nseleccionado={this.state.nivelSeleccionado} parentCallback = {this.callbackFunction}></Nivel>
+                                <Nivel nivel={item} progreso={this.state.progreso} nseleccionado={this.state.nivelSeleccionado} parentCallback = {this.callbackFunction}></Nivel>
                             </View>
                         }
                         >
@@ -93,4 +119,3 @@ class NivelesList extends Component {
 }
 
 export default NivelesList;
-

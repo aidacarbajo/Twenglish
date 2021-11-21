@@ -1,17 +1,41 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { button } from '../../assets/theme/styles';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from '../Icons/Icon';
-import { Pressable, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 
-export const RoundButton = ({icon, color}) => {
-  return (
-    <LinearGradient locations={[0, 1]} useAngle={true} angle={-45} angleCenter={{ x: 0.5, y: 0.5 }} colors={button.secundary.backgroundColor} style={[button.round]}>
-      {
-        // icon == "notes" 
-        // ? <TouchableOpacity><Icon icon={icon} color={color}></Icon></TouchableOpacity>
-         <Icon icon={icon} color={color}></Icon>
-      }
-    </LinearGradient>
-  );
-};
+class RoundButton extends Component {
+  constructor(props) {
+    super(props);
+  } 
+
+  render() {
+    return (
+      this.props.progress !== undefined
+      ? (
+        <LinearGradient key={Math.random()*100} locations={[0, 1]} useAngle={true} angle={-45} angleCenter={{ x: 0.5, y: 0.5 }} colors={button.secundary.backgroundColor} style={[button.round, {width: 200, height: 200, borderRadius: 250}]}>
+          {this.props.children}
+        </LinearGradient>
+      )
+      : [
+        this.props.style === undefined 
+        ? (
+          <LinearGradient  key={Math.random()*100} locations={[0, 1]} useAngle={true} angle={-45} angleCenter={{ x: 0.5, y: 0.5 }} colors={button.secundary.backgroundColor} style={[button.round, {width: this.props.size != undefined ? this.props.size : 44, height: this.props.size != undefined ? this.props.size : 44}]}>
+            <Icon icon={this.props.icon} color={this.props.color}></Icon>
+          </LinearGradient>
+        )
+        : [
+          this.props.style
+          ? (<View key={Math.random()*100} style={[button.round, button.buttonListen, {width: this.props.size, height: this.props.size}]}>
+              <Icon icon={this.props.icon} color={this.props.color}></Icon>
+            </View>)
+          : (<View  key={Math.random()*100} style={[button.round, button.buttonNoListen, {width: this.props.size, height: this.props.size}]}>
+              <Icon icon={this.props.icon} color={this.props.color}></Icon>
+            </View>)
+        ]  
+      ] 
+    )
+  }
+}
+
+export default RoundButton;

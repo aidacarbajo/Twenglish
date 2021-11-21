@@ -7,22 +7,25 @@ const extrabold = 'sen_extra_bold';
 const primary = '#2971FD';
 const secundary = '#F7002B';
 const body = '#4D4D4D';
+const bodySub = '#9F9F9F';
 const example = '#949494';
 const correcto = '#00C136';
+const fondoCorrecto = '#D5EFDC';
 const extra = '#00ADF7';
+const fondo = '#F6F5F8';
 
 const view = StyleSheet.create({
     container: {
-        backgroundColor: "#F6F5F8",
+        backgroundColor: fondo,
         paddingVertical: 60,
         height: '100%'
     },
     safeArea:  {
-        backgroundColor: '#F6F5F8',
+        backgroundColor: fondo,
         paddingHorizontal: 50,
     },
     allContainers: {
-        backgroundColor: "#F6F5F8",
+        backgroundColor: fondo,
         paddingVertical: 60,
         // height: '100%',
         paddingHorizontal: 50,
@@ -41,7 +44,7 @@ const text = StyleSheet.create({
         fontFamily: extrabold,
     },
     body: {
-        fontSize: 13,
+        fontSize: 12,
         color: body,
         fontFamily: regular,
         textAlign: 'center',
@@ -59,7 +62,7 @@ const text = StyleSheet.create({
         marginRight: 7
     },
     opcion: {
-        fontSize: 12
+        fontSize: 10
     },
     buttonText: {
         backgroundColor: 'transparent',
@@ -103,8 +106,7 @@ const button = StyleSheet.create({
          elevation: 20,
     },
     option: {
-        width: '95%',
-        paddingVertical: 15,
+        paddingVertical: 12,        
         marginVertical: 10,
         shadowOpacity: 0,
         borderColor: primary,
@@ -118,13 +120,24 @@ const button = StyleSheet.create({
         backgroundColor: '#FEE3E8',
         color: secundary,
         paddingLeft: 15,
+        paddingVertical: 15
     },
     round: {
         width: 44,
         height: 44,
-        borderRadius: 22,
+        borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    buttonListen: {
+        backgroundColor: primary, 
+        elevation: 5
+    },
+    buttonNoListen: {
+        borderWidth: 1, 
+        borderColor: primary,
+        backgroundColor: 'white',
+        // elevation: 5
     }
 });
 
@@ -140,7 +153,7 @@ const icons = StyleSheet.create({
         fontSize: 20
     },
     lg: {
-        fontSize: 25
+        fontSize: 22
     },
     light: {
         color: 'white'
@@ -192,9 +205,8 @@ const cards = StyleSheet.create({
     },
     padding: {
         paddingHorizontal: 15,
-        marginBottom: 130,
+        marginBottom: 135,
         flex: 1,
-        // marginTop: 20
     },
     paddingLevel: {
         paddingEnd: 15,
@@ -218,8 +230,8 @@ const cards = StyleSheet.create({
     tag: {
         color: primary,
         fontFamily: 'sen_extra_bold',
-        fontSize: 10,
-        lineHeight: 25,
+        fontSize: 8,
+        paddingVertical: 8,
         paddingHorizontal: 15,
         textAlign: "center",
         backgroundColor: "#fff",
@@ -259,7 +271,7 @@ const cards = StyleSheet.create({
         borderColor: extra,
     },
     correct: {
-        backgroundColor: '#D5EFDC',
+        backgroundColor: fondoCorrecto,
         borderColor: correcto,
     },
     incorrect: {
@@ -280,4 +292,4 @@ const modal = StyleSheet.create({
     },
 });
 
-export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, correcto, extra, example, cards, modal, regular, extrabold, bold };
+export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, bodySub, correcto, fondoCorrecto, extra, example, cards, modal, regular, extrabold, bold, fondo };
