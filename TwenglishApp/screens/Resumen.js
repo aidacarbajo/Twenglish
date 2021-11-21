@@ -34,7 +34,7 @@ class Resumen extends Component {
             this.setState({isMessageVisible: true, _isMounted: false});
 
             setTimeout(() => {
-                this.props.navigation.navigate('Lecciones');
+                return this.props.navigation.navigate('Lecciones', {test: this.state.progreso});
             }, 4000);
         }, 1000);    
     }
@@ -56,7 +56,7 @@ class Resumen extends Component {
                 
                 <View style={{ height: '75%', alignItems: 'center'}}>
                     <RoundButton key={this.state.progreso} progress={true} estilo={{width: 100, height: 100, position: 'absolute'}}>
-                        <MyTextWhite title={Math.round(this.state.progreso) + '%'} style={{fontSize: 50, lineHeight: 100, fontFamily: bold}}/>
+                        <MyTextWhite title={(!isNaN(Math.round(this.state.progreso)) ? Math.round(this.state.progreso) + '%' : this.state.progreso)} style={{fontSize: 50, lineHeight: 100, fontFamily: bold}}/>
                     </RoundButton>
                 </View>   
 

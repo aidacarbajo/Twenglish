@@ -46,7 +46,7 @@ class PreTest extends Component {
             this.props.navigation.navigate('Lecciones');
         } else {
             // Hacer test
-            this.props.navigation.navigate('Test');
+            this.props.navigation.navigate('Ejercicios');
         }
     }
 
@@ -59,12 +59,12 @@ class PreTest extends Component {
                     <MyTitle title="Welcome to" titleBold="Twenglish"></MyTitle>
 
                     <View style={[{width: '70%', height: '40%', alignSelf: 'center', marginVertical: 20}]}>
-                    <ImageBackground 
-                        source={getImage('preTest')} 
-                        resizeMode="cover" 
-                        style={[cards.image]} 
-                        imageStyle={{ borderRadius: 12}}
-                    />
+                        <ImageBackground 
+                            source={getImage('preTest')} 
+                            resizeMode="cover" 
+                            style={[cards.image]} 
+                            imageStyle={{ borderRadius: 12}}
+                        />
                     </View>
 
                     <MyText title="What's your level currently?" style={{marginTop: 15}} />

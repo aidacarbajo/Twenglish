@@ -22,7 +22,7 @@ class ModalExit extends Component {
         return (
             <View style={{padding: 10}}>
                 <MyTitle title="Are you sure you want to leave?" style={{fontSize: 14, padding: 4, marginBottom: 5}}></MyTitle>
-                <MyText title="¿Seguro que quieres abandonar la lección?"></MyText>
+                <MyText title={'¿Seguro que quieres abandonar' + (!this.props.test ? ' la lección?' : ' el test?')}></MyText>
 
                 <BlueButton title="Exit" screen={this.mevoy} style={{marginTop: 30, marginBottom: 5}}></BlueButton>
                 

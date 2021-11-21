@@ -40,10 +40,15 @@ const getNiveles = () => new Promise((resolve, reject) => {
 // Devuelve el nivel seleccionado //
 ////////////////////////////////////
 
-const getNivelSeleccionado = () => new Promise((resolve, reject) => {
+const getNivelSeleccionado = (test) => new Promise((resolve, reject) => {
     Realm.open(database).then(realm => {
-        const niveles = realm.objects('Niveles');
-        resolve(niveles[0].nivel_seleccionado);
+        if(test != undefined) {
+            const nivelS = realm.objects('Nivel').filtered(`nombre == '${test}'`);
+            resolve(nivelS[0])
+        } else {
+            const niveles = realm.objects('Niveles');
+            resolve(niveles[0].nivel_seleccionado);    
+        }
     }).catch((error) => reject(error.message));
 });
 

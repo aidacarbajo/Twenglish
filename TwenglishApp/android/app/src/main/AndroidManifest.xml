@@ -13,7 +13,7 @@
       android:name=".MainApplication"
       android:label="Twenglish" 
       android:icon="@mipmap/icono_twenglish"
-      android:roundIcon="@mipmap/ic_launcher_round"
+      android:roundIcon="@mipmap/twenglish_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme">
 

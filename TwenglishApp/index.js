@@ -38,8 +38,8 @@ const App2 = () => {
             const realm = new Realm(database);
         });
   } else {
-    // global.firstTime = false;
-    global.firstTime = true;
+    global.firstTime = false;
+    // global.firstTime = true;
   }
     return (
         <App />
