@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { primary, secundary } from '../../assets/theme/styles';
 import { GradientCircularProgress,  } from 'react-native-circular-gradient-progress';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 class Nivel extends Component {
     constructor(props) {
@@ -89,7 +90,7 @@ class Nivel extends Component {
             <View style={this.styles.padding}>
                 {this.props.nivel.item.nombre === this.props.nseleccionado
                 ?   <View style={{flexDirection: 'row'}}>
-                        <Text style={{width:30}}></Text>
+                        <Text style={{width: EStyleSheet.value('$10')*3}}></Text>
                         <View style={this.styles.fondo}>
                         {this.getCircle('#EE6400', '#F34117', '#F7002D')}
                     </View>

@@ -7,6 +7,7 @@ import { body, button, text } from '../../assets/theme/styles';
 import DatePicker from 'react-native-date-picker'
 import { createRoutine } from '../../data/queries/rutina';
 import { createScheduleNotification } from '../../util/NotificationManager';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 class Create extends Component {
     constructor(props) {
@@ -48,19 +49,18 @@ class Create extends Component {
 
     render() {
         return(
-            <View style={{padding: 10}}>
-                <View style={{marginBottom: 15}}>
+            <View style={{padding: EStyleSheet.value('$10')}}>
+                <View style={{marginBottom: EStyleSheet.value('$10') + EStyleSheet.value('$5')}}>
                     <MyText title="Days" />
                     <Semana selected={this.props.action} hasRoutinee={this.routine} pressed={this.state.add} />
                 </View>
 
-                <View style={{marginBottom: 15}}>
+                <View style={{marginBottom: EStyleSheet.value('$10') + EStyleSheet.value('$5')}}>
                     <MyText title="Time" />
                     <DatePicker
                         mode = "time"
                         androidVariant = 'iosClone'
                         is24hourSource = 'device'
-                        // locale = 'es-ES'
                         textColor = {body}
                         date={this.state.date} 
                         onDateChange={date => this.setState({ date })}
@@ -68,8 +68,8 @@ class Create extends Component {
                 </View>
 
                 <View style={{flexDirection: 'row'}}>
-                    <TouchableOpacity style={[button.button, button.option, {width: '47%', alignItems: 'center'}]} onPress={() => this.props.mequedo()}>
-                        <MyText title="Cancel" style={[text.primario, {lineHeight: 21}]} />
+                    <TouchableOpacity style={[button.button, button.option, {width: '47%', alignItems: 'center', paddingLeft: 0}]} onPress={() => this.props.mequedo()}>
+                        <MyText title="Cancel" style={[text.primario, {lineHeight: EStyleSheet.value('$20'), padding: 0}]} />
                     </TouchableOpacity>  
                     <BlueButton title="Add" screen={this.createRoutine} style={{width: '47%'}} />
                 </View>

@@ -17,7 +17,7 @@ class ModalLessons extends Component {
                 
                 <BlueButton title="Start lesson" screen={this.props.empezarLeccion} style={{width: '90%'}}></BlueButton>
 
-                <TouchableOpacity style={[button.button, button.option, {width: '90%', alignItems: 'center'}]} onPress={this.props.verApuntes}>
+                <TouchableOpacity style={[button.button, button.option, {width: '90%', alignItems: 'center', paddingLeft: 0}]} onPress={this.props.verApuntes}>
                   <MyText title="Notes" style={[text.primario, {padding: 0}]}></MyText>
                 </TouchableOpacity>  
             </View>

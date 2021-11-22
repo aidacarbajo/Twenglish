@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { button, secundary } from '../assets/theme/styles';
 import RadioButton from '../components/RadioButton/RadioButton';
 import MyText from '../components/Texts/MyText';
@@ -138,7 +139,7 @@ class Speak_Ex10 extends Component {
 
                 {
                     !this.state.preSpeaking && this.state.seleccionado === -1 &&
-                    <MyText title={this.perdon} style={{fontSize: 12, color: secundary}}></MyText>
+                    <MyText title={this.perdon} style={{fontSize: EStyleSheet.value('$bodySize'), color: secundary}}></MyText>
                 }
                 <SpeakManager studentAnswer={this.areSimilar} casiCorrecta={undefined} loading={true}></SpeakManager>
             </View>    

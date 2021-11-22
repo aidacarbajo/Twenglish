@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { FlatList } from 'react-native-gesture-handler';
 import { cards } from '../../assets/theme/styles';
 import MyText from '../Texts/MyText';
@@ -13,7 +14,7 @@ class CardVocabulary extends Component {
     render() {
         return (
             <FlatList 
-                style={[cards.cardApuntes, cards.cards, {marginTop: 10}]}
+                style={[cards.cardApuntes, cards.cards, {marginTop: EStyleSheet.value('$10')}]}
                 data={this.props.vocabulary}
                 keyExtractor={(item) => item.palabra }
                 renderItem={(item) => 

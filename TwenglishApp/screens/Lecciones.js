@@ -9,6 +9,7 @@ import { getNivelSeleccionado } from '../data/queries/nivel';
 import NivelesList from '../components/Flatlist/NivelesList';
 import Modal from '../components/Modal/ModalC';
 import ModalLessons from '../components/Modal/ModalLessons';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 class Lecciones extends Component {
   constructor(props) {
@@ -36,11 +37,6 @@ class Lecciones extends Component {
     }
   }
 
-  // static getDerivedStateFromProps(nextProps, state) {
-  //   console.log('DERIVED', nextProps.test);
-  //   return null;
-  // }
-
   // cuando se destruye el componente
   componentWillUnmount() {
     // this._isMounted = false;
@@ -62,7 +58,6 @@ class Lecciones extends Component {
         progreso: nivel.progreso,
         nivel: nivel.nombre,
         first: false
-        // update: false
       }).catch( (error) => {
         // console.log(error.message);
       });
@@ -109,7 +104,7 @@ class Lecciones extends Component {
             <StatusBar hidden />
             {/* Modal de ajustes */}
             <Modal visible={this.state.isSettingsVisible} tipo={'top'} navigation={this.props.navigation}>
-                <TouchableOpacity style={[button.button, button.option, {alignItems: 'center', width: '95%', paddingVertical: 12}]} onPress={() => this.props.navigation.navigate('Settings')}>
+                <TouchableOpacity style={[button.button, button.option, {alignItems: 'center', width: '95%', paddingVertical: EStyleSheet.value('$bodySize')}]} onPress={() => this.props.navigation.navigate('Settings')}>
                     <MyText title={"Más Información"} style={text.primario} />
                 </TouchableOpacity>  
             </Modal>
@@ -131,8 +126,8 @@ class Lecciones extends Component {
 
             <NivelesList nivelSel={this.changeLessons} nivel={this.state.nivel} progreso={this.state.progreso}></NivelesList>
 
-            <View style={[view.safeArea, {paddingBottom: 30}]}>
-              <MyText title="What would you like to learn today?" style={{marginBottom: 15}}></MyText>
+            <View style={[view.safeArea, {paddingBottom: EStyleSheet.value('$10')*3}]}>
+              <MyText title="What would you like to learn today?" style={{marginBottom: EStyleSheet.value('$10') + EStyleSheet.value('$5')}}></MyText>
               <Flatlist lessonsModal={this.callbackLessons} dataRealm={this.state.lecciones} navigation={this.props.navigation}></Flatlist>
             </View>
 

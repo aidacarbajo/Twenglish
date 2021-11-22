@@ -20,6 +20,7 @@ import List_Ex8 from './List_Ex8';
 import Speak_Ex9 from './Speak_Ex9';
 import Speak_Ex10 from './Speak_Ex10';
 import { getTest } from '../data/queries/test';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
@@ -227,11 +228,11 @@ class Ejercicios extends Component {
                     /////////////////////////*/}
                     <View style={[view.safeArea, {width: '100%', height: '85%'}]}>
                         {/* Enunciado del ejercicio */}
-                        <MyText title={this.state.enunciado} style={{marginTop: 20, textAlign: 'left'}}></MyText>
+                        <MyText title={this.state.enunciado} style={{marginTop: EStyleSheet.value('$20'), textAlign: 'left'}}></MyText>
                         <View>{this.getEjercicio()}</View>
                     </View>
 
-                    <View style={[{position: 'absolute', bottom: 0, padding: 30, width:'100%'}]} >
+                    <View style={[{position: 'absolute', bottom: 0, padding: EStyleSheet.value('$10')*3, width:'100%'}]} >
                         {/* Boton para comprobar el resultado */}
                         <BlueButton title="Check answer" screen={this.correctExercise} style={[!this.state.isCheckVisible && {display: 'none'}]}></BlueButton>
                         {/* Boton para pasar al siguiente ejercicio, una vez hemos acertado */}

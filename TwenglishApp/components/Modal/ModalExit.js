@@ -24,9 +24,9 @@ class ModalExit extends Component {
                 <MyTitle title="Are you sure you want to leave?" style={{fontSize: 14, padding: 4, marginBottom: 5}}></MyTitle>
                 <MyText title={'¿Seguro que quieres abandonar' + (!this.props.test ? ' la lección?' : ' el test?')}></MyText>
 
-                <BlueButton title="Exit" screen={this.mevoy} style={{marginTop: 30, marginBottom: 5}}></BlueButton>
+                <BlueButton title="Exit" screen={this.mevoy} style={{marginTop: 30}}></BlueButton>
                 
-                <TouchableOpacity style={[button.button, button.option, {alignItems: 'center', paddingVertical: 10}]} onPress={this.mequedo}>
+                <TouchableOpacity style={[button.button, button.option, {alignItems: 'center', paddingLeft: 0}]} onPress={this.mequedo}>
                   <MyText title="Cancel" style={text.primario}></MyText>
                 </TouchableOpacity>  
             </View>

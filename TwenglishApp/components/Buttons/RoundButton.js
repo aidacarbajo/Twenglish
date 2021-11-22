@@ -3,6 +3,7 @@ import { button } from '../../assets/theme/styles';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from '../Icons/Icon';
 import { View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 class RoundButton extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class RoundButton extends Component {
       : [
         this.props.style === undefined 
         ? (
-          <LinearGradient  key={Math.random()*100} locations={[0, 1]} useAngle={true} angle={-45} angleCenter={{ x: 0.5, y: 0.5 }} colors={button.secundary.backgroundColor} style={[button.round, {width: this.props.size != undefined ? this.props.size : 44, height: this.props.size != undefined ? this.props.size : 44}]}>
+          <LinearGradient  key={Math.random()*100} locations={[0, 1]} useAngle={true} angle={-45} angleCenter={{ x: 0.5, y: 0.5 }} colors={button.secundary.backgroundColor} style={[button.round, {width: this.props.size != undefined ? this.props.size : EStyleSheet.value('$44'), height: this.props.size != undefined ? this.props.size : EStyleSheet.value('$44')}]}>
             <Icon icon={this.props.icon} color={this.props.color}></Icon>
           </LinearGradient>
         )

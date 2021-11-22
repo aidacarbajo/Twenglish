@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { ActivityIndicator, ImageBackground, Pressable, View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { FlatList } from 'react-native-gesture-handler';
 import { cards } from '../assets/theme/styles';
 import { getImage } from '../util/ImageManager';
@@ -82,7 +83,7 @@ class List_Ex7 extends Component {
                 <View>
                     <VoiceManager texto={this.props.texto} />
                     <FlatList
-                        style={{paddingHorizontal: cards.padding.paddingHorizontal, paddingVertical: 20}}
+                        style={{paddingHorizontal: cards.padding.paddingHorizontal, paddingVertical: EStyleSheet.value('$20')}}
                         numColumns={2}
                         columnWrapperStyle={{justifyContent: 'space-between'}}
                         showsVerticalScrollIndicator={false}
@@ -96,7 +97,7 @@ class List_Ex7 extends Component {
                                             source={getImage(item.item.frase)} 
                                             resizeMode="cover" 
                                             style={[cards.image]} 
-                                            imageStyle={{ borderRadius: 12}}
+                                            imageStyle={{ borderRadius: EStyleSheet.value('$borderImage')}}
                                         />
                                     </View>
                                 </Pressable>

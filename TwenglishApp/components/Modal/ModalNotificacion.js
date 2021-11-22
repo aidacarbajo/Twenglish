@@ -5,6 +5,7 @@ import MyTitle from "../Texts/MyTitle";
 import BlueButton from "../Buttons/BlueButton";
 import MyText from "../Texts/MyText";
 import Icon from "../Icons/Icon";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 class ModalNotificacion extends Component {
     constructor(props) {
@@ -55,7 +56,7 @@ class ModalNotificacion extends Component {
                 <View style={[styless]}>
                     <View style={{flexDirection: 'row', height: 17, width: '100%'}}>
                         <Icon icon={obj.icon} color={obj.color} style={{marginRight: 5, fontSize: 12}}></Icon>
-                        <MyTitle titleBold={obj.titulo} style={{color: obj.color, fontSize: 12, height: 25}}></MyTitle>
+                        <MyTitle titleBold={obj.titulo} style={{color: obj.color, fontSize: 12, height: EStyleSheet.value('$20') + EStyleSheet.value('$5')}}></MyTitle>
                     </View>
 
                     {
