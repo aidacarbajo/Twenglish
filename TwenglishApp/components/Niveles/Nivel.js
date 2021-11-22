@@ -8,27 +8,27 @@ class Nivel extends Component {
     constructor(props) {
         super(props);
 
-        this.styles = StyleSheet.create({
+        this.styles = EStyleSheet.create({
             fondo: {
                 backgroundColor: 'white',
-                padding: 10,
-                borderRadius: 12,
-                elevation: 2,
+                padding: EStyleSheet.value('$10'),
+                borderRadius: EStyleSheet.value('$bodySize'),
+                elevation: EStyleSheet.value('$1') * 2,
             },
             fondoT: {
                 backgroundColor: 'transparent',
-                padding: 10,
-                marginStart: -5,
-                borderRadius: 12,
+                padding: EStyleSheet.value('$10'),
+                marginStart: -EStyleSheet.value('$5'),
+                borderRadius: EStyleSheet.value('$bodySize'),
             },
             padding: {
-                padding: 2
+                padding: EStyleSheet.value('$1')*2
             },
             textNivel: {
                 textAlign: 'center',
                 fontFamily: 'sen_extra_bold',
-                fontSize: 12,
-                marginTop: -74 / 2
+                fontSize: EStyleSheet.value('$bodySize'),
+                marginTop: -(EStyleSheet.value('$10')*7 + EStyleSheet.value('$1')*4) / 2
             }
         });
 
