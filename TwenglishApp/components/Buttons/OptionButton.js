@@ -6,6 +6,7 @@ import {
   Text,
   View,
 } from 'react-native'
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 class OptionButton extends Component {
   sendData = () => {
@@ -17,7 +18,7 @@ class OptionButton extends Component {
       this.props.canPress 
       ? (
         <TouchableOpacity style={[button.button, button.option]} onPress={this.sendData}>
-          {this.props.titulo != undefined && <Text style={[text.primario, {fontFamily: 'sen_extra_bold', marginBottom: 5}]}>{this.props.titulo}</Text>}
+          {this.props.titulo != undefined && <Text style={[text.primario, {fontFamily: 'sen_extra_bold', marginBottom: EStyleSheet.value('$5')}]}>{this.props.titulo}</Text>}
           <Text style={[text.primario, text.opcion]}>{this.props.title}</Text>
         </TouchableOpacity>  
       )

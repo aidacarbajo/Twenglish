@@ -6,6 +6,7 @@ EStyleSheet.build({
     $extrabold: 'sen_extra_bold',
     $primary: '#2971FD',
     $secundary: '#F7002B',
+    $lila:'#7804FF',
     $body: '#4D4D4D',
     $bodySub: '#9F9F9F',
     $example: '#949494',
@@ -28,6 +29,7 @@ const bold = 'sen_bold';
 const extrabold = 'sen_extra_bold';
 const primary = '#2971FD';
 const secundary = '#F7002B';
+const lila = '#7804FF';
 const body = '#4D4D4D';
 const bodySub = '#9F9F9F';
 const example = '#949494';
@@ -74,6 +76,10 @@ const text = EStyleSheet.create({
     secundario: {
         color: '$secundary',
         fontFamily: '$regular',
+    },
+    lila: {
+        fontFamily: '$regular',
+        color: '$lila',
     },
     white: {
         color: '#fff',
@@ -124,9 +130,9 @@ const button = EStyleSheet.create({
         borderBottomWidth: '0.1rem',
     },
     optionSelected: {
-        borderColor: '$secundary',
-        backgroundColor: '#FEE3E8',
-        color: '$secundary',
+        borderColor: '#7804FF',
+        backgroundColor: '#EBDAFF',
+        color: '#7804FF',
     },
     round: {
         borderRadius: 50,
@@ -292,4 +298,4 @@ const modal = EStyleSheet.create({
     },
 });
 
-export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, bodySub, correcto, fondoCorrecto, extra, example, cards, modal, regular, extrabold, bold, fondo };
+export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, bodySub, correcto, fondoCorrecto, extra, example, cards, modal, regular, extrabold, bold, fondo, lila };

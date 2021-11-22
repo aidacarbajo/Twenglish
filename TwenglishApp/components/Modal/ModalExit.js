@@ -4,6 +4,7 @@ import { button, text } from "../../assets/theme/styles";
 import MyTitle from "../Texts/MyTitle";
 import BlueButton from "../Buttons/BlueButton";
 import MyText from "../Texts/MyText";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 class ModalExit extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class ModalExit extends Component {
     render() {
         return (
             <View style={{padding: 10}}>
-                <MyTitle title="Are you sure you want to leave?" style={{fontSize: 14, padding: 4, marginBottom: 5}}></MyTitle>
+                <MyTitle title="Are you sure you want to leave?" style={{fontSize: 14, padding: 4, marginBottom: EStyleSheet.value('$5')}}></MyTitle>
                 <MyText title={'¿Seguro que quieres abandonar' + (!this.props.test ? ' la lección?' : ' el test?')}></MyText>
 
                 <BlueButton title="Exit" screen={this.mevoy} style={{marginTop: 30}}></BlueButton>

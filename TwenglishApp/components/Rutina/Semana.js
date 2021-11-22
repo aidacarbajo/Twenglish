@@ -2,13 +2,13 @@ import { Pressable, View } from 'react-native';
 import React, { Component } from 'react'
 import { getWeek } from '../../data/queries/rutina';
 import MyText from '../Texts/MyText';
-import { primary, secundary } from '../../assets/theme/styles';
+import { primary, lila } from '../../assets/theme/styles';
 import { getToday } from '../../util/Time';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const selected = {
-    backgroundColor: '#FEE3E8',
-    borderColor: secundary,
+    backgroundColor: '#EBDAFF',
+    borderColor: lila,
     borderLeftWidth: 1.5,
     borderRightWidth: 1.5,
     borderTopWidth: 1.5,
