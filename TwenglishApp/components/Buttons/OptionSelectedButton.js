@@ -6,7 +6,7 @@ import { button, text } from '../../assets/theme/styles';
 export const OptionSelectedButton = ({title, titulo}) => {
   return (
    <TouchableOpacity style={[button.button, button.option, button.optionSelected]}>
-      { titulo != undefined && <Text style={[text.secundario, {fontFamily: 'sen_extra_bold', marginBottom: EStyleSheet.value('$5')}]}>{titulo}</Text>}
+      { titulo != undefined && <Text style={[text.lila, {fontFamily: 'sen_extra_bold', marginBottom: EStyleSheet.value('$5')}]}>{titulo}</Text>}
       <Text style={[text.lila, text.opcion]}>{title}</Text>
    </TouchableOpacity>  
   );

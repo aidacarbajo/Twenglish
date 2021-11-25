@@ -34,6 +34,7 @@ class Ejercicios extends Component {
         this.acierto = '';
         
         this.state = {
+            test: true,
             isLoading: true,
             isExitVisible: false,
             isCheckVisible: false,
@@ -53,16 +54,28 @@ class Ejercicios extends Component {
         if(this.props.route.params != undefined) {
             const lessonId = this.props.route.params.portada;
             updateCurrentLesson(lessonId).then(res => {
-                this.setState({numIntentos: [0,0], ejerciciosLeccionActual: res.ejercicios, enunciado: res.ejercicios[this.state.ejercicioActual].enunciado, isLoading: false})
+                this.setState({numIntentos: [0,0], ejerciciosLeccionActual: res.ejercicios, enunciado: res.ejercicios[0].enunciado, isLoading: false, ejercicioActual: 0, test: false})
             });    
         } else {
             // Es el TEST de calculo de nivel
             getTest().then(res => {
-                this.setState({numIntentos: [0,0], ejerciciosLeccionActual: res.Ejercicios, enunciado: res.Ejercicios[this.state.ejercicioActual].enunciado, isLoading: false})
+                this.setState({numIntentos: [0,0], ejerciciosLeccionActual: res.Ejercicios, enunciado: res.Ejercicios[0].enunciado, isLoading: false})
             })
 
         }
         
+    }
+
+
+    updateLesson = () => {
+        // console.log(this.props.route.params)
+        if(this.props.route.params != undefined && (this.state.test || ejercicioActual === 0)) {
+            const lessonId = this.props.route.params.portada;
+            console.log(lessonId);
+            updateCurrentLesson(lessonId).then(res => {
+                this.setState( {numIntentos: [0,0], ejerciciosLeccionActual: res.ejercicios, enunciado: res.ejercicios[0].enunciado, isLoading: false, ejercicioActual: 0, test: false, isNextVisible: false} );
+            });
+        } 
     }
 
     // Modal ¿Estas seguro de que quieres salir?
@@ -71,10 +84,18 @@ class Ejercicios extends Component {
     }
 
     salir = async() => {
-        this.setState({isExitVisible: false});
+        this.setState({ isExitVisible: false, 
+                        isLoading: true,
+                        isCheckVisible: false,
+                        isCorreccionVisible: false,
+                        isNextVisible: false,
+                        ejercicioActual: 0,
+                        ejerciciosLeccionActual: null,
+                        enunciado: null,
+                        numIntentos: [0, 0]});
 
         if(this.props.route.params != undefined) {
-            this.props.navigation.navigate('Lessons');
+            this.props.navigation.navigate('Lecciones');
         } else {
             // Volver al pretest
             this.props.navigation.navigate('PreTest');
@@ -204,6 +225,8 @@ class Ejercicios extends Component {
                 </View>
             );
         } else {
+            this.state.test && this.props.route.params != undefined && this.updateLesson()
+
             return (
                 <View style={[{paddingTop: 0, height: '100%'}]}>
                     {/////////////////////////////////////////////////////////

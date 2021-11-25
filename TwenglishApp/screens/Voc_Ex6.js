@@ -222,7 +222,7 @@ class Voc_Ex6 extends Component {
 
     render() {
         return (
-            <ScrollView style={{paddingVertical: EStyleSheet.value('$10')*3, marginBottom: EStyleSheet.value('$10')*18}}>
+            <ScrollView style={{paddingVertical: EStyleSheet.value('$10')*3, marginBottom: EStyleSheet.value('$10')*15}}>
 
                 <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', textAlign: 'center', width: '100%', marginTop: EStyleSheet.value('$20')}}>
                     {

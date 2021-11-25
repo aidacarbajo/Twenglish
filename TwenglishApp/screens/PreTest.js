@@ -62,9 +62,9 @@ class PreTest extends Component {
                     <View style={[{width: '100%', height: '40%', alignItems: 'center', marginVertical: EStyleSheet.value('$20')}]}>
                         <ImageBackground 
                             source={getImage('preTest')} 
-                            resizeMode="cover" 
-                            style={[cards.image, {width: '75%'}]} 
-                            imageStyle={{ borderRadius: EStyleSheet.value('$bodySize')}}
+                            resizeMode="contain" 
+                            style={[cards.image, {width: '60%'}]} 
+                            // imageStyle={{ borderRadius: EStyleSheet.value('$bodySize')}}
                         />
                     </View>
 

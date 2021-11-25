@@ -3,7 +3,7 @@ const Logo = require('../assets/img/logo.png');
 // Sin rutinas creadas
 const Rutina = require('../assets/img/routine-empty.png')
 
-const Test = require('../assets/img/preTest.png')
+const Test = require('../assets/img/test.png')
 
 // A1
     // Lecciones
