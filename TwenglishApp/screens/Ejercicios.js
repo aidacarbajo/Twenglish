@@ -20,7 +20,7 @@ import List_Ex8 from './List_Ex8';
 import Speak_Ex9 from './Speak_Ex9';
 import Speak_Ex10 from './Speak_Ex10';
 import { getTest } from '../data/queries/test';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import EStyleSheet, { flatten } from 'react-native-extended-stylesheet';
 
 LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
@@ -32,10 +32,21 @@ class Ejercicios extends Component {
         super(props);
         
         this.acierto = '';
+
+        if(this.props.route.params === undefined) {
+            this.nosoyTest = false;
+        } else {
+            this.nosoyTest = true;
+        }
+        
+        this._isMounted = true;
         
         this.state = {
-            test: true,
+            vengodeTest: !this.nosoyTest,
+            tema: props.route.params != undefined ? props.route.params.tema : null,
             isLoading: true,
+            updated: false,
+            test: false,
             isExitVisible: false,
             isCheckVisible: false,
             isCorreccionVisible: false,
@@ -51,48 +62,53 @@ class Ejercicios extends Component {
     }
 
     componentDidMount () {
-        if(this.props.route.params != undefined) {
+        if(this.props.route.params === undefined) {
+            getTest().then(res => {
+                this.setState({numIntentos: [0,0], ejerciciosLeccionActual: res.Ejercicios, enunciado: res.Ejercicios[0].enunciado, test: true, updated: false, isLoading: false})
+            })
+        } else {
             const lessonId = this.props.route.params.portada;
             updateCurrentLesson(lessonId).then(res => {
-                this.setState({numIntentos: [0,0], ejerciciosLeccionActual: res.ejercicios, enunciado: res.ejercicios[0].enunciado, isLoading: false, ejercicioActual: 0, test: false})
+                this.setState({numIntentos: [0,0], ejerciciosLeccionActual: res.ejercicios, enunciado: res.ejercicios[0].enunciado, test: false, updated: false, isLoading: false})
             });    
-        } else {
-            // Es el TEST de calculo de nivel
-            getTest().then(res => {
-                this.setState({numIntentos: [0,0], ejerciciosLeccionActual: res.Ejercicios, enunciado: res.Ejercicios[0].enunciado, isLoading: false})
-            })
-
         }
-        
+        this._isMounted = false;
     }
 
+    componentWillUnmount () {
+        this._isMounted = false;
+        this.setState({ 
+            isLoading: true,
+            isExitVisible: false, 
+            updated: true,
+            isCheckVisible: false,
+            isCorreccionVisible: false,
+            isNextVisible: false,
+            ejercicioActual: 0,
+            ejerciciosLeccionActual: null,
+            enunciado: null,
+            test: false,
+            numIntentos: [0, 0]});
+    }
 
     updateLesson = () => {
-        // console.log(this.props.route.params)
-        if(this.props.route.params != undefined && (this.state.test || ejercicioActual === 0)) {
-            const lessonId = this.props.route.params.portada;
-            console.log(lessonId);
-            updateCurrentLesson(lessonId).then(res => {
-                this.setState( {numIntentos: [0,0], ejerciciosLeccionActual: res.ejercicios, enunciado: res.ejercicios[0].enunciado, isLoading: false, ejercicioActual: 0, test: false, isNextVisible: false} );
-            });
-        } 
+        const lessonId = this.props.route.params.portada;
+
+        updateCurrentLesson(lessonId).then(res => {
+            this.setState({numIntentos: [0,0], ejerciciosLeccionActual: res.ejercicios, tema:  this.props.route.params != undefined ? this.props.route.params.tema : null, enunciado: res.ejercicios[0].enunciado, test: false, updated: false, isLoading: false})
+        });
+
+        this._isMounted = false;
     }
+
 
     // Modal ¿Estas seguro de que quieres salir?
     modalExit = (visible) => {
         this.setState({isExitVisible: visible});
     }
 
-    salir = async() => {
-        this.setState({ isExitVisible: false, 
-                        isLoading: true,
-                        isCheckVisible: false,
-                        isCorreccionVisible: false,
-                        isNextVisible: false,
-                        ejercicioActual: 0,
-                        ejerciciosLeccionActual: null,
-                        enunciado: null,
-                        numIntentos: [0, 0]});
+    salir = () => {
+       this.resetear();
 
         if(this.props.route.params != undefined) {
             this.props.navigation.navigate('Lecciones');
@@ -160,21 +176,39 @@ class Ejercicios extends Component {
                 // nos llevaria la página de resumen
                 const media = await calculateMedia(this.state.numIntentos);  
                 this.update();
+                this.resetear();
                 this.props.navigation.navigate('Resumen', {progreso: media, leccion: this.props.route.params.tema})
             } else {
                 const aciertos = this.state.numIntentos[0] + '/' + (this.state.numIntentos[0] + this.state.numIntentos[1]) + ' aciertos';
                 const nivel = await calculateLevel(this.state.numIntentos);
+                this.resetear();
                 this.props.navigation.navigate('Resumen', {progreso: nivel, leccion: aciertos})
             }
         }
     }
 
+    resetear = () => {
+        this.setState({ 
+            isLoading: true,
+            tema: null,
+            isExitVisible: false, 
+            updated: true,
+            isCheckVisible: false,
+            isCorreccionVisible: false,
+            isNextVisible: false,
+            ejercicioActual: 0,
+            ejerciciosLeccionActual: null,
+            enunciado: null,
+            test: false,
+            numIntentos: [0, 0]});
+    }
+
 
     // Completar la pantalla dependiendo del tipo de ejercicio que sea
     getEjercicio = () => {
+        if(!this.state.isLoading) {
         const ejercicio = this.state.ejerciciosLeccionActual[this.state.ejercicioActual];
         let res = null;
-
         switch(ejercicio.tipo) {
             case 1:
                 res = <Voc_Ex1 ejercicio={ejercicio.bloqueString} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
@@ -205,12 +239,11 @@ class Ejercicios extends Component {
                 break;
             case 10:
                 res = <Speak_Ex10 listening={ejercicio.textoListening} frases={ejercicio.bloqueRadioButton.opciones} buttonCheck={this.showButton} onRef={ref => {this.child = ref}} />
-                break;
-    
-    
+                break;    
             }    
 
         return res;
+        }
     }
 
     update = () => {
@@ -218,14 +251,28 @@ class Ejercicios extends Component {
     }
  
     render() {
-        if(this.state.isLoading){
+        if(this.props.route.params === undefined) {
+            this.nosoyTest = false;
+        } else {
+            this.nosoyTest = true;
+        }
+
+        if((this.state.isLoading && this.nosoyTest && this.state.enunciado === null && this.state.vengodeTest) || (this.props.route.params != undefined && this.state.tema != this.props.route.params.tema)){ 
+            this.updateLesson();
+        }
+
+        
+        if(this._isMounted){            
+            if((this.props.route.params != undefined && this.state.updated && this.nosoyTest)) {
+                this.updateLesson()
+            } 
+
             return (
                 <View>
                     <ActivityIndicator/>
                 </View>
             );
         } else {
-            this.state.test && this.props.route.params != undefined && this.updateLesson()
 
             return (
                 <View style={[{paddingTop: 0, height: '100%'}]}>
