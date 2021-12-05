@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { ActivityIndicator, ImageBackground, View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { cards } from '../assets/theme/styles';
 import RadioButton from '../components/RadioButton/RadioButton';
 import { getImage } from '../util/ImageManager';
@@ -74,12 +75,12 @@ class Voc_Ex2 extends Component {
                 <View>
                     {
                         this.state.imagen != 'null' &&
-                        <View style={{width: '100%', height: 180, marginTop: 20}}>
+                        <View style={{width: '100%', height: EStyleSheet.value('$20')*10, marginTop: EStyleSheet.value('$20')}}>
                             <ImageBackground 
                                 source={getImage(this.state.imagen)} 
                                 resizeMode="cover" 
                                 style={[cards.image]} 
-                                imageStyle={{ borderRadius: 12, width: '100%', height: 180, shadowColor: 'black'}} >
+                                imageStyle={{ borderRadius: EStyleSheet.value('$10') + EStyleSheet.value('$5'), width: '100%', height: '100%', shadowColor: 'black'}} >
                             </ImageBackground>  
                         </View>
 

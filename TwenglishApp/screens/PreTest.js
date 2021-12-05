@@ -6,6 +6,7 @@ import MyText from '../components/Texts/MyText';
 import MyTitle from '../components/Texts/MyTitle';
 import BlueButton from '../components/Buttons/BlueButton';
 import { getImage } from '../util/ImageManager';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const Beginner = {
     titulo: 'Beginner',
@@ -58,21 +59,22 @@ class PreTest extends Component {
                 <View style={[view.safeArea]}>
                     <MyTitle title="Welcome to" titleBold="Twenglish"></MyTitle>
 
-                    <View style={[{width: '70%', height: '40%', alignSelf: 'center', marginVertical: 20}]}>
+                    <View style={[{width: '100%', height: '40%', alignItems: 'center', marginVertical: EStyleSheet.value('$20')}]}>
                         <ImageBackground 
                             source={getImage('preTest')} 
-                            resizeMode="cover" 
-                            style={[cards.image]} 
-                            imageStyle={{ borderRadius: 12}}
+                            resizeMode="contain" 
+                            style={[cards.image, {width: '60%'}]} 
+                            // imageStyle={{ borderRadius: EStyleSheet.value('$bodySize')}}
                         />
                     </View>
 
-                    <MyText title="What's your level currently?" style={{marginTop: 15}} />
+                    <MyText title="What's your level currently?" style={{marginTop: EStyleSheet.value('$10') + EStyleSheet.value('$5')}} />
                     <RadioButton opciones={[Beginner, WhatLevel]} continuar={this.decision} />
                 </View>
                 
-                <BlueButton title="Continue" screen={this.desde0} style={[!this.state.continuar && {display: 'none'}, {width: '85%'}]} />
-
+                <View style={{position: 'absolute', bottom: EStyleSheet.value('$10')*5, width: '100%', alignSelf: 'center'}}>
+                    <BlueButton title="Continue" screen={this.desde0} style={[!this.state.continuar && {display: 'none'}, {width: '85%'}]} />
+                </View>
             </View>
         );
     }

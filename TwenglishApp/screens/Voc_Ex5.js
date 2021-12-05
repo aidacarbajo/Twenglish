@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Dimensions, Pressable, View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { bold, cards } from '../assets/theme/styles';
 import MyText from '../components/Texts/MyText';
 import MyTitle from '../components/Texts/MyTitle';
@@ -39,9 +40,6 @@ class Voc_Ex5 extends Component {
     componentWillUnmount() {
         this.props.onRef(undefined)
     }
-    // shouldComponentUpdate(nextProps, nextState) {                                     
-    //     return true;                      
-    // }
 
     static getDerivedStateFromProps(nextProps, state) {
         if(nextProps.frase != state.frase) {
@@ -132,7 +130,7 @@ class Voc_Ex5 extends Component {
 
     getCard = (index, accion, indexx) => {        
         return(
-            <Pressable key={index} style={[cards.cards, cards.centrar, {padding: 10, marginBottom: 12, marginRight: 10}]} onPress={() => {
+            <Pressable key={index} style={[cards.cards, cards.centrar, {padding: EStyleSheet.value('$10'), marginBottom: EStyleSheet.value('$10'), marginRight: EStyleSheet.value('$10')}]} onPress={() => {
                 if(accion === 's') {
                     this.seleccion(index)
                 } else {
@@ -149,12 +147,12 @@ class Voc_Ex5 extends Component {
 
     render() {
         return (
-            <View style={{marginTop: 20, height: '100%'}}>
+            <View style={{marginTop: EStyleSheet.value('$20'), height: '100%'}}>
             
-                <MyTitle title={this.state.frase + '.'} style={{fontSize: 12, fontFamily: bold, marginBottom: 4}}></MyTitle>
+                <MyTitle title={this.state.frase + '.'} style={{fontSize: EStyleSheet.value('$bodySize'), fontFamily: bold, marginBottom: EStyleSheet.value('$5')}}></MyTitle>
 
                 <View>
-                    <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', textAlign: 'center', width: '100%', marginTop: 20}}>
+                    <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', textAlign: 'center', width: '100%', marginTop: EStyleSheet.value('$20')}}>
                         {
                             this.state.respuestasUsuario.map((item, index) => {
                                 if(item != -1) {
@@ -166,10 +164,10 @@ class Voc_Ex5 extends Component {
                     </View>
                 </View>
 
-                <View style={{position: 'absolute', top: 250, width: '100%', minHeight: 50}}>
-                    <MyTitle titleBold="Options" style={{fontSize: 14, marginBottom: 0}}></MyTitle>
+                <View style={{position: 'absolute', bottom: EStyleSheet.value('$20')*10, width: '100%', minHeight: EStyleSheet.value('$10')*5}}>
+                    <MyTitle titleBold="Options" style={{fontSize: EStyleSheet.value('$bodySize'), marginBottom: 0}}></MyTitle>
                         
-                        <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', paddingTop: 10, paddingHorizontal: 10, textAlign: 'center', width: '100%', minHeight: 55, marginTop: 20, backgroundColor: 'white', borderRadius: 12}}>
+                        <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', paddingTop: EStyleSheet.value('$10'), paddingHorizontal: EStyleSheet.value('$10'), textAlign: 'center', width: '100%', minHeight: EStyleSheet.value('$10')*5 + EStyleSheet.value('$5'), marginTop: EStyleSheet.value('$20'), backgroundColor: 'white', borderRadius: EStyleSheet.value('$10')}}>
                         {
                             this.state.todosDesordenados.map((item, index) => {
                                 if(!this.state.hideWord[index]) {

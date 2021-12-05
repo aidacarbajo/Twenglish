@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import { View, Pressable } from 'react-native';
 import RoundButton from '../components/Buttons/RoundButton';
 import { cards, primary } from '../assets/theme/styles';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 class VoiceManager extends Component {
     constructor(props) {
@@ -59,7 +60,7 @@ class VoiceManager extends Component {
 
     render() {
         return (
-            <View style={[cards.centrar, {marginTop: 20}]}>
+            <View style={[cards.centrar, {marginTop: EStyleSheet.value('$10')}]}>
                 {
                     this.state._isMounted &&
                         <Pressable onPress = {() => this.listenToAudio()}>

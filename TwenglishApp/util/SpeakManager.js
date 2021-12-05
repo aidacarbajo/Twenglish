@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, AppRegistry, Pressable, Dimensions} from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import Voice from 'react-native-voice';
 import { cards, primary, secundary } from '../assets/theme/styles';
 import RoundButton from '../components/Buttons/RoundButton';
@@ -102,7 +103,7 @@ export default class SpeakManager extends React.Component {
         }
 
         return(
-            <MyText title={titulo} style={{fontSize: 10, marginTop: 10}}/>
+            <MyText title={titulo} style={{fontSize: EStyleSheet.value('$10'), marginTop: EStyleSheet.value('$10')}}/>
         );
     }
 
@@ -116,22 +117,22 @@ export default class SpeakManager extends React.Component {
 
                 {
                     this.props.loading == undefined &&
-                        <View style={{top: Dimensions.get('window').height/8, width: '100%', minHeight: 50, marginBottom: 80}}>
+                        <View style={{top: Dimensions.get('window').height/8, width: '100%', minHeight: EStyleSheet.value('$10')*5, marginBottom: EStyleSheet.value('$20')*4}}>
                             <MyTitle titleBold="My answer" style={{fontSize: 14, marginBottom: 0}}></MyTitle>
                             
-                            <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', paddingVertical: 10, paddingHorizontal: 10, textAlign: 'left', width: '100%', minHeight: 60, marginTop: 20, backgroundColor: 'white', borderRadius: 12, elevation: 10}}>
+                            <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', paddingVertical: EStyleSheet.value('$10'), paddingHorizontal: EStyleSheet.value('$10'), textAlign: 'left', width: '100%', minHeight: EStyleSheet.value('$20')*3, marginTop: EStyleSheet.value('$20'), backgroundColor: 'white', borderRadius: EStyleSheet.value('$bodySize'), elevation: EStyleSheet.value('$10')}}>
                                 <MyText title={this.state.partialResults} style={{textAlign: 'left', fontSize: 11}}/>
                             </View>
 
                             {
                                 this.props.casiCorrecta[0] != 'O'
-                                ? (<MyText title={this.props.casiCorrecta} style={{color: '#00C136', marginTop: 20, textAlign: 'center', width: '100%'}}/>)
-                                : (<MyText title={this.props.casiCorrecta} style={{color: secundary, marginTop: 20, textAlign: 'center', width: '100%'}}/>)
+                                ? (<MyText title={this.props.casiCorrecta} style={{color: '#00C136', marginTop: EStyleSheet.value('$20'), textAlign: 'center', width: '100%'}}/>)
+                                : (<MyText title={this.props.casiCorrecta} style={{color: secundary, marginTop: EStyleSheet.value('$20'), textAlign: 'center', width: '100%'}}/>)
                             }
                         </View>
                 }
                 
-                <View style={[cards.centrar, { top: 30, width: '100%'}]}>
+                <View style={[cards.centrar, { top: EStyleSheet.value('$10')*3, width: '100%'}]}>
 
                     <Pressable onPressIn={this._startRecognition.bind(this)}>
                     {

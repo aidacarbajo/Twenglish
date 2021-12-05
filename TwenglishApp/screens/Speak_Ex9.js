@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { bold, example } from '../assets/theme/styles';
 import MyText from '../components/Texts/MyText';
 import MyTitle from '../components/Texts/MyTitle';
@@ -71,8 +72,8 @@ class Speak_Ex9 extends Component {
         return(
             <View style={{ height: '100%'}}>
                 <View>
-                    <MyTitle title={this.frases[0]} style={{fontSize: 11, fontFamily: bold, marginTop: 40}} />
-                    <MyText title={this.frases[1]} style={{fontSize: 10, marginTop: -10, color: example}}/>
+                    <MyTitle title={this.frases[0]} style={{fontSize: 11, fontFamily: bold, marginTop: EStyleSheet.value('$10')*4}} />
+                    <MyText title={this.frases[1]} style={{fontSize: EStyleSheet.value('$10')*5, marginTop: -EStyleSheet.value('$10'), color: example}}/>
                 </View>
 
                 <SpeakManager studentAnswer={this.areSimilar} casiCorrecta={this.casiCorrecta}></SpeakManager>

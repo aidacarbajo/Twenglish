@@ -1,15 +1,13 @@
-import React, {Component, useEffect, NavigationActions} from 'react';
-// import { TouchableOpacity, View, StatusBar, ActivityIndicator, Pressable, Text } from 'react-native';
+import React, {Component} from 'react';
 import MyTitle from '../components/Texts/MyTitle';
-import { view, posiciones, icons, text, button, cards, secundary, body, example, fondo } from '../assets/theme/styles';
+import { posiciones, icons, cards, secundary, body, example, fondo } from '../assets/theme/styles';
 import MyText from '../components/Texts/MyText';
-// import Flatlist from '../components/Flatlist/Flatlist';
 import { getApuntesLeccion } from '../data/queries/lecciones';
-import Modal from '../components/Modal/ModalC';
-import { ActivityIndicator, Pressable, SafeAreaView, StatusBar, Text, View } from 'react-native';
-import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { ActivityIndicator, SafeAreaView, View } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from '../components/Icons/Icon';
 import CardVocabulary from '../components/Card/CardVocabulary';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 class Apuntes extends Component {
 
@@ -101,7 +99,7 @@ class Apuntes extends Component {
 
       return (
         <ScrollView style={{backgroundColor: fondo}}>            
-            <SafeAreaView style={{paddingHorizontal: 50, paddingVertical: 60}}>
+            <SafeAreaView style={{paddingHorizontal: EStyleSheet.value('$10')*5, paddingVertical: EStyleSheet.value('$20')*3}}>
 
                 <View style={[posiciones.abolute, posiciones.topleft]}>
                     <TouchableOpacity onPress={this.volver}>
@@ -113,13 +111,13 @@ class Apuntes extends Component {
 
                 {
                     this.state.vocabulario.length > 0 &&
-                    <MyTitle title={'Vocabulary'} style={{fontSize: 14, color: body, marginTop: 10, marginBottom: 8}}></MyTitle>
+                    <MyTitle title={'Vocabulary'} style={{fontSize: EStyleSheet.value('$10') + EStyleSheet.value('$5'), color: body, marginTop: EStyleSheet.value('$10'), marginBottom: 8}}></MyTitle>
                 }
 
                 {this.state.vocabulario.map((element, index) => {
                     return(
-                        <View style={{marginBottom: 10}}>
-                            <MyText title={this.state.titulo[index]} style={{marginTop: 15}} />
+                        <View style={{marginBottom: EStyleSheet.value('$10')}}>
+                            <MyText title={this.state.titulo[index]} style={{marginTop: EStyleSheet.value('$10') + EStyleSheet.value('$5')}} />
                             <CardVocabulary vocabulary={element} titulo={this.state.titulo}></CardVocabulary>
                         </View>
                     );
@@ -127,22 +125,22 @@ class Apuntes extends Component {
 
                 {
                     this.state.gramatica.length > 0 &&
-                    <MyTitle title={'Grammar'} style={{fontSize: 14, color: body, marginTop: 20, marginBottom: 8}}></MyTitle>
+                    <MyTitle title={'Grammar'} style={{fontSize: EStyleSheet.value('$10') + EStyleSheet.value('$5'), color: body, marginTop: EStyleSheet.value('$20'), marginBottom: 8}}></MyTitle>
                 }
                     {this.state.gramatica.map((element, index) => {
                         return (
                             <View>
                                 {
                                     this.state.titulo[index + this.state.vocabulario.length] != null && this.state.titulo[index + this.state.vocabulario.length] != '' &&
-                                    <MyText title={this.state.titulo[index + this.state.vocabulario.length]} style={{marginVertical: 15}} />
+                                    <MyText title={this.state.titulo[index + this.state.vocabulario.length]} style={{marginVertical: EStyleSheet.value('$10') + EStyleSheet.value('$5')}} />
                                 }
-                                <View style={[cards.cardApuntes, cards.cards, {marginBottom: 15}]} key={index}>
-                                    <MyTitle title={element[0].titulo} style={{fontSize: 12, marginBottom: 10}}></MyTitle>
+                                <View style={[cards.cardApuntes, cards.cards, {marginBottom: EStyleSheet.value('$10') + EStyleSheet.value('$5')}]} key={index}>
+                                    <MyTitle title={element[0].titulo} style={{fontSize: EStyleSheet.value('$bodySize'), marginBottom: EStyleSheet.value('$10')}}></MyTitle>
                                     {
                                         element[0].explicacion != null && element[0].explicacion != '' &&
-                                        <MyText title={element[0].explicacion} style={{textAlign: 'left', marginBottom: 4, padding: 4, lineHeight: 14}}></MyText>
+                                        <MyText title={element[0].explicacion} style={{textAlign: 'left', marginBottom: 4, padding: 4, lineHeight: EStyleSheet.value('$10') + EStyleSheet.value('$5')}}></MyText>
                                     }
-                                    <MyText title={element[0].ejemplo} style={{textAlign: 'left', color: example, paddingHorizontal: 4, lineHeight: 14}}></MyText>
+                                    <MyText title={element[0].ejemplo} style={{textAlign: 'left', color: example, paddingHorizontal: 4, lineHeight: EStyleSheet.value('$10') + EStyleSheet.value('$5')}}></MyText>
                                 </View>
                             </View>
                         );     

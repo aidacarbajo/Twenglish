@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { ImageBackground, Pressable, View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { cards } from '../../assets/theme/styles';
 import { getImage } from '../../util/ImageManager';
 import Tag from './Tag';
@@ -23,7 +24,7 @@ class CardImage extends Component {
                             source={getImage(this.props.dataImagen)} 
                             resizeMode="cover" 
                             style={[cards.image]} 
-                            imageStyle={{ borderRadius: 12}}
+                            imageStyle={{ borderRadius: EStyleSheet.value('$bodySize')}}
                         >
                             <Tag data100={this.props.data100} dataTitle={this.props.dataTitle}></Tag>
                         </ImageBackground> 

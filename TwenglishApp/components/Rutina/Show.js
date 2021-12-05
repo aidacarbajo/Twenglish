@@ -10,6 +10,7 @@ import RoundButton from '../Buttons/RoundButton';
 import { applyChanges, getDay } from '../../data/queries/rutina';
 import { createScheduleNotification } from '../../util/NotificationManager';
 import { getTime, getToday } from '../../util/Time';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 class Show extends Component {
     constructor(props) {
@@ -76,7 +77,7 @@ class Show extends Component {
 
     loadDay = () => {
         return(
-            <View style={[cards.centrar, {width: '100%', marginTop: 30, zIndex: -1}]}>
+            <View style={[cards.centrar, {width: '100%', marginTop: EStyleSheet.value('$10')*3, zIndex: -1}]}>
                 {
                     // Si no está editando recorre el array de this.state.horas (que es la de la bbdd)
                     this.props.action === 'show' ? 
@@ -85,8 +86,8 @@ class Show extends Component {
                         const minutos = getTime(item.getMinutes());
 
                         return(            
-                            <View key={index} style={[cards.cards, cards.cardPares, cards.centrar, {width: 180, height: 70,  marginBottom: 12}]}>
-                                <MyText title={hora + ':' + minutos} style={{lineHeight: 20, fontSize: 14}}></MyText>
+                            <View key={index} style={[cards.cards, cards.cardPares, cards.centrar, {width: EStyleSheet.value('$10')*18, height: EStyleSheet.value('$10')*7,  marginBottom: EStyleSheet.value('$bodySize')}]}>
+                                <MyText title={hora + ':' + minutos} style={{lineHeight: EStyleSheet.value('$20'), fontSize: 14}}></MyText>
                             </View>
                         )    
                     })
@@ -98,14 +99,14 @@ class Show extends Component {
                         const minutos = getTime(item.getMinutes());
 
                         return(            
-                            <View key={index + Math.random()*100} style={[cards.cards, cards.cardPares, cards.centrar, {width: 180, height: 70,  marginBottom: 12}]}>
+                            <View key={index + Math.random()*100} style={[cards.cards, cards.cardPares, cards.centrar, {width: EStyleSheet.value('$10')*18, height: EStyleSheet.value('$10')*7,  marginBottom: 12}]}>
                                 {
                                     this.props.action === 'edit' &&
-                                    <TouchableOpacity style={{position: 'absolute', right: -8, top: -10}} onPress={() => this.removeHour(index)}>
+                                    <TouchableOpacity style={{position: 'absolute', right: -8, top: -EStyleSheet.value('$10')}} onPress={() => this.removeHour(index)}>
                                         <RoundButton icon="wrong" color="white" size={32}></RoundButton>
                                     </TouchableOpacity>
                                 }
-                                <MyText title={hora + ':' + minutos} style={{lineHeight: 20, fontSize: 14}}></MyText>
+                                <MyText title={hora + ':' + minutos} style={{lineHeight: EStyleSheet.value('$20'), fontSize: 14}}></MyText>
                             </View>
                         )    
                     })
@@ -113,7 +114,7 @@ class Show extends Component {
 
                 {/* un + para crear nueva rutina */
                 this.props.action === 'edit' && 
-                <TouchableOpacity onPress={() => this.props.create('', 'create')} style={{marginVertical: 5}}>
+                <TouchableOpacity onPress={() => this.props.create('', 'create')} style={{marginVertical: EStyleSheet.value('$5')}}>
                     <RoundButton icon="+" color={primary} size={37} style={false}></RoundButton>
                 </TouchableOpacity>
                 }
@@ -124,7 +125,7 @@ class Show extends Component {
     norutina = () => {
         return(
             <View>
-                <View style={[{width: '80%', height: '65%', alignSelf: 'center'}]}>
+                <View style={[{width: '100%', height: '65%', alignSelf: 'center'}]}>
                     <ImageBackground
                         source={getImage('routine')} 
                         resizeMode="cover" 
@@ -133,9 +134,9 @@ class Show extends Component {
                 </View>
 
                 <View style={{width: '100%', alignItems: 'center'}}>
-                    <MyTitle titleBold="It's pretty quite in here," style={{fontSize: 16, textAlign: 'center', marginBottom: 0}} />
-                    <MyTitle titleBold="don't you think?" style={{fontSize: 16, textAlign: 'center', marginBottom: 10}} />
-                    <MyText title="Create a routine to learn faster" style={{fontSize: 10}} />
+                    <MyTitle titleBold="It's pretty quite in here," style={{fontSize: EStyleSheet.value('$10') + EStyleSheet.value('$5'), textAlign: 'center', marginBottom: 0}} />
+                    <MyTitle titleBold="don't you think?" style={{fontSize: EStyleSheet.value('$10') + EStyleSheet.value('$5'), textAlign: 'center', marginBottom: EStyleSheet.value('$10')}} />
+                    <MyText title="Create a routine to learn faster" style={{fontSize: EStyleSheet.value('$10')}} />
                 </View>
 
             </View>
@@ -200,14 +201,14 @@ class Show extends Component {
                     { this.state.dia != undefined && this.loadDay() }
                 </View>
 
-                <View style={{position: 'absolute', bottom: 70, width: '115%', alignSelf: 'center', minHeight: 50}}>
+                <View style={{position: 'absolute', bottom: EStyleSheet.value('$10')*9, width: '115%', alignSelf: 'center', minHeight: EStyleSheet.value('$10')*5}}>
                     {!this.tieneRutina
                         ? <BlueButton title="Create routine" screen={this.hideModal} />
                         :   [ this.props.action == 'show' 
                             ? <BlueButton title="Edit routine" screen={this.editRoutine} />
                             : <View style={{flexDirection: 'row'}}>
                                 
-                                <TouchableOpacity style={[button.button, button.option, {alignItems: 'center', width: '45%'}]} onPress={() => this.back2show(true)}>
+                                <TouchableOpacity style={[button.button, button.option, {alignItems: 'center', width: '45%', paddingLeft: 0}]} onPress={() => this.back2show(true)}>
                                     <MyText title="Discard" style={text.primario}></MyText>
                                 </TouchableOpacity>  
 

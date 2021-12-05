@@ -10,7 +10,7 @@ class MyText extends Component {
     render() {
         return (
             <View style={{flexDirection:'row'}}>
-                <Text style={[text.body, this.props.style]}>{this.props.title}</Text> 
+                <Text style={[text.body, this.props.style, {textAlign: 'left'}]}>{this.props.title}</Text> 
             </View>
         );
     }

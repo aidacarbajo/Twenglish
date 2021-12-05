@@ -5,12 +5,12 @@ import { bold, cards } from '../assets/theme/styles';
 import { getImage } from '../util/ImageManager';
 import Tag from '../components/Card/Tag';
 import MyTitle from '../components/Texts/MyTitle';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 class Voc_Ex1 extends Component {
 
     constructor(props) {
         super(props);
-        
 
         // crear otro array llamado fotos desordenadas
         // Si antes era:    [a, b, c, d]
@@ -108,8 +108,8 @@ class Voc_Ex1 extends Component {
 
         return (
             this.state.actual < data.palabraClave.length - 1
-            ? <MyTitle title={data.frases[this.state.actual]} style={{fontSize: 12, fontFamily: bold, marginVertical: 15}} destacar={[data.palabraClave[this.state.actual]]}></MyTitle>
-            : <MyTitle title={data.frases[data.frases.length - 1]} style={{fontSize: 12, fontFamily: bold, marginVertical: 15}} destacar={[data.palabraClave[data.palabraClave.length - 1]]}></MyTitle>
+            ? <MyTitle title={data.frases[this.state.actual]} style={{fontSize: EStyleSheet.value('$20')/2, fontFamily: bold, marginVertical: EStyleSheet.value('$10') + EStyleSheet.value('$5')}} destacar={[data.palabraClave[this.state.actual]]}></MyTitle>
+            : <MyTitle title={data.frases[data.frases.length - 1]} style={{fontSize: EStyleSheet.value('$20')/2, fontFamily: bold, marginVertical: EStyleSheet.value('$10') + EStyleSheet.value('$5')}} destacar={[data.palabraClave[data.palabraClave.length - 1]]}></MyTitle>
         )  
     };
 
@@ -158,7 +158,7 @@ class Voc_Ex1 extends Component {
                 <View>
                     <View>{this.list()}</View>
                     <FlatList
-                        style={{paddingHorizontal: cards.padding.paddingHorizontal, paddingVertical: 20}}
+                        style={{paddingHorizontal: cards.padding.paddingHorizontal, paddingVertical: EStyleSheet.value('$20')}}
                         numColumns={2}
                         columnWrapperStyle={{justifyContent: 'space-between'}}
                         showsVerticalScrollIndicator={false}
@@ -172,7 +172,7 @@ class Voc_Ex1 extends Component {
                                             source={getImage(this.state.dataRealm.portadaDesordenada[item.index])} 
                                             resizeMode="cover" 
                                             style={[cards.image]} 
-                                            imageStyle={{ borderRadius: 12}}
+                                            imageStyle={{ borderRadius: EStyleSheet.value('$borderImage')}}
                                         >
                                             {this.state.pressed[item.index] === true && (
                                                 <Tag dataTitle={this.state.respuestasUsuario[item.index]}></Tag>

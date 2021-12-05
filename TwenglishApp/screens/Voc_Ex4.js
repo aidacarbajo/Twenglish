@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { ActivityIndicator, View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { cards } from '../assets/theme/styles';
 import RadioButton from '../components/RadioButton/RadioButton';
 import MyText from '../components/Texts/MyText';
@@ -71,9 +72,9 @@ class Voc_Ex4 extends Component {
             );
         } else {
             return (
-                <View style={{marginTop: 20}}>
+                <View style={{marginTop: EStyleSheet.value('$20')}}>
                     <View style={[cards.cardApuntes, cards.cards]}>
-                        <MyText title={this.state.frase} style={{fontSize: 11, textAlign: 'left', padding: 4, lineHeight: 18}}></MyText>
+                        <MyText title={this.state.frase} style={{fontSize: EStyleSheet.value('$10'), textAlign: 'left', padding: EStyleSheet.value('$5'), lineHeight: EStyleSheet.value('$10') + EStyleSheet.value('$5')}}></MyText>
                     </View>
 
                     <RadioButton opciones={this.state.opciones} check={this.showCheck}></RadioButton>

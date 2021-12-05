@@ -2,32 +2,33 @@ import React, {Component} from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { primary, secundary } from '../../assets/theme/styles';
 import { GradientCircularProgress,  } from 'react-native-circular-gradient-progress';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 class Nivel extends Component {
     constructor(props) {
         super(props);
 
-        this.styles = StyleSheet.create({
+        this.styles = EStyleSheet.create({
             fondo: {
                 backgroundColor: 'white',
-                padding: 10,
-                borderRadius: 12,
-                elevation: 2,
+                padding: EStyleSheet.value('$10'),
+                borderRadius: EStyleSheet.value('$bodySize'),
+                elevation: EStyleSheet.value('$1') * 2,
             },
             fondoT: {
                 backgroundColor: 'transparent',
-                padding: 10,
-                marginStart: -5,
-                borderRadius: 12,
+                padding: EStyleSheet.value('$10'),
+                marginStart: -EStyleSheet.value('$5'),
+                borderRadius: EStyleSheet.value('$bodySize'),
             },
             padding: {
-                padding: 2
+                padding: EStyleSheet.value('$1')*2
             },
             textNivel: {
                 textAlign: 'center',
                 fontFamily: 'sen_extra_bold',
-                fontSize: 12,
-                marginTop: -74 / 2
+                fontSize: EStyleSheet.value('$bodySize'),
+                marginTop: -(EStyleSheet.value('$10')*7 + EStyleSheet.value('$1')*4) / 2
             }
         });
 
@@ -89,7 +90,7 @@ class Nivel extends Component {
             <View style={this.styles.padding}>
                 {this.props.nivel.item.nombre === this.props.nseleccionado
                 ?   <View style={{flexDirection: 'row'}}>
-                        <Text style={{width:30}}></Text>
+                        <Text style={{width: EStyleSheet.value('$10')*3}}></Text>
                         <View style={this.styles.fondo}>
                         {this.getCircle('#EE6400', '#F34117', '#F7002D')}
                     </View>

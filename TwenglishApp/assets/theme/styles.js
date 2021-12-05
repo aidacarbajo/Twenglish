@@ -1,11 +1,35 @@
-import { StyleSheet } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
+
+EStyleSheet.build({
+    $regular: 'sen_regular',
+    $bold: 'sen_bold',
+    $extrabold: 'sen_extra_bold',
+    $primary: '#2971FD',
+    $secundary: '#F7002B',
+    $lila:'#7804FF',
+    $body: '#4D4D4D',
+    $bodySub: '#9F9F9F',
+    $example: '#949494',
+    $correcto: '#00C136',
+    $fondoCorrecto: '#D5EFDC',
+    $extra: '#00ADF7',
+    $fondo: '#F6F5F8',
+    $44: '2.8rem',
+    $20: '1.2rem',
+    $10: '0.6rem',
+    $5: '0.3rem',
+    $1: '0.15rem',
+    $elementIcons: 'element-icons',
+    $borderImage: '0.7rem',
+    $bodySize: '0.75rem'
+});
 
 const regular = 'sen_regular';
 const bold = 'sen_bold';
 const extrabold = 'sen_extra_bold';
-
 const primary = '#2971FD';
 const secundary = '#F7002B';
+const lila = '#7804FF';
 const body = '#4D4D4D';
 const bodySub = '#9F9F9F';
 const example = '#949494';
@@ -14,146 +38,128 @@ const fondoCorrecto = '#D5EFDC';
 const extra = '#00ADF7';
 const fondo = '#F6F5F8';
 
-const view = StyleSheet.create({
+const view = EStyleSheet.create({
     container: {
-        backgroundColor: fondo,
-        paddingVertical: 60,
+        backgroundColor: '$fondo',
+        paddingVertical: '3rem',
         height: '100%'
     },
     safeArea:  {
-        backgroundColor: fondo,
-        paddingHorizontal: 50,
+        backgroundColor: '$fondo',
+        paddingHorizontal: '3rem',
     },
     allContainers: {
-        backgroundColor: fondo,
-        paddingVertical: 60,
-        // height: '100%',
-        paddingHorizontal: 50,
+        backgroundColor: '$fondo',
+        paddingVertical: '3rem',
+        paddingHorizontal: '3rem',
     }
 });
-const text = StyleSheet.create({
+const text = EStyleSheet.create({
     primario: {
-        color: primary,
-        fontFamily: regular,
+        color: '$primary',
+        fontFamily: '$regular',
     },
     primarioTitulo: {
-        fontSize: 20,
-        marginBottom: 20
+        fontSize: '1.2rem',
+        marginBottom: '1.2rem'
     },
     primarioBold: {
-        fontFamily: extrabold,
+        fontFamily: '$extrabold',
     },
     body: {
-        fontSize: 12,
-        color: body,
-        fontFamily: regular,
+        fontSize: '0.6rem',
+        color: '$body',
+        fontFamily: '$regular',
         textAlign: 'center',
-        lineHeight: 20
-        // width: '100%'
+        lineHeight: '1.2rem'
     },
     secundario: {
-        color: secundary,
-        fontFamily: regular,
+        color: '$secundary',
+        fontFamily: '$regular',
+    },
+    lila: {
+        fontFamily: '$regular',
+        color: '$lila',
     },
     white: {
         color: '#fff',
     },
     rightt: {
-        marginRight: 7
+        marginRight: '0.4rem'
     },
     opcion: {
-        fontSize: 10
+        fontSize: '0.65rem'
     },
     buttonText: {
         backgroundColor: 'transparent',
-        borderRadius: 12,
+        borderRadius: '0.8rem',
         justifyContent: 'center',
         width: '100%',
-        height: 50,
+        height: '3rem',
     }
 });
 
-const button = StyleSheet.create({
+const button = EStyleSheet.create({
     button: {
-        // colores, tamaño y texto
-        // alignItems: 'center',
-        // justifyContent: 'center',
         borderRadius: 12,
+        paddingVertical: '0.1rem',        
         width: '100%',
         // en medio de la pantalla
-        marginTop: 10,
-        marginBottom: 5,
+        marginTop: '0.6rem',
+        marginBottom: '0.2rem',
         marginRight: 'auto',
         marginLeft: 'auto',
-        // paddingVertical: 20
     },
     primary: {
         backgroundColor: ['#2773FC', '#4D3EFD', '#7A00FF'],
-         // sombra android
-         elevation: 20,
-         // sombra ios
-        //  shadowOffset: {
-        //      width: 0,
-        //      height: 1,
-        //  },
-        //  shadowColor: '#2B6DFD',
-        //  shadowOpacity: 0.25,
-        //  shadowRadius: 3.84,
-
+         elevation: '1.2rem',
     },
     secundary: {
         backgroundColor: ['#F6002F', '#EF7B03'],
-         elevation: 20,
+         elevation: '1.2rem',
     },
     option: {
-        paddingVertical: 12,        
-        marginVertical: 10,
+        paddingVertical: '0.85rem',        
+        marginVertical: '0.6rem',
+        paddingLeft: '0.8rem',
         shadowOpacity: 0,
-        borderColor: primary,
-        borderLeftWidth: 1.5,
-        borderRightWidth: 1.5,
-        borderTopWidth: 1.5,
-        borderBottomWidth: 1.5,
+        borderColor: '$primary',
+        borderLeftWidth: '0.1rem',
+        borderRightWidth: '0.1rem',
+        borderTopWidth: '0.1rem',
+        borderBottomWidth: '0.1rem',
     },
     optionSelected: {
-        borderColor: secundary,
-        backgroundColor: '#FEE3E8',
-        color: secundary,
-        paddingLeft: 15,
-        paddingVertical: 15
+        borderColor: '#7804FF',
+        backgroundColor: '#EBDAFF',
+        color: '#7804FF',
     },
     round: {
-        width: 44,
-        height: 44,
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center'
     },
     buttonListen: {
-        backgroundColor: primary, 
-        elevation: 5
+        backgroundColor: '$primary', 
+        elevation: '0.5rem'
     },
     buttonNoListen: {
-        borderWidth: 1, 
-        borderColor: primary,
+        borderWidth: '0.1rem', 
+        borderColor: '$primary',
         backgroundColor: 'white',
-        // elevation: 5
     }
 });
 
 
-const elementIcons = 'element-icons';
-
-const icons = StyleSheet.create({
+const icons = EStyleSheet.create({
     all: {
-        fontFamily: elementIcons,
-        // color: '#fff',
+        fontFamily: '$elementIcons',
     },
     sm: {
-        fontSize: 20
+        fontSize: '1.2rem'
     },
     lg: {
-        fontSize: 22
+        fontSize: '1.3rem'
     },
     light: {
         color: 'white'
@@ -162,31 +168,29 @@ const icons = StyleSheet.create({
         color: '#9F9F9F'
     },
     menu: {
-        color: secundary,
+        color: '$secundary',
     }
 });
 
-const radiobutton = StyleSheet.create({
+const radiobutton = EStyleSheet.create({
     radiobutton: {
-       paddingVertical: 20,
-    //    backgroundColor: 'black'
+       paddingVertical: '1.2rem',
    }
 });
 
-const menus = StyleSheet.create({
+const menus = EStyleSheet.create({
     footer: {
-        height: 70,
-        // backgroundColor: "green",
+        height: '4.2rem',
         width: '100%',
-        elevation: 20,
+        elevation: '1.2rem',
     }
 });
 
-const posiciones = StyleSheet.create({
+const posiciones = EStyleSheet.create({
     abolute: {
         position: 'absolute',
-        marginHorizontal: 20,
-        marginVertical: 20,
+        marginHorizontal: '1.2rem',
+        marginVertical: '1.2rem',
     },
     topright: {
         right: 0
@@ -196,12 +200,14 @@ const posiciones = StyleSheet.create({
     }
 });
 
-const cards = StyleSheet.create({
+
+// Por hacer todavia
+const cards = EStyleSheet.create({
     card: {
         borderRadius: 12,
         backgroundColor: 'white',
-        elevation: 5,
-        marginVertical: 10,
+        elevation: '0.5rem',
+        marginVertical: '0.6rem',
     },
     padding: {
         paddingHorizontal: 15,
@@ -228,17 +234,17 @@ const cards = StyleSheet.create({
         height: '100%'
     },
     tag: {
-        color: primary,
+        color: '$primary',
         fontFamily: 'sen_extra_bold',
-        fontSize: 8,
-        paddingVertical: 8,
-        paddingHorizontal: 15,
+        fontSize: '0.5rem',
+        paddingVertical: '0.5rem',
+        paddingHorizontal: '1rem',
         textAlign: "center",
         backgroundColor: "#fff",
-        borderRadius: 6,
+        borderRadius: '0.4rem',
         marginLeft: 'auto',
         marginRight: 'auto',
-        marginTop: -60
+        marginTop: '-5rem'
     },
     tag100: {
         fontFamily: 'sen_regular',
@@ -248,19 +254,19 @@ const cards = StyleSheet.create({
     },
     cards: {
         backgroundColor: 'white',
-        elevation: 4,
-        borderRadius: 20,
-        padding: 20,
+        elevation: '0.2rem',
+        borderRadius: '1.2rem',
+        padding: '1.2rem',
     },
     cardPares: {
         width: '47%',
-        padding: 15,
-        elevation: 3,
+        padding: '0.5rem',
+        elevation: '0.15rem',
         borderColor: 'white',
-        borderLeftWidth: 1.5,
-        borderRightWidth: 1.5,
-        borderTopWidth: 1.5,
-        borderBottomWidth: 1.5,   
+        borderLeftWidth: '0.1rem',
+        borderRightWidth: '0.1rem',
+        borderTopWidth: '0.1rem',
+        borderBottomWidth: '0.1rem',
     },
     centrar: {
         justifyContent: 'center', 
@@ -268,28 +274,28 @@ const cards = StyleSheet.create({
     },
     selected: {
         backgroundColor: '#CFF0FF',
-        borderColor: extra,
+        borderColor: '$extra',
     },
     correct: {
-        backgroundColor: fondoCorrecto,
-        borderColor: correcto,
+        backgroundColor: '$fondoCorrecto',
+        borderColor: '$correcto',
     },
     incorrect: {
-        borderColor: secundary,
+        borderColor: '$secundary',
         backgroundColor: '#FEE3E8'
     },
 });
 
-const modal = StyleSheet.create({
+const modal = EStyleSheet.create({
     all: {
         width: '90%'
     },
     content: {
         backgroundColor: 'white', 
-        borderRadius: 26, 
-        padding: 15, 
-        elevation: 20,
+        borderRadius: '2rem', 
+        padding: '1rem', 
+        elevation: '1.2rem',
     },
 });
 
-export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, bodySub, correcto, fondoCorrecto, extra, example, cards, modal, regular, extrabold, bold, fondo };
+export { text, button, icons, radiobutton, menus, view, posiciones, primary, secundary, body, bodySub, correcto, fondoCorrecto, extra, example, cards, modal, regular, extrabold, bold, fondo, lila };

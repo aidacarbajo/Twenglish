@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Pressable, View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { icons, posiciones, secundary, view } from '../../assets/theme/styles';
 import RoundButton from '../Buttons/RoundButton';
@@ -27,14 +28,14 @@ class Header extends Component {
 
                 {
                     this.props.tema != undefined &&
-                    <View style={[posiciones.abolute, {right: 25, top: 25}]}>
+                    <View style={[posiciones.abolute, {right: EStyleSheet.value('$20') + EStyleSheet.value('$5'), top: EStyleSheet.value('$20') + EStyleSheet.value('$5')}]}>
                         <TouchableOpacity onPress={() => this.props.navigation.navigate('Apuntes', {tema: this.props.tema, portada: this.props.portada, from: 'Ejercicios'}) }>
                             <RoundButton icon="notes" color={'white'}></RoundButton>
                         </TouchableOpacity>
                     </View>
                 }
 
-                <MyTitle titleBold={this.props.tema != undefined ? this.props.tema : 'Test'} style={{marginLeft: -7}}></MyTitle>
+                <MyTitle titleBold={this.props.tema != undefined ? this.props.tema : 'Test'} style={{marginLeft: -EStyleSheet.value('$5')}}></MyTitle>
 
             </View>
         );

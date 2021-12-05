@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { Pressable, Text, View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import { ScrollView } from 'react-native-gesture-handler';
 import { bold, button, cards, text } from '../assets/theme/styles';
 import MyText from '../components/Texts/MyText';
 
@@ -153,7 +155,7 @@ class Voc_Ex6 extends Component {
         return(
             this.state.opciones[this.state.actualOpciones].opciones.map((item, index) => {
                 return (
-                    <Pressable key={index} style={[cards.cards, cards.centrar, {padding: 10, marginTop: 25}]} onPress={() => this.checkResponse(index)}>
+                    <Pressable key={index} style={[cards.cards, {padding: EStyleSheet.value('$10'), marginBottom: EStyleSheet.value('$10')}]} onPress={() => this.checkResponse(index)}>
                         <MyText title={item.frase}></MyText>
                     </Pressable>
                 );
@@ -194,7 +196,7 @@ class Voc_Ex6 extends Component {
 
     frasesAntiguas = () => {
         return (
-            <View style={{marginTop: -20}}>
+            <View style={{marginTop: -EStyleSheet.value('$10')*3}}>
             
             {this.state.fs.map((item, index) => {
                 let color = {backgroundColor: '#CFF0FF'};
@@ -204,10 +206,10 @@ class Voc_Ex6 extends Component {
 
                 return (
                     <View key={index}>
-                        <View style={[button.button, button.option, color, {width: '100%', flexWrap: 'wrap', paddingLeft: 10, paddingRight: 10}]}>
+                        <View style={[button.button, button.option, color, {width: '100%', flexWrap: 'wrap', paddingLeft: EStyleSheet.value('$10'), paddingRight: EStyleSheet.value('$10')}]}>
                             {
                                 !this.state.tiene_opciones[index] 
-                                ? <MyText title={item} style={{textAlign: 'left', width: '100%'}}></MyText>
+                                ? <MyText title={item} style={{textAlign: 'left', width: '100%', fontSize: EStyleSheet.value('$10')}}></MyText>
                                 : this.hueco(item, index)
                             }
                         </View>
@@ -220,13 +222,13 @@ class Voc_Ex6 extends Component {
 
     render() {
         return (
-            <View style={{marginTop: 20, height: '100%', justifyContent: 'flex-start'}}>
-            
-                <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', textAlign: 'center', width: '100%', marginTop: 20}}>
+            <ScrollView style={{paddingVertical: EStyleSheet.value('$10')*3, marginBottom: EStyleSheet.value('$10')*15}}>
+
+                <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', textAlign: 'center', width: '100%', marginTop: EStyleSheet.value('$20')}}>
                     {
                         this.frasesAntiguas()   }  
 
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between', flexWrap: 'wrap', width: '100%'}}>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between', flexWrap: 'wrap', width: '100%', padding: EStyleSheet.value('$10')}}>
                     {
                         this.state.tiene_opciones[this.state.actualFrases] && !this.state.fin &&
                         this.getOptions()
@@ -234,7 +236,7 @@ class Voc_Ex6 extends Component {
                     </View>
                 </View>
                 
-            </View>
+            </ScrollView>
         );
     }
     

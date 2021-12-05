@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Pressable, View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import { cards } from '../assets/theme/styles';
 import MyText from '../components/Texts/MyText';
 
@@ -123,19 +124,19 @@ class Voc_Ex3 extends Component {
     getCard = (pos) => {
         return(
             <Pressable style={[cards.cards, cards.cardPares, cards.centrar, this.state.seleccionado[pos] == 's' ? cards.selected : [this.state.seleccionado[pos] == 'c' ? cards.correct : [this.state.seleccionado[pos] == 'n' && cards.incorrect]]]} onPress={() => this.seleccion(pos)}>
-                <MyText title={this.state.todosDesordenados[pos]} style={{lineHeight: 10, fontSize: 10}}></MyText>
+                <MyText title={this.state.todosDesordenados[pos]} style={{lineHeight: EStyleSheet.value('$10'), fontSize: EStyleSheet.value('$10')}}></MyText>
             </Pressable>
         );
     }
 
     render() {
         return (
-            <View style={{marginTop: 20}}>
+            <View style={{marginTop: EStyleSheet.value('$20')}}>
             {
                 this.state.todosDesordenados.map((item, index) => {
                     return (
                         index % 2 == 0 && (
-                        <View key={index} style={{flexDirection: 'row', height: 70, justifyContent: 'space-between', textAlign: 'center', marginBottom: 20}}>
+                        <View key={index} style={{flexDirection: 'row', height: EStyleSheet.value('$10')*7, justifyContent: 'space-between', textAlign: 'center', marginBottom: EStyleSheet.value('$20')}}>
                             {this.getCard(index)}
                             {this.getCard(index + 1)}
                         </View>

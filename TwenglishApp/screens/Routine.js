@@ -7,6 +7,7 @@ import ModalC from '../components/Modal/ModalC';
 import Show from '../components/Rutina/Show';
 import Create from '../components/Rutina/Create';
 import ModalNotificacion from '../components/Modal/ModalNotificacion';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 class Routine extends Component {
     constructor(props) {
@@ -74,9 +75,9 @@ class Routine extends Component {
 
     render() {
         return (
-            <View style={[view.container, {paddingHorizontal: 50}]}>
-                <MyTitle title="My" titleBold="Routine" style={{marginBottom: 10}}></MyTitle>
-                <MyText title="Be constant with a routine" style={{color: bodySub, marginBottom: 10}} />
+            <View style={[view.container, {paddingHorizontal: EStyleSheet.value('$10')*5}]}>
+                <MyTitle title="My" titleBold="Routine" style={{marginBottom: EStyleSheet.value('$10')}}></MyTitle>
+                <MyText title="Be constant with a routine" style={{color: bodySub, marginBottom: EStyleSheet.value('$10')}} />
 
                 { this.state.action != 'create' && <Show hasroutine={this.hasroutine} action={this.state.action} create={this.changeModalVisible} needUpdate={this.state.needUpdate} setUpdate={this.setUpdate} back2show={this.back2show} /> }                
 
