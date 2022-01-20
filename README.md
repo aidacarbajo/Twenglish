@@ -1,6 +1,6 @@
 # Twenglish
 
-My thesis is about the design and development of a mobile app to learn English (Multimedia Engineering at the Univesity of Alicante, Spain). This app is called Twenglish, it is not published on any platform, just here. Twenglish has 10 different types of exercises where you can practise, among other stuff, your grammar, vocabulary, speaking and listening. 
+My thesis is about the design and development of a mobile app to learn English (Multimedia Engineering at the University of Alicante, Spain). This app is called Twenglish, it is not published on any platform, just here. Twenglish has 10 different types of exercises where you can practise, among other stuff, your grammar, vocabulary, speaking and listening. 
 
 I'm using React Native as its main framework, Realm Database and some libraries like react-native-tts (to convert text-voice) and react-native-voice (to convert voice-text). 
 
